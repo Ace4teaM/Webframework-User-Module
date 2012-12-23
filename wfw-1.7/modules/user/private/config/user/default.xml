@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+  <config>
+    <module id="user" name="Utilisateurs" require="client mailling">
+      <name>Utilisateurs</name>
+      <desc>Gestionnaire des utilisateurs</desc>
+      <img>data/pictures/modules/user.png</img>
+    </module>
+  </config>
+  
+  <index>
+    <page protocol="https" id="user_create" name="Création d'un nouvel utilisateur">user_create.html</page>
+  </index>
+
+  <tree>
+    <user />
+  </tree>
+</site>

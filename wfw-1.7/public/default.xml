@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+    <title>Compte utilisateur</title>
+    <name>user_mod</name>
+    <base>webframework</base>
+    <description>Gestionnaire de compte utilisateur</description>
+    
+    <index>
+        <page id="index" name="Accueil">index.php</page>
+    </index>
+
+    <tree>
+        <index/>
+    </tree>
+</site>

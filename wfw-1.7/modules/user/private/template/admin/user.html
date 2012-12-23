@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- (C)2011-ID-Informatik -->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:template="http://www.webframework.fr/last/xmlns/template" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+<title>Gérer les utilisateurs</title>
+<meta name="description" content="Gestion des comptes utilisateurs" />
+
+<meta http-equiv="wfw.page-id" content="user" /><!-- page identifier -->
+
+<!-- Includes -->
+<script type="text/javascript" language="javascript" src="wfw/javascript/base.js"></script>
+<script type="text/javascript" language="javascript" src="wfw/javascript/dom.js"></script>
+<script type="text/javascript" language="javascript" src="wfw/javascript/dom-func-compatible.js"></script>
+<script type="text/javascript" language="javascript" src="wfw/javascript/wfw.js"></script>
+<script type="text/javascript" language="javascript" src="wfw/javascript/wfw-extends.js"></script>
+
+<!-- <link name="link" type="text/css" href="wfw/css/wfw-medium-icon.css" /> -->
+<script name="link" type="text/javascript" language="javascript" src="wfw/javascript/xml_template.js"></script>
+<script name="link" type="text/javascript" language="javascript" src="wfw/javascript/xml_default.js"></script>
+<script name="link" type="text/javascript" language="javascript" src="wfw/javascript/wfw-list.js"></script>
+
+<!-- Fonctions -->
+<script name="link" src="js/user/user.js" type="text/javascript" language="javascript"></script>
+
+<!-- style -->
+<style name="head" type="text/css">
+    
+    .float_content
+    {
+        position:relative;
+        /*border:1px solid black;
+        margin:40px;*/
+    }
+    .float_rightTop
+    {
+        position:absolute;
+        top:0;
+        right:0;
+        /*border:1px solid red;*/
+    }
+    .float_leftTop
+    {
+        position:absolute;
+        top:0;
+        left:0;
+        /*border:1px solid red;*/
+    }
+    /* item_list_template */
+    fieldset.item_field
+    {
+        border:none;
+        padding:0px;
+        margin:0px;
+    }
+    fieldset.item_field legend
+    {
+        border:none;
+    }
+
+    div.hdiv
+    {
+        vertical-align:middle;
+    }
+    div.hdiv > div
+    {
+        display:inline-block;
+        width:48%;
+        padding:0px;
+        margin:0px;
+        vertical-align:middle;
+        border:1px solid black;
+    }
+    input.auto
+    {
+        font-style:italic; color:Gray; font-size:small;
+    }
+</style>
+
+</head>
+
+<!-- Document -->
+<body>
+
+<div name="content">
+
+<input type="hidden" id="filename" /><!--fichier en cours d'edition-->
+
+<!-- Header -->
+<div>
+    <h1>Utilisateurs</h1>
+    <p>Gestion des comptes utilisateurs</p>
+    <!-- Menu -->
+    <div style="padding:10px;" class="float_rightTop">
+        <span class="wfw_button_icon wfw_hidden_help" onclick="return wfw.ext.navigator.openPage('#index');"><span class="wfw_icon left"></span><span class="wfw_hidden_help-content">Retour à l'accueil</span></span>
+        <span class="wfw_fixed_icon"><span class="wfw_icon separator"></span></span>
+        <span class="wfw_button_icon wfw_hidden_help" onclick="return add_user();"><span class="wfw_icon new"></span><span class="wfw_hidden_help-content">Nouveau</span></span>
+        <span class="wfw_button_icon wfw_hidden_help"><span class="wfw_icon delete" onclick="removeSelection();"></span><span class="wfw_hidden_help-content">Supprimer la séléction</span></span>
+        <span class="wfw_fixed_icon"><span class="wfw_icon separator"></span></span>
+        <span class="wfw_button_icon wfw_hidden_help"><span class="wfw_icon warning" onclick="disconnectAll();"></span><span class="wfw_hidden_help-content">Déconnecter toutes les sessions en cours</span></span>
+    </div>
+</div>
+
+<hr />
+
+<!-- Editeur -->
+<div id="editor">
+    <!-- sort list bar -->
+    <div class="wfw_bg_frame wfw_ext_unselectable" style="text-align:left; vertical-align:middle;">
+        <!-- selection -->
+        <span style="width:50px; display:inline-block;"></span>
+        <!-- uid -->
+        <span style="width:200px; display:inline-block;">
+            <span class="wfw_icon bottom" onclick="sort_by('user_list','uid',true);"></span>
+            <span class="wfw_icon top" onclick="sort_by('user_list','uid',false);"></span>
+            <span class="wfw_hidden_help">ID<span class="wfw_hidden_help-content">Identificateur de l'utilisateur</span></span>
+        </span>
+        <!-- session_ip -->
+        <span style="width:100px; display:inline-block;">
+            <span class="wfw_icon bottom" onclick="sort_by('user_list','session_ip',true);"></span>
+            <span class="wfw_icon top" onclick="sort_by('user_list','session_ip',false);"></span>
+            <span class="wfw_hidden_help">IP<span class="wfw_hidden_help-content">Adresse IP de l'ordinateur qui a ouvert la dernière session</span></span>
+        </span>
+        <!-- usid -->
+        <span style="width:100px; display:inline-block;">
+            <span class="wfw_icon bottom" onclick="sort_by('user_list','usid',true);"></span>
+            <span class="wfw_icon top" onclick="sort_by('user_list','usid',false);"></span>
+            <span class="wfw_hidden_help">SID<span class="wfw_hidden_help-content">Identificateur de la session</span></span>
+        </span>
+        <!-- date -->
+        <span style="width:150px; display:inline-block;">
+            <span class="wfw_icon bottom" onclick="sort_by('user_list','session_date',true);"></span>
+            <span class="wfw_icon top" onclick="sort_by('user_list','session_date',false);"></span>
+            <span class="wfw_hidden_help">Date<span class="wfw_hidden_help-content">Date de la dernière connection</span></span>
+        </span>
+        <!-- actions -->
+        <span></span>
+    </div>
+    
+    <!-- user list -->
+    <div style="height:200px; overflow-y:scroll; border-top:3px solid #eeeeee; border-bottom:2px solid #eeeeee; margin-top:3px;">
+        <div id="user_list"></div>
+    </div>
+</div>
+
+<div id="hidden_content" class="wfw_hidden" template:action="ignore">
+
+<!-- **************************************************
+     Template user list item
+*************************************************** -->
+
+<div id="user_template" class="wfw_ext_unselectable">
+    <!-- sort fields -->
+    <input type="hidden" name="id" value="-{client_id}" />
+    <input type="hidden" name="uid" value="-{uid}" />
+    <input type="hidden" name="session_ip" value="-{session_ip}" />
+    <input type="hidden" name="usid" value="-{usid}" />
+    <input type="hidden" name="session_date" value="-{session_date}" />
+    <!-- item -->
+    <div id="-{uid}_item" class="wfw_bg_frame" style="text-align:left; vertical-align:middle; margin-bottom:1px;">
+        <!-- selection -->
+        <span style="width:50px; display:inline-block;">
+            <input type="checkbox" onchange="onChangeSelection(this,'-{uid}');" />
+        </span>
+        <!-- selection -->
+        <span style="width:200px; display:inline-block;">-{uid}</span>
+        <!-- session_ip -->
+        <span style="width:100px; display:inline-block;">-{session_ip}</span>
+        <!-- session_id -->
+        <span style="width:100px; display:inline-block;">-{usid}</span>
+        <!-- date -->
+        <span style="width:150px; display:inline-block;">-{session_date_fmt}</span>
+        <!-- actions -->
+        <span style="width:100px; display:inline-block;">
+            <span class="wfw_button_icon"><span class="wfw_icon edit wfw_hidden_help" onclick="return openClientEditor('-{client_id}');"><span class="wfw_hidden_help-content">Editer les données</span></span></span>
+            <span class="wfw_button_icon" template:action="exp" template:exp="^open$" template:target="session_status"><span class="wfw_icon connect wfw_hidden_help" onclick="user_disconnect('-{uid}','-{usid}');"><span class="wfw_hidden_help-content">L'Utilisateur est connecté. Cliquez pour déconnecter</span></span></span>
+            <span class="wfw_button_icon" template:action="exp" template:exp="^closed$" template:target="session_status"><span class="wfw_icon disconnect wfw_hidden_help" onclick="user_connect('-{uid}');"><span class="wfw_hidden_help-content">L'Utilisateur est déconnecté. Cliquez pour connecter</span></span></span>
+            <span class="wfw_button_icon" template:action="exp" template:exp="^active$" template:target="activation"><span class="wfw_icon unlock wfw_hidden_help" onclick="user_unactive('-{uid}','-{mail}');"><span class="wfw_hidden_help-content">Le compte utilisateur est activé. Cliquez pour le désactiver</span></span></span>
+            <span class="wfw_button_icon" template:action="exp" template:exp="^unactive$" template:target="activation"><span class="wfw_icon lock wfw_hidden_help" onclick="user_active('-{uid}','-{mail}');"><span class="wfw_hidden_help-content">Le compte utilisateur est désactivé. Cliquez pour l'activer</span></span></span>
+        </span>
+    </div>
+</div>
+
+<!-- **************************************************
+     Formulaire: Nouvel utilisateur
+*************************************************** -->
+
+<div id="new_user_dialog">
+    <div class="wfw_static_field"><span>Identifiant</span><span><input type="text" style="width:250px;" name="wfw_uid" value="" /></span></div>
+    <div class="wfw_static_field"><span>Mot de passe</span><span><input type="text" style="width:250px;" name="wfw_pwd" value="" /></span></div>
+    <div class="wfw_static_field"><span>eMail</span><span><input type="text" style="width:250px;" name="wfw_mail" value="" /></span></div>
+    <div class="wfw_static_field"><span>Activer</span><span><input type="checkbox" style="width:250px;" name="wfw_active" value="" /></span></div>
+</div>
+
+</div>
+
+</div><!-- content -->
+
+</body>
+
+
+</html>

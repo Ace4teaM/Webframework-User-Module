@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Connexion à un compte utilisateur</title>
+    <!-- Base Path (for local test only)-->
+    <base href="../../../">
+    <link rel="stylesheet" type="text/css" href="css/user/global.css" />
+    <link rel="stylesheet" type="text/css" href="wfw/css/wfw-extends.css" />
+    <!-- Add-Includes (template link)-->
+    <script name="link" type="text/javascript" src="js/user/user_connect.js"></script>
+  </head>
+  <body>
+    <div  style="width:600">
+      <h1>Connexion à un compte utilisateur</h1>
+      <form id="form" enctype="multipart/form-data" submit="onSubmit" >
+        <fieldset><legend>Identification de connexion</legend>
+          <div style="display:inline-block; width:100px;"><img height="80px" src="data/pictures/modules/user.png" /></div>
+          <div style="display:inline-block;">
+          <div class="wfw_edit_field"><span><label for="txt_uid">Nom d'utilisateur</label></span><span><input type="text" id="txt_uid" name="uid" /></span></div>
+          <div class="wfw_edit_field"><span><label for="txt_pwd">Mot-de-Passe</label></span><span><input type="text" id="txt_pwd" name="pwd" /></span></div>
+          <div class="wfw_edit_field"><span><label for="txt_lifetime">Temps d'inactivité avant déconnexion</label></span><span><select id="txt_lifetime" name="expire"><option value="">Illimté</option><option value="1800">30min</option><option value="3600">1h</option></select></span></div></div>
+        </fieldset>
+        <div align="right"><input class="wfw_button_text" type="submit" value="Connexion" /></div>
+      </form>
+    </div>
+  </body>
+</html>

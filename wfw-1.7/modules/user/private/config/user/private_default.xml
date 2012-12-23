@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+  <config>
+    <module id="user" name="Utilisateurs" require="client mailling">
+      <name>Utilisateurs</name>
+      <desc>Gestionnaire des utilisateurs</desc>
+      <img>data/pictures/modules/user.png</img>
+      <page>
+        <name>user</name>
+        <desc>Gestion des comptes utilisateurs</desc>
+      </page>
+    </module>
+  </config>
+  
+  <index>
+    <page protocol="https" id="user" name="Gestion utilisateurs">user.html</page>
+    <page protocol="https" id="user_list" name="Liste des utilisateurs">user_list.html</page>
+  </index>
+
+  <tree>
+    <user />
+  </tree>
+</site>

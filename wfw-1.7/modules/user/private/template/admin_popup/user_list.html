@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+    (C)2012-ID-Informatik
+    Popup de séléction d'utilisateurs
+
+    INPUT:
+        sel       : Optionnel, Identificateur du/des dossier(s) à selectionner
+        field     : Optionnel, Champ additionel à afficher (tous les dossiers qui ne possèdent pas ce champs ne sont pas affichés)
+        field_sep : Optionnel, Caractère de séparation utilisé pour retourner les champs additionels ( ';' par défaut )
+
+    OUTPUT:
+        id       : identificateur du/des dossier(s) utilisateur(s) selectionné(s)
+        field    : valeurs du/des champ(s) additionnel(s) selectionné(s)
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:template="http://www.webframework.fr/last/xmlns/template" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+<title>Utilisateurs</title>
+
+<meta http-equiv="wfw.page-id" content="user_list" /><!-- page identifier -->
+<meta name="description" content="Liste des utilisateurs" />
+
+<!-- Includes -->
+<script type="text/javascript" language="javascript" src="wfw/javascript/base.js"></script>
+<script type="text/javascript" language="javascript" src="wfw/javascript/dom.js"></script>
+<script type="text/javascript" language="javascript" src="wfw/javascript/dom-func-compatible.js"></script>
+<script type="text/javascript" language="javascript" src="wfw/javascript/wfw.js"></script>
+<script type="text/javascript" language="javascript" src="wfw/javascript/wfw-extends.js"></script>
+
+<!-- wfw : list -->
+<script name="link" type="text/javascript" language="javascript" src="wfw/javascript/wfw-list.js"></script>
+<link name="link" rel="stylesheet" href="wfw/css/wfw-list.css" type="text/css" />
+
+<!-- Fonctions -->
+<script name="head" type="text/javascript" language="javascript">
+// <![CDATA[
+
+var selection = new Object();       // selection des dossiers ("name"=>element)
+
+//options par defaut
+var opt = {
+    sel: "", //selection en cours
+    field: "", //champs de tri supplementaire
+    field_sep: ";" //separateur de champs dans "field"
+};
+
+// [initialise]
+wfw.event.SetCallback( // window
+    "wfw_window",
+    "load",
+    "onInit",
+    function () {
+        // obtient les options 
+        var uri_fields = wfw.utils.getURIFields();
+        if (uri_fields != null) {
+            for (opt_name in opt) {
+                if (typeof (uri_fields[opt_name]) == "string")
+                    opt[opt_name] = uri_fields[opt_name];
+            }
+        }
+
+        // genere la liste
+        ListUser();
+    },
+    false
+);
+
+// [change la selection des utilisateurs]
+function onChangeSelection(e, name) {
+    if (e.checked)
+        selection[name] = e;
+    else if (typeof (selection[name]) != "undefined")
+        delete (selection[name]);
+
+    updateFields();
+}
+
+// actualise les champs de selection
+function updateFields()
+{
+    if(empty(selection))
+        return;
+
+    //ids
+    var ids = "";
+    for(var name in selection){
+        ids += name + ";";
+    }
+    $value("id", ids);
+
+    //champs
+    if (!empty(opt.field)) {
+        var value = "";
+        for (var name in selection) {
+            var fields = wfw.form.get_fields(name+"_item");
+            value += fields["field"] + opt.field_sep;
+        }
+        $value("field", value);
+    }
+}
+
+function ListUser() {
+    var param = {
+        "onsuccess": function (obj, args) {
+            var list = $doc("user_list");
+            objRemoveChildNode(list, null, REMOVENODE_ALL);
+
+            //ok ?
+            if (empty(args.uid))
+                return;
+
+            //initialise la liste
+            var uidList = strToArray(args.uid, ";");
+            //var clientList = strToArray(args.client_id, ";");
+            for (var i = 0; i < uidList.length; i++) {
+                var param2 = {
+                    "onsuccess": function (obj, args2) {
+                        args2._field = opt.field; //champs de tri supplementaire
+                        var template = wfw.template.insert($doc("user_template"), list, args2, null);
+                        //redefinit l'id
+                        objSetAtt(template, "id", args2.uid + "_item");
+                    }
+                };
+                wfw.request.Add(null, "req/user/check.php", { wfw_uid: uidList[i] }, wfw.utils.onCheckRequestResult_XARG, param2, false);
+            }
+
+            //tri par date
+            sort_by('user_list', 'id', true);
+        }
+    };
+    //envoie la requete
+    wfw.request.Add(null, "req/user/list.php", null, wfw.utils.onCheckRequestResult_XARG, param, false);
+}
+// charge la liste des utilisateurs
+function ListUser2() {
+    var param = {
+        "onsuccess": function (obj, args) {
+            var list = $doc("user_list");
+            objRemoveChildNode(list, null, REMOVENODE_ALL);
+
+            //ok ?
+            if (empty(args.id))
+                return;
+
+            //initialise la liste
+            var idList = strToArray(args.id, ";");
+            var typeList = strToArray(args.type, ";");
+            var dateList = strToArray(args.date, ";");
+            var timeList = strToArray(args.time, ";");
+            for (var i = 0; i < idList.length; i++) {
+                if (typeList[i] == "user") {
+                    var param2 = {
+                        "onsuccess": function (wfw_id, args2) {
+                            //filtre les utilisateur avec le champ specifie
+                            if (empty(opt.field) || (typeof (args2[opt.field]) == "string")) {
+                                args2.wfw_id = wfw_id.args.wfw_id; //champs de tri supplementaire
+                                args2._field = opt.field;//champs de tri supplementaire
+                                args2._date = date(DATE_DEFAULT, args2.wfw_date); //format la date
+                                var element = wfw.ext.listElement.insertFields($doc("user_template"), list, args2);
+                                //redefinit l'id
+                                objSetAtt(element, "id", args2.wfw_id + "_item");
+                            }
+                        }
+                    };
+                    wfw.request.Add(null, "req/client/getall.php", { wfw_id: idList[i], get_private: "1" }, wfw.utils.onCheckRequestResult_XARG, param2, false);
+                }
+            }
+
+            //tri par date
+            sort_by('user_list', 'id', true);
+        }
+    };
+    //envoie la requete
+    wfw.request.Add(null, "req/client/listclient.php", null, wfw.utils.onCheckRequestResult_XARG, param, false);
+}
+
+// tri une liste
+function sort_by(listId, field_name, bReverse) {
+    var list = docGetElement(document, listId);
+    //scan les articles a la recherche de criteres de selections
+    var fields = wfw.ext.sort.fieldsFromElement(objGetChild(list, null));
+    //   alert(wfw.toString(fields));
+    fields = wfw.ext.sort.sortFields(fields, field_name);
+    //   alert(wfw.toString(fields));
+    reArrange(listId, fields, bReverse);
+}
+
+function reArrange(listId, fields, bReverse) {
+    var list = docGetElement(document, listId);
+    if (bReverse) {
+        for (var key = 0; key < fields.length; key++) {
+            objInsertNode(fields[key].node, list, null, INSERTNODE_BEGIN);
+        }
+    }
+    else {
+        for (var key = fields.length - 1; key >= 0; key--) {
+            objInsertNode(fields[key].node, list, null, INSERTNODE_BEGIN);
+        }
+    }
+}
+
+// ]]>
+</script>
+
+</head>
+
+<!-- Document -->
+<body>
+
+<div name="content">
+
+<!-- **************************************************
+        param
+*************************************************** -->
+<input type="hidden" id="id" value="" />
+<input type="hidden" id="field" value="" />
+
+<!-- **************************************************
+        View
+*************************************************** -->
+<!-- sort list bar -->
+<div class="wfw_bg_frame wfw_ext_unselectable" style="text-align:left; vertical-align:middle;">
+    <!-- selection -->
+    <span style="width:50px; display:inline-block;"></span>
+    <!-- uid -->
+    <span style="width:150px; display:inline-block;">
+        <span class="wfw_icon bottom" onclick="sort_by('user_list','uid',true);"></span>
+        <span class="wfw_icon top" onclick="sort_by('user_list','uid',false);"></span>
+        <span>ID</span>
+    </span>
+    <!-- champ supplementaire -->
+    <span style="width:150px; display:inline-block;">
+        <span class="wfw_icon bottom" onclick="sort_by('user_list','field',true);"></span>
+        <span class="wfw_icon top" onclick="sort_by('user_list','field',false);"></span>
+    </span>
+</div>
+    
+<!-- user list -->
+<div id="user_list"></div>
+
+<!-- **************************************************
+        Templates
+*************************************************** -->
+<div id="hidden_content" class="wfw_hidden" template:action="ignore">
+
+    <!-- **************************************************
+         Template user list item
+    *************************************************** -->
+
+    <div id="user_template" class="wfw_ext_unselectable">
+        <!-- sort fields -->
+        <input type="hidden" name="uid" value="-{uid}" />
+        <input type="hidden" name="session_ip" value="-{session_ip}" />
+        <input type="hidden" name="session_id" value="-{session_id}" />
+        <input type="hidden" name="session_date" value="-{session_date}" />
+        <input type="hidden" name="field" value="-{{-{_field}}}" />
+
+        <!-- item -->
+        <div id="-{uid}_item" class="wfw_bg_frame" style="text-align:left; vertical-align:middle; margin-bottom:1px;;">
+            <!-- selection -->
+            <span style="width:50px; display:inline-block;">
+                <input type="checkbox" name="selected" onchange="onChangeSelection(this,'-{uid}');" />
+            </span>
+            <!-- id -->
+            <span style="width:150px; display:inline-block;">-{uid}</span>
+            <!-- champ supplementaire -->
+            <span style="width:150px; display:inline-block;" template:action="exp" template:exp=".+" template:target="_field">-{{-{_field}}}</span>
+        </div>
+    </div>
+</div>
+</div><!-- content -->
+
+</body>
+
+
+</html>
