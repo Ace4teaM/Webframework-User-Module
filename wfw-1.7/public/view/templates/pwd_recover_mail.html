@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:template="http://www.webframework.fr/last/xmlns/template" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+<title>-{subject}</title>
+<base href="-{__base_uri__}" target="_blank" /><!-- important pour la resolution des path-->
+</head>
+<!-- Document -->
+<body>
+<div id="wfw_ext_content" style="min-width:600px;">
+    <p>Pour rappel, voici vos identifants de connection:</p>
+    <div>Votre identifiant: -{wfw_uid}</div>
+    <div>Votre mot-de-passe: -{wfw_pwd}</div>
+    <p>Pour des questions de securités, ne concevez pas ce mail sur votre ordinateur.</p>
+    <hr />
+    <div style="font-size:small;">
+        <div><a href="mailto:-{mail:contact}">-{mail:contact}</a></div>
+        <div>-{title:contact} -{address:contact} -{zipcode:contact} -{city:contact}</div>
+    </div>
+</div>
+</body>
+</html>
