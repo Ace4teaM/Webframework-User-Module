@@ -17,17 +17,17 @@ class UserAddress
     public $userAddressId;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $zipCode;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $cityName;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $streetName;
     
@@ -37,12 +37,12 @@ class UserAddress
     public $streetNumber;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $countryName;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $streetPrefix;
     
@@ -54,20 +54,14 @@ class UserAddress
     /**
     * @var      double
     */
-    public $aptNumber;
-    
-    /**
-    * @return   UserIdentity
-    */
-    public function getIdentity()
-    {
-       // TODO: implement
-    }    
+    public $aptNumber;    
 
 }
 
 /*
-   Class manager
+   user_address Class manager
+   
+   This class is optimized for use with the Webfrmework project (www.webframework.fr)
 */
 class UserAddressMgr
 {

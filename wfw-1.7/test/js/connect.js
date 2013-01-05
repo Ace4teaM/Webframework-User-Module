@@ -37,7 +37,7 @@ YUI(wfw_yui_config(wfw_yui_base_path)).use('node', 'event', 'wfw-navigator', 'wf
                         "Le compte '"+arg.uid+"' est créé, un eMail de confirmation vous à été envoyé.\nMerci de consulter votre boite mail et de confirmer l'activation de votre compte utilisateur.",
                         //ok
                         function(){
-                            wfw.Navigation.openPage("user_activation","_self",{
+                            wfw.Navigation.openPage("user:activation","_self",{
                                 uid:args.uid
                                 });
                         },

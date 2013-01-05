@@ -17,7 +17,7 @@ class UserConnection
     public $userConnectionId;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $clientIp;
     
@@ -32,14 +32,16 @@ class UserConnection
     public $lifeTime;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $linkPath;    
 
 }
 
 /*
-   Class manager
+   user_connection Class manager
+   
+   This class is optimized for use with the Webfrmework project (www.webframework.fr)
 */
 class UserConnectionMgr
 {

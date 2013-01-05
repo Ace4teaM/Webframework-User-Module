@@ -12,29 +12,31 @@ class UserAccount
 {
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $userAccountId;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $userPwd;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $clientId;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $userMail;    
 
 }
 
 /*
-   Class manager
+   user_account Class manager
+   
+   This class is optimized for use with the Webfrmework project (www.webframework.fr)
 */
 class UserAccountMgr
 {

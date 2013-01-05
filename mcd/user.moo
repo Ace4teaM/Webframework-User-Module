@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1356168134" Name="user" Objects="61" Symbols="13" Target="PHP" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1356970196" Name="user" Objects="58" Symbols="10" Target="PHP" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,7 +12,7 @@
 <a:Code>USER</a:Code>
 <a:CreationDate>1355940053</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356162380</a:ModificationDate>
+<a:ModificationDate>1356970196</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {94471171-BAD3-410B-8D7E-6A3235048243}
 DAT 1356018134
@@ -144,7 +144,8 @@ DLD {BDFDF622-6242-40B0-A50C-2ADF2AA2F7D8}
 DLD {CF21FDCB-E218-4B88-AE09-8FBE2D334F16}
 DLD {801929CA-DF58-4DDF-ABE6-A70330B1C797}
 DLD {9FA282B4-2F3A-411D-9B0D-052D5CF023CB}
-ATT MOPT</a:History>
+ATT MOPT
+ATT DVTL</a:History>
 <a:PackageOptionsText>[FolderOptions]
 
 [FolderOptions\Class Diagram Objects]
@@ -2222,12 +2223,12 @@ PreserveMode=Yes</a:ModelOptionsText>
 </c:GenerationOrigins>
 <c:ObjectLanguage>
 <o:Shortcut Id="o4">
-<a:ObjectID>707D7D3F-BC70-4DB4-84DE-774D65F3C829</a:ObjectID>
+<a:ObjectID>C1156770-D6FC-42BA-AA88-A1D251AED5B5</a:ObjectID>
 <a:Name>PHP</a:Name>
 <a:Code>PHP</a:Code>
-<a:CreationDate>1355940057</a:CreationDate>
+<a:CreationDate>1356970173</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1355940057</a:ModificationDate>
+<a:ModificationDate>1356970173</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:TargetStereotype/>
 <a:TargetID>C37F67C8-679C-48FB-8CA4-2E98B9D416F7</a:TargetID>
@@ -3210,8 +3211,8 @@ Shadow=0
 <c:Symbols>
 <o:AssociationSymbol Id="o7">
 <a:ModificationDate>1356024155</a:ModificationDate>
-<a:Rect>((-1626,11590), (32486,18112))</a:Rect>
-<a:ListOfPoints>((-1589,18112),(-1589,12764),(32486,12764))</a:ListOfPoints>
+<a:Rect>((-1589,11590), (32495,18112))</a:Rect>
+<a:ListOfPoints>((-1589,18112),(-1589,12764),(32495,12764))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
 <a:LineColor>16744576</a:LineColor>
@@ -3249,7 +3250,7 @@ MULA 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:AssociationSymbol>
 <o:AssociationSymbol Id="o14">
-<a:Rect>((-39611,-11358), (-35713,16828))</a:Rect>
+<a:Rect>((-39574,-11358), (-35750,16828))</a:Rect>
 <a:ListOfPoints>((-37587,-11358),(-37587,16828))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
@@ -3269,8 +3270,8 @@ MULA 0 Arial,8,N</a:FontList>
 </o:AssociationSymbol>
 <o:AssociationSymbol Id="o17">
 <a:ModificationDate>1356024153</a:ModificationDate>
-<a:Rect>((-3889,1927), (32462,10082))</a:Rect>
-<a:ListOfPoints>((-1865,1927),(-1865,9495),(32462,9495))</a:ListOfPoints>
+<a:Rect>((-3889,1927), (32468,9495))</a:Rect>
+<a:ListOfPoints>((-1865,1927),(-1865,9495),(32468,9495))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
 <a:LineColor>16744576</a:LineColor>
@@ -3393,9 +3394,9 @@ LABL 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:ClassSymbol>
 <o:ClassSymbol Id="o9">
-<a:ModificationDate>1356168134</a:ModificationDate>
+<a:ModificationDate>1356970173</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((26387,7766), (38411,15482))</a:Rect>
+<a:Rect>((25770,7766), (39028,15482))</a:Rect>
 <a:LineColor>11184640</a:LineColor>
 <a:FillColor>16777136</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -3427,7 +3428,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>UserAddress</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356161750</a:ModificationDate>
+<a:ModificationDate>1356969409</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {6EE9078C-D0E7-4387-990C-16A21550571C}
 DAT 1356023837
@@ -3464,15 +3465,16 @@ DAT 1356022050</a:History>
 <a:Code>zipCode</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {DEF35FD8-8094-45D6-B6C5-1FB9624E868C}
 DAT 1356023837
 ORG {9D447048-58D0-4C6F-A309-DCC891825B7F}
 DAT 1356022055
 ORG {8CF21D91-0B6F-4FBD-B236-18CBDE5EEA7F}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA10</a:PersistentDataType>
 <a:PersistentLength>10</a:PersistentLength>
 <a:PersistentCode>ZIP_CODE</a:PersistentCode>
@@ -3484,15 +3486,16 @@ DAT 1356022050</a:History>
 <a:Code>cityName</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {EF477503-9D94-41E7-829F-4F2566599B89}
 DAT 1356023837
 ORG {BC21E10E-FD00-4B33-80C3-2A3BD5447F78}
 DAT 1356022055
 ORG {9941209B-3CDB-4212-9DBE-427E5FB65C16}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA80</a:PersistentDataType>
 <a:PersistentLength>80</a:PersistentLength>
 <a:PersistentCode>CITY_NAME</a:PersistentCode>
@@ -3504,15 +3507,16 @@ DAT 1356022050</a:History>
 <a:Code>streetName</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {5EF6D22D-4F69-4FBB-BDE9-7207752E465F}
 DAT 1356023837
 ORG {C952877A-A9CE-479F-AFFE-2C7FEE6A5C51}
 DAT 1356022055
 ORG {B43C3C4C-F86D-4F6F-929E-9BFBBC0DF50B}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA128</a:PersistentDataType>
 <a:PersistentLength>128</a:PersistentLength>
 <a:PersistentCode>STREET_NAME</a:PersistentCode>
@@ -3544,15 +3548,16 @@ DAT 1356022050</a:History>
 <a:Code>countryName</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {C167124D-94C8-468D-B906-98DE8F831087}
 DAT 1356023837
 ORG {D851E2F5-AD80-40F2-9F68-387B88B3CBB3}
 DAT 1356022055
 ORG {08B62310-6262-43A0-B040-A63A1B4B9C16}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA80</a:PersistentDataType>
 <a:PersistentLength>80</a:PersistentLength>
 <a:PersistentCode>COUNTRY_NAME</a:PersistentCode>
@@ -3564,17 +3569,18 @@ DAT 1356022050</a:History>
 <a:Code>streetPrefix</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {C955DF8C-A7BE-4BA7-BAB6-25C37474F74D}
 DAT 1356023837
 ORG {AB935188-E039-4D5E-86B9-B08527BF18D9}
 DAT 1356022055
 ORG {C7F039AE-8F70-467A-A63E-14F5EF321114}
-DAT 1356022050</a:History>
+DAT 1356022050
+ATT DTTP</a:History>
 <a:ListOfValues>bis	BIS
 ter	TER</a:ListOfValues>
-<a:DataType>String</a:DataType>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA3</a:PersistentDataType>
 <a:PersistentLength>3</a:PersistentLength>
 <a:PersistentCode>STREET_PREFIX</a:PersistentCode>
@@ -3621,32 +3627,8 @@ DAT 1356022050</a:History>
 <a:PersistentCode>APT_NUMBER</a:PersistentCode>
 </o:Attribute>
 </c:Attributes>
-<c:Operations>
-<o:Operation Id="o36">
-<a:ObjectID>8D1C39B0-FD7F-48B6-B313-1B1C1CEB1CDC</a:ObjectID>
-<a:Name>getIdentity</a:Name>
-<a:Code>getIdentity</a:Code>
-<a:CreationDate>1356157868</a:CreationDate>
-<a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356162071</a:ModificationDate>
-<a:Modifier>developpement</a:Modifier>
-<a:ReturnType>UserIdentity</a:ReturnType>
-<a:TemplateBody>//obtient la base de donnees courrante
-global $app;
-if(!$app-&gt;getDB($db))
- return false;
-
-//execute la requete
-$query = &quot;SELECT * from user_identity inner join user_address a on id = $this-&gt;addressId where id = a.identity_id&quot;;
-
-return IdentityMgr::bound($query);</a:TemplateBody>
-<c:ObjectReturnType>
-<o:Class Ref="o22"/>
-</c:ObjectReturnType>
-</o:Operation>
-</c:Operations>
 <c:Identifiers>
-<o:Identifier Id="o37">
+<o:Identifier Id="o36">
 <a:ObjectID>2FA8B8E1-3CC9-4B39-B790-7FC945EAC7EF</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>Identifiant_1</a:Code>
@@ -3666,7 +3648,7 @@ DAT 1356022050</a:History>
 </o:Identifier>
 </c:Identifiers>
 <c:PrimaryIdentifier>
-<o:Identifier Ref="o37"/>
+<o:Identifier Ref="o36"/>
 </c:PrimaryIdentifier>
 </o:Class>
 <o:Class Id="o21">
@@ -3686,82 +3668,86 @@ DAT 1356022050</a:History>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <a:PersistentCode>USER_ACCOUNT</a:PersistentCode>
 <c:Attributes>
-<o:Attribute Id="o38">
+<o:Attribute Id="o37">
 <a:ObjectID>3960FAA9-C93A-45DB-ACF0-FB0A1731339F</a:ObjectID>
 <a:Name>user_account id</a:Name>
 <a:Code>userAccountId</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {520FBDBB-6C29-44FD-A04C-D4C08289C63A}
 DAT 1356023837
 ORG {5B3985BC-F9DE-4C92-89B1-0CB55B67D0B7}
 DAT 1356022055
 ORG {09320BEC-C594-412C-BD94-7F30628B0903}
-DAT 1356022050</a:History>
+DAT 1356022050
+ATT DTTP</a:History>
 <a:Format>[0-9]</a:Format>
-<a:DataType>String</a:DataType>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA64</a:PersistentDataType>
 <a:PersistentLength>64</a:PersistentLength>
 <a:PersistentCode>USER_ACCOUNT_ID</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o39">
+<o:Attribute Id="o38">
 <a:ObjectID>EBE34BA9-9B0E-4AA2-9ECE-E3B1F7E6EC87</a:ObjectID>
 <a:Name>user pwd</a:Name>
 <a:Code>userPwd</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {8F5708E7-823C-4E60-9F3B-873EA59E8424}
 DAT 1356023837
 ORG {4E3C0632-C350-4150-9B48-ABD3FBFB4E0D}
 DAT 1356022055
 ORG {BEAD3AED-5F8A-45E6-A205-F50F9AE74310}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA64</a:PersistentDataType>
 <a:PersistentLength>64</a:PersistentLength>
 <a:PersistentCode>USER_PWD</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o40">
+<o:Attribute Id="o39">
 <a:ObjectID>CF76ED67-DBA5-496C-82F7-3E0B019B9686</a:ObjectID>
 <a:Name>client id</a:Name>
 <a:Code>clientId</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {1D4818FE-143F-41B7-9FA5-56A4EA6D4E12}
 DAT 1356023837
 ORG {CB789755-B771-41CF-9A76-CB5F852552E6}
 DAT 1356022055
 ORG {D7486BFB-0428-412B-9F5F-9FFF09AE0E49}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA64</a:PersistentDataType>
 <a:PersistentLength>64</a:PersistentLength>
 <a:PersistentCode>CLIENT_ID</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o41">
+<o:Attribute Id="o40">
 <a:ObjectID>B90DD82A-000F-4DBC-A3D3-6FF83F02AE4B</a:ObjectID>
 <a:Name>user mail</a:Name>
 <a:Code>userMail</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {E523A9CF-B931-40B0-9512-C4049BAAB3E8}
 DAT 1356023837
 ORG {4040B819-E842-44CC-934B-B04721E9C964}
 DAT 1356022055
 ORG {60407143-012D-4757-855C-3A51CCB90448}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA80</a:PersistentDataType>
 <a:PersistentLength>80</a:PersistentLength>
 <a:PersistentCode>USER_MAIL</a:PersistentCode>
@@ -3769,7 +3755,7 @@ DAT 1356022050</a:History>
 </o:Attribute>
 </c:Attributes>
 <c:Identifiers>
-<o:Identifier Id="o42">
+<o:Identifier Id="o41">
 <a:ObjectID>6DE9E6B2-D52E-4145-82CB-F04E3680E900</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>Identifiant_1</a:Code>
@@ -3784,12 +3770,12 @@ DAT 1356022055
 ORG {AE3AB293-D750-410A-A924-2873615D6636}
 DAT 1356022050</a:History>
 <c:Identifier.Attributes>
-<o:Attribute Ref="o38"/>
+<o:Attribute Ref="o37"/>
 </c:Identifier.Attributes>
 </o:Identifier>
 </c:Identifiers>
 <c:PrimaryIdentifier>
-<o:Identifier Ref="o42"/>
+<o:Identifier Ref="o41"/>
 </c:PrimaryIdentifier>
 </o:Class>
 <o:Class Id="o22">
@@ -3798,7 +3784,7 @@ DAT 1356022050</a:History>
 <a:Code>UserIdentity</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356160243</a:ModificationDate>
+<a:ModificationDate>1356969409</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {0DBB783E-0A6B-4907-AB15-89680F27E5B7}
 DAT 1356023837
@@ -3809,13 +3795,13 @@ DAT 1356022050</a:History>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <a:PersistentCode>USER_IDENTITY</a:PersistentCode>
 <c:Attributes>
-<o:Attribute Id="o43">
+<o:Attribute Id="o42">
 <a:ObjectID>B99B9CA5-0A1C-493A-89A8-4B7A03A05E32</a:ObjectID>
 <a:Name>user_identity id</a:Name>
 <a:Code>userIdentityId</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356160569</a:ModificationDate>
+<a:ModificationDate>1356969409</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {4D3EB6C0-8B7A-43BA-85DC-8DF9D28F663B}
 DAT 1356023837
@@ -3828,47 +3814,49 @@ DAT 1356022050</a:History>
 <a:PersistentCode>USER_IDENTITY_ID</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o44">
+<o:Attribute Id="o43">
 <a:ObjectID>F8FCEB56-8C82-45FC-BDA1-BA6555628E68</a:ObjectID>
 <a:Name>first name</a:Name>
 <a:Code>firstName</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {B89AEB8E-E65C-49E4-AFFB-53ADC53F3F59}
 DAT 1356023837
 ORG {36065DF1-D5B4-4FBF-818F-03922F6DC89F}
 DAT 1356022055
 ORG {3F646579-BFAB-4026-8ACD-E07781C865B0}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA80</a:PersistentDataType>
 <a:PersistentLength>80</a:PersistentLength>
 <a:PersistentCode>FIRST_NAME</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o45">
+<o:Attribute Id="o44">
 <a:ObjectID>813B597D-25FA-42E2-9687-0F26740C7F94</a:ObjectID>
 <a:Name>last name</a:Name>
 <a:Code>lastName</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {E6867C32-C2F6-4074-A1B0-7412AD3FFCD4}
 DAT 1356023837
 ORG {52DCF6BF-A01C-4170-ACF8-14E575B0DF40}
 DAT 1356022055
 ORG {3AB65871-1F5E-4D3E-85E0-A757342B285F}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA80</a:PersistentDataType>
 <a:PersistentLength>80</a:PersistentLength>
 <a:PersistentCode>LAST_NAME</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o46">
+<o:Attribute Id="o45">
 <a:ObjectID>0C9DFF50-9A0B-4B87-BC98-5064B8968AB6</a:ObjectID>
 <a:Name>birth day</a:Name>
 <a:Code>birthDay</a:Code>
@@ -3887,40 +3875,41 @@ DAT 1356022050</a:History>
 <a:PersistentCode>BIRTH_DAY</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o47">
+<o:Attribute Id="o46">
 <a:ObjectID>377E7554-0EBD-4325-8AC7-4D9F5C6FACE9</a:ObjectID>
 <a:Name>sex</a:Name>
 <a:Code>sex</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {22295E46-05CA-4BED-99B5-878200B81C32}
 DAT 1356023837
 ORG {2D7DEF2C-2E55-4A32-AB85-ED4B9ACBF8B7}
 DAT 1356022055
 ORG {8031E403-85FD-4241-9D8F-84B7138E925B}
-DAT 1356022050</a:History>
+DAT 1356022050
+ATT DTTP</a:History>
 <a:ListOfValues>M	Homme
 F	Femme</a:ListOfValues>
-<a:DataType>String</a:DataType>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>A1</a:PersistentDataType>
 <a:PersistentLength>1</a:PersistentLength>
 <a:PersistentCode>SEX</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 <c:Domain>
-<o:Domain Ref="o48"/>
+<o:Domain Ref="o47"/>
 </c:Domain>
 </o:Attribute>
 </c:Attributes>
 <c:Identifiers>
-<o:Identifier Id="o49">
+<o:Identifier Id="o48">
 <a:ObjectID>E112A5C7-95F4-432F-B321-56C6AFA5DA47</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>Identifiant_1</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356160569</a:ModificationDate>
+<a:ModificationDate>1356969409</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {0FEC0743-3137-4E8C-B450-817E71CB9931}
 DAT 1356023837
@@ -3929,12 +3918,12 @@ DAT 1356022055
 ORG {0B32BE94-5BD3-41D0-B34D-B44ACC92F286}
 DAT 1356022050</a:History>
 <c:Identifier.Attributes>
-<o:Attribute Ref="o43"/>
+<o:Attribute Ref="o42"/>
 </c:Identifier.Attributes>
 </o:Identifier>
 </c:Identifiers>
 <c:PrimaryIdentifier>
-<o:Identifier Ref="o49"/>
+<o:Identifier Ref="o48"/>
 </c:PrimaryIdentifier>
 </o:Class>
 <o:Class Id="o24">
@@ -3954,41 +3943,43 @@ DAT 1356022050</a:History>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <a:PersistentCode>USER_SESSION</a:PersistentCode>
 <c:Attributes>
-<o:Attribute Id="o50">
+<o:Attribute Id="o49">
 <a:ObjectID>4D95455B-FE73-4424-B882-365948F7AEE9</a:ObjectID>
 <a:Name>user_session id</a:Name>
 <a:Code>userSessionId</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {3FC38D95-6E80-4540-8BDB-E42F865FC63D}
 DAT 1356023837
 ORG {326E9D28-E999-48EF-B7D4-72EE34E3C907}
 DAT 1356022055
 ORG {1D25CE97-950A-4BF9-A9FA-0C76FE249F3F}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA64</a:PersistentDataType>
 <a:PersistentLength>64</a:PersistentLength>
 <a:PersistentCode>USER_SESSION_ID</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o51">
+<o:Attribute Id="o50">
 <a:ObjectID>D5367318-5866-4A15-BA38-2321A3B0986C</a:ObjectID>
 <a:Name>local path</a:Name>
 <a:Code>localPath</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {E8D47BA8-942F-4318-9345-6921A51BF4BE}
 DAT 1356023837
 ORG {CAA181FE-4D89-4C9A-9D23-070B2C96AE4E}
 DAT 1356022055
 ORG {885A794C-02F5-466B-8C8B-FF61A84157B7}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA260</a:PersistentDataType>
 <a:PersistentLength>260</a:PersistentLength>
 <a:PersistentCode>LOCAL_PATH</a:PersistentCode>
@@ -3996,7 +3987,7 @@ DAT 1356022050</a:History>
 </o:Attribute>
 </c:Attributes>
 <c:Identifiers>
-<o:Identifier Id="o52">
+<o:Identifier Id="o51">
 <a:ObjectID>442407D0-6082-45DF-9288-76055004E1EE</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>Identifiant_1</a:Code>
@@ -4011,12 +4002,12 @@ DAT 1356022055
 ORG {40405E49-BA71-4F3B-A39A-5AEF35F31A8E}
 DAT 1356022050</a:History>
 <c:Identifier.Attributes>
-<o:Attribute Ref="o50"/>
+<o:Attribute Ref="o49"/>
 </c:Identifier.Attributes>
 </o:Identifier>
 </c:Identifiers>
 <c:PrimaryIdentifier>
-<o:Identifier Ref="o52"/>
+<o:Identifier Ref="o51"/>
 </c:PrimaryIdentifier>
 </o:Class>
 <o:Class Id="o25">
@@ -4036,7 +4027,7 @@ DAT 1356022050</a:History>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <a:PersistentCode>USER_CONNECTION</a:PersistentCode>
 <c:Attributes>
-<o:Attribute Id="o53">
+<o:Attribute Id="o52">
 <a:ObjectID>E7BD7813-6AD3-408F-8D10-3672D7BD1908</a:ObjectID>
 <a:Name>user_connection id</a:Name>
 <a:Code>userConnectionId</a:Code>
@@ -4055,27 +4046,28 @@ DAT 1356022050</a:History>
 <a:PersistentCode>USER_CONNECTION_ID</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o54">
+<o:Attribute Id="o53">
 <a:ObjectID>F6AD32B1-24B2-4006-98C9-F0FAF37C9412</a:ObjectID>
 <a:Name>client ip</a:Name>
 <a:Code>clientIp</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {E51AF8D2-48C0-4670-9EE4-A922CE95B3B7}
 DAT 1356023837
 ORG {C3BEDDFE-0A0B-46F0-B92B-A7AD29A6557A}
 DAT 1356022055
 ORG {29620B6C-2F1A-4081-B5AF-9DC0DF34169E}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA15</a:PersistentDataType>
 <a:PersistentLength>15</a:PersistentLength>
 <a:PersistentCode>CLIENT_IP</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o55">
+<o:Attribute Id="o54">
 <a:ObjectID>22B4AF4D-9B6C-4B19-9A7C-D52BB6F200C7</a:ObjectID>
 <a:Name>last access</a:Name>
 <a:Code>lastAccess</a:Code>
@@ -4095,7 +4087,7 @@ DAT 1356022050</a:History>
 <a:PersistentCode>LAST_ACCESS</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o56">
+<o:Attribute Id="o55">
 <a:ObjectID>DA16FE16-9613-4234-983B-D70E80C3CE2D</a:ObjectID>
 <a:Name>life time</a:Name>
 <a:Code>lifeTime</a:Code>
@@ -4114,28 +4106,29 @@ DAT 1356022050</a:History>
 <a:PersistentCode>LIFE_TIME</a:PersistentCode>
 <a:Multiplicity>1..1</a:Multiplicity>
 </o:Attribute>
-<o:Attribute Id="o57">
+<o:Attribute Id="o56">
 <a:ObjectID>E3CDB3EA-CA77-43D4-BB16-079BBB2EA2A2</a:ObjectID>
 <a:Name>link path</a:Name>
 <a:Code>linkPath</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {7690923F-66E7-42C2-9408-E417CC6F6B39}
 DAT 1356023837
 ORG {070DD36E-9A6A-4D36-8FAE-C58F31B66506}
 DAT 1356022055
 ORG {0468E390-8CC4-4D33-9BD6-94E9F479C1E2}
-DAT 1356022050</a:History>
-<a:DataType>String</a:DataType>
+DAT 1356022050
+ATT DTTP</a:History>
+<a:DataType>std::string</a:DataType>
 <a:PersistentDataType>VA260</a:PersistentDataType>
 <a:PersistentLength>260</a:PersistentLength>
 <a:PersistentCode>LINK_PATH</a:PersistentCode>
 </o:Attribute>
 </c:Attributes>
 <c:Identifiers>
-<o:Identifier Id="o58">
+<o:Identifier Id="o57">
 <a:ObjectID>CD443EE7-0389-4080-BD59-05667DA309FD</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>Identifiant_1</a:Code>
@@ -4150,13 +4143,13 @@ DAT 1356022055
 ORG {9F349349-F496-4DF3-A7E1-636DE44F88C7}
 DAT 1356022050</a:History>
 <c:Identifier.Attributes>
-<o:Attribute Ref="o54"/>
 <o:Attribute Ref="o53"/>
+<o:Attribute Ref="o52"/>
 </c:Identifier.Attributes>
 </o:Identifier>
 </c:Identifiers>
 <c:PrimaryIdentifier>
-<o:Identifier Ref="o58"/>
+<o:Identifier Ref="o57"/>
 </c:PrimaryIdentifier>
 </o:Class>
 </c:Classes>
@@ -4279,90 +4272,47 @@ ATT ROLB</a:History>
 <a:Code>Street_Prefix</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {801929CA-DF58-4DDF-ABE6-A70330B1C797}
 DAT 1356023837
 ORG {277BCF31-A4E3-4901-BA0E-8362040F1418}
 DAT 1356022055
 ORG {A8154052-CCFC-45FE-9041-A2CA22643AD5}
-DAT 1356022050</a:History>
+DAT 1356022050
+ATT DTTP</a:History>
 <a:ListOfValues>bis	BIS
 ter	TER</a:ListOfValues>
-<a:DataType>String</a:DataType>
+<a:DataType>std::string</a:DataType>
 </o:Domain>
-<o:Domain Id="o48">
+<o:Domain Id="o47">
 <a:ObjectID>FC2E9994-306C-4569-BDC0-B6CD647B84E2</a:ObjectID>
 <a:Name>Sex</a:Name>
 <a:Code>Sex</a:Code>
 <a:CreationDate>1356023837</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356023837</a:ModificationDate>
+<a:ModificationDate>1356969108</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {9FA282B4-2F3A-411D-9B0D-052D5CF023CB}
 DAT 1356023837
 ORG {3DD73922-4F7F-452A-B413-D5465A9CC41F}
 DAT 1356022055
 ORG {F714F86A-C21E-492C-A547-BB878E20CB10}
-DAT 1356022050</a:History>
+DAT 1356022050
+ATT DTTP</a:History>
 <a:ListOfValues>M	Homme
 F	Femme</a:ListOfValues>
-<a:DataType>String</a:DataType>
+<a:DataType>std::string</a:DataType>
 </o:Domain>
 </c:Domains>
-<c:ChildExtendedDependencies>
-<o:ExtendedDependency Id="o59">
-<a:ObjectID>E9D7A4EA-66EE-4934-9B42-1809E4CE5C00</a:ObjectID>
-<a:CreationDate>1356160532</a:CreationDate>
-<a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356160827</a:ModificationDate>
-<a:Modifier>developpement</a:Modifier>
-<a:Stereotype>id</a:Stereotype>
-<c:Object1>
-<o:Attribute Ref="o43"/>
-</c:Object1>
-<c:Object2>
-<o:Operation Ref="o36"/>
-</c:Object2>
-</o:ExtendedDependency>
-<o:ExtendedDependency Id="o60">
-<a:ObjectID>3DCC3669-F635-414D-A37E-C75911F838B2</a:ObjectID>
-<a:CreationDate>1356160532</a:CreationDate>
-<a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356160827</a:ModificationDate>
-<a:Modifier>developpement</a:Modifier>
-<a:Stereotype>id</a:Stereotype>
-<c:Object1>
-<o:Identifier Ref="o49"/>
-</c:Object1>
-<c:Object2>
-<o:Operation Ref="o36"/>
-</c:Object2>
-</o:ExtendedDependency>
-</c:ChildExtendedDependencies>
 <c:TargetModels>
-<o:TargetModel Id="o61">
-<a:ObjectID>78AC0A78-7CA8-40A0-A3D6-6FBB690B4CA0</a:ObjectID>
-<a:Name>PHP</a:Name>
-<a:Code>PHP</a:Code>
-<a:CreationDate>1355940057</a:CreationDate>
-<a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356157468</a:ModificationDate>
-<a:Modifier>developpement</a:Modifier>
-<a:TargetModelURL>file:///%_OBJLANG%/php.xol</a:TargetModelURL>
-<a:TargetModelID>C37F67C8-679C-48FB-8CA4-2E98B9D416F7</a:TargetModelID>
-<a:TargetModelClassID>1811206C-1A4B-11D1-83D9-444553540000</a:TargetModelClassID>
-<c:SessionShortcuts>
-<o:Shortcut Ref="o4"/>
-</c:SessionShortcuts>
-</o:TargetModel>
-<o:TargetModel Id="o62">
+<o:TargetModel Id="o58">
 <a:ObjectID>76356BAE-9F15-4A5E-8877-45D64FEF961A</a:ObjectID>
 <a:Name>user</a:Name>
 <a:Code>USER</a:Code>
 <a:CreationDate>1356018134</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356162240</a:ModificationDate>
+<a:ModificationDate>1356952096</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:TargetModelURL>file:///C|/Users/developpement/Documents/GitHub/Webframework Module Utilisateur/mcd/user.mpd</a:TargetModelURL>
 <a:TargetModelID>94471171-BAD3-410B-8D7E-6A3235048243</a:TargetModelID>
@@ -4371,19 +4321,34 @@ F	Femme</a:ListOfValues>
 <o:Shortcut Ref="o3"/>
 </c:SessionShortcuts>
 </o:TargetModel>
-<o:TargetModel Id="o63">
+<o:TargetModel Id="o59">
 <a:ObjectID>9E85D589-B48A-4648-9734-A1B1E568B2D7</a:ObjectID>
 <a:Name>WSDL for Java</a:Name>
 <a:Code>WSDLJava</a:Code>
 <a:CreationDate>1356018443</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356157470</a:ModificationDate>
+<a:ModificationDate>1356952096</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:TargetModelURL>file:///%_XEM%/WSDLJ2EE.xem</a:TargetModelURL>
 <a:TargetModelID>C8F5F7B2-CF9D-4E98-8301-959BB6E86C8A</a:TargetModelID>
 <a:TargetModelClassID>186C8AC3-D3DC-11D3-881C-00508B03C75C</a:TargetModelClassID>
 <c:SessionShortcuts>
 <o:Shortcut Ref="o5"/>
+</c:SessionShortcuts>
+</o:TargetModel>
+<o:TargetModel Id="o60">
+<a:ObjectID>EB622687-982B-4428-A71A-752CBDED2CE8</a:ObjectID>
+<a:Name>PHP</a:Name>
+<a:Code>PHP</a:Code>
+<a:CreationDate>1356970173</a:CreationDate>
+<a:Creator>developpement</a:Creator>
+<a:ModificationDate>1356970173</a:ModificationDate>
+<a:Modifier>developpement</a:Modifier>
+<a:TargetModelURL>file:///%_OBJLANG%/php.xol</a:TargetModelURL>
+<a:TargetModelID>C37F67C8-679C-48FB-8CA4-2E98B9D416F7</a:TargetModelID>
+<a:TargetModelClassID>1811206C-1A4B-11D1-83D9-444553540000</a:TargetModelClassID>
+<c:SessionShortcuts>
+<o:Shortcut Ref="o4"/>
 </c:SessionShortcuts>
 </o:TargetModel>
 </c:TargetModels>

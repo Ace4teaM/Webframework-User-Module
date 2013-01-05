@@ -12,19 +12,21 @@ class UserSession
 {
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $userSessionId;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $localPath;    
 
 }
 
 /*
-   Class manager
+   user_session Class manager
+   
+   This class is optimized for use with the Webfrmework project (www.webframework.fr)
 */
 class UserSessionMgr
 {

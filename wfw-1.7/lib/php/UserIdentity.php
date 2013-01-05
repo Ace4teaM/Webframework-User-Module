@@ -17,12 +17,12 @@ class UserIdentity
     public $userIdentityId;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $firstName;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $lastName;
     
@@ -32,14 +32,16 @@ class UserIdentity
     public $birthDay;
     
     /**
-    * @var      String
+    * @var      std::string
     */
     public $sex;    
 
 }
 
 /*
-   Class manager
+   user_identity Class manager
+   
+   This class is optimized for use with the Webfrmework project (www.webframework.fr)
 */
 class UserIdentityMgr
 {
