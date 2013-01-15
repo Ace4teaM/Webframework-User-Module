@@ -19,11 +19,14 @@
     <body>
         <h1>Renseigner une identité</h1>
         <p>Cette page vous permez de renseigner votre identité personnelle.</p>
-        <p>Résultat: (-{error_code})<br/>-{error_str}</p>
+        <fieldset><legend>Résultat (-{error_code})</legend>
+            -{error_str}
+        </fieldset>
         <form id="form" enctype="multipart/form-data" action="#" method="post">
             <fieldset><legend>Votre Identité</legend>
                 <div>
-                    <input type="hidden" name="user_id" value="sds" />
+                    <div class="wfw_edit_field"><span><label for="last_name">Nom d'utilisateur</label></span><span><input type="text" id="user_id" name="user_id" value="sds"/></span></div>
+                    <hr/>
                     <div class="wfw_edit_field"><span><label for="last_name">Nom</label></span><span><input type="text" id="last_name" name="last_name" /></span></div>
                     <div class="wfw_edit_field"><span><label for="first_name">Prénom</label></span><span><input type="text" id="first_name" name="first_name" /></span></div>
                     <div class="wfw_edit_field"><span><label for="birth_day">Date de naissance</label></span><span><input type="text" id="birth_day" name="birth_day" /></span></div>
