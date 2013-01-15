@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--(C)2010-ID-Informatik-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:template="http://www.webframework.fr/last/xmlns/template" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+        <!-- Title -->
+        <title>Comptes utilisateurs</title>
+
+        <!-- Navigator Page Id -->
+        <meta http-equiv="wfw.page-id" content="index" /> 
+
+        <!-- meta -->
+        <meta name="description" content="Gestion des comptes utilisateurs" />
+        <meta name="keywords" content="utilisateur, compte" />
+</head>
+
+<!-- Document -->
+<body>
+
+    <h1>Gestion des comptes utilisateurs</h1>
+    <p>Le module de gestion des comptes vous permez de créer des comptes utilisateurs sécurisés. Chaque compte est identifié par son adresse email et un nom d'utilisateur. Un mot de passe permet de s'y connecter en toute sécurité.</p>
+    <p>Le systéme de session est géré par adresse IP et compte utilisateur.</p>
+    
+    <fieldset>
+        <legend>Etat de la configuration</legend>
+        <ul>
+            <li>Base de données : -{bdd_status}</li>
+        </ul>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Fonctionnalités de base</legend>
+        <ul>
+            <li><a href="-{page:create}">Créer un compte</a></li>
+            <li><a href="-{page:connect}">Connexion</a></li>
+            <li><a href="-{page:disconnect}">Déconnexion</a></li>
+            <li><a href="-{page:delete}">Supprimer</a></li>
+            <li><a href="-{page:lost_pwd}">Mot de passe perdu</a></li>
+            <li><a href="-{page:identity}">Renseigner identité</a></li>
+        </ul>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Fonctionnalités supplémentaires</legend>
+        <ul>
+            <li><a href="-{page:connect_to_facebook}">Connexion avec un compte Facebook(tm)</a></li>
+            <li><a href="-{page:connect_to_client}">Connexion à un dossier client (Module Client)</a></li>
+        </ul>
+    </fieldset>
+    
+</body>
+
+</html>

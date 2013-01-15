@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+    <title>Compte utilisateur</title>
+    <name>user_mod</name>
+    <base>webframework</base>
+    <description>Gestionnaire de compte utilisateur</description>
+    
+    <index>
+        <page id="index" name="Accueil">index.php</page>
+        <page id="connect" name="Connexion">index.php?page=connect</page>
+        <page id="create" name="Créer un compte">create.php</page>
+        <page id="delete" name="Supprimer un compte">index.php?page=delete</page>
+        <page id="disconnect" name="Déconnecter un compte">index.php?page=disconnect</page>
+        <page id="identity" name="Modifier les informations d'identité">identity.php</page>
+        <!-- templates -->
+        <template id="connect" name="Connect user popup">view/popup/connect.html</template>
+        <template id="create" name="Create user popup">view/popup/create.html</template>
+        <template id="delete" name="Delete user popup">view/popup/delete.html</template>
+        <template id="disconnect" name="Disconnect user popup">view/popup/disconnect.html</template>
+    </index>
+
+    <tree>
+        <index/>
+        <connect/>
+        <create/>
+        <delete/>
+        <disconnect/>
+    </tree>
+</site>
