@@ -160,7 +160,7 @@ class UserIdentityMgr
       @param $inst UserIdentity instance pointer to initialize
       @param $cond SQL Select condition
       @param $db iDataBase derived instance
-    */
+    
     public static function create(&$inst,$db=null){
        //obtient la base de donnees courrante
        global $app;
@@ -168,19 +168,15 @@ class UserIdentityMgr
          return false;
       
       //execute la requete
-       $query = "INSERT INTO user_identity";
+       $query = "INSERT INTO user_identity (user_identity_id) VALUE(DEFAULT) RETURNING CURRVAL('user_identity_id')";
        if($db->execute($query, $result) && pg_num_rows($result)){
-            $inst = new UserIdentity();
-          $inst->userIdentityId = $db->fetchValue($result,"user_identity_id");
-          $inst->firstName = $db->fetchValue($result,"first_name");
-          $inst->lastName = $db->fetchValue($result,"last_name");
-          $inst->birthDay = $db->fetchValue($result,"birth_day");
-          $inst->sex = $db->fetchValue($result,"sex");          
+          $fch = pg_fetch_row($result);
+            print_r($fch);
 
           return true;
        }
        return false;
-    }
+    }*/
     
 }
 

@@ -336,3 +336,59 @@ BEGIN
      end if;
 END;
 $$ LANGUAGE plpgsql;
+
+  /*
+    Définit l'identité d'un utilisateur
+    Parametres:
+      p_user_account_id    : Identifiant de l'utilisateur
+      p_first_name         : ...
+      p_last_name          : ...
+      p_birth_day          : ...
+      p_sex                : ...
+    Remarque:
+      Si aucune entrée de la table USER_IDENTITY n'existe, elle est créé
+    Succès:
+      IDENTITY_INSERTED : Une nouvelle identité à été créée
+      IDENTITY_UPDATED  : L'identité existante à été modifié
+    Echec:
+      [SQL Exceptions]
+  */
+CREATE OR REPLACE FUNCTION user_make_identity(
+       p_user_account_id    user_account.user_account_id%type,
+       p_first_name         user_identity.first_name%type,
+       p_last_name          user_identity.last_name%type,
+       p_birth_day          user_identity.birth_day%type,
+       p_sex                user_identity.sex%type
+       )
+    returns RESULT
+  as $$
+  declare
+    v_user_identity_id   user_identity.user_identity_id%type;
+    v_result RESULT;
+  begin
+
+    /* ajoute/actualise la connexion */
+    select user_identity_id into v_user_identity_id from user_account where user_account_id = p_user_account_id;
+    if v_user_identity_id is NULL then
+        /* obtient un nouvel ID */
+        select coalesce(max(user_identity_id)+1,1) into v_user_identity_id from user_identity;
+        /* insert une nouvelle identite */
+        insert into user_identity (user_identity_id,first_name,last_name,birth_day,sex)
+          values(v_user_identity_id,p_first_name,p_last_name,p_birth_day,p_sex);
+        /* actualise le lien avec le compte */
+        update user_account
+          set user_identity_id=v_user_identity_id
+          where user_account_id = p_user_account_id;
+          select 'ERR_OK', 'IDENTITY_INSERTED' into v_result;
+    else
+        /* actualise l'identite existante */
+        update user_identity
+          set first_name=p_first_name, last_name=p_last_name, birth_day=p_birth_day, sex=p_sex
+          where user_identity_id = v_user_identity_id;
+        select 'ERR_OK', 'IDENTITY_UPDATED' into v_result;
+    end if;
+  
+    /* return */
+     return v_result;
+  end;
+$$ LANGUAGE plpgsql;

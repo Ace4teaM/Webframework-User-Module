@@ -138,6 +138,25 @@ class UserModule implements iModule
         return $result;
         //return RESULT($result[0], $result[1]);
     }
+    
+    /** 
+     * Cree un nouvel utilisateur
+     * 
+     * @param type $name
+     * @param type $attributes
+     * @param type $template_file
+     */
+    public static function makeIdentity($uid, $first_name, $last_name, $birth_day, $sex){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_make_identity", func_get_args());
+        return $result;
+        //return RESULT($result[0], $result[1]);
+    }
 }
 
 ?>

@@ -17,12 +17,15 @@ $accountFields = array(
 // exemples JS
 if(cInputFields::checkArray($accountFields))
 {
+    //verifie les informations de connexion
+    //... $_REQUEST["user_id"]
+ 
     //obtient le compte utilisateur
-    if(!UserAccountMgr::getById($account, $_REQUEST["user_id"]))
+    if(!UserModule::makeIdentity($_REQUEST["user_id"], $_REQUEST["first_name"], $_REQUEST["last_name"], $_REQUEST["birth_day"], $_REQUEST["sex"]))
             $app->processLastError();
     
     //obtient/initialise l'identité
-    $identity = NULL;
+ /*   $identity = NULL;
     if(!UserIdentityMgr::getByRelation($identity,$account)){
         echo("add");
         //crée une nouvelle entree
@@ -42,7 +45,7 @@ if(cInputFields::checkArray($accountFields))
     $identity->birthDay  = $_REQUEST["birth_day"];
     $identity->sex       = $_REQUEST["sex"];
     if(!UserIdentityMgr::update($identity))
-        $app->processLastError();
+        $app->processLastError();*/
     
 }
 
