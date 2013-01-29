@@ -5,37 +5,30 @@
 
 require_once("inc/globals.php");
 global $app;
-/*
-class FieldForm{
-    public function FieldForm($field_array,){
-        
-    }
-}*/
 
 $accountFields = array(
     "uid"=>"cInputIdentifier",
     "pwd"=>"cInputPassword",
-    "mail"=>"cInputMail"
+    "mail"=>"cInputMail",
+    "token"=>"cInputName"
 );
 
 // exemples JS
 if(cInputFields::checkArray($accountFields))
 {
-    $client_id = "none";
-
     //crée le compte utilisateur
-    $result = UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],$client_id,$_REQUEST["mail"]);
-    //if(false === $result)
-    //    $app->processLastError();
-    
+    $result = UserModule::activateAccount($_REQUEST["uid"],$_REQUEST["pwd"],$_REQUEST["mail"],$_REQUEST["token"]);
     //ok
-    //header("Location: user_account_activation.php");
+    /*if($result){
+        header("Location: index.php");
+    }*/
 }
 
 /* Ajoute le résultat aux champs du template */
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
-//traduit le nom du champs
+
+//traduit le nom des champs
 if(isset($att["field_name"])){
     switch($att["field_name"]){
         case "mail":
@@ -46,6 +39,9 @@ if(isset($att["field_name"])){
             break;
         case "pwd":
             $att["field_name"] = "Mot-de-passe";
+            break;
+        case "token":
+            $att["field_name"] = "Jeton";
             break;
     }
 }
@@ -64,12 +60,12 @@ if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
             break;
         case "html":
         default:
-            $app->showXMLView("view/user/pages/create.html",$att);
+            $app->showXMLView("view/user/pages/activate.html",$att);
             break;
     }
 }
 
 // accueil
-$app->showXMLView("view/user/pages/create.html",$att);
+$app->showXMLView("view/user/pages/activate.html",$att);
 
 ?>

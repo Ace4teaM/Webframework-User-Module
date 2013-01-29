@@ -16,7 +16,7 @@ require_once("php/templates/cHTMLTemplate.php");
 require_once("php/templates/xml_template.php");
 
 //charge la classe de la base de données
-$db_classname = $app->config["database"]["class"];
+$db_classname = $app->getCfgValue("database", "class");
 if(!empty($db_classname))
     require_once($app->getLibPath("wfw")."/php/$db_classname.php");
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1356969409" Name="user" Objects="54" Symbols="10" Target="C++" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1356970196" Name="user" Objects="58" Symbols="10" Target="PHP" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,7 +12,7 @@
 <a:Code>USER</a:Code>
 <a:CreationDate>1355940053</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356969409</a:ModificationDate>
+<a:ModificationDate>1356970196</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {94471171-BAD3-410B-8D7E-6A3235048243}
 DAT 1356018134
@@ -150,7 +150,7 @@ ATT DVTL</a:History>
 
 [FolderOptions\Class Diagram Objects]
 GenerationCheckModel=Yes
-GenerationPath=C:\Users\developpement\Documents\GitHub\Webframework Module Utilisateur\wfw-1.7\lib\cpp\
+GenerationPath=C:\Users\developpement\Documents\GitHub\Webframework Module Utilisateur\wfw-1.7\lib\php\
 GenerationOptions=
 GenerationTasks=WSDLJava|WSPackServer[LF]F[LF]WSDLJava|WSPackClient[LF]F[LF]
 GenerationTargets=WSDL[LF]F[LF]WSDLJava[LF]T
@@ -1323,7 +1323,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1351,7 +1351,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1379,7 +1379,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1407,7 +1407,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1435,7 +1435,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1463,7 +1463,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1491,7 +1491,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1519,7 +1519,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1547,7 +1547,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1575,7 +1575,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1603,7 +1603,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1631,7 +1631,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1659,7 +1659,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1687,7 +1687,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1715,7 +1715,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1743,7 +1743,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1771,7 +1771,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1799,7 +1799,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1827,7 +1827,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1855,7 +1855,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1883,7 +1883,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1911,7 +1911,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1939,7 +1939,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1967,7 +1967,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -1995,7 +1995,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -2023,7 +2023,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -2051,7 +2051,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -2079,7 +2079,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_. &quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -2107,7 +2107,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -2135,7 +2135,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -2163,7 +2163,7 @@ Template=
 MaxLen=254
 Case=M
 ValidChar=&#39;a&#39;-&#39;z&#39;,&#39;A&#39;-&#39;Z&#39;,&#39;0&#39;-&#39;9&#39;,&quot;_&quot;
-InvldChar=&quot; &#39;()+=*/&quot;
+InvldChar=&quot; +-*/!=&lt;&gt;&#39;&quot;&quot;().&quot;
 AllValid=Yes
 NoAccent=Yes
 DefaultChar=_
@@ -2223,15 +2223,15 @@ PreserveMode=Yes</a:ModelOptionsText>
 </c:GenerationOrigins>
 <c:ObjectLanguage>
 <o:Shortcut Id="o4">
-<a:ObjectID>A2792A1D-89E1-41C1-BBBB-C78ED24B4734</a:ObjectID>
-<a:Name>C++</a:Name>
-<a:Code>C++</a:Code>
-<a:CreationDate>1356969107</a:CreationDate>
+<a:ObjectID>C1156770-D6FC-42BA-AA88-A1D251AED5B5</a:ObjectID>
+<a:Name>PHP</a:Name>
+<a:Code>PHP</a:Code>
+<a:CreationDate>1356970173</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356969108</a:ModificationDate>
+<a:ModificationDate>1356970173</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:TargetStereotype/>
-<a:TargetID>22FB523D-7E45-430F-8069-3A702CF3BE3C</a:TargetID>
+<a:TargetID>C37F67C8-679C-48FB-8CA4-2E98B9D416F7</a:TargetID>
 <a:TargetClassID>1811206C-1A4B-11D1-83D9-444553540000</a:TargetClassID>
 </o:Shortcut>
 </c:ObjectLanguage>
@@ -3394,7 +3394,7 @@ LABL 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:ClassSymbol>
 <o:ClassSymbol Id="o9">
-<a:ModificationDate>1356969108</a:ModificationDate>
+<a:ModificationDate>1356970173</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
 <a:Rect>((25770,7766), (39028,15482))</a:Rect>
 <a:LineColor>11184640</a:LineColor>
@@ -4337,15 +4337,15 @@ F	Femme</a:ListOfValues>
 </c:SessionShortcuts>
 </o:TargetModel>
 <o:TargetModel Id="o60">
-<a:ObjectID>28E41DB9-186F-4122-8C16-F2CD9678B83D</a:ObjectID>
-<a:Name>C++</a:Name>
-<a:Code>C++</a:Code>
-<a:CreationDate>1356969107</a:CreationDate>
+<a:ObjectID>EB622687-982B-4428-A71A-752CBDED2CE8</a:ObjectID>
+<a:Name>PHP</a:Name>
+<a:Code>PHP</a:Code>
+<a:CreationDate>1356970173</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356969108</a:ModificationDate>
+<a:ModificationDate>1356970173</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
-<a:TargetModelURL>file:///%_OBJLANG%/C++.xol</a:TargetModelURL>
-<a:TargetModelID>22FB523D-7E45-430F-8069-3A702CF3BE3C</a:TargetModelID>
+<a:TargetModelURL>file:///%_OBJLANG%/php.xol</a:TargetModelURL>
+<a:TargetModelID>C37F67C8-679C-48FB-8CA4-2E98B9D416F7</a:TargetModelID>
 <a:TargetModelClassID>1811206C-1A4B-11D1-83D9-444553540000</a:TargetModelClassID>
 <c:SessionShortcuts>
 <o:Shortcut Ref="o4"/>

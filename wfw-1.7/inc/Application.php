@@ -6,10 +6,10 @@ require_once("inc/Error.php");
  */
 class Application{
     //errors class
-    const Configuration = 2001;
-    const ModuleClassNotFound = 2002;
-    const DatabaseConnectionNotFound = 2003;
-    
+    const Configuration              = "CONFIGURATION";
+    const ModuleClassNotFound        = "MODULE_NOT_FOUND";
+    const DatabaseConnectionNotFound = "DATABASE_CONNECTION_NOT_FOUND";
+    const UnsuportedFeature          = "UNSUPORTED_FEATURE";
     //
     public $template_attributes;
     public $config;
@@ -210,7 +210,17 @@ class Application{
     public static function processLastError(){
         $result = cResult::getLast();
         if($result->code != cResult::Ok){
-            echo("RESULT: $result->code, $result->info\n");
+            header("content-type: text/plain");
+            echo("The application encountered a fatal error.\n");
+            echo("L'application à rencontrée une erreur fatale.\n");
+            echo("\nCode\t: ");
+            echo(isset(Error::$code[$result->code]) ? Error::$code[$result->code] : $result->code);
+            echo("\nInfos\t: ");
+            echo(isset(Error::$info[$result->info]) ? Error::$info[$result->info] : $result->info);
+            if(!empty($result->att)){
+                echo("\n\nAdditionnal:\n");
+                print_r($result->att);
+            }
             exit;
         }
     }

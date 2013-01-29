@@ -12,12 +12,12 @@ class UserSession
 {
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $userSessionId;
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $localPath;    
 
@@ -60,7 +60,7 @@ class UserSessionMgr
       
       //execute la requete
        $query = "SELECT * from user_session where $cond";
-       if($db->execute($query, $result) && pg_num_rows($result)){
+       if($db->execute($query, $result)){
             $inst = new UserSession();
           $inst->userSessionId = $db->fetchValue($result,"user_session_id");
           $inst->localPath = $db->fetchValue($result,"local_path");          
@@ -87,7 +87,7 @@ class UserSessionMgr
            
       //execute la requete
        $query = "SELECT * from user_session where user_session_id=$id";
-       if($db->execute($query, $result) && pg_num_rows($result)){
+       if($db->execute($query, $result)){
             $inst = new UserSession();
           $inst->userSessionId = $db->fetchValue($result,"user_session_id");
           $inst->localPath = $db->fetchValue($result,"local_path");          
@@ -124,14 +124,13 @@ class UserSessionMgr
         print_r($objectIdName.", ");
         print_r($obj->$objectIdName);*/
         
-        $id = $obj->$objectIdName;
-        if(is_string($id))
-            $id = "'$id'";
-        
-        $cond = ("user_session_id = (select user_session_id from $objectTableName where ".$objectTableName."_id=".$id.")");
-        
+        $select;
+        if(is_string($obj->$objectIdName))
+            $select = ("user_session_id = (select user_session_id from $objectTableName where ".$objectTableName."_id='".$obj->$objectIdName."')");
+        else
+            $select = ("user_session_id = (select user_session_id  from $objectTableName where ".$objectTableName."_id=".$obj->$objectIdName.")");
 
-        return UserSessionMgr::get($inst,$cond,$db);
+        return UserSessionMgr::get($inst,$select,$db);
     }
 
 }

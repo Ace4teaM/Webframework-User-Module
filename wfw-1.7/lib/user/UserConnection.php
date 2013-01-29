@@ -17,7 +17,7 @@ class UserConnection
     public $userConnectionId;
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $clientIp;
     
@@ -32,7 +32,7 @@ class UserConnection
     public $lifeTime;
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $linkPath;    
 
@@ -75,7 +75,7 @@ class UserConnectionMgr
       
       //execute la requete
        $query = "SELECT * from user_connection where $cond";
-       if($db->execute($query, $result) && pg_num_rows($result)){
+       if($db->execute($query, $result)){
             $inst = new UserConnection();
           $inst->userConnectionId = $db->fetchValue($result,"user_connection_id");
           $inst->clientIp = $db->fetchValue($result,"client_ip");
@@ -105,7 +105,7 @@ class UserConnectionMgr
            
       //execute la requete
        $query = "SELECT * from user_connection where user_connection_id=$id";
-       if($db->execute($query, $result) && pg_num_rows($result)){
+       if($db->execute($query, $result)){
             $inst = new UserConnection();
           $inst->userConnectionId = $db->fetchValue($result,"user_connection_id");
           $inst->clientIp = $db->fetchValue($result,"client_ip");
@@ -145,14 +145,13 @@ class UserConnectionMgr
         print_r($objectIdName.", ");
         print_r($obj->$objectIdName);*/
         
-        $id = $obj->$objectIdName;
-        if(is_string($id))
-            $id = "'$id'";
-        
-        $cond = ("user_connection_id = (select user_connection_id from $objectTableName where ".$objectTableName."_id=".$id.")");
-        
+        $select;
+        if(is_string($obj->$objectIdName))
+            $select = ("user_connection_id = (select user_connection_id from $objectTableName where ".$objectTableName."_id='".$obj->$objectIdName."')");
+        else
+            $select = ("user_connection_id = (select user_connection_id  from $objectTableName where ".$objectTableName."_id=".$obj->$objectIdName.")");
 
-        return UserConnectionMgr::get($inst,$cond,$db);
+        return UserConnectionMgr::get($inst,$select,$db);
     }
 
 }

@@ -1,9 +1,9 @@
 /*
   (C)2012 ID-INFORMATIK, Webframework (R)
-  PL/pgSQL8
+  PL/pgSQL
   Module Utilisateur (WFW_USER)
   
-  Fonctions
+  PostgreSQL v8.3 (version minimum requise)
 */
 
 /*
@@ -48,15 +48,34 @@ CREATE OR REPLACE FUNCTION user_create_account(
        p_client_id user_account.client_id%type,
        p_user_mail user_account.user_mail%type
 )
-RETURNS RESULT
-AS $$
-declare
+RETURNS RESULT AS
+$$
+DECLARE
 	v_result RESULT;
+	v_cnt INT;
 BEGIN
-  insert into user_account (user_account_id,user_pwd,client_id,user_mail) values(p_user_id,p_user_pwd,p_client_id,p_user_mail);
+
+  /* verifie si le nom d'utilisateur est déjà utilisé */
+  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id);
+  if v_cnt > 0 then
+    select 'ERR_FAILED', 'USER_NAME_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* verifie si l'adresse mail est déjà utilisé */
+  select count(*) into v_cnt from user_account where upper(user_mail) = upper(p_user_mail);
+  if v_cnt > 0 then
+    select 'ERR_FAILED', 'USER_MAIL_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* insert l'entree */
+  insert into user_account (user_account_id,user_pwd,client_id,user_mail) values(p_user_id,p_user_pwd,p_client_id,lower(p_user_mail));
   select 'ERR_OK', 'USER_CREATED' into v_result;
   return v_result;
+
 EXCEPTION
+
   when unique_violation then
        select 'ERR_FAILED', 'USER_EXISTS' into v_result;
        --debugmsg(v_result.err_code||':'||v_result.err_str);
@@ -65,9 +84,163 @@ EXCEPTION
        select 'ERR_SYSTEM', 'NOT_SPECIFIED' into v_result;
        --debugmsg(v_result.err_code||':'||v_result.err_str);
        return v_result;
-END;
-$$ LANGUAGE plpgsql;
 
+END;
+$$
+LANGUAGE plpgsql;
+
+/*
+  Inscrit un utilisateur
+  Retourne:
+     [RESULT] Un des résultats suivant:
+        'ERR_OK     : USER_CREATED'   -> L'Utilisateur à été créé avec succès
+        'ERR_FAILED : USER_EXISTS'    -> L'Utilisateur existe déjà
+        'ERR_SYSTEM : NOT_SPECIFIED'  -> Une erreur système est survenue
+
+*/
+
+CREATE OR REPLACE FUNCTION user_register_account(
+       p_user_id user_account.user_account_id%type,
+       p_user_mail user_account.user_mail%type
+)
+RETURNS RESULT AS
+$$
+DECLARE
+	v_result RESULT;
+        v_token CHAR(8);
+	v_cnt INT;
+BEGIN
+
+  /* verifie si le nom d'utilisateur est déjà utilisé */
+  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id);
+  if v_cnt > 0 then
+    select 'ERR_FAILED', 'USER_NAME_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* verifie si l'adresse mail est déjà utilisé par un compte utilisateur */
+  select count(*) into v_cnt from user_account where upper(user_mail) = upper(p_user_mail);
+  if v_cnt > 0 then
+    select 'ERR_FAILED', 'USER_MAIL_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* verifie si l'adresse mail est déjà utilisé pour une inscription */
+  select count(*) into v_cnt from user_registration where upper(user_mail) = upper(p_user_mail);
+  if v_cnt > 0 then
+    select 'ERR_FAILED', 'USER_MAIL_REGISTRED' into v_result;
+    return v_result;
+  end if;
+
+  /* Génère le code d’activation */
+  select user_random_token() into v_token;
+
+  /* insert l'entree */
+  insert into user_registration (user_registration_id,user_token,user_id,user_mail)
+        values(
+            (select coalesce(max(user_registration_id),0)+1 from user_registration), /* id auto-increment */
+            v_token, /* token généré */
+            p_user_id,
+            lower(p_user_mail)
+        );
+  select 'ERR_OK', 'USER_REGISTRED' into v_result;
+  return v_result;
+
+EXCEPTION
+
+  when unique_violation then
+       select 'ERR_FAILED', 'USER_EXISTS' into v_result;
+       --debugmsg(v_result.err_code||':'||v_result.err_str);
+       return v_result;
+  when others then
+       select 'ERR_SYSTEM', 'NOT_SPECIFIED' into v_result;
+       --debugmsg(v_result.err_code||':'||v_result.err_str);
+       return v_result;
+
+END;
+$$
+LANGUAGE plpgsql;
+
+/*
+  Active un compte utilisateur
+*/
+
+CREATE OR REPLACE FUNCTION user_activate_account(
+       p_user_id user_account.user_account_id%type,
+       p_user_pwd user_account.user_pwd%type,
+       p_user_mail user_account.user_mail%type,
+       p_user_token user_registration.user_token%type
+)
+RETURNS RESULT AS
+$$
+DECLARE
+	v_result  RESULT;
+	v_cnt     INT;
+        v_reg_id  user_registration.user_registration_id%type;
+BEGIN
+
+  /* verifie si le nom d'utilisateur ou le mail est déjà utilisé */
+  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id) or upper(user_mail) = upper(p_user_mail);
+  if v_cnt > 0 then
+    select 'ERR_FAILED', 'USER_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* verifie si l'adresse mail est déjà utilisé pour une inscription */
+  select user_registration_id into v_reg_id from user_registration where upper(user_id) = upper(p_user_id) and upper(user_mail) = upper(p_user_mail) and user_token = p_user_token;
+  if v_cnt is null then
+    select 'ERR_FAILED', 'USER_REGISTRATIION_NOT_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* insert l'entree */
+  select user_create_account(p_user_id, p_user_pwd, NULL, p_user_mail) into v_result;
+  if v_result.err_code <> 'ERR_OK' then
+    return v_result;
+  end if;
+
+  /* supprime l'inscription */
+  delete from user_registration where user_registration_id = v_reg_id;
+
+  /* ok */
+  select 'ERR_OK', 'USER_CREATED' into v_result;
+  return v_result;
+
+EXCEPTION
+
+  when others then
+       select 'ERR_SYSTEM', 'NOT_SPECIFIED' into v_result;
+       --debugmsg(v_result.err_code||':'||v_result.err_str);
+       return v_result;
+
+END;
+$$
+LANGUAGE plpgsql;
+
+/*
+  Génère un token aléatoire (utilisé par la fonction user_create_account)
+  Retourne:
+     [TEXT] Token généré
+
+*/
+
+CREATE OR REPLACE FUNCTION user_random_token()
+RETURNS text AS 
+$$
+DECLARE
+  chars text[] := '{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z}';
+  result text := '';
+  i integer := 0;
+  token_length integer := 8;
+  chars_length integer := 62; /*array_length(chars, 1); PG-8.4! */
+BEGIN
+  for i in 1..token_length loop
+    result := result || chars[round(random()*(chars_length-1))];
+  end loop;
+  return result;
+END;
+$$
+LANGUAGE plpgsql;
 
 /*
   Crée une user_session

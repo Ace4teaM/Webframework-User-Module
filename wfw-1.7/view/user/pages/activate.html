@@ -1,11 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-        <title>Création d'un compte utilisateur</title>
+        <title>Activer un compte utilisateur</title>
     </head>
     <body>
         <div style="width:600">
-            <h1>Création d'un compte utilisateur</h1>
+            <h1>Activation d'un compte utilisateur</h1>
+            <p>Ce formulaire vous permet d'activer votre inscription et d'utiliser votre compte utilisateur.</p>
             <fieldset><legend>Résultat (-{error_code})</legend>
                 -{error_str}<br/>-{field_name}
             </fieldset>
@@ -14,6 +15,7 @@
                     <div class="wfw_edit_field"><span><label for="txt_uid">Nom d'utilisateur</label></span><span><input type="text" id="txt_uid" name="uid" value="-{uid}" /></span></div>
                     <div class="wfw_edit_field"><span><label for="txt_pwd">Mot-de-Passe</label></span><span><input type="text" id="txt_pwd" name="pwd" value="-{pwd}" /></span></div>
                     <div class="wfw_edit_field"><span><label for="txt_mail">Adresse eMail</label></span><span><input type="text" id="txt_mail" name="mail" value="-{mail}" /></span></div>
+                    <div class="wfw_edit_field"><span><label for="txt_token">Jeton d'activation</label></span><span><input type="text" id="txt_token" name="token" value="-{token}" /></span></div>
                 </fieldset>
                 <div align="right">
                     <a class="wfw_button_text" href="-{page:index}">Retour</a>

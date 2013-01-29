@@ -8,42 +8,37 @@
 /**
 * @author       developpement
 */
-class UserIdentity
+class UserRegistration
 {
     
     /**
     * @var      int
     */
-    public $userIdentityId;
+    public $userRegistrationId;
     
     /**
     * @var      String
     */
-    public $firstName;
+    public $userToken;
     
     /**
     * @var      String
     */
-    public $lastName;
-    
-    /**
-    * @var      Date
-    */
-    public $birthDay;
+    public $userMail;
     
     /**
     * @var      String
     */
-    public $sex;    
+    public $userId;    
 
 }
 
 /*
-   user_identity Class manager
+   user_registration Class manager
    
    This class is optimized for use with the Webfrmework project (www.webframework.fr)
 */
-class UserIdentityMgr
+class UserRegistrationMgr
 {
     /*
       @brief Get entry list
@@ -63,7 +58,7 @@ class UserIdentityMgr
     
     /*
       @brief Get single entry
-      @param $inst UserIdentity instance pointer to initialize
+      @param $inst UserRegistration instance pointer to initialize
       @param $cond SQL Select condition
       @param $db iDataBase derived instance
     */
@@ -74,14 +69,13 @@ class UserIdentityMgr
          return false;
       
       //execute la requete
-       $query = "SELECT * from user_identity where $cond";
+       $query = "SELECT * from user_registration where $cond";
        if($db->execute($query, $result)){
-            $inst = new UserIdentity();
-          $inst->userIdentityId = $db->fetchValue($result,"user_identity_id");
-          $inst->firstName = $db->fetchValue($result,"first_name");
-          $inst->lastName = $db->fetchValue($result,"last_name");
-          $inst->birthDay = $db->fetchValue($result,"birth_day");
-          $inst->sex = $db->fetchValue($result,"sex");          
+            $inst = new UserRegistration();
+          $inst->userRegistrationId = $db->fetchValue($result,"user_registration_id");
+          $inst->userToken = $db->fetchValue($result,"user_token");
+          $inst->userMail = $db->fetchValue($result,"user_mail");
+          $inst->userId = $db->fetchValue($result,"user_id");          
 
           return true;
        }
@@ -90,7 +84,7 @@ class UserIdentityMgr
     
     /*
       @brief Get single entry by id
-      @param $inst UserIdentity instance pointer to initialize
+      @param $inst UserRegistration instance pointer to initialize
       @param $id Primary unique identifier of entry to retreive
       @param $db iDataBase derived instance
     */
@@ -104,14 +98,13 @@ class UserIdentityMgr
            $id = "'$id'";
            
       //execute la requete
-       $query = "SELECT * from user_identity where user_identity_id=$id";
+       $query = "SELECT * from user_registration where user_registration_id=$id";
        if($db->execute($query, $result)){
-            $inst = new UserIdentity();
-          $inst->userIdentityId = $db->fetchValue($result,"user_identity_id");
-          $inst->firstName = $db->fetchValue($result,"first_name");
-          $inst->lastName = $db->fetchValue($result,"last_name");
-          $inst->birthDay = $db->fetchValue($result,"birth_day");
-          $inst->sex = $db->fetchValue($result,"sex");          
+            $inst = new UserRegistration();
+          $inst->userRegistrationId = $db->fetchValue($result,"user_registration_id");
+          $inst->userToken = $db->fetchValue($result,"user_token");
+          $inst->userMail = $db->fetchValue($result,"user_mail");
+          $inst->userId = $db->fetchValue($result,"user_id");          
 
           return true;
        }
@@ -131,13 +124,13 @@ class UserIdentityMgr
     
     /**
       @brief Get entry by id's relation table
-      @param $inst UserIdentity instance pointer to initialize
+      @param $inst UserRegistration instance pointer to initialize
       @param $obj An another entry class object instance
       @param $db iDataBase derived instance
     */
     public static function getByRelation(&$inst,$obj,$db=null){
         $objectName = get_class($obj);
-        $objectTableName  = UserIdentityMgr::nameToCode($objectName);
+        $objectTableName  = UserRegistrationMgr::nameToCode($objectName);
         $objectIdName = lcfirst($objectName)."Id";
         
         /*print_r($objectName.", ");
@@ -147,11 +140,11 @@ class UserIdentityMgr
         
         $select;
         if(is_string($obj->$objectIdName))
-            $select = ("user_identity_id = (select user_identity_id from $objectTableName where ".$objectTableName."_id='".$obj->$objectIdName."')");
+            $select = ("user_registration_id = (select user_registration_id from $objectTableName where ".$objectTableName."_id='".$obj->$objectIdName."')");
         else
-            $select = ("user_identity_id = (select user_identity_id  from $objectTableName where ".$objectTableName."_id=".$obj->$objectIdName.")");
+            $select = ("user_registration_id = (select user_registration_id  from $objectTableName where ".$objectTableName."_id=".$obj->$objectIdName.")");
 
-        return UserIdentityMgr::get($inst,$select,$db);
+        return UserRegistrationMgr::get($inst,$select,$db);
     }
 
 }

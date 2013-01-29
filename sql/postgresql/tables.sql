@@ -1,22 +1,24 @@
 /*==============================================================*/
 /* Nom de SGBD :  PostgreSQL 8                                  */
-/* Date de création :  20/12/2012 17:48:17                      */
+/* Date de création :  29/01/2013 15:39:11                      */
 /*==============================================================*/
 
 
-drop table if exists USER_ACCOUNT;
+drop table USER_ACCOUNT;
 
-drop table if exists USER_ADDRESS;
+drop table USER_ADDRESS;
 
-drop table if exists USER_CONNECTION;
+drop table USER_CONNECTION;
 
-drop table if exists USER_IDENTITY;
+drop table USER_IDENTITY;
 
-drop table if exists USER_SESSION;
+drop table USER_REGISTRATION;
 
-drop domain if exists SEX;
+drop table USER_SESSION;
 
-drop domain if exists STREET_PREFIX;
+drop domain SEX;
+
+drop domain STREET_PREFIX;
 
 /*==============================================================*/
 /* Domaine : SEX                                                */
@@ -34,9 +36,9 @@ create domain STREET_PREFIX as VARCHAR(3);
 create table USER_ACCOUNT (
    USER_ACCOUNT_ID      VARCHAR(64)          not null,
    USER_IDENTITY_ID     INT4                 null,
-   USER_PWD             VARCHAR(64)          not null,
    CLIENT_ID            VARCHAR(64)          not null,
    USER_MAIL            VARCHAR(80)          not null,
+   USER_PWD             VARCHAR(64)          not null,
    constraint PK_USER_ACCOUNT primary key (USER_ACCOUNT_ID)
 );
 
@@ -83,6 +85,17 @@ create table USER_IDENTITY (
    SEX                  CHAR(1)              not null
       constraint CKC_SEX_USER_IDE check (SEX in ('M','F')),
    constraint PK_USER_IDENTITY primary key (USER_IDENTITY_ID)
+);
+
+/*==============================================================*/
+/* Table : USER_REGISTRATION                                    */
+/*==============================================================*/
+create table USER_REGISTRATION (
+   USER_REGISTRATION_ID INT4                 not null,
+   USER_TOKEN           VARCHAR(8)           not null,
+   USER_MAIL            VARCHAR(80)          not null,
+   USER_ID              VARCHAR(64)          not null,
+   constraint PK_USER_REGISTRATION primary key (USER_REGISTRATION_ID)
 );
 
 /*==============================================================*/

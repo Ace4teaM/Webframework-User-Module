@@ -135,8 +135,45 @@ class UserModule implements iModule
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_create_account", func_get_args());
-        return $result;
-        //return RESULT($result[0], $result[1]);
+        //return $result;
+        return RESULT($result[0], $result[1]);
+    }
+    
+    /** 
+     * Cree un nouvel utilisateur
+     * 
+     * @param type $name
+     * @param type $attributes
+     * @param type $template_file
+     */
+    public static function activateAccount($uid, $pwd, $mail, $token){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_activate_account", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1]);
+    }
+    
+    /** 
+     * Inscrit un nouvel utilisateur
+     * 
+     * @param type $uid Identifiant
+     * @param type $mail Adresse Mail
+     */
+    public static function registerAccount($uid, $mail){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_register_account", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1]);
     }
     
     /** 
@@ -154,8 +191,8 @@ class UserModule implements iModule
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_make_identity", func_get_args());
-        return $result;
-        //return RESULT($result[0], $result[1]);
+        //return $result;
+        return RESULT($result[0], $result[1]);
     }
 }
 

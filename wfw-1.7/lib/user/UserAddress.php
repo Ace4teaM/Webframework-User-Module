@@ -17,17 +17,17 @@ class UserAddress
     public $userAddressId;
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $zipCode;
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $cityName;
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $streetName;
     
@@ -37,12 +37,12 @@ class UserAddress
     public $streetNumber;
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $countryName;
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $streetPrefix;
     
@@ -95,7 +95,7 @@ class UserAddressMgr
       
       //execute la requete
        $query = "SELECT * from user_address where $cond";
-       if($db->execute($query, $result) && pg_num_rows($result)){
+       if($db->execute($query, $result)){
             $inst = new UserAddress();
           $inst->userAddressId = $db->fetchValue($result,"user_address_id");
           $inst->zipCode = $db->fetchValue($result,"zip_code");
@@ -129,7 +129,7 @@ class UserAddressMgr
            
       //execute la requete
        $query = "SELECT * from user_address where user_address_id=$id";
-       if($db->execute($query, $result) && pg_num_rows($result)){
+       if($db->execute($query, $result)){
             $inst = new UserAddress();
           $inst->userAddressId = $db->fetchValue($result,"user_address_id");
           $inst->zipCode = $db->fetchValue($result,"zip_code");
@@ -173,14 +173,13 @@ class UserAddressMgr
         print_r($objectIdName.", ");
         print_r($obj->$objectIdName);*/
         
-        $id = $obj->$objectIdName;
-        if(is_string($id))
-            $id = "'$id'";
-        
-        $cond = ("user_address_id = (select user_address_id from $objectTableName where ".$objectTableName."_id=".$id.")");
-        
+        $select;
+        if(is_string($obj->$objectIdName))
+            $select = ("user_address_id = (select user_address_id from $objectTableName where ".$objectTableName."_id='".$obj->$objectIdName."')");
+        else
+            $select = ("user_address_id = (select user_address_id  from $objectTableName where ".$objectTableName."_id=".$obj->$objectIdName.")");
 
-        return UserAddressMgr::get($inst,$cond,$db);
+        return UserAddressMgr::get($inst,$select,$db);
     }
 
 }

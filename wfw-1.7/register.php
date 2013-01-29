@@ -1,20 +1,15 @@
 <?php
 /*
  * Formulaire d'inscription
+ * L'inscription passe par une phase d'activation
  */
 
 require_once("inc/globals.php");
 global $app;
-/*
-class FieldForm{
-    public function FieldForm($field_array,){
-        
-    }
-}*/
 
+//entree
 $accountFields = array(
     "uid"=>"cInputIdentifier",
-    "pwd"=>"cInputPassword",
     "mail"=>"cInputMail"
 );
 
@@ -23,16 +18,19 @@ if(cInputFields::checkArray($accountFields))
 {
     $client_id = "none";
 
-    //crée le compte utilisateur
-    $result = UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],$client_id,$_REQUEST["mail"]);
-    //if(false === $result)
-    //    $app->processLastError();
-    
-    //ok
-    //header("Location: user_account_activation.php");
+    //crée l'e compte utilisateur'inscription
+    $result = UserModule::registerAccount($_REQUEST["uid"],$_REQUEST["mail"]);
+    //ok ?
+    if($result){
+        //envoie un mail de confirmation
+        //MailModule::send();
+        //redirige vers la page d'activation
+        header("Location: activate.php?uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"]);
+        exit;
+    }
 }
 
-/* Ajoute le résultat aux champs du template */
+/* Ajoute le résultat au champs du template */
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
 //traduit le nom du champs
@@ -43,9 +41,6 @@ if(isset($att["field_name"])){
             break;
         case "uid":
             $att["field_name"] = "Nom d'utilisateur";
-            break;
-        case "pwd":
-            $att["field_name"] = "Mot-de-passe";
             break;
     }
 }
@@ -64,12 +59,12 @@ if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
             break;
         case "html":
         default:
-            $app->showXMLView("view/user/pages/create.html",$att);
+            $app->showXMLView("view/user/pages/register.html",$att);
             break;
     }
 }
 
 // accueil
-$app->showXMLView("view/user/pages/create.html",$att);
+$app->showXMLView("view/user/pages/register.html",$att);
 
 ?>

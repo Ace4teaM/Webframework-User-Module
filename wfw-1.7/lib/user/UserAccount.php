@@ -12,24 +12,24 @@ class UserAccount
 {
     
     /**
-    * @var      std::string
+    * @var      String
     */
     public $userAccountId;
     
     /**
-    * @var      std::string
-    */
-    public $userPwd;
-    
-    /**
-    * @var      std::string
+    * @var      String
     */
     public $clientId;
     
     /**
-    * @var      std::string
+    * @var      String
     */
-    public $userMail;    
+    public $userMail;
+    
+    /**
+    * @var      String
+    */
+    public $userPwd;    
 
 }
 
@@ -70,12 +70,12 @@ class UserAccountMgr
       
       //execute la requete
        $query = "SELECT * from user_account where $cond";
-       if($db->execute($query, $result) && pg_num_rows($result)){
+       if($db->execute($query, $result)){
             $inst = new UserAccount();
           $inst->userAccountId = $db->fetchValue($result,"user_account_id");
-          $inst->userPwd = $db->fetchValue($result,"user_pwd");
           $inst->clientId = $db->fetchValue($result,"client_id");
-          $inst->userMail = $db->fetchValue($result,"user_mail");          
+          $inst->userMail = $db->fetchValue($result,"user_mail");
+          $inst->userPwd = $db->fetchValue($result,"user_pwd");          
 
           return true;
        }
@@ -99,12 +99,12 @@ class UserAccountMgr
            
       //execute la requete
        $query = "SELECT * from user_account where user_account_id=$id";
-       if($db->execute($query, $result) && pg_num_rows($result)){
+       if($db->execute($query, $result)){
             $inst = new UserAccount();
           $inst->userAccountId = $db->fetchValue($result,"user_account_id");
-          $inst->userPwd = $db->fetchValue($result,"user_pwd");
           $inst->clientId = $db->fetchValue($result,"client_id");
-          $inst->userMail = $db->fetchValue($result,"user_mail");          
+          $inst->userMail = $db->fetchValue($result,"user_mail");
+          $inst->userPwd = $db->fetchValue($result,"user_pwd");          
 
           return true;
        }
@@ -138,14 +138,13 @@ class UserAccountMgr
         print_r($objectIdName.", ");
         print_r($obj->$objectIdName);*/
         
-        $id = $obj->$objectIdName;
-        if(is_string($id))
-            $id = "'$id'";
-        
-        $cond = ("user_account_id = (select user_account_id from $objectTableName where ".$objectTableName."_id=".$id.")");
-        
+        $select;
+        if(is_string($obj->$objectIdName))
+            $select = ("user_account_id = (select user_account_id from $objectTableName where ".$objectTableName."_id='".$obj->$objectIdName."')");
+        else
+            $select = ("user_account_id = (select user_account_id  from $objectTableName where ".$objectTableName."_id=".$obj->$objectIdName.")");
 
-        return UserAccountMgr::get($inst,$cond,$db);
+        return UserAccountMgr::get($inst,$select,$db);
     }
 
 }
