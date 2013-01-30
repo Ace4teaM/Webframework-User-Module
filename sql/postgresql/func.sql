@@ -73,7 +73,7 @@ BEGIN
   insert into user_account (user_account_id,user_pwd,client_id,user_mail) values(p_user_id,p_user_pwd,p_client_id,lower(p_user_mail));
   select 'ERR_OK', 'USER_CREATED' into v_result;
   return v_result;
-
+/*
 EXCEPTION
 
   when unique_violation then
@@ -84,7 +84,7 @@ EXCEPTION
        select 'ERR_SYSTEM', 'NOT_SPECIFIED' into v_result;
        --debugmsg(v_result.err_code||':'||v_result.err_str);
        return v_result;
-
+*/
 END;
 $$
 LANGUAGE plpgsql;
@@ -143,9 +143,11 @@ BEGIN
             p_user_id,
             lower(p_user_mail)
         );
+
+  /* ok */
   select 'ERR_OK', 'USER_REGISTRED' into v_result;
   return v_result;
-
+/*
 EXCEPTION
 
   when unique_violation then
@@ -156,7 +158,7 @@ EXCEPTION
        select 'ERR_SYSTEM', 'NOT_SPECIFIED' into v_result;
        --debugmsg(v_result.err_code||':'||v_result.err_str);
        return v_result;
-
+*/
 END;
 $$
 LANGUAGE plpgsql;
@@ -174,9 +176,10 @@ CREATE OR REPLACE FUNCTION user_activate_account(
 RETURNS RESULT AS
 $$
 DECLARE
-	v_result  RESULT;
-	v_cnt     INT;
-        v_reg_id  user_registration.user_registration_id%type;
+	v_result     RESULT;
+	v_cnt        INT;
+        v_reg_id     user_registration.user_registration_id%type;
+        v_user_token user_registration.user_token%type;
 BEGIN
 
   /* verifie si le nom d'utilisateur ou le mail est déjà utilisé */
@@ -186,15 +189,25 @@ BEGIN
     return v_result;
   end if;
 
-  /* verifie si l'adresse mail est déjà utilisé pour une inscription */
-  select user_registration_id into v_reg_id from user_registration where upper(user_id) = upper(p_user_id) and upper(user_mail) = upper(p_user_mail) and user_token = p_user_token;
-  if v_cnt is null then
-    select 'ERR_FAILED', 'USER_REGISTRATIION_NOT_EXISTS' into v_result;
+  /* verifie si l'inscription existe */
+  select user_registration_id into v_reg_id from user_registration where upper(user_id) = upper(p_user_id) and upper(user_mail) = upper(p_user_mail);
+-- RAISE NOTICE 'registration_id=%', v_reg_id;
+  if v_reg_id is null then
+    select 'ERR_FAILED', 'USER_REGISTRATION_NOT_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* verifie le token d'inscription */
+  select user_token into v_user_token from user_registration where user_registration_id = v_reg_id;
+-- RAISE NOTICE 'user_token=%', v_user_token;
+  if v_user_token <> p_user_token then
+    select 'ERR_FAILED', 'USER_REGISTRATION_INVALID_TOKEN' into v_result;
     return v_result;
   end if;
 
   /* insert l'entree */
-  select user_create_account(p_user_id, p_user_pwd, NULL, p_user_mail) into v_result;
+--  RAISE NOTICE 'user=%, pwd=%, mail=%', p_user_id, p_user_pwd, p_user_mail;
+  select * from user_create_account(p_user_id, p_user_pwd, 'NULL', p_user_mail) into v_result;
   if v_result.err_code <> 'ERR_OK' then
     return v_result;
   end if;
@@ -205,14 +218,14 @@ BEGIN
   /* ok */
   select 'ERR_OK', 'USER_CREATED' into v_result;
   return v_result;
-
+/*
 EXCEPTION
 
   when others then
        select 'ERR_SYSTEM', 'NOT_SPECIFIED' into v_result;
        --debugmsg(v_result.err_code||':'||v_result.err_str);
        return v_result;
-
+*/
 END;
 $$
 LANGUAGE plpgsql;

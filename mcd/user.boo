@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1356970196" Name="user" Objects="58" Symbols="10" Target="PHP" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1358269905" Name="user" Objects="49" Symbols="10" Target="PHP" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,7 +12,7 @@
 <a:Code>USER</a:Code>
 <a:CreationDate>1355940053</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1356970196</a:ModificationDate>
+<a:ModificationDate>1358268019</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {94471171-BAD3-410B-8D7E-6A3235048243}
 DAT 1356018134
@@ -150,7 +150,7 @@ ATT DVTL</a:History>
 
 [FolderOptions\Class Diagram Objects]
 GenerationCheckModel=Yes
-GenerationPath=C:\Users\developpement\Documents\GitHub\Webframework Module Utilisateur\wfw-1.7\lib\php\
+GenerationPath=C:\Users\developpement\Documents\GitHub\Webframework Module Utilisateur\wfw-1.7\lib\user\
 GenerationOptions=
 GenerationTasks=WSDLJava|WSPackServer[LF]F[LF]WSDLJava|WSPackClient[LF]F[LF]
 GenerationTargets=WSDL[LF]F[LF]WSDLJava[LF]T
@@ -3211,7 +3211,7 @@ Shadow=0
 <c:Symbols>
 <o:AssociationSymbol Id="o7">
 <a:ModificationDate>1356024155</a:ModificationDate>
-<a:Rect>((-1589,11590), (32495,18112))</a:Rect>
+<a:Rect>((-1626,11590), (32495,18112))</a:Rect>
 <a:ListOfPoints>((-1589,18112),(-1589,12764),(32495,12764))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
@@ -3270,7 +3270,7 @@ MULA 0 Arial,8,N</a:FontList>
 </o:AssociationSymbol>
 <o:AssociationSymbol Id="o17">
 <a:ModificationDate>1356024153</a:ModificationDate>
-<a:Rect>((-3889,1927), (32468,9495))</a:Rect>
+<a:Rect>((-3852,1927), (32468,9495))</a:Rect>
 <a:ListOfPoints>((-1865,1927),(-1865,9495),(32468,9495))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
@@ -3394,7 +3394,7 @@ LABL 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:ClassSymbol>
 <o:ClassSymbol Id="o9">
-<a:ModificationDate>1356970173</a:ModificationDate>
+<a:ModificationDate>1358269905</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
 <a:Rect>((25770,7766), (39028,15482))</a:Rect>
 <a:LineColor>11184640</a:LineColor>

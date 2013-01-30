@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{6FB9F148-AD47-4AAF-B43F-CD8A5C444AD7}" Label="" LastModificationDate="1359467366" Name="user" Objects="95" Symbols="19" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" signature="CDM_DATA_MODEL_XML" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{6FB9F148-AD47-4AAF-B43F-CD8A5C444AD7}" Label="" LastModificationDate="1359552129" Name="user" Objects="93" Symbols="19" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" signature="CDM_DATA_MODEL_XML" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -1653,9 +1653,8 @@ EntityForeignAttribute 0 Arial,8,N</a:FontList>
 <a:ObjectID>D7486BFB-0428-412B-9F5F-9FFF09AE0E49</a:ObjectID>
 <a:CreationDate>1340202677</a:CreationDate>
 <a:Creator>dl201</a:Creator>
-<a:ModificationDate>1340202677</a:ModificationDate>
-<a:Modifier>dl201</a:Modifier>
-<a:BaseAttribute.Mandatory>1</a:BaseAttribute.Mandatory>
+<a:ModificationDate>1359552129</a:ModificationDate>
+<a:Modifier>developpement</a:Modifier>
 <c:DataItem>
 <o:DataItem Ref="o48"/>
 </c:DataItem>
