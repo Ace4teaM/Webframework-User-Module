@@ -34,16 +34,7 @@ if(cInputFields::checkArray($accountFields))
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
 //traduit le nom du champs
-if(isset($att["field_name"])){
-    switch($att["field_name"]){
-        case "mail":
-            $att["field_name"] = "eMail";
-            break;
-        case "uid":
-            $att["field_name"] = "Nom d'utilisateur";
-            break;
-    }
-}
+$att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 
 /* Ajoute les arguments reçues en entrée au template */
 $att = array_merge($att,$_REQUEST);

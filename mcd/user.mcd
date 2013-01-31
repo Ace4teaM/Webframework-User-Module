@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{6FB9F148-AD47-4AAF-B43F-CD8A5C444AD7}" Label="" LastModificationDate="1359552129" Name="user" Objects="93" Symbols="19" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" signature="CDM_DATA_MODEL_XML" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{6FB9F148-AD47-4AAF-B43F-CD8A5C444AD7}" Label="" LastModificationDate="1359644681" Name="user" Objects="93" Symbols="19" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" signature="CDM_DATA_MODEL_XML" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,7 +12,7 @@
 <a:Code>USER</a:Code>
 <a:CreationDate>1340202651</a:CreationDate>
 <a:Creator>dl201</a:Creator>
-<a:ModificationDate>1359451289</a:ModificationDate>
+<a:ModificationDate>1359644664</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:PackageOptionsText>[FolderOptions]
 
@@ -1931,9 +1931,8 @@ EntityForeignAttribute 0 Arial,8,N</a:FontList>
 <a:ObjectID>885A794C-02F5-466B-8C8B-FF61A84157B7</a:ObjectID>
 <a:CreationDate>1340202677</a:CreationDate>
 <a:Creator>dl201</a:Creator>
-<a:ModificationDate>1340202677</a:ModificationDate>
-<a:Modifier>dl201</a:Modifier>
-<a:BaseAttribute.Mandatory>1</a:BaseAttribute.Mandatory>
+<a:ModificationDate>1359644681</a:ModificationDate>
+<a:Modifier>developpement</a:Modifier>
 <c:DataItem>
 <o:DataItem Ref="o87"/>
 </c:DataItem>
@@ -1946,7 +1945,7 @@ EntityForeignAttribute 0 Arial,8,N</a:FontList>
 <a:Code>USER_CONNECTION</a:Code>
 <a:CreationDate>1341861903</a:CreationDate>
 <a:Creator>ACER 7740</a:Creator>
-<a:ModificationDate>1356022007</a:ModificationDate>
+<a:ModificationDate>1359644664</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <c:Identifiers>
 <o:Identifier Id="o88">
@@ -2118,10 +2117,10 @@ EntityForeignAttribute 0 Arial,8,N</a:FontList>
 <a:Code>LAST_ACCESS</a:Code>
 <a:CreationDate>1340202677</a:CreationDate>
 <a:Creator>dl201</a:Creator>
-<a:ModificationDate>1355937227</a:ModificationDate>
+<a:ModificationDate>1359644664</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:DefaultValue>CURRENT_TIMESTAMP</a:DefaultValue>
-<a:DataType>D</a:DataType>
+<a:DataType>DT</a:DataType>
 </o:DataItem>
 <o:DataItem Id="o87">
 <a:ObjectID>14833BE5-1454-413C-8AA4-4146A5103182</a:ObjectID>

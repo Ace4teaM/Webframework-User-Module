@@ -121,6 +121,28 @@ class UserModule implements iModule
     }
     
     /** 
+     * Traduit un nom d'attribut
+     * 
+     * @param type $name Nom de l'attribut
+     * @return Texte de remplacement. Si le nom d'attribut est incnnue, l'identifiant est retourné
+     */
+    public static function translateAttributeName($name){ 
+        switch($name){
+            case "uid":
+                return "Nom d'utilisateur";
+            case "pwd":
+                return "Mot-de-passe";
+            case "mail":
+                return "eMail";
+            case "token":
+                return "Jeton";
+            case "life_time":
+                return "Durée de connexion";
+        }
+        return $name;
+    }
+    
+    /** 
      * Cree un nouvel utilisateur
      * 
      * @param type $name
@@ -135,6 +157,62 @@ class UserModule implements iModule
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_create_account", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1]);
+    }
+    
+    /** 
+     * Supprime un utilisateur existant
+     */
+    public static function deleteAccount($uid){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_delete_account", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1]);
+    }
+    
+    /** 
+     * Connect un utilisateur
+     * 
+     * @param type $uid         Nom d'utilisateur
+     * @param type $client_ip   IP du client. Si NULL, $_SERVER["..."] est utilisé
+     * @param type $local_path  Chemin d'accées local pour le paratage de données
+     * @param type $life_time   Durée de vide de la session en secondes
+     */
+    public static function connectUser($uid, $client_ip, $local_path, $life_time){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_connect", func_get_args());
+        if($result){
+            //tache de deconnexion
+            if($life_time > 0)
+                ;;
+        }
+        
+        //return $result;
+        return RESULT($result[0], $result[1]);
+    }
+    
+    /** 
+     * Deconnect un utilisateur
+     */
+    public static function disconnectUser($uid){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_disconnect", func_get_args());
         //return $result;
         return RESULT($result[0], $result[1]);
     }
@@ -172,6 +250,24 @@ class UserModule implements iModule
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_register_account", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1]);
+    }
+    
+    /** 
+     * Vérifie si un utilisateur existe utilisateur
+     * 
+     * @param type $uid Identifiant
+     * @param type $mail Adresse Mail
+     */
+    public static function accountExists($uid, $mail){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_account_exists", func_get_args());
         //return $result;
         return RESULT($result[0], $result[1]);
     }

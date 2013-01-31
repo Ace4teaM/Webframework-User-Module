@@ -13,6 +13,14 @@
         <!-- meta -->
         <meta name="description" content="Gestion des comptes utilisateurs" />
         <meta name="keywords" content="utilisateur, compte" />
+        
+        <style type="text/css">
+            fieldset.column{
+                display:inline-block;
+                vertical-align: top;
+                height: 300px;
+            }
+        </style>
 </head>
 
 <!-- Document -->
@@ -29,30 +37,30 @@
         </ul>
     </fieldset>
     
-    <fieldset>
-        <legend>Fonctionnalités de base</legend>
-        <ul>
-            <li><a href="-{page:create}">-{page:create@name}</a></li>
-            <li><a href="-{page:register}">-{page:register@name}</a></li>
-            <li><a href="-{page:delete}">-{page:delete@name}</a></li>
-            <li><a href="-{page:connect}">-{page:connect@name}</a></li>
-            <li><a href="-{page:connect_to}">-{page:connect_to@name}</a></li>
-            <li><a href="-{page:disconnect}">-{page:disconnect@name}</a></li>
-            <li><a href="-{page:disconnect_all}">-{page:disconnect_all@name}</a></li>
-            <li><a href="-{page:activate}">-{page:activate@name}</a></li>
-            <li><a href="-{page:check}">-{page:check@name}</a></li>
-            <li><a href="-{page:lost_pwd}">-{page:lost_pwd@name}</a></li>
-            <li><a href="-{page:identity}">-{page:identity@name}</a></li>
-        </ul>
-    </fieldset>
-    
-    <fieldset>
-        <legend>Fonctionnalités supplémentaires</legend>
-        <ul>
-            <li><a href="-{page:connect_to_facebook}">Connexion avec un compte Facebook(tm)</a></li>
-            <li><a href="-{page:connect_to_client}">Connexion à un dossier client (Module Client)</a></li>
-        </ul>
-    </fieldset>
+    <h2>Cas d'utilisation</h2>
+    <p>Implémentation des cas d'utilisation par rôle:</p>
+    <div>
+        <fieldset class="column">
+            <legend>Administrateur</legend>
+            <ul template:action="select" template:path=":default.xml:index">
+                <li template:action="all" template:selector="> page[role=administrator]"><a href="-{{page:-{@id}}}">-{@name}</a></li>
+            </ul>
+        </fieldset>
+
+        <fieldset class="column">
+            <legend>Visiteur</legend>
+            <ul template:action="select" template:path=":default.xml:index">
+                <li template:action="all" template:selector="> page[role=visitor]"><a href="-{{page:-{@id}}}">-{@name}</a></li>
+            </ul>
+        </fieldset>
+
+        <fieldset class="column">
+            <legend>Utilisateur</legend>
+            <ul template:action="select" template:path=":default.xml:index">
+                <li template:action="all" template:selector="> page[role=user]"><a href="-{{page:-{@id}}}">-{@name}</a></li>
+            </ul>
+        </fieldset>
+    </div>
     
 </body>
 

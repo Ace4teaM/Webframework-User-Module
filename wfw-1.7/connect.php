@@ -1,38 +1,34 @@
 <?php
 /*
- * Crée un compte utilisateur
- * Rôle : Administrateur
- * UC   : user_create_account
+ * Connexion d'un utilisateur
+ * Rôle : Utilisateur
+ * UC   : user_connect
  */
 
 require_once("inc/globals.php");
 global $app;
 
-
-$accountFields = array(
+//entree
+$required_fields = array(
     "uid"=>"cInputIdentifier",
-    "pwd"=>"cInputPassword",
-    "mail"=>"cInputMail"
+    "life_time"=>"cInputInteger"
 );
 
 // exemples JS
-if(cInputFields::checkArray($accountFields))
+if(cInputFields::checkArray($required_fields))
 {
-    //crée le compte utilisateur
-    $result = UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],NULL,$_REQUEST["mail"]);
-    //if(false === $result)
-    //    $app->processLastError();
-    
-    //ok
-    //header("Location: user_account_activation.php");
+    $client_ip  = $_SERVER["REMOTE_ADDR"];
+    $local_path = NULL;
+
+    //crée une connexion
+    $result = UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"]);
 }
 
-/* Ajoute le résultat aux champs du template */
+/* Ajoute le résultat au champs du template */
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
 //traduit le nom du champs
 $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
-
 
 /* Ajoute les arguments reçues en entrée au template */
 $att = array_merge($att,$_REQUEST);
@@ -48,12 +44,12 @@ if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
             break;
         case "html":
         default:
-            $app->showXMLView("view/user/pages/create.html",$att);
+            $app->showXMLView("view/user/pages/connect.html",$att);
             break;
     }
 }
 
 // accueil
-$app->showXMLView("view/user/pages/create.html",$att);
+$app->showXMLView("view/user/pages/connect.html",$att);
 
 ?>

@@ -7,16 +7,92 @@
 */
 
 /*
+  Vérifie si un compte utilisateur n'existe pas
+  Si un compte utilisteur avec le nom 'p_user_id' ou le mail 'p_user_mail' existe la fonction échoue.
+*/
+
+CREATE OR REPLACE FUNCTION user_account_exists(
+       p_user_id user_account.user_account_id%type
+)
+RETURNS RESULT AS
+$$
+DECLARE
+	v_result     RESULT;
+	v_cnt        INT;
+BEGIN
+
+  /* verifie si le nom d'utilisateur est déjà utilisé */
+  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id);
+  if v_cnt > 0 then
+    select 'ERR_OK', 'USER_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* ok */
+  select 'ERR_FAILED', 'USER_NOT_EXISTS' into v_result;
+  return v_result;
+
+END;
+$$
+LANGUAGE plpgsql;
+
+/*
+  Vérifie si un compte utilisateur n'existe pas
+  Si un compte utilisteur avec le nom 'p_user_id' ou le mail 'p_user_mail' existe la fonction échoue.
+*/
+
+CREATE OR REPLACE FUNCTION user_is_free_account(
+       p_user_id user_account.user_account_id%type,
+       p_user_mail user_account.user_mail%type
+)
+RETURNS RESULT AS
+$$
+DECLARE
+	v_result     RESULT;
+	v_cnt        INT;
+BEGIN
+
+  /* verifie si le nom d'utilisateur est déjà utilisé */
+  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id);
+  if v_cnt > 0 then
+    select 'ERR_FAILED', 'USER_NAME_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* verifie si l'adresse mail est déjà utilisé */
+  select count(*) into v_cnt from user_account where upper(user_mail) = upper(p_user_mail);
+  if v_cnt > 0 then
+    select 'ERR_FAILED', 'USER_MAIL_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* ok */
+  select 'ERR_OK', 'USER_NOT_EXISTS' into v_result;
+  return v_result;
+
+END;
+$$
+LANGUAGE plpgsql;
+
+
+/*
   Supprime un utilisateur
   Remarques:
     Les sessions automatiques sont automatiquements supprimées (on_disconnect_user)
 */
-CREATE OR REPLACE FUNCTION user_delete_account(p_user_id user_account.user_account_id%type)
+CREATE OR REPLACE FUNCTION user_delete_account(
+    p_user_id user_account.user_account_id%type
+)
 RETURNS RESULT
 AS $$
 declare
 	v_result RESULT;
 BEGIN
+     --verifie l'existance du compte
+     select * from user_account_exists(p_user_id) into v_result;
+     if v_result.err_code <> 'ERR_OK' then
+        return v_result;
+     end if;
      --supprime l'user_account
      delete from user_account where user_account_id = p_user_id;
      --supprime les connexions
@@ -55,17 +131,9 @@ DECLARE
 	v_cnt INT;
 BEGIN
 
-  /* verifie si le nom d'utilisateur est déjà utilisé */
-  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id);
-  if v_cnt > 0 then
-    select 'ERR_FAILED', 'USER_NAME_EXISTS' into v_result;
-    return v_result;
-  end if;
-
-  /* verifie si l'adresse mail est déjà utilisé */
-  select count(*) into v_cnt from user_account where upper(user_mail) = upper(p_user_mail);
-  if v_cnt > 0 then
-    select 'ERR_FAILED', 'USER_MAIL_EXISTS' into v_result;
+  /* verifie si le mail ou l'id est déjà utilisé par un autre compte */
+  select * from user_is_free_account(p_user_id, p_user_mail) into v_result;
+  if v_result.err_code <> 'ERR_OK' then
     return v_result;
   end if;
 
@@ -111,17 +179,9 @@ DECLARE
 	v_cnt INT;
 BEGIN
 
-  /* verifie si le nom d'utilisateur est déjà utilisé */
-  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id);
-  if v_cnt > 0 then
-    select 'ERR_FAILED', 'USER_NAME_EXISTS' into v_result;
-    return v_result;
-  end if;
-
-  /* verifie si l'adresse mail est déjà utilisé par un compte utilisateur */
-  select count(*) into v_cnt from user_account where upper(user_mail) = upper(p_user_mail);
-  if v_cnt > 0 then
-    select 'ERR_FAILED', 'USER_MAIL_EXISTS' into v_result;
+  /* verifie si le mail ou l'id est déjà utilisé par un autre compte */
+  select * from user_is_free_account(p_user_id, p_user_mail) into v_result;
+  if v_result.err_code <> 'ERR_OK' then
     return v_result;
   end if;
 
@@ -182,10 +242,9 @@ DECLARE
         v_user_token user_registration.user_token%type;
 BEGIN
 
-  /* verifie si le nom d'utilisateur ou le mail est déjà utilisé */
-  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id) or upper(user_mail) = upper(p_user_mail);
-  if v_cnt > 0 then
-    select 'ERR_FAILED', 'USER_EXISTS' into v_result;
+  /* verifie si le mail ou l'id est déjà utilisé par un autre compte */
+  select * from user_is_free_account(p_user_id, p_user_mail) into v_result;
+  if v_result.err_code <> 'ERR_OK' then
     return v_result;
   end if;
 
@@ -207,7 +266,7 @@ BEGIN
 
   /* insert l'entree */
 --  RAISE NOTICE 'user=%, pwd=%, mail=%', p_user_id, p_user_pwd, p_user_mail;
-  select * from user_create_account(p_user_id, p_user_pwd, 'NULL', p_user_mail) into v_result;
+  select * from user_create_account(p_user_id, p_user_pwd, NULL, p_user_mail) into v_result;
   if v_result.err_code <> 'ERR_OK' then
     return v_result;
   end if;
@@ -286,7 +345,7 @@ $$ LANGUAGE plpgsql;
     Remarque:
       Si une connexion existe deja pour cette IP, elle est remplacée
   */
-CREATE OR REPLACE FUNCTION user_connect(
+CREATE OR REPLACE FUNCTION user_connect_to_session(
        p_user_id user_account.user_account_id%type,
        p_client_ip user_connection.client_ip%type,
        p_session_id user_session.user_session_id%type,
@@ -315,11 +374,10 @@ CREATE OR REPLACE FUNCTION user_connect(
 $$ LANGUAGE plpgsql;
 
   /*
-    Crée une connexion utilisateur sur une user_session client
+    Crée une connexion utilisateur
     Parametres:
       p_user_id    : Identifiant de l'utilisateur
       p_client_ip  : IP du client (IPv4)
-      p_data_id    : Identifiant du dossier client contenant les données utilisateur
       p_data_path  : Chemin d'accès aux données utilisateurs
       p_life_time  : temps de vie de la connexion (en secondes)
     Remarque:
@@ -327,10 +385,9 @@ $$ LANGUAGE plpgsql;
     Retourne:
       [VARCHAR2] Identifiant de la user_session active.
   */
-CREATE OR REPLACE FUNCTION user_connect_client(
+CREATE OR REPLACE FUNCTION user_connect(
        p_user_id    user_account.user_account_id%type,
        p_client_ip  user_connection.client_ip%type,
-       p_data_id    varchar,
        p_data_path  varchar,
        p_life_time  user_connection.life_time%type/* default 10000*/
        )
@@ -338,20 +395,21 @@ CREATE OR REPLACE FUNCTION user_connect_client(
   as $$
  declare
     v_n integer;
-    v_SessionID user_session.user_session_id%TYPE := (get_global('CLIENT_SESSION_PREFIX')||p_data_id);
+    v_connection_id integer;
+    v_SessionID user_session.user_session_id%TYPE := (get_global('AUTO_SESSION_PREFIX',NULL)||p_user_id);
     
   begin
     ------------------------------------------------------------
-    --  Ajoute la user_session
-    --  Si la user_session existe elle est remplacée
+    --  Ajoute la session
+    --  Si la session existe elle est remplacée
     ------------------------------------------------------------
     select count(*) into v_n from user_session where user_session_id = v_SessionID;
     if v_n = 0 then
---	  msg('insert une user_session '||v_SessionID);
+--	  RAISE NOTICE 'insert une session %',v_SessionID;
       insert into user_session (user_session_id,local_path)
         values(v_SessionID,p_data_path);
     else
---	  msg('actualise la user_session '||user_session_id);
+--	  RAISE NOTICE 'actualise la session %',user_session_id;
       update user_session
         set local_path=p_data_path
         where user_session_id = v_SessionID;
@@ -364,11 +422,12 @@ CREATE OR REPLACE FUNCTION user_connect_client(
     ------------------------------------------------------------
     select count(*) into v_n from user_connection where client_ip = p_client_ip AND user_account_id = p_user_id;
     if v_n = 0 then
---	  msg('insert la user_connection '||client_ip||'::'||user_account_id);
-      insert into user_connection (client_ip,user_account_id,user_session_id,life_time)
-        values(p_client_ip,p_user_id,v_SessionID,p_life_time);
+--	  RAISE NOTICE 'insert la connection %:%',client_ip,user_account_id;
+      select coalesce(max(user_connection_id),0)+1 into v_connection_id from user_connection;
+      insert into user_connection (user_connection_id,client_ip,user_account_id,user_session_id,life_time)
+        values(v_connection_id,p_client_ip,p_user_id,v_SessionID,p_life_time);
     else
---	  msg('actualise la user_connection '||client_ip||'::'||user_account_id);
+--	  RAISE NOTICE 'actualise la connection %:%',client_ip,user_account_id;
       update user_connection
         set user_account_id=p_user_id, user_session_id=v_SessionID, life_time=p_life_time
         where client_ip = p_client_ip AND user_account_id = p_user_id;
@@ -409,15 +468,21 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION user_disconnect_all_client(
        p_b_session in boolean/* default true*/
        )
-RETURNS VOID
+RETURNS RESULT
 AS $$
+DECLARE
+    v_result RESULT;
 BEGIN
-  /* supprime toutes les connexions */
+  -- supprime toutes les connexions
   delete from user_connection where user_session_id like(get_global('CLIENT_SESSION_PREFIX')||'%');
-  /* supprime toutes les sessions utilisateurs */
+  -- supprime toutes les sessions utilisateurs
   if p_b_session = true then
     delete from user_session where user_session_id like(get_global('CLIENT_SESSION_PREFIX')||'%');
   end if;
+
+  -- ok
+  select 'ERR_OK', 'USER_DISCONNECTED' into v_result;
+  return v_result;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -458,15 +523,30 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION user_disconnect(
        p_user_id    user_account.user_account_id%type
        )
-    returns VOID
+    returns RESULT
 AS $$
-  DECLARE
-   v_conn user_connection%rowtype;
+DECLARE
+    v_result RESULT;
+    v_conn user_connection%rowtype;
   BEGIN
+     --verifie l'existance du compte
+     select * from user_account_exists(p_user_id) into v_result;
+     if v_result.err_code <> 'ERR_OK' then
+        return v_result;
+     end if;
+
     -- obtient la connexion
     select * into v_conn from user_connection where user_account_id = p_user_id;
+
     -- supprime la connexion
     delete from user_connection where user_account_id = v_conn.user_account_id;
+
+    -- les sessions automatiques seront supprimées par le trigger 'on_disconnect_user'
+    -- delete from user_session where user_session_id like(get_global('CLIENT_SESSION_PREFIX')||p_user_id);
+
+    -- ok
+    select 'ERR_OK', 'USER_DISCONNECTED' into v_result;
+    return v_result;
   END;
 $$ LANGUAGE plpgsql;
   

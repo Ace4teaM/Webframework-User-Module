@@ -1,38 +1,32 @@
 <?php
 /*
- * Crée un compte utilisateur
+ * Supprime un compte
  * Rôle : Administrateur
- * UC   : user_create_account
+ * UC   : user_delete_account
  */
 
 require_once("inc/globals.php");
 global $app;
 
-
+//entree
 $accountFields = array(
-    "uid"=>"cInputIdentifier",
-    "pwd"=>"cInputPassword",
-    "mail"=>"cInputMail"
+    "uid"=>"cInputIdentifier"
 );
 
 // exemples JS
 if(cInputFields::checkArray($accountFields))
 {
-    //crée le compte utilisateur
-    $result = UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],NULL,$_REQUEST["mail"]);
-    //if(false === $result)
-    //    $app->processLastError();
-    
-    //ok
-    //header("Location: user_account_activation.php");
+    $client_id = "none";
+
+    //supprime le compte utilisateur
+    $result = UserModule::deleteAccount($_REQUEST["uid"]);
 }
 
-/* Ajoute le résultat aux champs du template */
+/* Ajoute le résultat au champs du template */
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
 //traduit le nom du champs
 $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
-
 
 /* Ajoute les arguments reçues en entrée au template */
 $att = array_merge($att,$_REQUEST);
@@ -48,12 +42,12 @@ if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
             break;
         case "html":
         default:
-            $app->showXMLView("view/user/pages/create.html",$att);
+            $app->showXMLView("view/user/pages/delete.html",$att);
             break;
     }
 }
 
 // accueil
-$app->showXMLView("view/user/pages/create.html",$att);
+$app->showXMLView("view/user/pages/delete.html",$att);
 
 ?>

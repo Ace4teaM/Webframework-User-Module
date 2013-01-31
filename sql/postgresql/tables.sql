@@ -1,20 +1,20 @@
 /*==============================================================*/
 /* Nom de SGBD :  PostgreSQL 8                                  */
-/* Date de création :  29/01/2013 15:39:11                      */
+/* Date de création :  31/01/2013 16:48:55                      */
 /*==============================================================*/
 
 
-drop table USER_ACCOUNT;
+drop table USER_ACCOUNT  CASCADE;
 
-drop table USER_ADDRESS;
+drop table USER_ADDRESS  CASCADE;
 
-drop table USER_CONNECTION;
+drop table USER_CONNECTION  CASCADE;
 
-drop table USER_IDENTITY;
+drop table USER_IDENTITY  CASCADE;
 
-drop table USER_REGISTRATION;
+drop table USER_REGISTRATION  CASCADE;
 
-drop table USER_SESSION;
+drop table USER_SESSION  CASCADE;
 
 drop domain SEX;
 
@@ -36,7 +36,7 @@ create domain STREET_PREFIX as VARCHAR(3);
 create table USER_ACCOUNT (
    USER_ACCOUNT_ID      VARCHAR(64)          not null,
    USER_IDENTITY_ID     INT4                 null,
-   CLIENT_ID            VARCHAR(64)          not null,
+   CLIENT_ID            VARCHAR(64)          null,
    USER_MAIL            VARCHAR(80)          not null,
    USER_PWD             VARCHAR(64)          not null,
    constraint PK_USER_ACCOUNT primary key (USER_ACCOUNT_ID)
@@ -67,7 +67,7 @@ create table USER_CONNECTION (
    CLIENT_IP            VARCHAR(15)          not null,
    USER_ACCOUNT_ID      VARCHAR(64)          not null,
    USER_SESSION_ID      VARCHAR(64)          not null,
-   LAST_ACCESS          DATE                 not null default CURRENT_TIMESTAMP,
+   LAST_ACCESS          TIMESTAMP            not null default CURRENT_TIMESTAMP,
    LIFE_TIME            INT4                 not null,
    LINK_PATH            VARCHAR(260)         null,
    constraint PK_USER_CONNECTION primary key (CLIENT_IP, USER_CONNECTION_ID)
@@ -103,7 +103,7 @@ create table USER_REGISTRATION (
 /*==============================================================*/
 create table USER_SESSION (
    USER_SESSION_ID      VARCHAR(64)          not null,
-   LOCAL_PATH           VARCHAR(260)         not null,
+   LOCAL_PATH           VARCHAR(260)         null,
    constraint PK_USER_SESSION primary key (USER_SESSION_ID)
 );
 

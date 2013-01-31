@@ -8,7 +8,7 @@
 
 /*
 --------------------------------------------------------------------------
-     Fix
+     Fix (PowerAMC)
 --------------------------------------------------------------------------
 
 
@@ -23,8 +23,6 @@ ALTER TABLE "USER" RENAME TO "user";
 
 select set_global('AUTO_SESSION_PREFIX','_');
 select set_global('CLIENT_SESSION_PREFIX','_client_session_');
-select set_global('EC_CREATE_USER','U1');
-select set_global('ET_CREATE_USER','Impossible de créer l''utilisateur');
 
 /*
 --------------------------------------------------------------------------
