@@ -405,11 +405,11 @@ CREATE OR REPLACE FUNCTION user_connect(
     ------------------------------------------------------------
     select count(*) into v_n from user_session where user_session_id = v_SessionID;
     if v_n = 0 then
---	  RAISE NOTICE 'insert une session %',v_SessionID;
+      RAISE NOTICE 'insert une session %',v_SessionID;
       insert into user_session (user_session_id,local_path)
         values(v_SessionID,p_data_path);
     else
---	  RAISE NOTICE 'actualise la session %',user_session_id;
+      RAISE NOTICE 'actualise la session %',v_SessionID;
       update user_session
         set local_path=p_data_path
         where user_session_id = v_SessionID;
@@ -422,12 +422,12 @@ CREATE OR REPLACE FUNCTION user_connect(
     ------------------------------------------------------------
     select count(*) into v_n from user_connection where client_ip = p_client_ip AND user_account_id = p_user_id;
     if v_n = 0 then
---	  RAISE NOTICE 'insert la connection %:%',client_ip,user_account_id;
+      RAISE NOTICE 'insert la connection %;%',p_client_ip,p_user_id;
       select coalesce(max(user_connection_id),0)+1 into v_connection_id from user_connection;
       insert into user_connection (user_connection_id,client_ip,user_account_id,user_session_id,life_time)
         values(v_connection_id,p_client_ip,p_user_id,v_SessionID,p_life_time);
     else
---	  RAISE NOTICE 'actualise la connection %:%',client_ip,user_account_id;
+      RAISE NOTICE 'actualise la connection %;%',p_client_ip,p_user_id;
       update user_connection
         set user_account_id=p_user_id, user_session_id=v_SessionID, life_time=p_life_time
         where client_ip = p_client_ip AND user_account_id = p_user_id;
