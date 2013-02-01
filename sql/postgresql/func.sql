@@ -7,8 +7,39 @@
 */
 
 /*
-  Vérifie si un compte utilisateur n'existe pas
-  Si un compte utilisteur avec le nom 'p_user_id' ou le mail 'p_user_mail' existe la fonction échoue.
+  Vérifie l'autentification d'un compte utilisateur
+  Le nom 'p_user_id' et le mot-de-passe 'p_user_pwd' est valide la fonction réussie.
+*/
+
+CREATE OR REPLACE FUNCTION user_check_authentication(
+       p_user_id user_account.user_account_id%type,
+       p_user_pwd user_account.user_pwd%type
+)
+RETURNS RESULT AS
+$$
+DECLARE
+	v_result     RESULT;
+	v_cnt        INT;
+BEGIN
+
+  /* verifie si l'utilisateur est valide */
+  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id) and upper(user_pwd) = p_user_pwd;
+  if v_cnt > 0 then
+    select 'ERR_OK', 'USER_EXISTS' into v_result;
+    return v_result;
+  end if;
+
+  /* ok */
+  select 'ERR_FAILED', 'USER_NOT_EXISTS' into v_result;
+  return v_result;
+
+END;
+$$
+LANGUAGE plpgsql;
+
+/*
+  Vérifie si le compte utilisateur existe
+  Si un compte utilisteur avec le nom 'p_user_id' existe la fonction réussie.
 */
 
 CREATE OR REPLACE FUNCTION user_account_exists(
@@ -394,6 +425,7 @@ CREATE OR REPLACE FUNCTION user_connect(
     returns user_session.user_session_id%TYPE
   as $$
  declare
+    v_result RESULT;
     v_n integer;
     v_connection_id integer;
     v_SessionID user_session.user_session_id%TYPE := (get_global('AUTO_SESSION_PREFIX',NULL)||p_user_id);
@@ -434,6 +466,7 @@ CREATE OR REPLACE FUNCTION user_connect(
     end if;
   
     -- return
+    select 'ERR_OK', 'USER_CONNECTED', 'CONNECTION_ID:'||v_connection_id||';' into v_result;
     RETURN v_SessionID;
   end;
 $$ LANGUAGE plpgsql;

@@ -22,6 +22,7 @@ class Application{
     
     function Application($root_path){
         $this->root_path = $root_path;
+        $this->template_attributes = array();
         
         // Configuration par défaut
         /*$this->config = array(
@@ -33,11 +34,12 @@ class Application{
         // Charge la configuration
         $this->config = parse_ini_file($this->root_path."/cfg/config.ini", true);
         
-        //ajoute les chamins d'accès aux attribut de template
-        $this->template_attributes = array(
-            "_LIB_PATH_WFW_" => $this->getLibPath("wfw",true),
-            "_LIB_PATH_YUI_" => $this->getLibPath("yui",true)
-        );
+        //ajoute les chamins d'accès aux attributs de template
+        if(isset($this->config["path"])){
+            foreach($this->config["path"] as $name=>$path){
+                $this->template_attributes["_LIB_PATH_".strtoupper($name)."_"] = $path;
+            }
+        }
         
         // initialise la base de données à null
         //( la fonction getDB initialise la connexion si besoin )

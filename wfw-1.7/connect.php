@@ -1,7 +1,7 @@
 <?php
 /*
  * Connexion d'un utilisateur
- * Rôle : Utilisateur
+ * Rôle : Visiteur
  * UC   : user_connect
  */
 
@@ -11,6 +11,7 @@ global $app;
 //entree
 $required_fields = array(
     "uid"=>"cInputIdentifier",
+    "pwd"=>"cInputPassword",
     "life_time"=>"cInputInteger"
 );
 
@@ -20,10 +21,18 @@ if(cInputFields::checkArray($required_fields))
     $client_ip  = $_SERVER["REMOTE_ADDR"];
     $local_path = NULL;
 
+    if(!UserModule::checkAuthentication($_REQUEST["uid"], $_REQUEST["pwd"]))
+        goto end;
+    
     //crée une connexion
     $result = UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"]);
+    if($result){
+        setcookie("wfw_user_uid",$_REQUEST["uid"]);
+        setcookie("wfw_user_cid",$result);
+    }
 }
 
+end:
 /* Ajoute le résultat au champs du template */
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();

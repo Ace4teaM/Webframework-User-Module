@@ -290,6 +290,26 @@ class UserModule implements iModule
         //return $result;
         return RESULT($result[0], $result[1]);
     }
+    
+    /** 
+     * Vérifie l'autentification d'un tilisateur
+     * 
+     * @param type $uid Nom d'utilisateur
+     * @param type $pwd Mot de passe
+     */
+    public static function checkAuthentication($uid, $pwd){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_check_authentication", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1]);
+    }
+    
+    
 }
 
 ?>
