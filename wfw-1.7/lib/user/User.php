@@ -158,7 +158,7 @@ class UserModule implements iModule
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_create_account", func_get_args());
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     /** 
@@ -173,7 +173,7 @@ class UserModule implements iModule
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_delete_account", func_get_args());
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     /** 
@@ -199,7 +199,7 @@ class UserModule implements iModule
         }
         
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     /** 
@@ -214,7 +214,7 @@ class UserModule implements iModule
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_disconnect", func_get_args());
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     /** 
@@ -233,7 +233,7 @@ class UserModule implements iModule
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_activate_account", func_get_args());
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     /** 
@@ -251,7 +251,7 @@ class UserModule implements iModule
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_register_account", func_get_args());
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     /** 
@@ -269,7 +269,7 @@ class UserModule implements iModule
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_account_exists", func_get_args());
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     /** 
@@ -288,7 +288,7 @@ class UserModule implements iModule
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_make_identity", func_get_args());
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     /** 
@@ -306,7 +306,7 @@ class UserModule implements iModule
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_check_authentication", func_get_args());
         //return $result;
-        return RESULT($result[0], $result[1]);
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
     

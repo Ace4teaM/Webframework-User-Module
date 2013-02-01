@@ -25,10 +25,10 @@ if(cInputFields::checkArray($required_fields))
         goto end;
     
     //crée une connexion
-    $result = UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"]);
-    if($result){
-        setcookie("wfw_user_uid",$_REQUEST["uid"]);
-        setcookie("wfw_user_cid",$result);
+    if(UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"])){
+        $result = cResult::getLast();
+        //setcookie("wfw_user_uid",$_REQUEST["uid"]);
+        setcookie("wfw_user_cid",$result->att["CONNECTION_ID"]);
     }
 }
 

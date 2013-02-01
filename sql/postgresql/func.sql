@@ -23,7 +23,7 @@ DECLARE
 BEGIN
 
   /* verifie si l'utilisateur est valide */
-  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id) and upper(user_pwd) = p_user_pwd;
+  select count(*) into v_cnt from user_account where upper(user_account_id) = upper(p_user_id) and user_pwd = p_user_pwd;
   if v_cnt > 0 then
     select 'ERR_OK', 'USER_EXISTS' into v_result;
     return v_result;
@@ -422,7 +422,7 @@ CREATE OR REPLACE FUNCTION user_connect(
        p_data_path  varchar,
        p_life_time  user_connection.life_time%type/* default 10000*/
        )
-    returns user_session.user_session_id%TYPE
+    returns RESULT
   as $$
  declare
     v_result RESULT;
@@ -455,19 +455,25 @@ CREATE OR REPLACE FUNCTION user_connect(
     select count(*) into v_n from user_connection where client_ip = p_client_ip AND user_account_id = p_user_id;
     if v_n = 0 then
       RAISE NOTICE 'insert la connection %;%',p_client_ip,p_user_id;
+      -- Crée l'identifiant de connexion
+      --v_ConnectionID user_connection.user_connection_id%TYPE := user_random_token()||user_random_token());
       select coalesce(max(user_connection_id),0)+1 into v_connection_id from user_connection;
+      -- Crée la connexion
       insert into user_connection (user_connection_id,client_ip,user_account_id,user_session_id,life_time)
         values(v_connection_id,p_client_ip,p_user_id,v_SessionID,p_life_time);
     else
       RAISE NOTICE 'actualise la connection %;%',p_client_ip,p_user_id;
+      -- Actualise la connexion
       update user_connection
         set user_account_id=p_user_id, user_session_id=v_SessionID, life_time=p_life_time
         where client_ip = p_client_ip AND user_account_id = p_user_id;
+      -- Recupere l'identifiant de connexion
+      select user_connection_id into v_connection_id from user_connection where client_ip = p_client_ip AND user_account_id = p_user_id;
     end if;
   
-    -- return
+    -- OK
     select 'ERR_OK', 'USER_CONNECTED', 'CONNECTION_ID:'||v_connection_id||';' into v_result;
-    RETURN v_SessionID;
+    RETURN v_result;
   end;
 $$ LANGUAGE plpgsql;
 
