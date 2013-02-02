@@ -1,31 +1,30 @@
 <?php
 /*
- * Déconnect un utilisateur
- * Rôle : Administrateur
- * UC   : user_delete_account
+ * Maintient la connexion d'un utilisateur
+ * Rôle : Utilisateur
+ * UC   : user_check_connection
  */
 
 require_once("inc/globals.php");
 global $app;
 
 //entree
-$accountFields = array(
-    "uid"=>"cInputIdentifier"
+$required_fields = array(
+    "cid"=>"cInputName"
 );
 
 // exemples JS
-if(cInputFields::checkArray($accountFields))
+if(cInputFields::checkArray($required_fields))
 {
-    $client_id = "none";
-
-    //supprime le compte utilisateur
-    $result = UserModule::disconnectUser($_REQUEST["uid"]);
+    if(!UserModule::checkConnection($_REQUEST["cid"],$_SERVER["REMOTE_ADDR"]))
+        goto end;
 }
 
+end:
 /* Ajoute le résultat au champs du template */
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
-//traduit le nom du champs
+//traduit le nom du champ
 $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 
 /* Ajoute les arguments reçues en entrée au template */
@@ -40,12 +39,12 @@ if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
             exit;
         case "html":
         default:
-            $app->showXMLView("view/user/pages/disconnect_user.html",$att);
+            $app->showXMLView("view/user/pages/check.html",$att);
             break;
     }
 }
 
 // accueil
-$app->showXMLView("view/user/pages/disconnect_user.html",$att);
+$app->showXMLView("view/user/pages/check.html",$att);
 
 ?>

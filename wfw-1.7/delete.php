@@ -25,7 +25,7 @@ if(cInputFields::checkArray($accountFields))
 /* Ajoute le résultat au champs du template */
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
-//traduit le nom du champs
+//traduit le nom du champ
 $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 
 /* Ajoute les arguments reçues en entrée au template */
@@ -35,11 +35,9 @@ $att = array_merge($att,$_REQUEST);
 if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
     switch($_REQUEST["output"]){
         case "xarg":
-            //XArg::makeArray($att);
-            RESULT(cResult::Failed,Application::UnsuportedFeature);
-            RESULT_PUSH("cause","XARG output format");
-            $app->processLastError();
-            break;
+            header("content-type: text/xarg");
+            echo xarg_encode_array($att);
+            exit;
         case "html":
         default:
             $app->showXMLView("view/user/pages/delete.html",$att);

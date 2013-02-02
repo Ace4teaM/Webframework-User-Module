@@ -4,21 +4,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-        <title>Connexion à un compte utilisateur</title>
+        <title>Maintient une connexion à un compte utilisateur</title>
     </head>
     <body>
         <div style="width:600">
-            <h1>Connexion à un compte utilisateur</h1>
+            <h1>Maintient une connexion à un compte utilisateur</h1>
 
             <fieldset><legend>Résultat (-{result})</legend>
                 -{error}<br/>-{field_name}
             </fieldset>
             
             <form action="#" enctype="multipart/form-data" method="post">
-                <fieldset><legend>Informations sur l'utilisateur</legend>
-                    <div class="wfw_edit_field"><span><label for="txt_uid">Nom d'utilisateur</label></span><span><input type="text" id="txt_uid" name="uid" value="-{uid}" /></span></div>
-                    <div class="wfw_edit_field"><span><label for="txt_pwd">Mot-de-Passe</label></span><span><input type="text" id="txt_pwd" name="pwd" value="-{pwd}" /></span></div>
-                    <div class="wfw_edit_field"><span><label for="txt_life_time">Temps d'inactivité avant déconnexion</label></span><span><select id="txt_life_time" name="life_time"><option value="0">Illimté</option><option value="1800">30min</option><option value="3600">1h</option></select></span></div>
+                <fieldset><legend>Informations sur la connexion</legend>
+                    <div class="wfw_edit_field"><span><label for="txt_cid">Identificateur de connexion</label></span><span><input type="text" id="txt_uid" name="cid" value="-{cid}" /></span></div>
                 </fieldset>
                 <div align="right">
                     <a class="wfw_button_text" href="-{page:index}">Retour</a>

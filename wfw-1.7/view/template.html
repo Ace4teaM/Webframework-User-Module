@@ -21,9 +21,6 @@
     <!-- Main Styles -->
     <link rel="stylesheet" href="-{_LIB_PATH_WFW_}/css/wfw-extends.css" type="text/css" />
     <link rel="stylesheet" href="-{_LIB_PATH_WFW_}/css/wfw-fieldbar.css" type="text/css" />
-    <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <link rel="stylesheet" href="css/form.css" type="text/css" />
 
     <!-- Main Includes -->
     <script type="text/javascript" language="javascript" src="-{_LIB_PATH_WFW_}/javascript/base.js"></script>
@@ -31,6 +28,7 @@
     <script type="text/javascript" language="javascript" src="-{_LIB_PATH_WFW_}/javascript/yui/yui_config.js"></script>
     <script type="text/javascript">var wfw_yui_base_path = "-{_LIB_PATH_WFW_}/javascript/yui/";</script>
     <script type="text/javascript" language="javascript" src="-{_LIB_PATH_USER_MODULE_}/User.js"></script>
+    <script type="text/javascript" language="javascript" src="js/index.js"></script>
 
     <!-- Add-Includes
     <script type="text/javascript" language="javascript" src="js/user/user.js"></script>
@@ -41,6 +39,7 @@
 
 <!-- Document -->
 <body>
+    <div id="header">Statut de connexion <span id="connection_status">checking...</span></div>
     <div id="content" template:action="merge" template:path=">body"></div>
     <div><i>Exemple d'implémentation du module Utilisateur dans un environnement Webframework</i></div>
 </body>

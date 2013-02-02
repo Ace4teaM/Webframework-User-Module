@@ -27,24 +27,8 @@ if(cInputFields::checkArray($accountFields))
 /* Ajoute le résultat aux champs du template */
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
-
-//traduit le nom des champs
-if(isset($att["field_name"])){
-    switch($att["field_name"]){
-        case "mail":
-            $att["field_name"] = "eMail";
-            break;
-        case "uid":
-            $att["field_name"] = "Nom d'utilisateur";
-            break;
-        case "pwd":
-            $att["field_name"] = "Mot-de-passe";
-            break;
-        case "token":
-            $att["field_name"] = "Jeton";
-            break;
-    }
-}
+//traduit le nom du champ
+$att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 
 /* Ajoute les arguments reçues en entrée au template */
 $att = array_merge($att,$_REQUEST);
@@ -53,11 +37,9 @@ $att = array_merge($att,$_REQUEST);
 if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
     switch($_REQUEST["output"]){
         case "xarg":
-            //XArg::makeArray($att);
-            RESULT(cResult::Failed,Application::UnsuportedFeature);
-            RESULT_PUSH("cause","XARG output format");
-            $app->processLastError();
-            break;
+            header("content-type: text/xarg");
+            echo xarg_encode_array($att);
+            exit;
         case "html":
         default:
             $app->showXMLView("view/user/pages/activate.html",$att);

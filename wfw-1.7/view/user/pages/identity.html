@@ -19,9 +19,11 @@
     <body>
         <h1>Renseigner une identité</h1>
         <p>Cette page vous permez de renseigner votre identité personnelle.</p>
-        <fieldset><legend>Résultat (-{error_code})</legend>
-            -{error_str}
-        </fieldset>
+
+            <fieldset><legend>Résultat (-{result})</legend>
+                -{error}<br/>-{field_name}
+            </fieldset>
+            
         <form id="form" enctype="multipart/form-data" action="#" method="post">
             <fieldset><legend>Votre Identité</legend>
                 <div>

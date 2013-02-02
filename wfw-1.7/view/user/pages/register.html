@@ -7,9 +7,11 @@
         <div style="width:600">
             <h1>Création d'un compte utilisateur</h1>
             <p>Ce formulaire vous permet de vous inscrire. Votre compte une fois créé devra être activé depuis votre boite mail.</p>
-            <fieldset><legend>Résultat (-{error_code})</legend>
-                -{error_str}<br/>-{field_name}
+
+            <fieldset><legend>Résultat (-{result})</legend>
+                -{error}<br/>-{field_name}
             </fieldset>
+            
             <form action="#" enctype="multipart/form-data" method="post">
                 <fieldset><legend>Informations sur l'utilisateur</legend>
                     <div class="wfw_edit_field"><span><label for="txt_uid">Nom d'utilisateur</label></span><span><input type="text" id="txt_uid" name="uid" value="-{uid}" /></span></div>

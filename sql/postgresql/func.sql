@@ -697,3 +697,49 @@ CREATE OR REPLACE FUNCTION user_make_identity(
      return v_result;
   end;
 $$ LANGUAGE plpgsql;
+
+
+/*
+  Maintient une connexion utilisateur
+  Parametres:
+    p_user_connection_id  : Identifiant de connexion
+    p_client_ip           : Adresse IP du client
+*/
+CREATE OR REPLACE FUNCTION user_check_connection(
+       p_user_connection_id    user_connection.user_connection_id%type,
+       p_client_ip             user_connection.client_ip%type
+       )
+    returns RESULT
+  as $$
+  declare
+    v_result RESULT;
+    v_client_ip user_connection.client_ip%type := NULL;
+    v_expire INT;
+  begin
+
+    /* Vérifie l’existence de la connexion */
+    select client_ip into v_client_ip from user_connection where user_connection_id = p_user_connection_id;
+      RAISE NOTICE 'v_client_ip %',v_client_ip;
+    if v_client_ip is NULL then
+        select 'ERR_FAILED', 'USER_CONNECTION_NOT_EXISTS' into v_result;
+        return v_result;
+    end if;
+
+    /* Vérifie l’adresse IP */
+    if v_client_ip <> p_client_ip then
+        select 'ERR_FAILED', 'USER_CONNECTION_IP_REFUSED' into v_result;
+        return v_result;
+    end if;
+  
+    /* Actualise la date d’accees */
+    update user_connection set last_access = now() where user_connection_id = p_user_connection_id;
+
+    /* Date d'expiration */
+    select last_access+life_time into v_expire from user_connection where user_connection_id = p_user_connection_id;
+
+    /* return */
+    select 'ERR_OK', 'USER_CONNECTED', 'EXPIRE:'||v_expire||';' into v_result;
+    return v_result;
+  end;
+$$ LANGUAGE plpgsql;
+

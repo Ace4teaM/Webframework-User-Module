@@ -41,11 +41,9 @@ $att = array_merge($att,$_REQUEST);
 if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
     switch($_REQUEST["output"]){
         case "xarg":
-            //XArg::makeArray($att);
-            RESULT(cResult::Failed,Application::UnsuportedFeature);
-            RESULT_PUSH("cause","XARG output format");
-            $app->processLastError();
-            break;
+            header("content-type: text/xarg");
+            echo xarg_encode_array($att);
+            exit;
         case "html":
         default:
             $app->showXMLView("view/user/pages/create.html",$att);

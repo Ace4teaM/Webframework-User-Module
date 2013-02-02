@@ -309,6 +309,24 @@ class UserModule implements iModule
         return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
     
+    /** 
+     * Vérifie l'autentification d'un tilisateur
+     * 
+     * @param type $uid Nom d'utilisateur
+     * @param type $pwd Mot de passe
+     */
+    public static function checkConnection($cid){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_check_connection", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
+    }
+    
     
 }
 
