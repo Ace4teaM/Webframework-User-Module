@@ -31,6 +31,16 @@ YUI.add('wfw-user', function (Y) {
          *   @brief Initialise le module
         */
         init: function() {
+            wfw.puts("User: init");
+            this.uid = Y.Cookie.get("wfw_user_uid");
+            this.cid = Y.Cookie.get("wfw_user_cid");
+            this.pwd = Y.Cookie.get("wfw_user_pwd");
+        },
+
+        /**
+         *   @brief Initialise le module
+        */
+        checkConnection: function() {
             this.uid = Y.Cookie.get("wfw_user_uid");
             this.cid = Y.Cookie.get("wfw_user_cid");
             this.pwd = Y.Cookie.get("wfw_user_pwd");
@@ -39,6 +49,8 @@ YUI.add('wfw-user', function (Y) {
             
             //Test la session active
             if (this.cid != null) {
+                wfw.puts("User: Cheking connection");
+                
                 checkReq = new wfw.Request.REQUEST(
                     {
                         name: "Maintient la connexion active",
@@ -66,6 +78,10 @@ YUI.add('wfw-user', function (Y) {
                 );
                     
                 wfw.Request.Insert(checkReq);
+            }
+            else{
+                wfw.puts("User: No current connection");
+                wfw.User.onConnectionStatusChange("USER_DISCONNECTED");
             }
 
         },
