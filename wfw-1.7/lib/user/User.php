@@ -2,50 +2,51 @@
 
 require_once("php/class/bases/iModule.php");
 require_once("php/xml_default.php");
+
 function relativePath( $path, $compareTo ) {
-        // clean arguments by removing trailing and prefixing slashes
-        if ( substr( $path, -1 ) == '/' ) {
-            $path = substr( $path, 0, -1 );
-        }
-        if ( substr( $path, 0, 1 ) == '/' ) {
-            $path = substr( $path, 1 );
-        }
-
-        if ( substr( $compareTo, -1 ) == '/' ) {
-            $compareTo = substr( $compareTo, 0, -1 );
-        }
-        if ( substr( $compareTo, 0, 1 ) == '/' ) {
-            $compareTo = substr( $compareTo, 1 );
-        }
-
-        // simple case: $compareTo is in $path
-        if ( strpos( $path, $compareTo ) === 0 ) {
-            $offset = strlen( $compareTo ) + 1;
-            return substr( $path, $offset );
-        }
-
-        $relative  = array(  );
-        $pathParts = explode( '/', $path );
-        $compareToParts = explode( '/', $compareTo );
-
-        foreach( $compareToParts as $index => $part ) {
-            if ( isset( $pathParts[$index] ) && $pathParts[$index] == $part ) {
-                continue;
-            }
-
-            $relative[] = '..';
-        }
-
-        foreach( $pathParts as $index => $part ) {
-            if ( isset( $compareToParts[$index] ) && $compareToParts[$index] == $part ) {
-                continue;
-            }
-
-            $relative[] = $part;
-        }
-
-        return implode( '/', $relative );
+    // clean arguments by removing trailing and prefixing slashes
+    if ( substr( $path, -1 ) == '/' ) {
+        $path = substr( $path, 0, -1 );
     }
+    if ( substr( $path, 0, 1 ) == '/' ) {
+        $path = substr( $path, 1 );
+    }
+
+    if ( substr( $compareTo, -1 ) == '/' ) {
+        $compareTo = substr( $compareTo, 0, -1 );
+    }
+    if ( substr( $compareTo, 0, 1 ) == '/' ) {
+        $compareTo = substr( $compareTo, 1 );
+    }
+
+    // simple case: $compareTo is in $path
+    if ( strpos( $path, $compareTo ) === 0 ) {
+        $offset = strlen( $compareTo ) + 1;
+        return substr( $path, $offset );
+    }
+
+    $relative  = array(  );
+    $pathParts = explode( '/', $path );
+    $compareToParts = explode( '/', $compareTo );
+
+    foreach( $compareToParts as $index => $part ) {
+        if ( isset( $pathParts[$index] ) && $pathParts[$index] == $part ) {
+            continue;
+        }
+
+        $relative[] = '..';
+    }
+
+    foreach( $pathParts as $index => $part ) {
+        if ( isset( $compareToParts[$index] ) && $compareToParts[$index] == $part ) {
+            continue;
+        }
+
+        $relative[] = $part;
+    }
+
+    return implode( '/', $relative );
+}
     
 class UserModule implements iModule
 {
