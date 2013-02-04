@@ -14,14 +14,19 @@
             <h1>Connexion à un compte utilisateur</h1>
 
             <fieldset><legend>Résultat (-{result})</legend>
-                -{error}<br/>-{field_name}
+                -{error}
+                <br/>-{field_name}
+                <br/>-{schtasks_error}
+                <br/>-{schtasks_code}
+                <br/>-{schtasks_output}
+                <br/>-{schtasks_cmd}
             </fieldset>
             
             <form action="#" enctype="multipart/form-data" method="post">
                 <fieldset><legend>Informations sur l'utilisateur</legend>
                     <div class="wfw_edit_field"><span><label for="txt_uid">Nom d'utilisateur</label></span><span><input type="text" id="txt_uid" name="uid" value="-{uid}" /></span></div>
                     <div class="wfw_edit_field"><span><label for="txt_pwd">Mot-de-Passe</label></span><span><input type="text" id="txt_pwd" name="pwd" value="-{pwd}" /></span></div>
-                    <div class="wfw_edit_field"><span><label for="txt_life_time">Temps d'inactivité avant déconnexion</label></span><span><select id="txt_life_time" name="life_time"><option value="0">Illimté</option><option value="1800">30min</option><option value="3600">1h</option></select></span></div>
+                    <div class="wfw_edit_field"><span><label for="txt_life_time">Temps d'inactivité avant déconnexion</label></span><span><select id="txt_life_time" name="life_time"><option value="0">Illimté</option><option value="5">5min</option><option value="15">15min</option><option value="30">30min</option><option value="60">1h</option></select></span></div>
                 </fieldset>
                 <div align="right">
                     <a class="wfw_button_text" href="-{page:index}">Retour</a>

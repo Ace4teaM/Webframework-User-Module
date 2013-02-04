@@ -6,7 +6,7 @@
  */
 
 require_once("inc/globals.php");
-require_once("php/system/windows/task.php");
+require_once("php/system/windows/schtasks.php");
 global $app;
 
 //entree
@@ -16,54 +16,76 @@ $required_fields = array(
     "life_time"=>"cInputInteger"
 );
 
+//résultat de la requete
+$result = NULL;
+
 // exemples JS
 if(cInputFields::checkArray($required_fields))
 {
     $client_ip  = $_SERVER["REMOTE_ADDR"];
     $local_path = NULL;
+    $life_time  = intval($_REQUEST["life_time"]);
 
     if(!UserModule::checkAuthentication($_REQUEST["uid"], $_REQUEST["pwd"]))
-        goto end;
+        goto failed;
     
     //crée une connexion
     if(UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"])){
+        //retourne le resultat de cette fonction
         $result = cResult::getLast();
         //setcookie("wfw_user_uid",$_REQUEST["uid"]);
         //définit le cookie
-        setcookie("wfw_user_cid",$result->att["CONNECTION_ID"]);
+        setcookie("wfw_user_cid",$result->getAtt("CONNECTION_ID"));
         //initialise la tache de fermeture
-        $expire = new DateTime();
-        $expire->add(new DateInterval('P0Y0DT0H1M'));
-        cSysTaskMgr::create("wfw_test",$expire,"C:\\Users\\developpement\\Documents\\doxywizard.exe");
+        if($life_time > 0){
+            $expire = new DateTime();
+            $expire->add(new DateInterval('P0Y0DT0H'.$life_time.'M'));
+            if(!cSchTasksMgr::create("wfwUserConnectionExpire",$expire,'"'.$app->getRootPath().'/sh/disconnect_task.bat" "'.$_REQUEST["uid"].'" > NUL'))
+                 goto failed;
+        }
     }
+    
+    goto success;
 }
 
-end:
-/* Ajoute le résultat au champs du template */
+
+failed:
+// redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();
-$att = cResult::getLast()->toArray();
+
+
+success:
+// Ajoute le résultat aux attributs du template
+$att = $result->toArray();
+
 //traduit le nom du champs
 if(isset($att["field_name"]))
     $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 
-/* Ajoute les arguments reçues en entrée au template */
+// Ajoute les arguments reçues en entrée au template
 $att = array_merge($att,$_REQUEST);
 
 /* Génére la sortie */
-if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
-    switch($_REQUEST["output"]){
-        case "xarg":
-            header("content-type: text/xarg");
-            echo xarg_encode_array($att);
-            exit;
-        case "html":
-        default:
-            $app->showXMLView("view/user/pages/connect.html",$att);
-            break;
-    }
+$format = "html";
+if(cInputFields::checkArray(array("output"=>"cInputIdentifier")))
+    $format = $_REQUEST["output"] ;
+
+switch($format){
+    case "xarg":
+        header("content-type: text/xarg");
+        echo xarg_encode_array($att);
+        break;
+    case "html":
+        echo $app->makeXMLView("view/user/pages/connect.html",$att);
+        break;
+    default:
+        RESULT(cResult::Failed,Application::UnsuportedFeature);
+        $app->processLastError();
+        break;
 }
 
-// accueil
-$app->showXMLView("view/user/pages/connect.html",$att);
+
+// ok
+exit($result->isOk() ? 0 : 1);
 
 ?>

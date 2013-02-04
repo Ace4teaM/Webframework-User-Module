@@ -4,16 +4,18 @@ require_once("inc/Error.php");
 /**
  * @brief Interface principale avec l'application 
  */
-class Application{
+class Application /*extends cApplication*/{
     //errors class
     const Configuration              = "CONFIGURATION";
     const ModuleClassNotFound        = "MODULE_NOT_FOUND";
     const DatabaseConnectionNotFound = "DATABASE_CONNECTION_NOT_FOUND";
     const UnsuportedFeature          = "UNSUPORTED_FEATURE";
+    
     //
-    public $template_attributes;
-    public $config;
-    public $root_path;
+    private $template_attributes;
+    private $config;
+    private $root_path;
+    
     /** 
      * @brief Pointeur sur la base de données par défaut
      * @var iDataBase
@@ -33,10 +35,14 @@ class Application{
         
         // Charge la configuration
         $this->config = parse_ini_file($this->root_path."/cfg/config.ini", true);
+        $this->config = array_change_key_case($this->config, CASE_UPPER);
+        foreach($this->config as $section=>&$params)
+            $params = array_change_key_case($params, CASE_UPPER);
         
-        //ajoute les chamins d'accès aux attributs de template
-        if(isset($this->config["path"])){
-            foreach($this->config["path"] as $name=>$path){
+        //ajoute les chemins d'accès aux attributs de template
+        $path_section = $this->getCfgSection("path");
+        if(isset($path_section)){
+            foreach($path_section as $name=>$path){
                 $this->template_attributes["_LIB_PATH_".strtoupper($name)."_"] = $path;
             }
         }
@@ -55,19 +61,19 @@ class Application{
     function getDB(&$db_iface)
     {
         //obtient le nom de la classe à instancier
-        if(!isset($this->config["database"]["class"]) || empty($this->config["database"]["class"]))
+        $db_classname = $this->getCfgValue("database","class");
+        if(!isset($db_classname) || empty($db_classname))
             return RESULT(Application::Configuration,"No database class defined");
-        $db_classname = $this->config["database"]["class"];
 
         //initialise l'instance
         if($this->db == null){
             //initialise la connexion
             $db = new $db_classname();
-            $user   = $this->config["database"]["user"];
-            $name   = $this->config["database"]["name"];
-            $pwd    = $this->config["database"]["pwd"];
-            $server = $this->config["database"]["server"];
-            $port   = $this->config["database"]["port"];
+            $user   = $this->getCfgValue("database","user");
+            $name   = $this->getCfgValue("database","name");
+            $pwd    = $this->getCfgValue("database","pwd");
+            $server = $this->getCfgValue("database","server");
+            $port   = $this->getCfgValue("database","port");
             if(!$db->connect($user,$name,$pwd,$server,$port))
                 return false;
             
@@ -92,7 +98,7 @@ class Application{
      * @return string Chemin absolue vers la racine de l'application
      */
     function getTmpPath(){
-        return $this->root_path."/".$this->config["path"]["tmp"];
+        return $this->root_path."/".$this->getCfgValue("path","tmp");
     }
     
     /**
@@ -106,12 +112,13 @@ class Application{
      * @retval false  Chemin introuvable dans la configuration
      */
     function getLibPath($name="wfw",$relatif=false){
-        if(!isset($this->config["path"][$name])){
+        $path = $this->getCfgValue("path",$name);
+        if($path == NULL){
             //$this->result->set(cResult::ERR_FAILED,"config_not_found",array("desc"=>"Library path '$name' not set in configuration file"));
             return false;
         }
         
-        return (!$relatif) ? $this->root_path."/".$this->config["path"][$name] : $this->config["path"][$name];
+        return (!$relatif) ? $this->root_path."/".$path : $path;
     }
     
     /**
@@ -122,6 +129,7 @@ class Application{
      * @retval null La section n'existe pas
      */
     function getCfgSection($name){
+        $name = strtoupper($name);
         return (isset($this->config[$name]) ? $this->config[$name] : null);
     }
     
@@ -134,6 +142,7 @@ class Application{
      * @retval null La section n'existe pas
      */
     function getCfgValue($section_name,$item_name){
+        $item_name = strtoupper($item_name);
         $section = $this->getCfgSection($section_name);
         return ($section!==null && isset($section[$item_name]) ? $section[$item_name] : null);
     }
@@ -223,7 +232,7 @@ class Application{
                 echo("\n\nAdditionnal:\n");
                 print_r($result->att);
             }
-            exit;
+            exit(-1);
         }
     }
 

@@ -735,10 +735,11 @@ CREATE OR REPLACE FUNCTION user_check_connection(
     update user_connection set last_access = now() where user_connection_id = p_user_connection_id;
 
     /* Date d'expiration */
-    select last_access+life_time into v_expire from user_connection where user_connection_id = p_user_connection_id;
+    SELECT ROUND(EXTRACT(EPOCH FROM last_access) + life_time) into v_expire from user_connection where user_connection_id = p_user_connection_id;
+    /*select last_access+life_time into v_expire from user_connection where user_connection_id = p_user_connection_id;*/
 
     /* return */
-    select 'ERR_OK', 'USER_CONNECTED', 'EXPIRE:'||v_expire||';' into v_result;
+    select 'ERR_OK', 'USER_CONNECTED', 'EXPIRE:'||v_expire into v_result;
     return v_result;
   end;
 $$ LANGUAGE plpgsql;

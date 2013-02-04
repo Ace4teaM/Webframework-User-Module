@@ -49,7 +49,7 @@ YUI.add('wfw-user', function (Y) {
             
             //Test la session active
             if (this.cid != null) {
-                wfw.puts("User: Cheking connection");
+                wfw.puts("User: Checking connection");
                 
                 checkReq = new wfw.Request.REQUEST(
                     {
@@ -63,10 +63,24 @@ YUI.add('wfw-user', function (Y) {
                         user : {
                             onsuccess: function (obj, args) {
                                 //wfw.puts(args.error);
+                                wfw.puts("onsuccess");
+
                                 wfw.User.onConnectionStatusChange(args.error);
+                                //si l'utilisateur est connecté prépare l'événement d'expiration
+                                if(args.error == "USER_CONNECTED"){
+                                    var expire = parseInt(args.expire);
+                                    wfw.puts("expire="+expire);
+                                    var expireDate = new Date(expire*1000);
+                                    var delay = (expire*1000)-new Date().getTime();
+                                    wfw.puts("expire="+expireDate);
+                                    wfw.puts("delay="+delay);
+                                    if(!isNaN(expire) && delay>0)
+                                        setTimeout(wfw.User.checkConnection,delay);
+                                }
                             },
                             onfailed: function (obj, args) {
-                                //wfw.puts(args.error);
+                                wfw.puts("onfailed");
+                                wfw.puts(args.error);
                                 wfw.User.onConnectionStatusChange(args.error);
                                 wfw.User.cid = null; // pas la peine d'essayer de nouveau
                             },
@@ -76,7 +90,7 @@ YUI.add('wfw-user', function (Y) {
                         }
                     }
                 );
-                    
+                
                 wfw.Request.Insert(checkReq);
             }
             else{

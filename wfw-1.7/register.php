@@ -34,7 +34,8 @@ if(cInputFields::checkArray($accountFields))
 $result = cResult::getLast();
 $att = cResult::getLast()->toArray();
 //traduit le nom du champs
-$att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
+if(isset($att["field_name"]))
+    $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 
 /* Ajoute les arguments reçues en entrée au template */
 $att = array_merge($att,$_REQUEST);

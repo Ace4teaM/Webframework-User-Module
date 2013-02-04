@@ -324,11 +324,10 @@ class UserModule implements iModule
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
         $result = $db->call($app->getCfgValue("database","schema"), "user_check_connection", func_get_args());
-        //return $result;
+
+        //print_r($result);     
         return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
-    
-    
 }
 
 ?>

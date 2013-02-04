@@ -13,39 +13,59 @@ $accountFields = array(
     "uid"=>"cInputIdentifier"
 );
 
+//résultat de la requete
+$result = NULL;
+
 // exemples JS
 if(cInputFields::checkArray($accountFields))
 {
     $client_id = "none";
 
     //supprime le compte utilisateur
-    $result = UserModule::disconnectUser($_REQUEST["uid"]);
+    if(!UserModule::disconnectUser($_REQUEST["uid"]))
+        goto failed;
+    
+    //retourne le resultat de cette fonction
+    $result = cResult::getLast();
+    
+    goto success;
 }
 
-/* Ajoute le résultat au champs du template */
+failed:
+// redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();
-$att = cResult::getLast()->toArray();
-//traduit le nom du champs
-$att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 
+
+success:
+// Ajoute le résultat aux attributs du template
+$att = $result->toArray();
+//traduit le nom du champs
+if(isset($att["field_name"]))
+    $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 /* Ajoute les arguments reçues en entrée au template */
 $att = array_merge($att,$_REQUEST);
 
 /* Génére la sortie */
-if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
-    switch($_REQUEST["output"]){
-        case "xarg":
-            header("content-type: text/xarg");
-            echo xarg_encode_array($att);
-            exit;
-        case "html":
-        default:
-            $app->showXMLView("view/user/pages/disconnect_user.html",$att);
-            break;
-    }
+$format = "html";
+if(cInputFields::checkArray(array("output"=>"cInputIdentifier")))
+    $format = $_REQUEST["output"] ;
+
+switch($format){
+    case "xarg":
+        header("content-type: text/xarg");
+        echo xarg_encode_array($att);
+        break;
+    case "html":
+        echo $app->makeXMLView("view/user/pages/disconnect_user.html",$att);
+        break;
+    default:
+        RESULT(cResult::Failed,Application::UnsuportedFeature);
+        $app->processLastError();
+        break;
 }
 
-// accueil
-$app->showXMLView("view/user/pages/disconnect_user.html",$att);
+
+// ok
+exit($result->isOk() ? 0 : 1);
 
 ?>
