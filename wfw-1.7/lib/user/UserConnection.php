@@ -12,7 +12,7 @@ class UserConnection
 {
     
     /**
-    * @var      int
+    * @var      String
     */
     public $userConnectionId;
     

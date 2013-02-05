@@ -23,9 +23,16 @@ YUI.add('wfw-user', function (Y) {
         uid         : null, // user id
         cid         : null, // connexion id
         pwd         : null, // mot-de-passe (si connexion automatique)
+        expireTimeoutId : null, // id setTimeout fonction
         
-        //events
+        //public events
         onConnectionStatusChange: function(status){},
+        
+        //private event
+        onConnectionExpireDate: function(status){
+            wfw.User.expireTimeoutId = null;
+            wfw.User.checkConnection();
+        },
         
         /**
          *   @brief Initialise le module
@@ -49,7 +56,7 @@ YUI.add('wfw-user', function (Y) {
             
             //Test la session active
             if (this.cid != null) {
-                wfw.puts("User: Checking connection");
+                wfw.puts("wfw.User.checkConnection: Checking connection");
                 
                 checkReq = new wfw.Request.REQUEST(
                     {
@@ -63,24 +70,36 @@ YUI.add('wfw-user', function (Y) {
                         user : {
                             onsuccess: function (obj, args) {
                                 //wfw.puts(args.error);
-                                wfw.puts("onsuccess");
+                                wfw.puts("wfw.User.checkConnection: onsuccess");
 
                                 wfw.User.onConnectionStatusChange(args.error);
                                 //si l'utilisateur est connecté prépare l'événement d'expiration
-                                if(args.error == "USER_CONNECTED"){
+                                if(args.error == "USER_CONNECTED")
+                                {
+                                    //calcule le delais pour la date d'expiration
                                     var expire = parseInt(args.expire);
-                                    wfw.puts("expire="+expire);
                                     var expireDate = new Date(expire*1000);
                                     var delay = (expire*1000)-new Date().getTime();
-                                    wfw.puts("expire="+expireDate);
-                                    wfw.puts("delay="+delay);
+                                    //wfw.puts("expire="+expireDate);
+
+                                    //delais ok?
                                     if(!isNaN(expire) && delay>0)
-                                        setTimeout(wfw.User.checkConnection,delay);
+                                    {
+                                        //supprime le timer en cours si besoin
+                                        if(wfw.User.expireTimeoutId != null){
+                                            clearTimeout(wfw.User.expireTimeoutId);
+                                            wfw.User.expireTimeoutId=null;
+                                        }
+                                        //cree le nouveau timer de l'evenement
+                                        wfw.puts("wfw.User.checkConnection: Add expire callback to "+expireDate);
+                                        wfw.User.expireTimeoutId = setTimeout(wfw.User.checkConnection,delay);
+                                    }
+                                    else
+                                        wfw.puts("wfw.User.checkConnection: Use unlimited session life time");
                                 }
                             },
                             onfailed: function (obj, args) {
-                                wfw.puts("onfailed");
-                                wfw.puts(args.error);
+                                wfw.puts("wfw.User.checkConnection: onfailed = "+args.error);
                                 wfw.User.onConnectionStatusChange(args.error);
                                 wfw.User.cid = null; // pas la peine d'essayer de nouveau
                             },

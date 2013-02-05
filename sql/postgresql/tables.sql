@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  PostgreSQL 8                                  */
-/* Date de création :  31/01/2013 16:48:55                      */
+/* Date de création :  05/02/2013 08:15:23                      */
 /*==============================================================*/
 
 
@@ -63,7 +63,7 @@ create table USER_ADDRESS (
 /* Table : USER_CONNECTION                                      */
 /*==============================================================*/
 create table USER_CONNECTION (
-   USER_CONNECTION_ID   INT4                 not null,
+   USER_CONNECTION_ID   CHAR(22)             not null,
    CLIENT_IP            VARCHAR(15)          not null,
    USER_ACCOUNT_ID      VARCHAR(64)          not null,
    USER_SESSION_ID      VARCHAR(64)          not null,

@@ -427,7 +427,7 @@ CREATE OR REPLACE FUNCTION user_connect(
  declare
     v_result RESULT;
     v_n integer;
-    v_connection_id integer;
+    v_connection_id user_connection.user_connection_id%type;
     v_SessionID user_session.user_session_id%TYPE := (get_global('AUTO_SESSION_PREFIX',NULL)||p_user_id);
     
   begin
@@ -455,9 +455,10 @@ CREATE OR REPLACE FUNCTION user_connect(
     select count(*) into v_n from user_connection where client_ip = p_client_ip AND user_account_id = p_user_id;
     if v_n = 0 then
       RAISE NOTICE 'insert la connection %;%',p_client_ip,p_user_id;
-      -- Crée l'identifiant de connexion
+      -- Crée l'identifiant de connexion (YYYYMMDDHHMISSTTTTTTTT)
+      select to_char(current_timestamp, 'YYYYMMDDHHMISS')||user_random_token() into v_connection_id;
       --v_ConnectionID user_connection.user_connection_id%TYPE := user_random_token()||user_random_token());
-      select coalesce(max(user_connection_id),0)+1 into v_connection_id from user_connection;
+      --select coalesce(max(user_connection_id),0)+1 into v_connection_id from user_connection;
       -- Crée la connexion
       insert into user_connection (user_connection_id,client_ip,user_account_id,user_session_id,life_time)
         values(v_connection_id,p_client_ip,p_user_id,v_SessionID,p_life_time);
@@ -714,12 +715,12 @@ CREATE OR REPLACE FUNCTION user_check_connection(
   declare
     v_result RESULT;
     v_client_ip user_connection.client_ip%type := NULL;
-    v_expire INT;
+    v_expire INT; /* timestamp de la date d'expiration */
   begin
 
     /* Vérifie l’existence de la connexion */
     select client_ip into v_client_ip from user_connection where user_connection_id = p_user_connection_id;
-      RAISE NOTICE 'v_client_ip %',v_client_ip;
+    RAISE NOTICE 'v_client_ip %',v_client_ip;
     if v_client_ip is NULL then
         select 'ERR_FAILED', 'USER_CONNECTION_NOT_EXISTS' into v_result;
         return v_result;
@@ -731,15 +732,23 @@ CREATE OR REPLACE FUNCTION user_check_connection(
         return v_result;
     end if;
   
+    /* Vérifie la validité de la date d'expiration 
+    SELECT ROUND(EXTRACT(EPOCH FROM last_access) + life_time * 60) - ROUND(EXTRACT(EPOCH FROM now())) into v_expire from user_connection where user_connection_id = p_user_connection_id;
+    if v_expire < 1 then
+        select 'ERR_FAILED', 'USER_CONNECTION_EXPIRED' into v_result;
+        return v_result;
+    end if;*/
+  
     /* Actualise la date d’accees */
     update user_connection set last_access = now() where user_connection_id = p_user_connection_id;
 
     /* Date d'expiration */
-    SELECT ROUND(EXTRACT(EPOCH FROM last_access) + life_time) into v_expire from user_connection where user_connection_id = p_user_connection_id;
+    /*SELECT TIMESTAMP WITH TIME ZONE 'epoch' + (EXTRACT(EPOCH FROM now()) + 3600) * INTERVAL '1 second';*/
+    SELECT ROUND(EXTRACT(EPOCH FROM last_access) + life_time * 60) into v_expire from user_connection where user_connection_id = p_user_connection_id;
     /*select last_access+life_time into v_expire from user_connection where user_connection_id = p_user_connection_id;*/
 
     /* return */
-    select 'ERR_OK', 'USER_CONNECTED', 'EXPIRE:'||v_expire into v_result;
+    select 'ERR_OK', 'USER_CONNECTED', 'EXPIRE:'||v_expire||';'||'UID:'||(select user_account_id from user_connection where user_connection_id = p_user_connection_id)||';' into v_result;
     return v_result;
   end;
 $$ LANGUAGE plpgsql;

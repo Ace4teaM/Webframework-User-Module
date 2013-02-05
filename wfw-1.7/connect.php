@@ -38,9 +38,11 @@ if(cInputFields::checkArray($required_fields))
         setcookie("wfw_user_cid",$result->getAtt("CONNECTION_ID"));
         //initialise la tache de fermeture
         if($life_time > 0){
-            $expire = new DateTime();
+            $taskName = UserModule::disconnectTaskName($_REQUEST["uid"]);
+            $taskCmd  = UserModule::disconnectTaskCmd($_REQUEST["uid"]);
+            $expire   = new DateTime();
             $expire->add(new DateInterval('P0Y0DT0H'.$life_time.'M'));
-            if(!cSchTasksMgr::create("wfwUserConnectionExpire",$expire,'"'.$app->getRootPath().'/sh/disconnect_task.bat" "'.$_REQUEST["uid"].'" > NUL'))
+            if(!cSchTasksMgr::create($taskName,$expire,$taskCmd))
                  goto failed;
         }
     }

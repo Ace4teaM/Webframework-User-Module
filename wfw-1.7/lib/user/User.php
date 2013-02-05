@@ -328,6 +328,31 @@ class UserModule implements iModule
         //print_r($result);     
         return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }
+    
+    /** 
+     * Génére le nom pour la tâche de déconnection d'un utilisateur
+     * 
+     * @param type $uid Nom d'utilisateur
+     * @return Nom de la tâche système
+     */
+    public static function disconnectTaskName($uid){ 
+        global $app;
+        return "wfwUserConnectionExpire_".$uid;
+    }
+
+    /** 
+     * Génére la commande pour la tâche de déconnection d'un utilisateur
+     * 
+     * @param type $uid Nom d'utilisateur
+     * @return Commande de la tâche système
+     */
+    public static function disconnectTaskCmd($uid){
+        global $app;
+        if(defined("WINDOWS"))
+            return '"'.$app->getRootPath().'/sh/disconnect_task.bat" "'.$uid.'" > NUL';
+        //UNIX
+        return '"'.$app->getRootPath().'/sh/disconnect_task.sh" "'.$uid.'" > NUL';
+    }
 }
 
 ?>
