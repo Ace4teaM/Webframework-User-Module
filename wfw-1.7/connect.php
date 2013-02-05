@@ -6,7 +6,6 @@
  */
 
 require_once("inc/globals.php");
-require_once("php/system/windows/schtasks.php");
 global $app;
 
 //entree
@@ -37,12 +36,14 @@ if(cInputFields::checkArray($required_fields))
         //définit le cookie
         setcookie("wfw_user_cid",$result->getAtt("CONNECTION_ID"));
         //initialise la tache de fermeture
-        if($life_time > 0){
+        $taskMgr=NULL;
+        $app->getTaskMgr($taskMgr);
+        if($taskMgr !== null && $life_time > 0){
             $taskName = UserModule::disconnectTaskName($_REQUEST["uid"]);
             $taskCmd  = UserModule::disconnectTaskCmd($_REQUEST["uid"]);
             $expire   = new DateTime();
             $expire->add(new DateInterval('P0Y0DT0H'.$life_time.'M'));
-            if(!cSchTasksMgr::create($taskName,$expire,$taskCmd))
+            if(!$taskMgr->create($taskName,$expire,$taskCmd))
                  goto failed;
         }
     }

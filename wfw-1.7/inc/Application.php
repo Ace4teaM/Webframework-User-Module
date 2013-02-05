@@ -22,6 +22,12 @@ class Application /*extends cApplication*/{
      */
     public $db;
     
+    /** 
+     * @brief Pointeur sur le gestionnaire de tache
+     * @var iTaskMgr
+     */
+    public $task;
+    
     function Application($root_path){
         $this->root_path = $root_path;
         $this->template_attributes = array();
@@ -50,8 +56,30 @@ class Application /*extends cApplication*/{
         // initialise la base de données à null
         //( la fonction getDB initialise la connexion si besoin )
         $this->db = null;
+        
+        // initialise le gestionnaire de tache
+        //( la fonction getTaskMgr initialise l'instance si besoin )
+        $this->task = null;
     }
 
+    /**
+     * @brief Obtient le gestionnaire de tache par défaut
+     * @return Résultat de la procédure
+     * @retval true La fonction à réussit, $iface contient un pointeur vers une interface iTaskMgr initialisée
+     * @retval false La fonction à échouée, voir cResult::getLast() pour plus d'informations
+     */
+    function getTaskMgr(&$iface)
+    {
+        //initialise
+        if($this->task===NULL){
+            $className = $this->getCfgValue(constant("SYSTEM"), "taskmgr_class");
+            $this->task = new $className();
+        }
+        //ok, retourne l'interface
+        $iface = $this->task;
+        return RESULT_OK();
+    }
+    
     /**
      * @brief Obtient la connexion à la base de données par défaut
      * @return Résultat de la procédure

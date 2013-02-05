@@ -6,7 +6,6 @@
  */
 
 require_once("inc/globals.php");
-require_once("php/system/windows/schtasks.php");
 global $app;
 
 //entree
@@ -26,14 +25,18 @@ if(cInputFields::checkArray($required_fields))
     $result = cResult::getLast();
 
     //actualise la tache de fermeture
-    $expire  = new DateTime();
-    $expire->setTimestamp(intval($result->getAtt("EXPIRE")));
-    $current = new DateTime();
-    if($expire->getTimestamp() > $current->getTimestamp()){
-        $taskName = UserModule::disconnectTaskName($result->getAtt("UID"));
-        $taskCmd  = UserModule::disconnectTaskCmd($result->getAtt("UID"));
-        if(!cSchTasksMgr::create($taskName,$expire,$taskCmd))
-             goto failed;
+    $taskMgr=NULL;
+    $app->getTaskMgr($taskMgr);
+    if($taskMgr!==NULL){
+        $expire  = new DateTime();
+        $expire->setTimestamp(intval($result->getAtt("EXPIRE")));
+        $current = new DateTime();
+        if($expire->getTimestamp() > $current->getTimestamp()){
+            $taskName = UserModule::disconnectTaskName($result->getAtt("UID"));
+            $taskCmd  = UserModule::disconnectTaskCmd($result->getAtt("UID"));
+            if(!$taskMgr->create($taskName,$expire,$taskCmd))
+                 goto failed;
+        }
     }
 
     goto success;
