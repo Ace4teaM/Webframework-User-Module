@@ -124,8 +124,8 @@ class UserModule implements iModule
     /** 
      * Traduit un nom d'attribut
      * 
-     * @param type $name Nom de l'attribut
-     * @return Texte de remplacement. Si le nom d'attribut est incnnue, l'identifiant est retourné
+     * @param string $name Nom de l'attribut
+     * @return Texte de remplacement. Si le nom d'attribut est inconnu, l'identifiant est retourné
      */
     public static function translateAttributeName($name){ 
         switch($name){
@@ -141,6 +141,32 @@ class UserModule implements iModule
                 return "Durée de connexion";
         }
         return $name;
+    }
+    
+    /** 
+     * Traduit un message d'erreur
+     * 
+     * @param string $error Code de l'erreur
+     * @return Texte de remplacement. Si le nom d'attribut est inconnu, l'identifiant est retourné
+     */
+    public static function translateErrorCode($error){ 
+        switch($error){
+            case "USER_CREATED":                    return "L’Utilisateur est créé";
+            case "USER_DELETED":                    return "L’Utilisateur est supprimé";
+            case "USER_REGISTRED":                  return "L’Utilisateur est inscrit";
+            case "USER_DISCONNECTED":               return "L’Utilisateur est déconnecté";
+
+            case "USER_EXISTS":                     return "L’Utilisateur existe déjà";
+            case "USER_INVALID_PWD":                return "Le mot-de-passe est invalide";
+            case "USER_MAIL_EXISTS":                return "L’adresse e-mail existe déjà";
+            case "USER_NAME_EXISTS":                return "Le nom d’utilisateur existe déjà";
+            case "USER_MAIL_REGISTRED":             return "Une inscription en attente existe déjà pour cette adresse e-mail";
+            case "USER_REGISTRATIION_NOT_EXISTS":   return "L’Inscription n’existe pas";
+            case "USER_CONNECTION_NOT_EXISTS":      return "La connexion n’existe pas";
+            case "USER_CONNECTION_IP_REFUSED":      return "L’Adresse IP ne correspond pas";
+            case "USER_CONNECTION_EXPIRED":         return "La connexion à expirée";
+        }
+        return $error;
     }
     
     /** 

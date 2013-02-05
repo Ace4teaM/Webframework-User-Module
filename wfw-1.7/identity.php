@@ -14,6 +14,9 @@ $accountFields = array(
     "sex"=>""
 );
 
+//résultat de la requete
+$result = NULL;
+
 // exemples JS
 if(cInputFields::checkArray($accountFields))
 {
@@ -22,8 +25,11 @@ if(cInputFields::checkArray($accountFields))
  
     //obtient le compte utilisateur
     if(!UserModule::makeIdentity($_REQUEST["user_id"], $_REQUEST["first_name"], $_REQUEST["last_name"], $_REQUEST["birth_day"], $_REQUEST["sex"]))
-            $app->processLastError();
-    
+            goto failed;
+
+    //retourne le resultat de cette fonction
+    $result = cResult::getLast();
+      
     //obtient/initialise l'identité
  /*   $identity = NULL;
     if(!UserIdentityMgr::getByRelation($identity,$account)){
@@ -47,12 +53,49 @@ if(cInputFields::checkArray($accountFields))
     if(!UserIdentityMgr::update($identity))
         $app->processLastError();*/
     
+    goto success;  
 }
 
+failed:
+// redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();
-$att = array("error_code"=>$result->code, "error_str"=>$result->info);
 
-// accueil
-$app->showXMLView("view/user/pages/identity.html",$att);
+
+success:
+// Ajoute le résultat aux attributs du template
+$att = $result->toArray();
+
+//traduit le nom du champ
+if(isset($att["field_name"]))
+    $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
+
+//traduit le code de résultat
+if(isset($att["error"]))
+    $att["error"] = UserModule::translateErrorCode($att["error"]);
+
+// Ajoute les arguments reçues en entrée au template
+$att = array_merge($att,$_REQUEST);
+
+/* Génére la sortie */
+$format = "html";
+if(cInputFields::checkArray(array("output"=>"cInputIdentifier")))
+    $format = $_REQUEST["output"] ;
+
+switch($format){
+    case "xarg":
+        header("content-type: text/xarg");
+        echo xarg_encode_array($att);
+        break;
+    case "html":
+        echo $app->makeXMLView("view/user/pages/identity.html",$att);
+        break;
+    default:
+        RESULT(cResult::Failed,Application::UnsuportedFeature);
+        $app->processLastError();
+        break;
+}
+
+// ok
+exit($result->isOk() ? 0 : 1);
 
 ?>

@@ -15,44 +15,65 @@ $accountFields = array(
     "mail"=>"cInputMail"
 );
 
+//résultat de la requete
+$result = NULL;
+
 // exemples JS
 if(cInputFields::checkArray($accountFields))
 {
     //crée le compte utilisateur
-    $result = UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],NULL,$_REQUEST["mail"]);
-    //if(false === $result)
-    //    $app->processLastError();
+    if(!UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],NULL,$_REQUEST["mail"]))
+            goto failed;
+ 
+    //retourne le resultat de cette fonction
+    $result = cResult::getLast();
     
     //ok
     //header("Location: user_account_activation.php");
+    goto success;
 }
 
-/* Ajoute le résultat aux champs du template */
+failed:
+// redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();
-$att = cResult::getLast()->toArray();
-//traduit le nom du champs
+
+
+success:
+// Ajoute le résultat aux attributs du template
+$att = $result->toArray();
+
+//traduit le nom du champ
 if(isset($att["field_name"]))
     $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
 
+//traduit le code de résultat
+if(isset($att["error"]))
+    $att["error"] = UserModule::translateErrorCode($att["error"]);
 
-/* Ajoute les arguments reçues en entrée au template */
+// Ajoute les arguments reçues en entrée au template
 $att = array_merge($att,$_REQUEST);
 
 /* Génére la sortie */
-if(cInputFields::checkArray(array("output"=>"cInputIdentifier"))){
-    switch($_REQUEST["output"]){
-        case "xarg":
-            header("content-type: text/xarg");
-            echo xarg_encode_array($att);
-            exit;
-        case "html":
-        default:
-            $app->showXMLView("view/user/pages/create.html",$att);
-            break;
-    }
+$format = "html";
+if(cInputFields::checkArray(array("output"=>"cInputIdentifier")))
+    $format = $_REQUEST["output"] ;
+
+switch($format){
+    case "xarg":
+        header("content-type: text/xarg");
+        echo xarg_encode_array($att);
+        break;
+    case "html":
+        echo $app->makeXMLView("view/user/pages/create.html",$att);
+        break;
+    default:
+        RESULT(cResult::Failed,Application::UnsuportedFeature);
+        $app->processLastError();
+        break;
 }
 
-// accueil
-$app->showXMLView("view/user/pages/create.html",$att);
+
+// ok
+exit($result->isOk() ? 0 : 1);
 
 ?>
