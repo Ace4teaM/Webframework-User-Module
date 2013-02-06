@@ -484,19 +484,21 @@ $$ LANGUAGE plpgsql;
     Parametres:
       p_b_session : Si true, termine toutes les sessions
   */
-CREATE OR REPLACE FUNCTION user_disconnect_all(
-       p_b_session in boolean/* default true*/
-       )
-RETURNS VOID
+CREATE OR REPLACE FUNCTION user_disconnect_all()
+RETURNS RESULT
 AS $$
-  BEGIN
+DECLARE
+    v_result RESULT;
+BEGIN
     /* supprime toutes les connexions */
     delete from user_connection;
-    /* supprime toutes les sessions */
-    if p_b_session = true then
-      delete from user_session;
-    end if;
-  END;
+    /* supprime toutes les sessions automatiques */
+    delete from user_session where user_session_id like(get_global('AUTO_SESSION_PREFIX',NULL)||'%');
+
+    -- ok
+    select 'ERR_OK', 'USER_DISCONNECTED' into v_result;
+    return v_result;
+END;
 $$ LANGUAGE plpgsql;
   
   
@@ -553,14 +555,13 @@ $$ LANGUAGE plpgsql;
   
   
   /*
-    Termine une connexion
+    Termine la connexion d'un utilisateur
     Parametres:
       p_user_id    : Identifiant de l'utilisateur
-      p_client_ip  : IP de connexion
     Remarques:
-      Si la user_session est de type automatique et non utilisée, elle sera detruite.
+      Si la session est de type automatique et non utilisée, elle sera detruite.
   */
-CREATE OR REPLACE FUNCTION user_disconnect(
+CREATE OR REPLACE FUNCTION user_disconnect_account(
        p_user_id    user_account.user_account_id%type
        )
     returns RESULT
@@ -580,6 +581,33 @@ DECLARE
 
     -- supprime la connexion
     delete from user_connection where user_account_id = v_conn.user_account_id;
+
+    -- les sessions automatiques seront supprimées par le trigger 'on_disconnect_user'
+    -- delete from user_session where user_session_id like(get_global('CLIENT_SESSION_PREFIX')||p_user_id);
+
+    -- ok
+    select 'ERR_OK', 'USER_DISCONNECTED' into v_result;
+    return v_result;
+  END;
+$$ LANGUAGE plpgsql;
+  
+  /*
+    Termine une connexion
+    Parametres:
+      p_connection_id    : Identifiant de connexion
+    Remarques:
+      Si la session est de type automatique et non utilisée, elle sera detruite.
+  */
+CREATE OR REPLACE FUNCTION user_disconnect(
+       p_connection_id    user_connection.user_connection_id%type
+       )
+    returns RESULT
+AS $$
+DECLARE
+    v_result RESULT;
+  BEGIN
+    -- supprime la connexion
+    delete from user_connection where user_connection_id = p_connection_id;
 
     -- les sessions automatiques seront supprimées par le trigger 'on_disconnect_user'
     -- delete from user_session where user_session_id like(get_global('CLIENT_SESSION_PREFIX')||p_user_id);

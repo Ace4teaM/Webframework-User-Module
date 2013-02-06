@@ -222,7 +222,37 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
+        $result = $db->call($app->getCfgValue("database","schema"), "user_disconnect_account", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
+    }
+    
+    /** 
+     * Deconnect une connexion
+     */
+    public static function disconnect($cid){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
         $result = $db->call($app->getCfgValue("database","schema"), "user_disconnect", func_get_args());
+        //return $result;
+        return RESULT($result[0], $result[1], stra_to_array($result[2]));
+    }
+    
+    /** 
+     * Deconnect un utilisateur
+     */
+    public static function disconnectAll(){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        $result = $db->call($app->getCfgValue("database","schema"), "user_disconnect_all", func_get_args());
         //return $result;
         return RESULT($result[0], $result[1], stra_to_array($result[2]));
     }

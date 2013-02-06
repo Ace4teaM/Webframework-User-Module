@@ -1,6 +1,11 @@
 <?php
 /*
- * Formulaire d'identité
+ * Renseigne l'identité d'un utilisateur
+ * Rôle : Utilisateur
+ * UC   : user_identity
+ * 
+ * Projet Webframework (GNU): Module Utilisateur
+ * Auteur: Thomas Auguey
  */
 
 require_once("inc/globals.php");

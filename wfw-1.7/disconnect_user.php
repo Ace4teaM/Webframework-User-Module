@@ -2,7 +2,10 @@
 /*
  * Déconnect un utilisateur
  * Rôle : Administrateur
- * UC   : user_delete_account
+ * UC   : user_disconnect_account
+ * 
+ * Projet Webframework (GNU): Module Utilisateur
+ * Auteur: Thomas Auguey
  */
 
 require_once("inc/globals.php");

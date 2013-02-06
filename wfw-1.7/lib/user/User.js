@@ -7,8 +7,6 @@
         dev@aceteam.org
     ---------------------------------------------------------------------------------------------------------------------------------------
 
-    [16-10-2012] Formulaires HTML
-
     JS  Dependences: base.js
     YUI Dependences: base, wfw, wfw-request, wfw-uri, wfw-navigator, wfw-style, wfw-xarg, wfw-document
 
@@ -25,32 +23,50 @@ YUI.add('wfw-user', function (Y) {
         pwd         : null, // mot-de-passe (si connexion automatique)
         expireTimeoutId : null, // id setTimeout fonction
         
-        //public events
+        //-------------------------------------------------------------
+        // public events
+        //-------------------------------------------------------------
+        
+        /**
+         *   @brief Callback appelé lors d'un changement d'état de la connexion
+         *   @param string status Un des codes de résultat retourné par le cas d'utilisation 'user_check_connection'
+        */
         onConnectionStatusChange: function(status){},
         
-        //private event
+        //-------------------------------------------------------------
+        // private events
+        //-------------------------------------------------------------
+        
+        /**
+         *   @brief Callback appelé lors de l'expiration (estimé) de la connexion
+         *   @param string status Un des codes de résultat retourné par le cas d'utilisation 'user_check_connection'
+        */
         onConnectionExpireDate: function(status){
             wfw.User.expireTimeoutId = null;
             wfw.User.checkConnection();
         },
+        
+        //-------------------------------------------------------------
+        // methodes
+        //-------------------------------------------------------------
         
         /**
          *   @brief Initialise le module
         */
         init: function() {
             wfw.puts("User: init");
-            this.uid = Y.Cookie.get("wfw_user_uid");
-            this.cid = Y.Cookie.get("wfw_user_cid");
-            this.pwd = Y.Cookie.get("wfw_user_pwd");
+            this.uid = Y.Cookie.get("uid");
+            this.cid = Y.Cookie.get("cid");
+            this.pwd = Y.Cookie.get("pwd");
         },
 
         /**
-         *   @brief Initialise le module
+         *   @brief Vérifie et maintient l'état de la connexion
         */
         checkConnection: function() {
-            this.uid = Y.Cookie.get("wfw_user_uid");
-            this.cid = Y.Cookie.get("wfw_user_cid");
-            this.pwd = Y.Cookie.get("wfw_user_pwd");
+            this.uid = Y.Cookie.get("uid");
+            this.cid = Y.Cookie.get("cid");
+            this.pwd = Y.Cookie.get("pwd");
 
             var checkReq = null; // 
             
@@ -99,9 +115,10 @@ YUI.add('wfw-user', function (Y) {
                                 }
                             },
                             onfailed: function (obj, args) {
-                                wfw.puts("wfw.User.checkConnection: onfailed = "+args.error);
+                                wfw.puts("wfw.User.checkConnection: "+args.result+" = "+args.error);
                                 wfw.User.onConnectionStatusChange(args.error);
                                 wfw.User.cid = null; // pas la peine d'essayer de nouveau
+                                Y.Cookie.remove("cid"); // supprime le cookie obselete
                             },
                             continue_if_failed: false,
                             no_msg: true,
@@ -123,11 +140,10 @@ YUI.add('wfw-user', function (Y) {
          *   @brief Enregistre les informations de connexion
          *   @param string  user_name      Nom de l'utilisateur
          *   @param string  connection_id  Token de connection
-         *   @return bool Succès de la fonction
         */
         regSession: function(user_name, connection_id) {
-            this.uid = Y.Cookie.set("wfw_user_uid",user_name);
-            this.cid = Y.Cookie.set("wfw_user_cid",connection_id);
+            this.uid = Y.Cookie.set("uid",user_name);
+            this.cid = Y.Cookie.set("cid",connection_id);
             wfw.puts("uid="+this.uid);
             wfw.puts("cid="+this.cid);
         }

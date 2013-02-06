@@ -3,6 +3,9 @@
  * Connexion d'un utilisateur
  * Rôle : Visiteur
  * UC   : user_connect
+ * 
+ * Projet Webframework (GNU): Module Utilisateur
+ * Auteur: Thomas Auguey
  */
 
 require_once("inc/globals.php");
@@ -32,9 +35,9 @@ if(cInputFields::checkArray($required_fields))
     if(UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"])){
         //retourne le resultat de cette fonction
         $result = cResult::getLast();
-        //setcookie("wfw_user_uid",$_REQUEST["uid"]);
+        //setcookie("uid",$_REQUEST["uid"]);
         //définit le cookie
-        setcookie("wfw_user_cid",$result->getAtt("CONNECTION_ID"));
+        setcookie("cid",$result->getAtt("CONNECTION_ID"));
         //initialise la tache de fermeture
         $taskMgr=NULL;
         $app->getTaskMgr($taskMgr);

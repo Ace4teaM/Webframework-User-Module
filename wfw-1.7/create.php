@@ -3,6 +3,9 @@
  * Crée un compte utilisateur
  * Rôle : Administrateur
  * UC   : user_create_account
+ * 
+ * Projet Webframework (GNU): Module Utilisateur
+ * Auteur: Thomas Auguey
  */
 
 require_once("inc/globals.php");

@@ -1,8 +1,8 @@
 <?php
 /*
- * Maintient la connexion d'un utilisateur
+ * Déconnecte l'utilisateur en cours
  * Rôle : Utilisateur
- * UC   : user_check_connection
+ * UC   : user_disconnect
  * 
  * Projet Webframework (GNU): Module Utilisateur
  * Auteur: Thomas Auguey
@@ -12,7 +12,7 @@ require_once("inc/globals.php");
 global $app;
 
 //entree
-$required_fields = array(
+$fields = array(
     "cid"=>"cInputName"
 );
 
@@ -20,27 +20,17 @@ $required_fields = array(
 $result = NULL;
 
 // exemples JS
-if(cInputFields::checkArray($required_fields))
+if(cInputFields::checkArray($fields,NULL,$_COOKIE))
 {
-    if(!UserModule::checkConnection($_REQUEST["cid"],$_SERVER["REMOTE_ADDR"]))
+    //supprime le compte utilisateur
+    if(!UserModule::disconnect($_COOKIE["cid"]))
         goto failed;
+    
     //retourne le resultat de cette fonction
     $result = cResult::getLast();
-
-    //actualise la tache de fermeture
-    $taskMgr=NULL;
-    $app->getTaskMgr($taskMgr);
-    if($taskMgr!==NULL){
-        $expire  = new DateTime();
-        $expire->setTimestamp(intval($result->getAtt("EXPIRE")));
-        $current = new DateTime();
-        if($expire->getTimestamp() > $current->getTimestamp()){
-            $taskName = UserModule::disconnectTaskName($result->getAtt("UID"));
-            $taskCmd  = UserModule::disconnectTaskCmd($result->getAtt("UID"));
-            if(!$taskMgr->create($taskName,$expire,$taskCmd))
-                 goto failed;
-        }
-    }
+    
+    //supprime le cookie
+    setcookie("cid",NULL,time()-1);
 
     goto success;
 }
@@ -48,7 +38,6 @@ if(cInputFields::checkArray($required_fields))
 failed:
 // redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();
-
 
 success:
 
@@ -73,14 +62,13 @@ switch($format){
         echo xarg_encode_array($att);
         break;
     case "html":
-        echo $app->makeXMLView("view/user/pages/check.html",$att);
+        echo $app->makeXMLView("view/user/pages/disconnect.html",$att);
         break;
     default:
         RESULT(cResult::Failed,Application::UnsuportedFeature);
         $app->processLastError();
         break;
 }
-
 
 // ok
 exit($result->isOk() ? 0 : 1);

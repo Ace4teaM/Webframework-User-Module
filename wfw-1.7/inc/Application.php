@@ -277,11 +277,11 @@ class Application /*extends cApplication*/{
         $default = new cXMLDefault();
         if($default->Initialise("default.xml")){
 
-            $att["result"]  = $default->getResultText("codes",$result->code);
-            $att["error"]   = $default->getResultText("errors",$result->info);
+            $att["txt_result"]  = $default->getResultText("codes",$result->code);
+            $att["txt_error"]   = $default->getResultText("errors",$result->info);
             if(isset($att["message"])){
-                $att["message"] = $default->getResultText("messages",$att["message"]);
-                $att["message"] = cHTMLTemplate::transform($att["message"], $att);
+                $att["txt_message"] = $default->getResultText("messages",$att["message"]);
+                $att["txt_message"] = cHTMLTemplate::transform($att["txt_message"], $att);
             }
         }
         

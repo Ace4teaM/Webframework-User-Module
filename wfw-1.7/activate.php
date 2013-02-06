@@ -1,6 +1,11 @@
 <?php
 /*
- * Formulaire d'inscription
+ * Active un compte utilisateur
+ * Rôle : Visiteur
+ * UC   : user_activate_account
+ * 
+ * Projet Webframework (GNU): Module Utilisateur
+ * Auteur: Thomas Auguey
  */
 
 require_once("inc/globals.php");
