@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{8D93700A-2D93-4DAE-B2F9-94542D8970E7}" Label="" LastModificationDate="1360047627" Name="user" Objects="61" Symbols="11" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" signature="LDM_DATA_MODEL_XML" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{8D93700A-2D93-4DAE-B2F9-94542D8970E7}" Label="" LastModificationDate="1360048515" Name="user" Objects="61" Symbols="11" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" signature="LDM_DATA_MODEL_XML" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,7 +12,7 @@
 <a:Code>USER</a:Code>
 <a:CreationDate>1341742454</a:CreationDate>
 <a:Creator>ACER 7740</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {6FB9F148-AD47-4AAF-B43F-CD8A5C444AD7}
 DAT 1343250705
@@ -750,9 +750,9 @@ PreserveMode=No</a:ModelOptionsText>
 <a:ObjectID>769DFF77-E7F4-43B2-8864-CA8943E0FF39</a:ObjectID>
 <a:Name>user</a:Name>
 <a:Code>USER</a:Code>
-<a:CreationDate>1360047627</a:CreationDate>
+<a:CreationDate>1360048515</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047627</a:ModificationDate>
+<a:ModificationDate>1360048515</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:TargetStereotype/>
 <a:TargetID>6FB9F148-AD47-4AAF-B43F-CD8A5C444AD7</a:TargetID>
@@ -761,15 +761,15 @@ PreserveMode=No</a:ModelOptionsText>
 </c:GenerationOrigins>
 <c:LogicalDiagrams>
 <o:LogicalDiagram Id="o5">
-<a:ObjectID>17E635E6-AFD0-44F4-8E65-B8F380B48245</a:ObjectID>
+<a:ObjectID>784A12C1-2E7D-49B4-950B-B461DCEDA7EF</a:ObjectID>
 <a:Name>user</a:Name>
 <a:Code>USER</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {EB930B1C-895A-430E-AEF1-3023AA6DACEB}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DisplayPreferences>[DisplayPreferences]
 
 [DisplayPreferences\LDM]
@@ -1268,7 +1268,7 @@ NAMA 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:RelationshipSymbol>
 <o:RelationshipSymbol Id="o10">
-<a:Rect>((-37562,17061), (-1439,19107))</a:Rect>
+<a:Rect>((-37562,16599), (-1439,19124))</a:Rect>
 <a:ListOfPoints>((-1439,17861),(-37562,17861))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4881</a:ArrowStyle>
@@ -1325,8 +1325,8 @@ NAMA 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:RelationshipSymbol>
 <o:TitleSymbol Id="o19">
-<a:CreationDate>1360047626</a:CreationDate>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:CreationDate>1360048514</a:CreationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Rect>((-16462,28543), (16238,36641))</a:Rect>
 <a:TextStyle>4130</a:TextStyle>
 <a:AutoAdjustToText>0</a:AutoAdjustToText>
@@ -1474,30 +1474,30 @@ Identifiers 0 Arial,8,N</a:FontList>
 </c:DefaultDiagram>
 <c:Entities>
 <o:Entity Id="o20">
-<a:ObjectID>450F3C5A-ECB1-40F4-8F4D-16A58A665470</a:ObjectID>
+<a:ObjectID>3852BEFB-273C-4F0F-BD94-56B9D187648E</a:ObjectID>
 <a:Name>user_account</a:Name>
 <a:Code>USER_ACCOUNT</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {850764B6-BF67-4C2C-B228-4B377AC1FF18}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Description>{\rtf1\ansi\ansicpg1252\deff0\deflang1036{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}}
 {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\f0\fs20 Table stockant les comptes utilisateur actifs\fs20\par
 }
 </a:Description>
 <c:Identifiers>
 <o:Identifier Id="o27">
-<a:ObjectID>F109DB64-6C79-4ABC-9F2E-B63DD376D9EF</a:ObjectID>
+<a:ObjectID>FD744A76-BDB4-463B-BFE9-D92A54E2CF6A</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>IDENTIFIANT_1</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {AE3AB293-D750-410A-A924-2873615D6636}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifier.Attributes>
 <o:EntityAttribute Ref="o28"/>
 </c:Identifier.Attributes>
@@ -1508,69 +1508,69 @@ DAT 1360047626</a:History>
 </c:PrimaryIdentifier>
 <c:Attributes>
 <o:EntityAttribute Id="o28">
-<a:ObjectID>8E6961E5-9E19-45BA-BFAF-8E3849E8FA8E</a:ObjectID>
+<a:ObjectID>CD4892C4-61BC-4B9A-A8D1-0EA41A40E3BF</a:ObjectID>
 <a:Name>user_account id</a:Name>
 <a:Code>USER_ACCOUNT_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {09320BEC-C594-412C-BD94-7F30628B0903}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Format>[0-9]</a:Format>
 <a:DataType>VA64</a:DataType>
 <a:Length>64</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o29">
-<a:ObjectID>4730790C-2A4D-43E8-ACF6-62A2C9F0E4A8</a:ObjectID>
+<a:ObjectID>E68E239A-B5CF-4DE5-90CD-CFFBC4C6ED02</a:ObjectID>
 <a:Name>user_identity id</a:Name>
 <a:Code>USER_IDENTITY_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {0EF4255E-5255-4A87-B2D4-C03C3CC48B82},{9D9C7942-6898-4E47-90F7-90FA0D7AB922}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>I</a:DataType>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o30">
-<a:ObjectID>D74D8E36-F223-4111-908E-A4E742D14042</a:ObjectID>
+<a:ObjectID>3EA62EF1-52A1-4F9E-8681-B95EE961B06B</a:ObjectID>
 <a:Name>client id</a:Name>
 <a:Code>CLIENT_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {D7486BFB-0428-412B-9F5F-9FFF09AE0E49}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA64</a:DataType>
 <a:Length>64</a:Length>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o31">
-<a:ObjectID>DBAE43AB-94A3-4630-8E3B-258D2454AE7F</a:ObjectID>
+<a:ObjectID>3C0CA726-9DDB-42AD-BD33-8F81AED97F5D</a:ObjectID>
 <a:Name>user mail</a:Name>
 <a:Code>USER_MAIL</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {60407143-012D-4757-855C-3A51CCB90448}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA80</a:DataType>
 <a:Length>80</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o32">
-<a:ObjectID>566C53B0-48F8-4FD1-A42D-9C40E5A2E125</a:ObjectID>
+<a:ObjectID>AF7C9B9F-3CEB-4047-BE0B-5A95747B14BB</a:ObjectID>
 <a:Name>user pwd</a:Name>
 <a:Code>USER_PWD</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {B4ED7D17-4760-4C8A-AD8B-507884964C4E}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA64</a:DataType>
 <a:Length>64</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
@@ -1578,26 +1578,26 @@ DAT 1360047626</a:History>
 </c:Attributes>
 </o:Entity>
 <o:Entity Id="o21">
-<a:ObjectID>789B0E3F-F242-4BF4-B97A-AAE076E7D635</a:ObjectID>
+<a:ObjectID>97E58F5F-B45B-4F77-917C-DB9A0BF06A67</a:ObjectID>
 <a:Name>user_identity</a:Name>
 <a:Code>USER_IDENTITY</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {A8F7C79B-AD91-4682-A387-0A7AED91187A}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifiers>
 <o:Identifier Id="o33">
-<a:ObjectID>A56C3C03-DF72-4F25-B2F6-EE8008E312F1</a:ObjectID>
+<a:ObjectID>28F48494-7D09-4555-9BBD-7B064A873206</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>IDENTIFIANT_1</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {0B32BE94-5BD3-41D0-B34D-B44ACC92F286}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifier.Attributes>
 <o:EntityAttribute Ref="o34"/>
 </c:Identifier.Attributes>
@@ -1608,81 +1608,81 @@ DAT 1360047626</a:History>
 </c:PrimaryIdentifier>
 <c:Attributes>
 <o:EntityAttribute Id="o34">
-<a:ObjectID>43CDA0F8-2E15-4047-B3D2-D87ACFC67BCF</a:ObjectID>
+<a:ObjectID>F9A596DD-991B-42D2-905B-8720783D3D43</a:ObjectID>
 <a:Name>user_identity id</a:Name>
 <a:Code>USER_IDENTITY_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {0EF4255E-5255-4A87-B2D4-C03C3CC48B82}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>I</a:DataType>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o35">
-<a:ObjectID>789FFB80-8F0F-4D14-9C90-9B76008A22E8</a:ObjectID>
+<a:ObjectID>8CE9F828-C915-49E3-A5A3-2A7B30D8B448</a:ObjectID>
 <a:Name>user_address id</a:Name>
 <a:Code>USER_ADDRESS_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {B91B7720-0706-4A87-AE70-535CFCBF169F},{2CDDE715-F2AA-47B9-B743-96267656BAFF}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>I</a:DataType>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o36">
-<a:ObjectID>84B47AAE-7D2D-4BC6-AE8F-E56CA687B38A</a:ObjectID>
+<a:ObjectID>7DC46A13-8F74-41B8-93FA-42BADEE0B4C8</a:ObjectID>
 <a:Name>first name</a:Name>
 <a:Code>FIRST_NAME</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {3F646579-BFAB-4026-8ACD-E07781C865B0}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA80</a:DataType>
 <a:Length>80</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o37">
-<a:ObjectID>93F043DB-A806-447A-B223-AC555D7EE988</a:ObjectID>
+<a:ObjectID>3B69E237-2E4D-4694-AE85-61BB047D0EAE</a:ObjectID>
 <a:Name>last name</a:Name>
 <a:Code>LAST_NAME</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {3AB65871-1F5E-4D3E-85E0-A757342B285F}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA80</a:DataType>
 <a:Length>80</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o38">
-<a:ObjectID>B217C34F-F59A-4B83-9C14-E230CC0A70CF</a:ObjectID>
+<a:ObjectID>C230C36C-195F-47E6-ACF3-E906A9658D40</a:ObjectID>
 <a:Name>birth day</a:Name>
 <a:Code>BIRTH_DAY</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {9655AAE9-8DD0-4F43-9D4C-3C84E3DD6C61}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>D</a:DataType>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o39">
-<a:ObjectID>B0CBC0D8-85B1-4088-AAA7-140E7E60436E</a:ObjectID>
+<a:ObjectID>B7B2D93B-CFA6-4BE2-A95E-F8CD4E4483F2</a:ObjectID>
 <a:Name>sex</a:Name>
 <a:Code>SEX</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {8031E403-85FD-4241-9D8F-84B7138E925B}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:ListOfValues>M	Homme
 F	Femme</a:ListOfValues>
 <a:DataType>A1</a:DataType>
@@ -1695,26 +1695,26 @@ F	Femme</a:ListOfValues>
 </c:Attributes>
 </o:Entity>
 <o:Entity Id="o22">
-<a:ObjectID>7271B247-9E0D-4B7F-8288-A47C321B12D3</a:ObjectID>
+<a:ObjectID>C906B512-272F-486B-9B7F-9915D2AC1D38</a:ObjectID>
 <a:Name>user_address</a:Name>
 <a:Code>USER_ADDRESS</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {06B2B495-11BA-46FD-BE03-6F3F0A96E082}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifiers>
 <o:Identifier Id="o41">
-<a:ObjectID>94A3023A-3D75-477B-9CF7-7D9E5A29ABC2</a:ObjectID>
+<a:ObjectID>D2077942-3EF5-4035-9ED2-FBF6E3064DC4</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>IDENTIFIANT_1</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {B329CF0E-9A5D-442F-B514-9B4DF6FCA6EB}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifier.Attributes>
 <o:EntityAttribute Ref="o42"/>
 </c:Identifier.Attributes>
@@ -1725,98 +1725,98 @@ DAT 1360047626</a:History>
 </c:PrimaryIdentifier>
 <c:Attributes>
 <o:EntityAttribute Id="o42">
-<a:ObjectID>86680C3C-296A-4264-904C-8319EB2A1FE1</a:ObjectID>
+<a:ObjectID>92DEF8B4-5C4D-4431-9E12-61A4F9727331</a:ObjectID>
 <a:Name>user_address id</a:Name>
 <a:Code>USER_ADDRESS_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {B91B7720-0706-4A87-AE70-535CFCBF169F}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>I</a:DataType>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o43">
-<a:ObjectID>8EE713E3-C8E8-4B87-BAAC-13B95B02D079</a:ObjectID>
+<a:ObjectID>06E05526-6C77-4E11-9E0E-3D0956265BE7</a:ObjectID>
 <a:Name>zip code</a:Name>
 <a:Code>ZIP_CODE</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {8CF21D91-0B6F-4FBD-B236-18CBDE5EEA7F}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA10</a:DataType>
 <a:Length>10</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o44">
-<a:ObjectID>CCFC59F1-BCB4-4888-B2F9-CD8F27B05DAD</a:ObjectID>
+<a:ObjectID>BFD44CA5-7142-4A57-9DE2-C35ECF5116CF</a:ObjectID>
 <a:Name>city name</a:Name>
 <a:Code>CITY_NAME</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {9941209B-3CDB-4212-9DBE-427E5FB65C16}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA80</a:DataType>
 <a:Length>80</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o45">
-<a:ObjectID>1F2AE9BF-F3BF-4AD8-9243-8250E056BC1D</a:ObjectID>
+<a:ObjectID>1BEB5FCE-47B6-4A9C-95C9-1B2BEE182A63</a:ObjectID>
 <a:Name>street name</a:Name>
 <a:Code>STREET_NAME</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {B43C3C4C-F86D-4F6F-929E-9BFBBC0DF50B}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA128</a:DataType>
 <a:Length>128</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o46">
-<a:ObjectID>B7004309-D2B4-4992-9B59-133CB0D89FE0</a:ObjectID>
+<a:ObjectID>ED3AB5DC-6891-424B-8FB6-D0393CAA8485</a:ObjectID>
 <a:Name>street number</a:Name>
 <a:Code>STREET_NUMBER</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {5101BBA6-FFE7-438B-BA53-D75CFF57A606}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>N4,0</a:DataType>
 <a:Length>4</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o47">
-<a:ObjectID>E5A8E8A9-2294-4B7F-A343-2D6DDF5301C2</a:ObjectID>
+<a:ObjectID>E3FBF8A6-0FB3-4C9D-B738-A2FE8B9E880A</a:ObjectID>
 <a:Name>country name</a:Name>
 <a:Code>COUNTRY_NAME</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {08B62310-6262-43A0-B040-A63A1B4B9C16}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA80</a:DataType>
 <a:Length>80</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o48">
-<a:ObjectID>7B9262F2-8A7A-4F7C-B7FF-1FC48EE1203E</a:ObjectID>
+<a:ObjectID>C2C17A3E-2D0E-463C-9CF3-218FF7CA14F4</a:ObjectID>
 <a:Name>street prefix</a:Name>
 <a:Code>STREET_PREFIX</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {C7F039AE-8F70-467A-A63E-14F5EF321114}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:ListOfValues>bis	BIS
 ter	TER</a:ListOfValues>
 <a:DataType>VA3</a:DataType>
@@ -1826,54 +1826,54 @@ ter	TER</a:ListOfValues>
 </c:Domain>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o50">
-<a:ObjectID>F68470FF-F27D-4486-86E0-75E2DB3085AB</a:ObjectID>
+<a:ObjectID>9875DBE0-3267-40ED-BCCC-296DB3509076</a:ObjectID>
 <a:Name>building number</a:Name>
 <a:Code>BUILDING_NUMBER</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {3032D9AE-2C21-4A69-A08D-43A73CDE0FC4}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>N4,0</a:DataType>
 <a:Length>4</a:Length>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o51">
-<a:ObjectID>45A3A226-EA19-4BE1-9F77-1FA5C1C718E5</a:ObjectID>
+<a:ObjectID>0C79D773-3BF7-4C14-A98E-C7D54771140A</a:ObjectID>
 <a:Name>apt number</a:Name>
 <a:Code>APT_NUMBER</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {C133D7E7-638B-4D7B-8F51-0CD310A91CB3}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>N4,0</a:DataType>
 <a:Length>4</a:Length>
 </o:EntityAttribute>
 </c:Attributes>
 </o:Entity>
 <o:Entity Id="o23">
-<a:ObjectID>56911CAA-9548-4615-9B54-4F8553E0CAF3</a:ObjectID>
+<a:ObjectID>45CDBD93-D3E7-4C96-8867-A15A1FC3EC9E</a:ObjectID>
 <a:Name>user_session</a:Name>
 <a:Code>USER_SESSION</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {1CEA841A-1644-487B-B5A0-32C3F2533A19}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifiers>
 <o:Identifier Id="o52">
-<a:ObjectID>BC674C4C-786D-447B-B897-111CEE21072F</a:ObjectID>
+<a:ObjectID>804B4DDA-AC2C-442B-A327-6E37465A3E79</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>IDENTIFIANT_1</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {40405E49-BA71-4F3B-A39A-5AEF35F31A8E}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifier.Attributes>
 <o:EntityAttribute Ref="o53"/>
 </c:Identifier.Attributes>
@@ -1884,55 +1884,55 @@ DAT 1360047626</a:History>
 </c:PrimaryIdentifier>
 <c:Attributes>
 <o:EntityAttribute Id="o53">
-<a:ObjectID>7F6DC149-9D3A-41F2-85D0-69970631834A</a:ObjectID>
+<a:ObjectID>C3F0E1D7-32CA-4787-B0AB-6A1917FBBD18</a:ObjectID>
 <a:Name>user_session id</a:Name>
 <a:Code>USER_SESSION_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {1D25CE97-950A-4BF9-A9FA-0C76FE249F3F}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA64</a:DataType>
 <a:Length>64</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o54">
-<a:ObjectID>BC4543E5-DB70-488F-826D-2BA2505C5638</a:ObjectID>
+<a:ObjectID>85DBBA82-93A5-44B6-AC72-D64EC54DBDF2</a:ObjectID>
 <a:Name>local path</a:Name>
 <a:Code>LOCAL_PATH</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {885A794C-02F5-466B-8C8B-FF61A84157B7}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA260</a:DataType>
 <a:Length>260</a:Length>
 </o:EntityAttribute>
 </c:Attributes>
 </o:Entity>
 <o:Entity Id="o24">
-<a:ObjectID>BF754030-1564-4BF5-B850-C01F98058024</a:ObjectID>
+<a:ObjectID>F6BC0B69-2D8C-4E8A-A9AA-D811488158CC</a:ObjectID>
 <a:Name>user_connection</a:Name>
 <a:Code>USER_CONNECTION</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {037C08AC-B757-4230-9896-E5225269958F}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifiers>
 <o:Identifier Id="o55">
-<a:ObjectID>1055FA46-11C8-4D7E-9453-C1D6F7F8BFCA</a:ObjectID>
+<a:ObjectID>DD38D7DA-1F1C-4FB6-A375-3DE311F38DF1</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>IDENTIFIANT_1</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {9F349349-F496-4DF3-A7E1-636DE44F88C7}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifier.Attributes>
 <o:EntityAttribute Ref="o56"/>
 <o:EntityAttribute Ref="o57"/>
@@ -1944,129 +1944,129 @@ DAT 1360047626</a:History>
 </c:PrimaryIdentifier>
 <c:Attributes>
 <o:EntityAttribute Id="o57">
-<a:ObjectID>5CA3C0D9-3355-4E3C-9833-040AF7C13402</a:ObjectID>
+<a:ObjectID>9D180209-880C-44A5-B0E0-E2AC2F449887</a:ObjectID>
 <a:Name>user_connection id</a:Name>
 <a:Code>USER_CONNECTION_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {2DA31B75-6A47-4791-8A5D-33B9E768E682}
-DAT 1360047626</a:History>
-<a:DataType>A16</a:DataType>
-<a:Length>16</a:Length>
+DAT 1360048514</a:History>
+<a:DataType>A22</a:DataType>
+<a:Length>22</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o56">
-<a:ObjectID>0304CE57-9ADF-4506-896C-ECE1E114D405</a:ObjectID>
+<a:ObjectID>EBCBA41A-70F1-4797-82C9-AFC5309FB4CD</a:ObjectID>
 <a:Name>client ip</a:Name>
 <a:Code>CLIENT_IP</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {29620B6C-2F1A-4081-B5AF-9DC0DF34169E}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA15</a:DataType>
 <a:Length>15</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o58">
-<a:ObjectID>D7956B64-7C8B-48F3-AD88-933E88AD51A6</a:ObjectID>
+<a:ObjectID>3D404A94-F098-4A0F-844E-FEED8976D9ED</a:ObjectID>
 <a:Name>user_account id</a:Name>
 <a:Code>USER_ACCOUNT_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {09320BEC-C594-412C-BD94-7F30628B0903},{5E4FC844-95D8-4703-B0C9-D58B705B1BCE}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Format>[0-9]</a:Format>
 <a:DataType>VA64</a:DataType>
 <a:Length>64</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o59">
-<a:ObjectID>86E99DA0-0499-4C38-9689-62E3F2205D41</a:ObjectID>
+<a:ObjectID>3A38E665-3FDE-4130-BBB3-144A677CBCA8</a:ObjectID>
 <a:Name>user_session id</a:Name>
 <a:Code>USER_SESSION_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {1D25CE97-950A-4BF9-A9FA-0C76FE249F3F},{6D60F8AC-7F21-41DC-BCA0-2A7CD3237D76}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA64</a:DataType>
 <a:Length>64</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o60">
-<a:ObjectID>E98ADDE7-3F87-4B70-A2B2-5727CFDF2AD5</a:ObjectID>
+<a:ObjectID>7622C69E-A40B-4C4A-ABF5-1E9A6B5600F4</a:ObjectID>
 <a:Name>last access</a:Name>
 <a:Code>LAST_ACCESS</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {2F77870C-E7F0-470D-B146-32BFFD38B5F6}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DefaultValue>CURRENT_TIMESTAMP</a:DefaultValue>
 <a:DataType>DT</a:DataType>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o61">
-<a:ObjectID>846616C1-C403-47E4-8F91-79DEACEA4799</a:ObjectID>
+<a:ObjectID>338A83B3-D640-4867-9093-172D6355ACAF</a:ObjectID>
 <a:Name>life time</a:Name>
 <a:Code>LIFE_TIME</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {C4E39DCC-15D6-42BA-85DA-9710B80C7C0E}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>I</a:DataType>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o62">
-<a:ObjectID>51CB4FB3-C7DE-4E7F-AA7F-2C27695732BA</a:ObjectID>
+<a:ObjectID>EDA17D12-DB45-4E2B-9D5C-896CDDEE64D0</a:ObjectID>
 <a:Name>link path</a:Name>
 <a:Code>LINK_PATH</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {0468E390-8CC4-4D33-9BD6-94E9F479C1E2}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA260</a:DataType>
 <a:Length>260</a:Length>
 </o:EntityAttribute>
 </c:Attributes>
 </o:Entity>
 <o:Entity Id="o26">
-<a:ObjectID>3C6F1311-8D81-4209-8D53-8D494137FFD2</a:ObjectID>
+<a:ObjectID>3EFDD01C-72CE-49BF-97C7-17E5758C3EE7</a:ObjectID>
 <a:Name>user_registration</a:Name>
 <a:Code>USER_REGISTRATION</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {18121E8B-43C7-47C7-BF76-8707DD6365F5}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Description>{\rtf1\ansi\ansicpg1252\deff0\deflang1036{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}}
 {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\f0\fs20 Table stockant les inscriptions d&#39;utilisateur en attente d&#39;activation\par
 }
 </a:Description>
 <c:Identifiers>
 <o:Identifier Id="o63">
-<a:ObjectID>72F5D76F-7989-422C-828A-C5FDD5BFBE2A</a:ObjectID>
+<a:ObjectID>52C9BB7F-19DC-4C94-B15A-36F0E7849EBB</a:ObjectID>
 <a:Name>Identifiant_1</a:Name>
 <a:Code>IDENTIFIANT_1</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {218A9561-17FF-4836-A634-258D5B87027D}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <c:Identifier.Attributes>
 <o:EntityAttribute Ref="o64"/>
 </c:Identifier.Attributes>
@@ -2077,57 +2077,57 @@ DAT 1360047626</a:History>
 </c:PrimaryIdentifier>
 <c:Attributes>
 <o:EntityAttribute Id="o64">
-<a:ObjectID>8DEAF0F9-4EBB-4878-ABAD-F8AEC498B1F2</a:ObjectID>
+<a:ObjectID>9A77E8E6-6C06-4B1C-A6BA-A9E867546DA6</a:ObjectID>
 <a:Name>user_registration id</a:Name>
 <a:Code>USER_REGISTRATION_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {7906607A-97A8-41CF-A7C1-1B054722A364}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Format>[0-9]</a:Format>
 <a:DataType>I</a:DataType>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o65">
-<a:ObjectID>E605E8A1-A9ED-49FE-BB6F-376BAF09AA03</a:ObjectID>
+<a:ObjectID>05055824-A9FF-4506-99BB-44F3A77720D0</a:ObjectID>
 <a:Name>user token</a:Name>
 <a:Code>USER_TOKEN</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {B291F2FF-FDB3-4771-AF0B-DC4BD3627F54}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA8</a:DataType>
 <a:Length>8</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o66">
-<a:ObjectID>EC6D849C-EB29-4D6F-8E7D-413532847DFC</a:ObjectID>
+<a:ObjectID>E5066F57-4C02-4D3B-950C-592D3BD79610</a:ObjectID>
 <a:Name>user mail</a:Name>
 <a:Code>USER_MAIL</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {F0F2C95F-B935-4C4C-A342-260B2F1F5FC3}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA80</a:DataType>
 <a:Length>80</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
 </o:EntityAttribute>
 <o:EntityAttribute Id="o67">
-<a:ObjectID>0201A348-E226-4D52-AB0A-053C4D4010A0</a:ObjectID>
+<a:ObjectID>B9ADC3E0-966F-4ACF-93E6-4ECBE5132168</a:ObjectID>
 <a:Name>user id</a:Name>
 <a:Code>USER_ID</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {F7F3DDF1-7AE0-4D0C-9BF2-2BE8A25EA993}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:DataType>VA64</a:DataType>
 <a:Length>64</a:Length>
 <a:LogicalAttribute.Mandatory>1</a:LogicalAttribute.Mandatory>
@@ -2137,15 +2137,15 @@ DAT 1360047626</a:History>
 </c:Entities>
 <c:Relationships>
 <o:Relationship Id="o9">
-<a:ObjectID>A2EFF996-2ACE-4539-A0FE-AAE91B77AFE6</a:ObjectID>
+<a:ObjectID>CD330A0D-8E85-447C-99B3-C0063D01F8C4</a:ObjectID>
 <a:Name>ouvrir CIF</a:Name>
 <a:Code>OUVRIR_CIF</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {5E4FC844-95D8-4703-B0C9-D58B705B1BCE}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Entity1ToEntity2RoleCardinality>0,n</a:Entity1ToEntity2RoleCardinality>
 <a:Entity2ToEntity1RoleCardinality>1,1</a:Entity2ToEntity1RoleCardinality>
 <c:Object1>
@@ -2156,10 +2156,10 @@ DAT 1360047626</a:History>
 </c:Object2>
 <c:Joins>
 <o:RelationshipJoin Id="o68">
-<a:ObjectID>EB5895E7-8E40-413A-8BDC-661286298167</a:ObjectID>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:ObjectID>2E7F7097-933C-4AEB-A3DD-2F8345508A02</a:ObjectID>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <c:Object1>
 <o:EntityAttribute Ref="o28"/>
@@ -2174,15 +2174,15 @@ DAT 1360047626</a:History>
 </c:ParentIdentifier>
 </o:Relationship>
 <o:Relationship Id="o12">
-<a:ObjectID>99D4A105-DD3A-48C1-9699-DFE5550D0B90</a:ObjectID>
+<a:ObjectID>3FB2C09E-423B-47B8-A4CA-1A6D9AB08128</a:ObjectID>
 <a:Name>renseigner CIF</a:Name>
 <a:Code>RENSEIGNER_CIF</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {9D9C7942-6898-4E47-90F7-90FA0D7AB922}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Entity1ToEntity2RoleCardinality>0,1</a:Entity1ToEntity2RoleCardinality>
 <a:Entity2ToEntity1RoleCardinality>0,n</a:Entity2ToEntity1RoleCardinality>
 <c:Object1>
@@ -2193,10 +2193,10 @@ DAT 1360047626</a:History>
 </c:Object2>
 <c:Joins>
 <o:RelationshipJoin Id="o69">
-<a:ObjectID>51317101-F38A-4FFF-81BE-C6B67A7C367D</a:ObjectID>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:ObjectID>99CFB088-969B-47D2-9888-806D63EDB5F9</a:ObjectID>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <c:Object1>
 <o:EntityAttribute Ref="o34"/>
@@ -2211,15 +2211,15 @@ DAT 1360047626</a:History>
 </c:ParentIdentifier>
 </o:Relationship>
 <o:Relationship Id="o15">
-<a:ObjectID>9377BBBC-F330-432E-9009-6EC77EFE7CA1</a:ObjectID>
+<a:ObjectID>0C10EE3A-0888-478A-A6AF-910BF1C7DFFC</a:ObjectID>
 <a:Name>posséder CIF</a:Name>
 <a:Code>POSSEDER_CIF</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {2CDDE715-F2AA-47B9-B743-96267656BAFF}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Entity1ToEntity2RoleCardinality>0,1</a:Entity1ToEntity2RoleCardinality>
 <a:Entity2ToEntity1RoleCardinality>0,n</a:Entity2ToEntity1RoleCardinality>
 <c:Object1>
@@ -2230,10 +2230,10 @@ DAT 1360047626</a:History>
 </c:Object2>
 <c:Joins>
 <o:RelationshipJoin Id="o70">
-<a:ObjectID>FB2FD2D8-92EC-4098-8641-E820507F540E</a:ObjectID>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:ObjectID>62300458-6957-4445-81F7-91869AADC0F7</a:ObjectID>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <c:Object1>
 <o:EntityAttribute Ref="o42"/>
@@ -2248,15 +2248,15 @@ DAT 1360047626</a:History>
 </c:ParentIdentifier>
 </o:Relationship>
 <o:Relationship Id="o18">
-<a:ObjectID>BABBC245-6BA6-4A55-800B-0A598327360D</a:ObjectID>
+<a:ObjectID>F00BC382-7D7A-422B-A748-00DBF5882640</a:ObjectID>
 <a:Name>attacher CIF</a:Name>
 <a:Code>ATTACHER_CIF</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {6D60F8AC-7F21-41DC-BCA0-2A7CD3237D76}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:Entity1ToEntity2RoleCardinality>0,n</a:Entity1ToEntity2RoleCardinality>
 <a:Entity2ToEntity1RoleCardinality>1,1</a:Entity2ToEntity1RoleCardinality>
 <c:Object1>
@@ -2267,10 +2267,10 @@ DAT 1360047626</a:History>
 </c:Object2>
 <c:Joins>
 <o:RelationshipJoin Id="o71">
-<a:ObjectID>8C850A1F-EAFA-42AA-A989-462C837BEB6C</a:ObjectID>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:ObjectID>C324F982-B413-49EF-ADF1-9495C79D55DF</a:ObjectID>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <c:Object1>
 <o:EntityAttribute Ref="o53"/>
@@ -2287,30 +2287,30 @@ DAT 1360047626</a:History>
 </c:Relationships>
 <c:Domains>
 <o:Domain Id="o49">
-<a:ObjectID>C357945B-745A-4709-BF2C-51EEC9C6461E</a:ObjectID>
+<a:ObjectID>6F452BCC-404E-4951-8E1B-352C63487F6B</a:ObjectID>
 <a:Name>Street Prefix</a:Name>
 <a:Code>STREET_PREFIX</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {A8154052-CCFC-45FE-9041-A2CA22643AD5}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:ListOfValues>bis	BIS
 ter	TER</a:ListOfValues>
 <a:DataType>VA3</a:DataType>
 <a:Length>3</a:Length>
 </o:Domain>
 <o:Domain Id="o40">
-<a:ObjectID>82F69FC0-B3DC-4803-8817-F50878AFC374</a:ObjectID>
+<a:ObjectID>FE403580-F939-46AD-857C-4A7A419425BC</a:ObjectID>
 <a:Name>Sex</a:Name>
 <a:Code>SEX</a:Code>
-<a:CreationDate>1360047626</a:CreationDate>
+<a:CreationDate>1360048514</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047626</a:ModificationDate>
+<a:ModificationDate>1360048514</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {F714F86A-C21E-492C-A547-BB878E20CB10}
-DAT 1360047626</a:History>
+DAT 1360048514</a:History>
 <a:ListOfValues>M	Homme
 F	Femme</a:ListOfValues>
 <a:DataType>A1</a:DataType>

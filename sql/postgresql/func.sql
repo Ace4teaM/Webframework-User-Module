@@ -236,7 +236,7 @@ BEGIN
         );
 
   /* ok */
-  select 'ERR_OK', 'USER_REGISTRED' into v_result;
+  select 'ERR_OK', 'USER_REGISTRED', 'TOKEN:'||v_token||';' into v_result;
   return v_result;
 /*
 EXCEPTION

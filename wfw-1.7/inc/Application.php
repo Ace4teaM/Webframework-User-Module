@@ -264,6 +264,30 @@ class Application /*extends cApplication*/{
         }
     }
 
+    /** 
+     * Convertie un résultat de procédure en un tableau humainement lisible
+     * 
+     * @param string $result Instance de la classe cResult
+     * @return Tableau associatif contenant les champs traduits
+     */
+    public static function translateResult($result)
+    {
+        $att = $result->toArray();
+        
+        $default = new cXMLDefault();
+        if($default->Initialise("default.xml")){
+
+            $att["result"]  = $default->getResultText("codes",$result->code);
+            $att["error"]   = $default->getResultText("errors",$result->info);
+            if(isset($att["message"])){
+                $att["message"] = $default->getResultText("messages",$att["message"]);
+                $att["message"] = cHTMLTemplate::transform($att["message"], $att);
+            }
+        }
+        
+        return $att;
+    }
+    
 }
 
 ?>

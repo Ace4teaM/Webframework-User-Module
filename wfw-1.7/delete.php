@@ -37,16 +37,13 @@ $result = cResult::getLast();
 
 
 success:
-// Ajoute le résultat aux attributs du template
-$att = $result->toArray();
 
-//traduit le nom du champ
-if(isset($att["field_name"]))
-    $att["field_name"] = UserModule::translateAttributeName($att["field_name"]);
+// Traduit le nom du champ concerné
+if(isset($result->att["field_name"]))
+    $result->att["field_name"] = UserModule::translateAttributeName($result->att["field_name"]);
 
-//traduit le code de résultat
-if(isset($att["error"]))
-    $att["error"] = UserModule::translateErrorCode($att["error"]);
+// Traduit le résultat
+$att = Application::translateResult($result);
 
 // Ajoute les arguments reçues en entrée au template
 $att = array_merge($att,$_REQUEST);

@@ -10,23 +10,21 @@
 
     </head>
     <body>
-        <div style="width:600">
-            <h1>Maintient une connexion à un compte utilisateur</h1>
+        <h1>Maintient une connexion à un compte utilisateur</h1>
 
-            <fieldset><legend>Résultat (-{result})</legend>
-                -{error}<br/>-{field_name}
+        <fieldset class="result"><legend>-{result}</legend>
+            -{error}<br/>-{message}
+        </fieldset>
+
+        <form action="#" enctype="multipart/form-data" method="post">
+            <fieldset><legend>Informations sur la connexion</legend>
+                <div class="wfw_edit_field"><span><label for="txt_cid">Identificateur de connexion</label></span><span><input type="text" id="txt_uid" name="cid" value="-{cid}" /></span></div>
             </fieldset>
-            
-            <form action="#" enctype="multipart/form-data" method="post">
-                <fieldset><legend>Informations sur la connexion</legend>
-                    <div class="wfw_edit_field"><span><label for="txt_cid">Identificateur de connexion</label></span><span><input type="text" id="txt_uid" name="cid" value="-{cid}" /></span></div>
-                </fieldset>
-                <div align="right">
-                    <a class="wfw_button_text" href="-{page:index}">Retour</a>
-                    <input class="wfw_button_text" type="submit" value="Souscrire" />
-                </div>
-            </form>
-        </div>
+            <div align="right">
+                <a class="wfw_button_text" href="-{page:index}">Retour</a>
+                <input class="wfw_button_text" type="submit" value="Souscrire" />
+            </div>
+        </form>
     </body>
 
 </html>

@@ -42,4 +42,69 @@
         <lost_pwd/>
         <identity/>
     </tree>
+    
+    <results lang="fr">
+        <codes>
+            <ERR_OK>Succès</ERR_OK>
+            <ERR_FAILED>Echec</ERR_FAILED>
+            <ERR_SYSTEM>Erreur système</ERR_SYSTEM>
+        </codes>
+
+        <errors>
+            <!-- WFW (ERR_FAILED) -->
+            <NO_INPUT_FIELD>Aucun champ reçu</NO_INPUT_FIELD>
+            <MISSING_FIELD>Champ manquant</MISSING_FIELD>
+            <EMPTY_TEXT>Champ vide</EMPTY_TEXT>
+            <INVALID_CHAR>Champ contenant des caractères interdits</INVALID_CHAR>
+            <INVALID_FORMAT>Champ mal formé</INVALID_FORMAT>
+            <!-- WFW (ERR_SYSTEM) -->
+            <SYS_TASK_CREATE>La tâche ne peut pas être créée</SYS_TASK_CREATE>
+            <SYS_TASK_UPDATE>La tâche ne peut pas être mise à jour</SYS_TASK_UPDATE>
+            
+            <!-- USER (ERR_OK) -->
+            <USER_CREATED>Utilisateur créé</USER_CREATED>
+            <USER_DELETED>Utilisateur supprimé</USER_DELETED>
+            <USER_REGISTRED>Inscription réussite</USER_REGISTRED>
+            <USER_DISCONNECTED>Utilisateur déconnecté</USER_DISCONNECTED>
+            <!-- USER (ERR_FAILED) -->
+            <USER_EXISTS>L’Utilisateur existe déjà</USER_EXISTS>
+            <USER_INVALID_PWD>Le mot-de-passe est invalide</USER_INVALID_PWD>
+            <USER_MAIL_EXISTS>L’adresse e-mail existe déjà</USER_MAIL_EXISTS>
+            <USER_NAME_EXISTS>Le nom d’utilisateur existe déjà</USER_NAME_EXISTS>
+            <USER_MAIL_REGISTRED>Une inscription en attente existe déjà pour cette adresse e-mail</USER_MAIL_REGISTRED>
+            <USER_REGISTRATIION_NOT_EXISTS>L’Inscription n’existe pas</USER_REGISTRATIION_NOT_EXISTS>
+            <USER_CONNECTION_NOT_EXISTS>La connexion n’existe pas</USER_CONNECTION_NOT_EXISTS>
+            <USER_CONNECTION_IP_REFUSED>L’Adresse IP ne correspond pas</USER_CONNECTION_IP_REFUSED>
+            <USER_CONNECTION_EXPIRED>La connexion à expirée</USER_CONNECTION_EXPIRED>
+        </errors>
+
+        <messages>
+            <!-- WFW -->
+            <INPUT_MSG_INVALID_FIELD>
+                Merci de renseigner le champ: $FIELD_NAME.
+            </INPUT_MSG_INVALID_FIELD>
+            
+            <!-- USER -->
+            <USER_MSG_ACTIVATE_BY_MAIL>
+                Merci de consulter vos courriers électroniques pour activer votre compte utilisateur.
+            </USER_MSG_ACTIVATE_BY_MAIL>
+            <USER_MSG_AUTO_ACTIVATE>
+                Votre compte est maintenant créé.
+                Votre mot-de-passe de connexion est le suivant: $PWD.
+                Conservez ce code en lieu sûr, il ne vous sera plus communiqué à l’avenir.
+            </USER_MSG_AUTO_ACTIVATE>
+        </messages>
+        
+        <fields>
+            <uid format="identifier">Nom d'utilisateur</uid>
+            <pwd format="password">Mot-de-passe</pwd>
+            <mail format="mail">Adresse eMail</mail>
+            <token format="name">Jeton</token>
+            <life_time format="integer">Temps d'inactivité avant déconnexion</life_time>
+            <cid format="name">Identifiant de connexion</cid>
+            <firstname format="name">Prénom</firstname>
+            <lastname format="name">Nom</lastname>
+            <birthday format="date">Date de naissance</birthday>
+        </fields>
+    </results>
 </site>
