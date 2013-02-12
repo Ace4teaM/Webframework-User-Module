@@ -30,38 +30,11 @@
     <p>Le module de gestion des comptes vous permez de créer des comptes utilisateurs sécurisés. Chaque compte est identifié par son adresse email et un nom d'utilisateur. Un mot de passe permet de s'y connecter en toute sécurité.</p>
     <p>Le systéme de session est géré par adresse IP et compte utilisateur.</p>
     
-    <fieldset>
-        <legend>Etat de la configuration</legend>
-        <ul>
-            <li><strong>Base de données</strong> : -{bdd_status}</li>
-        </ul>
-    </fieldset>
-    
-    <h2>Cas d'utilisation</h2>
-    <p>Implémentation des cas d'utilisation par rôle:</p>
-    <div>
-        <fieldset class="column">
-            <legend>Administrateur</legend>
-            <ul template:action="select" template:path=":default.xml:index">
-                <li template:action="all" template:selector="> page[role=administrator]"><a href="-{{page:-{@id}}}">-{@name}</a></li>
-            </ul>
-        </fieldset>
+    <h2>Etat de la configuration</h2>
+    <ul>
+        <li><strong>Base de données</strong> : -{bdd_status}</li>
+    </ul>
 
-        <fieldset class="column">
-            <legend>Visiteur</legend>
-            <ul template:action="select" template:path=":default.xml:index">
-                <li template:action="all" template:selector="> page[role=visitor]"><a href="-{{page:-{@id}}}">-{@name}</a></li>
-            </ul>
-        </fieldset>
-
-        <fieldset class="column">
-            <legend>Utilisateur</legend>
-            <ul template:action="select" template:path=":default.xml:index">
-                <li template:action="all" template:selector="> page[role=user]"><a href="-{{page:-{@id}}}">-{@name}</a></li>
-            </ul>
-        </fieldset>
-    </div>
-    
 </body>
 
 </html>

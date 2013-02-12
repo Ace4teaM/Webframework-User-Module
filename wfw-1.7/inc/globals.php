@@ -3,41 +3,28 @@
 define("THIS_PATH", dirname(__FILE__)); //chemin absolue vers ce script
 define("ROOT_PATH", realpath(THIS_PATH."/../")); //racine du site
 
-
-/* Systeme */
-if(PHP_OS == "WINNT"){
-    define('WINDOWS',true);
-    define('SYSTEM','WINDOWS');
+//charge la configuration
+$config = parse_ini_file(ROOT_PATH."/cfg/config.ini", true);
+$config = array_change_key_case($config, CASE_UPPER);
+if(!isset($config["PATH"])){
+    echo("Cant't find configuration path section");
+    exit(-1);
 }
-else{
-    define('LINUX',true);
-    define('SYSTEM','LINUX');
+$config["PATH"] = array_change_key_case($config["PATH"], CASE_UPPER);
+if(!isset($config["PATH"]["WFW"])){
+    echo("Cant't find Webframework Path");
+    exit(-1);
 }
 
-require_once("inc/Application.php");
+//ajoute le chemin d'accès à WFW
+set_include_path(get_include_path() . PATH_SEPARATOR . $config["PATH"]["WFW"]);
 
 //instancie l'application
+require_once("Application.php");
 global $app;
-$app = new Application(ROOT_PATH);
+$app = new Application(ROOT_PATH,$config);
 
-set_include_path(get_include_path() . PATH_SEPARATOR . $app->getLibPath('wfw'));
-
-require_once("php/xarg.php");
-require_once("php/class/bases/cResult.php");
-require_once("php/templates/cHTMLTemplate.php");
-require_once("php/templates/xml_template.php");
-
-//charge la classe de la base de données
-$db_classname = $app->getCfgValue("database", "class");
-if(!empty($db_classname))
-    require_once($app->getLibPath("wfw")."/php/$db_classname.php");
-
-//charge la classe du gestionnaire de taches
-$classname = $app->getCfgValue(constant("SYSTEM"), "taskmgr_class");
-if(!empty($classname))
-    require_once($app->getLibPath("wfw")."/php/system/windows/$classname.php");
-
-
-//librairies...
+//charge les modules.
 require_path($app->getCfgValue("user_module", "lib_path")."/");
+
 ?>

@@ -30,7 +30,7 @@ require_once("inc/globals.php");
 global $app;
 
 //entree
-$accountFields = array(
+$fields = array(
     "uid"=>"cInputIdentifier",
     "mail"=>"cInputMail"
 );
@@ -45,7 +45,7 @@ if(!class_exists("MailModule") && $app->getCfgValue("user_module","requires_mail
 $result = NULL;
 
 // exemples JS
-if(cInputFields::checkArray($accountFields))
+if(cInputFields::checkArray($fields))
 {
     $client_id = "none";
 
@@ -100,7 +100,7 @@ if(isset($result->att["field_name"]))
     $result->att["field_name"] = UserModule::translateAttributeName($result->att["field_name"]);
 
 // Traduit le résultat
-$att = Application::translateResult($result);
+$att = $app->translateResult($result);
 
 // Ajoute les arguments reçues en entrée au template
 $att = array_merge($att,$_REQUEST);
@@ -116,7 +116,7 @@ switch($format){
         echo xarg_encode_array($att);
         break;
     case "html":
-        echo $app->makeXMLView("view/user/pages/register.html",$att);
+        echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
         break;
     default:
         RESULT(cResult::Failed,Application::UnsuportedFeature);

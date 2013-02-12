@@ -29,7 +29,7 @@
 require_once("inc/globals.php");
 global $app;
 
-$accountFields = array(
+$fields = array(
     "user_id"=>"cInputInteger",
     "last_name"=>"cInputName",
     "first_name"=>"cInputName",
@@ -41,7 +41,7 @@ $accountFields = array(
 $result = NULL;
 
 // exemples JS
-if(cInputFields::checkArray($accountFields))
+if(cInputFields::checkArray($fields))
 {
     //verifie les informations de connexion
     //... $_REQUEST["user_id"]
@@ -91,7 +91,7 @@ if(isset($result->att["field_name"]))
     $result->att["field_name"] = UserModule::translateAttributeName($result->att["field_name"]);
 
 // Traduit le résultat
-$att = Application::translateResult($result);
+$att = $app->translateResult($result);
 
 // Ajoute les arguments reçues en entrée au template
 $att = array_merge($att,$_REQUEST);
@@ -107,7 +107,7 @@ switch($format){
         echo xarg_encode_array($att);
         break;
     case "html":
-        echo $app->makeXMLView("view/user/pages/identity.html",$att);
+        echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
         break;
     default:
         RESULT(cResult::Failed,Application::UnsuportedFeature);

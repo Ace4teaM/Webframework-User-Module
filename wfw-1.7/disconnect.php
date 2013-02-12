@@ -64,7 +64,7 @@ if(isset($result->att["field_name"]))
     $result->att["field_name"] = UserModule::translateAttributeName($result->att["field_name"]);
 
 // Traduit le résultat
-$att = Application::translateResult($result);
+$att = $app->translateResult($result);
 
 // Ajoute les arguments reçues en entrée au template
 $att = array_merge($att,$_REQUEST);
@@ -80,7 +80,7 @@ switch($format){
         echo xarg_encode_array($att);
         break;
     case "html":
-        echo $app->makeXMLView("view/user/pages/disconnect.html",$att);
+        echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
         break;
     default:
         RESULT(cResult::Failed,Application::UnsuportedFeature);

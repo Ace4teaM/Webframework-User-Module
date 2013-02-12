@@ -49,7 +49,7 @@ $result = cResult::getLast();
 success:
 
 // Traduit le résultat
-$att = Application::translateResult($result);
+$att = $app->translateResult($result);
 
 /* Génére la sortie */
 $format = "html";
@@ -62,7 +62,7 @@ switch($format){
         echo xarg_encode_array($att);
         break;
     case "html":
-        echo $app->makeXMLView("view/user/pages/disconnect_all.html",$att);
+        echo $app->makeFormView($att,NULL,NULL,$_REQUEST);
         break;
     default:
         RESULT(cResult::Failed,Application::UnsuportedFeature);
