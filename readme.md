@@ -7,7 +7,7 @@
 ---------------------------------------------------------------------------------------------------------------------------------------
  Quoi de neuf ?
 ---------------------------------------------------------------------------------------------------------------------------------------
-- ReIntroduction du module à la version 1.7 de Webframework.
+- Re-introduction du module à la version 1.7 de Webframework.
 - Ajoute le support de la base de données PostgreSql.8
 - Conception en Modèle de données et Modèle orienté objet via PowerAMC
 - Nouvelle interface
