@@ -44,6 +44,14 @@
         #headerContent{
             padding:10px;
             font-weight: bold;
+            text-align: center;
+        }
+        #statusContent{
+            padding:20px;
+        }
+        #statusContent li strong{
+            width:150px;
+            display: inline-block;
         }
         #footerContent{
             padding:10px;
@@ -62,15 +70,28 @@
         #contentContent {
             padding:8px;
         }
+        strong {
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <!-- Document -->
 <body>
     <div id="header">
-        <div id="headerContent">Webframework 1.7
-            <br/>Module Utilisateur
-            <hr/>Statut de connexion <span id="connection_status">checking...</span>
+        <div id="headerContent">
+            <img src="-{_LIB_PATH_WFW_}/bin/logo.png" height="40" />
+            <hr/>
+            <span><a href="-{page:index}">Module Utilisateur</a></span>
+        </div>
+    </div>
+    <div id="status" class="wfw_bg_frame">
+        <div id="statusContent">
+            <ul>
+                <li><strong>Base de données</strong> : -{bdd_status}</li>
+                <li><strong>Statut de connexion</strong> : <span id="connection_status">checking...</span></li>
+            </ul>
+            
         </div>
     </div>
     <div id="menu">
@@ -88,7 +109,7 @@
         </ul>
     </div>
     <div id="content"><div id="contentContent" template:action="merge" template:path=">body"></div></div>
-    <div id="footer"><div id="footerContent">Exemple d'implémentation du module Utilisateur dans un environnement Webframework</div></div>
+    <div id="footer" class="wfw_information"><div id="footerContent">Exemple d'implémentation du module Utilisateur dans un environnement Webframework</div></div>
 </body>
 
 
