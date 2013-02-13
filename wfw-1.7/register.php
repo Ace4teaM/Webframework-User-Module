@@ -29,6 +29,10 @@
 require_once("inc/globals.php");
 global $app;
 
+//résultat de la requete
+RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
+$result = cResult::getLast();
+
 //entree
 $fields = array(
     "uid"=>"cInputIdentifier",
@@ -41,12 +45,12 @@ if(!class_exists("MailModule") && $app->getCfgValue("user_module","requires_mail
     $app->processLastError();
 }
 
-//résultat de la requete
-$result = NULL;
-
-// exemples JS
-if(cInputFields::checkArray($fields))
+if(!empty($_REQUEST))
 {
+    // exemples JS
+    if(!cInputFields::checkArray($fields))
+        goto failed;
+    
     $client_id = "none";
 
     //crée l'e compte utilisateur'inscription
@@ -85,10 +89,9 @@ if(cInputFields::checkArray($fields))
     //redirige vers la page d'activation
     //header("Location: activate.php?uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"]);    
     //exit;
-    
-    goto success;
 }
 
+goto success;
 failed:
 // utilise le dernier resultat
 $result = cResult::getLast();

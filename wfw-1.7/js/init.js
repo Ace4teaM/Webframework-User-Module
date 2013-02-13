@@ -40,7 +40,20 @@ YUI(wfw_yui_config(wfw_yui_base_path)).use('node', 'event', function (Y)
             height: 100,
             split: true,         // enable resizing
             margins: '0 5 5 5',
-            html: Y.Node.one("#content").get("innerHTML")
+            layout: 'vbox',
+            //html: Y.Node.one("#content").get("innerHTML")
+            items: [{
+                header:false,
+                border: false,
+                width:"100%",
+                html: Y.Node.one("#result").get("innerHTML")
+            },{
+                header:false,
+                border: false,
+                width:"100%",
+                html: Y.Node.one("#content").get("innerHTML")
+            }],
+            renderTo: Ext.getBody()
         });
             
         var menuPanel = Ext.create('Ext.Panel', {

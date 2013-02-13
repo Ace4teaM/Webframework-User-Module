@@ -1,22 +1,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
     <body>
-        <fieldset class="result"><legend>-{txt_result}</legend>
-            -{txt_error}<br/>-{txt_message}
-        </fieldset>
-
         <form action="#" enctype="multipart/form-data" method="post">
-            <fieldset>
-                <legend>Champs obligatoires</legend>
-                <!-- fields:£ -->
-                <div class="wfw_edit_field"><span><label for="txt_$NAME">$TITLE</label></span><span><input type="text" id="txt_$NAME" name="$NAME" value="$VALUE" /></span></div>
-                <!-- £:fields -->
-            </fieldset>
-            <fieldset>
-                <legend>Champs optionnels</legend>
-                <!-- opt_fields:£ -->
-                <div class="wfw_edit_field"><span><label for="txt_$NAME">$TITLE</label></span><span><input type="text" id="txt_$NAME" name="$NAME" value="$VALUE" /></span></div>
-                <!-- £:opt_fields -->
-            </fieldset>
+            <!-- fields:£ -->
+            <div class="wfw_edit_field"><span><label for="txt_$NAME">$TITLE</label></span><span><input type="text" id="txt_$NAME" name="$NAME" value="$VALUE" /></span></div>
+            <!-- £:fields -->
+            <hr/>
+            <!-- opt_fields:£ -->
+            <div class="wfw_edit_field"><span><label for="txt_$NAME">$TITLE</label></span><span><input type="text" id="txt_$NAME" name="$NAME" value="$VALUE" /></span></div>
+            <!-- £:opt_fields -->
             <div align="right">
                 <input class="wfw_button_text" type="submit" value="Executer" />
             </div>

@@ -29,6 +29,10 @@
 require_once("inc/globals.php");
 global $app;
 
+//résultat de la requete
+RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
+$result = cResult::getLast();
+
 $fields = array(
     "user_id"=>"cInputInteger",
     "last_name"=>"cInputName",
@@ -37,12 +41,12 @@ $fields = array(
     "sex"=>""
 );
 
-//résultat de la requete
-$result = NULL;
-
-// exemples JS
-if(cInputFields::checkArray($fields))
+if(!empty($_REQUEST))
 {
+    // exemples JS
+    if(!cInputFields::checkArray($fields))
+        goto failed;
+
     //verifie les informations de connexion
     //... $_REQUEST["user_id"]
  
@@ -75,10 +79,9 @@ if(cInputFields::checkArray($fields))
     $identity->sex       = $_REQUEST["sex"];
     if(!UserIdentityMgr::update($identity))
         $app->processLastError();*/
-    
-    goto success;  
 }
 
+goto success;
 failed:
 // redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();

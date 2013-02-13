@@ -29,6 +29,10 @@
 require_once("inc/globals.php");
 global $app;
 
+//résultat de la requete
+RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
+$result = cResult::getLast();
+
 //entree
 $fields = array(
     "uid"=>"cInputIdentifier",
@@ -36,12 +40,12 @@ $fields = array(
     "life_time"=>"cInputInteger"
 );
 
-//résultat de la requete
-$result = NULL;
+if(!empty($_REQUEST)){
 
-// exemples JS
-if(cInputFields::checkArray($fields))
-{
+    // exemples JS
+    if(!cInputFields::checkArray($fields))
+        goto failed;
+    
     $client_ip  = $_SERVER["REMOTE_ADDR"];
     $local_path = NULL;
     $life_time  = intval($_REQUEST["life_time"]);
@@ -68,11 +72,10 @@ if(cInputFields::checkArray($fields))
                  goto failed;
         }
     }
-    
-    goto success;
 }
 
 
+goto success;
 failed:
 // redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();

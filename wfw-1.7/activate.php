@@ -29,6 +29,10 @@
 require_once("inc/globals.php");
 global $app;
 
+//résultat de la requete
+RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
+$result = cResult::getLast();
+
 $fields = array(
     "uid"=>"cInputIdentifier",
     "pwd"=>"cInputPassword",
@@ -36,21 +40,20 @@ $fields = array(
     "token"=>"cInputName"
 );
 
-//résultat de la requete
-$result = NULL;
-
-// exemples JS
-if(cInputFields::checkArray($fields))
-{
+if(!empty($_REQUEST)){
+    // exemples JS
+    if(!cInputFields::checkArray($fields))
+        goto failed;
+    
     //crée le compte utilisateur
     if(!UserModule::activateAccount($_REQUEST["uid"],$_REQUEST["pwd"],$_REQUEST["mail"],$_REQUEST["token"]))
-            goto failed;
+        goto failed;
+    
     //retourne le resultat de cette fonction
     $result = cResult::getLast();
-    
-    goto success;
 }
 
+goto success;
 failed:
 // redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();

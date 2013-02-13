@@ -51,6 +51,8 @@
         </codes>
 
         <errors>
+            <!-- WFW (ERR_OK) -->
+            <INFORMATION>Information</INFORMATION>
             <!-- WFW (ERR_FAILED) -->
             <NO_INPUT_FIELD>Aucun champ reçu</NO_INPUT_FIELD>
             <MISSING_FIELD>Champ manquant</MISSING_FIELD>
@@ -75,7 +77,7 @@
             <USER_MAIL_EXISTS>L’adresse e-mail existe déjà</USER_MAIL_EXISTS>
             <USER_NAME_EXISTS>Le nom d’utilisateur existe déjà</USER_NAME_EXISTS>
             <USER_MAIL_REGISTRED>Une inscription en attente existe déjà pour cette adresse e-mail</USER_MAIL_REGISTRED>
-            <USER_REGISTRATIION_NOT_EXISTS>L��Inscription n’existe pas</USER_REGISTRATIION_NOT_EXISTS>
+            <USER_REGISTRATIION_NOT_EXISTS>L’Inscription n’existe pas</USER_REGISTRATIION_NOT_EXISTS>
             <USER_CONNECTION_NOT_EXISTS>La connexion n’existe pas</USER_CONNECTION_NOT_EXISTS>
             <USER_CONNECTION_IP_REFUSED>L’Adresse IP ne correspond pas</USER_CONNECTION_IP_REFUSED>
             <USER_CONNECTION_EXPIRED>La connexion à expirée</USER_CONNECTION_EXPIRED>
@@ -89,6 +91,9 @@
             <SOCK_SERVER_CONNECTION>
                 Cause retourné par le socket #$ERRNO : $ERRSTR
             </SOCK_SERVER_CONNECTION>
+            <WFW_MSG_POPULATE_FORM>
+                Merci de compléter le formulaire
+            </WFW_MSG_POPULATE_FORM>
             
             <!-- USER -->
             <USER_MSG_ACTIVATE_BY_MAIL>

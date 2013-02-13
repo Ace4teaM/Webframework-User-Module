@@ -30,7 +30,8 @@ require_once("inc/globals.php");
 global $app;
 
 //résultat de la requete
-$result = NULL;
+RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
+$result = cResult::getLast();
 
 //supprime le compte utilisateur
 if(!UserModule::disconnectAll())
@@ -39,8 +40,8 @@ if(!UserModule::disconnectAll())
 //retourne le resultat de cette fonction
 $result = cResult::getLast();
 
-goto success;
 
+goto success;
 failed:
 // redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();

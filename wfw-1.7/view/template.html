@@ -73,6 +73,49 @@
         strong {
             font-weight: bold;
         }
+        .ERR_OK{
+            font-weight: bold;
+            color:#115601;
+            background: rgb(157,213,58); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(157,213,58,1) 0%, rgba(161,213,79,1) 93%, rgba(128,194,23,1) 96%, rgba(124,188,10,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(157,213,58,1)), color-stop(93%,rgba(161,213,79,1)), color-stop(96%,rgba(128,194,23,1)), color-stop(100%,rgba(124,188,10,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(157,213,58,1) 0%,rgba(161,213,79,1) 93%,rgba(128,194,23,1) 96%,rgba(124,188,10,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(157,213,58,1) 0%,rgba(161,213,79,1) 93%,rgba(128,194,23,1) 96%,rgba(124,188,10,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(157,213,58,1) 0%,rgba(161,213,79,1) 93%,rgba(128,194,23,1) 96%,rgba(124,188,10,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(157,213,58,1) 0%,rgba(161,213,79,1) 93%,rgba(128,194,23,1) 96%,rgba(124,188,10,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=0 ); /* IE6-9 */
+        }
+        .ERR_OK .ICON, .ERR_FAILED .ICON, .ERR_SYSTEM .ICON{
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 60px;
+            height:60px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+        .ERR_OK .ICON{
+            background-image: url('-{_LIB_PATH_WFW_}/bin/icons/success.png');
+        }
+        .ERR_OK .TEXT, .ERR_FAILED .TEXT{
+            vertical-align: middle;
+            display: inline-block;
+        }
+        .ERR_FAILED, .ERR_SYSTEM{
+            color:#492401;
+            font-weight: bold;
+            background: rgb(255,183,107); /* Old browsers */
+            background: -moz-linear-gradient(top,  rgba(255,183,107,1) 0%, rgba(255,167,61,1) 93%, rgba(255,124,0,1) 96%, rgba(255,127,4,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,183,107,1)), color-stop(93%,rgba(255,167,61,1)), color-stop(96%,rgba(255,124,0,1)), color-stop(100%,rgba(255,127,4,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(255,183,107,1) 0%,rgba(255,167,61,1) 93%,rgba(255,124,0,1) 96%,rgba(255,127,4,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(255,183,107,1) 0%,rgba(255,167,61,1) 93%,rgba(255,124,0,1) 96%,rgba(255,127,4,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(255,183,107,1) 0%,rgba(255,167,61,1) 93%,rgba(255,124,0,1) 96%,rgba(255,127,4,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  rgba(255,183,107,1) 0%,rgba(255,167,61,1) 93%,rgba(255,124,0,1) 96%,rgba(255,127,4,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ff7f04',GradientType=0 ); /* IE6-9 */
+
+        }
+        .ERR_FAILED .ICON, .ERR_SYSTEM .ICON{
+            background-image: url('-{_LIB_PATH_WFW_}/bin/icons/failed.png');
+        }
     </style>
 </head>
 
@@ -91,7 +134,12 @@
                 <li><strong>Base de données</strong> : -{bdd_status}</li>
                 <li><strong>Statut de connexion</strong> : <span id="connection_status">checking...</span></li>
             </ul>
-            
+        </div>
+    </div>
+    <div id="result">
+        <div class="-{result}">
+            <span class="ICON"></span>
+            <p class="TEXT">-{txt_error}<br/>-{txt_message}</p>
         </div>
     </div>
     <div id="menu">
