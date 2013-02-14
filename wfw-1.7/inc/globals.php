@@ -24,7 +24,4 @@ require_once("Application.php");
 global $app;
 $app = new Application(ROOT_PATH,$config);
 
-//charge les modules.
-require_path($app->getCfgValue("user_module", "lib_path")."/");
-
 ?>

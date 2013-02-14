@@ -54,23 +54,25 @@ if(!empty($_REQUEST)){
         goto failed;
     
     //crée une connexion
-    if(UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"])){
-        //retourne le resultat de cette fonction
-        $result = cResult::getLast();
-        //setcookie("uid",$_REQUEST["uid"]);
-        //définit le cookie
-        setcookie("cid",$result->getAtt("CONNECTION_ID"));
-        //initialise la tache de fermeture
-        $taskMgr=NULL;
-        $app->getTaskMgr($taskMgr);
-        if($taskMgr !== null && $life_time > 0){
-            $taskName = UserModule::disconnectTaskName($_REQUEST["uid"]);
-            $taskCmd  = UserModule::disconnectTaskCmd($_REQUEST["uid"]);
-            $expire   = new DateTime();
-            $expire->add(new DateInterval('P0Y0DT0H'.$life_time.'M'));
-            if(!$taskMgr->create($taskName,$expire,$taskCmd))
-                 goto failed;
-        }
+    if(!UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"]))
+        goto failed;
+    
+    //retourne le resultat de cette fonction
+    $result = cResult::getLast();
+    
+    //définit le cookie
+    setcookie("cid",$result->getAtt("CONNECTION_ID"));
+    
+    //initialise la tache de fermeture
+    $taskMgr=NULL;
+    $app->getTaskMgr($taskMgr);
+    if($taskMgr !== null && $life_time > 0){
+        $taskName = UserModule::disconnectTaskName($_REQUEST["uid"]);
+        $taskCmd  = UserModule::disconnectTaskCmd($_REQUEST["uid"]);
+        $expire   = new DateTime();
+        $expire->add(new DateInterval('P0Y0DT0H'.$life_time.'M'));
+        if(!$taskMgr->create($taskName,$expire,$taskCmd))
+             goto failed;
     }
 }
 

@@ -30,7 +30,7 @@ BEGIN
   end if;
 
   /* ok */
-  select 'ERR_FAILED', 'USER_NOT_EXISTS' into v_result;
+  select 'ERR_FAILED', 'USER_AUTHENTICATION_FAILED' into v_result;
   return v_result;
 
 END;

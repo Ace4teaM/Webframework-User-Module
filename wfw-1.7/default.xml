@@ -59,9 +59,14 @@
             <EMPTY_TEXT>Champ vide</EMPTY_TEXT>
             <INVALID_CHAR>Champ contenant des caractères interdits</INVALID_CHAR>
             <INVALID_FORMAT>Champ mal formé</INVALID_FORMAT>
+            <INVALID_RANGE>Rang de valeur invalide</INVALID_RANGE>
+            <OVERSIZED>Trop de caractères</OVERSIZED>
+            <UNDERSIZED>Pas assez de caractères</UNDERSIZED>
             <DB_CONNECTION>Connexion au serveur de base de données a échouée</DB_CONNECTION>
             <DB_SQL_QUERY>Requête SQL mal formée</DB_SQL_QUERY>
             <SOCK_OPEN_URL>La connexion au serveur a échouée</SOCK_OPEN_URL>
+            <UNKNOWN_HOSTNAME>Nom de l'hôte inconnu</UNKNOWN_HOSTNAME>
+            <NO_DATABASE_CONFIGURED>Aucune base de donées n'est présente dans la configuration</NO_DATABASE_CONFIGURED>
             <!-- WFW (ERR_SYSTEM) -->
             <SYS_TASK_CREATE>La tâche ne peut pas être créée</SYS_TASK_CREATE>
             <SYS_TASK_UPDATE>La tâche ne peut pas être mise à jour</SYS_TASK_UPDATE>
@@ -70,14 +75,17 @@
             <USER_CREATED>Utilisateur créé</USER_CREATED>
             <USER_DELETED>Utilisateur supprimé</USER_DELETED>
             <USER_REGISTRED>Inscription réussite</USER_REGISTRED>
+            <USER_CONNECTED>Utilisateur connecté</USER_CONNECTED>
             <USER_DISCONNECTED>Utilisateur déconnecté</USER_DISCONNECTED>
             <!-- USER (ERR_FAILED) -->
             <USER_EXISTS>L’Utilisateur existe déjà</USER_EXISTS>
+            <USER_NOT_EXISTS>L'utilisateur n'existe pas</USER_NOT_EXISTS>
+            <USER_AUTHENTICATION_FAILED>Le nom d'utilisateur ou le mot-de-passe est invalide</USER_AUTHENTICATION_FAILED>
             <USER_INVALID_PWD>Le mot-de-passe est invalide</USER_INVALID_PWD>
             <USER_MAIL_EXISTS>L’adresse e-mail existe déjà</USER_MAIL_EXISTS>
             <USER_NAME_EXISTS>Le nom d’utilisateur existe déjà</USER_NAME_EXISTS>
             <USER_MAIL_REGISTRED>Une inscription en attente existe déjà pour cette adresse e-mail</USER_MAIL_REGISTRED>
-            <USER_REGISTRATIION_NOT_EXISTS>L’Inscription n’existe pas</USER_REGISTRATIION_NOT_EXISTS>
+            <USER_REGISTRATION_NOT_EXISTS>L’Inscription n’existe pas</USER_REGISTRATION_NOT_EXISTS>
             <USER_CONNECTION_NOT_EXISTS>La connexion n’existe pas</USER_CONNECTION_NOT_EXISTS>
             <USER_CONNECTION_IP_REFUSED>L’Adresse IP ne correspond pas</USER_CONNECTION_IP_REFUSED>
             <USER_CONNECTION_EXPIRED>La connexion à expirée</USER_CONNECTION_EXPIRED>
@@ -104,6 +112,13 @@
                 Votre mot-de-passe de connexion est le suivant: $PWD.
                 Conservez ce code en lieu sûr, il ne vous sera plus communiqué à l’avenir.
             </USER_MSG_AUTO_ACTIVATE>
+            <USER_ACTIVATION_MAIL>
+                Vous avez demandez la création d'un compte utilisateur.
+                Voici vos informations d'activation:
+                Votre nom d'utilisateur : $UID
+                Votre adresse eMail     : $MAIL
+                Votre code d'activation : $TOKEN
+            </USER_ACTIVATION_MAIL>
         </messages>
         
         <fields>

@@ -60,48 +60,74 @@ if(!empty($_REQUEST))
     //retourne le resultat de cette fonction
     $result = cResult::getLast();
     
-    //envoie un mail d'activation
-    if(class_exists("MailModule")){
-        //--------------------------------------------
-        //RESULT(cResult::Failed,Application::UnsuportedFeature);
-        //$app->processLastError();
-        //--------------------------------------------
-        
-        //initialise le message
-        $msg = new MailMessage();
-        $msg->to       = $_REQUEST["mail"];
-        $msg->subject  = "Activation";
-        $msg->msg      = cHTMLTemplate::transform("view/templates/default.html",$_REQUEST);
+    //pas de module Mail ?
+    if(!class_exists("MailModule"))
+        goto activate;
+    
+    //pour les messages
+    if(!$app->getDefaultFile($default))
+        goto activate;
+    
+    //--------------------------------------------
+    //initialise le message
+    
+    $msg = new MailMessage();
+    $msg->to       = $_REQUEST["mail"];
+    $msg->subject  = "Activation";
+    
+    //attributs du template
+    $template_att = $_REQUEST;
+    $template_att["TOKEN"] = $result->getAtt("token");
+    $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","activate")."?token=".$result->getAtt("token")."&uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"];
 
-        //envoie le message
-        if(!MailModule::sendMessage($msg))
-            goto failed;
-        //ajoute un message d'avertissement
-        $result->addAtt("message","USER_MSG_ACTIVATE_BY_MAIL");
-        //header("Location: get_activatation.php?uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"]);
-        //exit;
+    //depuis un template ?
+    $template = $app->getCfgValue("user_module","activation_mail");
+    if(!empty($template) && file_exists($template)){
+        $msg->msg      = cHTMLTemplate::transformFile($template,$template_att);
+        $msg->contentType = mime_content_type($template);
     }
-    //sinon, active le compte
+    //depuis le message standard ?
     else{
-        $pwd   = rand(1615,655641);
-        //crée le compte utilisateur'inscription
-        if(!UserModule::activateAccount($_REQUEST["uid"], $pwd, $_REQUEST["mail"], $result->getAtt("token")))
-                goto failed;
-        //ajoute un message d'avertissement
-        $result->addAtt("pwd",$pwd);
-        $result->addAtt("message","USER_MSG_AUTO_ACTIVATE");
+        $msg->msg      = cHTMLTemplate::transform($default->getResultText("messages","USER_ACTIVATION_MAIL"),$template_att);
+        $msg->contentType = "text/plain";
     }
+
+    //envoie le message
+    if(!MailModule::sendMessage($msg))
+        goto failed;
+    //ajoute un message d'avertissement
+    $result->addAtt("message","USER_MSG_ACTIVATE_BY_MAIL");
+    //header("Location: get_activatation.php?uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"]);
+    //exit;
 
     //redirige vers la page d'activation
     //header("Location: activate.php?uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"]);    
     //exit;
 }
 
+//-------------------------------------------------------------------------------------------------------
+//Active le compte en cas d'impossibilité d'envoyer un mail
+goto success;
+activate:
+    
+$pwd   = rand(1615,655641);
+//crée le compte utilisateur'inscription
+if(!UserModule::activateAccount($_REQUEST["uid"], $pwd, $_REQUEST["mail"], $result->getAtt("token")))
+    goto failed;
+//ajoute un message d'avertissement
+$result->addAtt("pwd",$pwd);
+$result->addAtt("message","USER_MSG_AUTO_ACTIVATE");
+
+//-------------------------------------------------------------------------------------------------------
+//En cas d'echec de la procedure
 goto success;
 failed:
+    
 // utilise le dernier resultat
 $result = cResult::getLast();
 
+//-------------------------------------------------------------------------------------------------------
+//Termine
 success:
 
 // Traduit le nom du champ concerné
