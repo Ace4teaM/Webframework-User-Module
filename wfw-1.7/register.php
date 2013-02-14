@@ -63,12 +63,18 @@ if(!empty($_REQUEST))
     //envoie un mail d'activation
     if(class_exists("MailModule")){
         //--------------------------------------------
-        RESULT(cResult::Failed,Application::UnsuportedFeature);
-        $app->processLastError();
+        //RESULT(cResult::Failed,Application::UnsuportedFeature);
+        //$app->processLastError();
         //--------------------------------------------
         
+        //initialise le message
+        $msg = new MailMessage();
+        $msg->to       = $_REQUEST["mail"];
+        $msg->subject  = "Activation";
+        $msg->msg      = cHTMLTemplate::transform("view/templates/default.html",$_REQUEST);
+
         //envoie le message
-        if(!MailModule::send())
+        if(!MailModule::sendMessage($msg))
             goto failed;
         //ajoute un message d'avertissement
         $result->addAtt("message","USER_MSG_ACTIVATE_BY_MAIL");
@@ -99,8 +105,8 @@ $result = cResult::getLast();
 success:
 
 // Traduit le nom du champ concerné
-if(isset($result->att["field_name"]))
-    $result->att["field_name"] = UserModule::translateAttributeName($result->att["field_name"]);
+if(isset($result->att["field_name"]) && $app->getDefaultFile($default))
+    $result->att["field_name"] = $default->getResultText("fields",$result->att["field_name"]);
 
 // Traduit le résultat
 $att = $app->translateResult($result);

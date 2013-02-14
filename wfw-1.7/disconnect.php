@@ -64,8 +64,8 @@ $result = cResult::getLast();
 success:
 
 // Traduit le nom du champ concerné
-if(isset($result->att["field_name"]))
-    $result->att["field_name"] = UserModule::translateAttributeName($result->att["field_name"]);
+if(isset($result->att["field_name"]) && $app->getDefaultFile($default))
+    $result->att["field_name"] = $default->getResultText("fields",$result->att["field_name"]);
 
 // Traduit le résultat
 $att = $app->translateResult($result);

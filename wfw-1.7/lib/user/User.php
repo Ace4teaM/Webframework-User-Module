@@ -149,36 +149,6 @@ class UserModule implements iModule
     }
     
     /** 
-     * Traduit un nom d'attribut
-     * 
-     * @param string $name Nom de l'attribut
-     * @return Texte de remplacement. Si le nom d'attribut est inconnu, l'identifiant est retourné
-     */
-    public static function translateAttributeName($name){ 
-        switch($name){
-            case "uid":
-                return "Nom d'utilisateur";
-            case "pwd":
-                return "Mot-de-passe";
-            case "mail":
-                return "Adresse eMail";
-            case "token":
-                return "Jeton";
-            case "life_time":
-                return "Temps d'inactivité avant déconnexion";
-            case "cid":
-                return "Identifiant de connexion";
-            case "firstname":
-                return "Prénom";
-            case "lastname":
-                return "Nom";
-            case "birthday":
-                return "Date de naissance";
-        }
-        return $name;
-    }
-    
-    /** 
      * Cree un nouvel utilisateur
      * 
      * @param type $name
