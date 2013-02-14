@@ -64,6 +64,9 @@ if(!empty($_REQUEST))
     if(!class_exists("MailModule"))
         goto activate;
     
+    //utile a la generation du message
+    if(!$app->getDefaultFile($default))
+        goto activate;
     
     //--------------------------------------------
     //initialise le message
@@ -84,13 +87,10 @@ if(!empty($_REQUEST))
         $msg->contentType = mime_content_type($template);
     }
     //depuis le message standard ?
-    else if($app->getDefaultFile($default)){
+    else{
         $msg->msg      = cHTMLTemplate::transform($default->getResultText("messages","USER_ACTIVATION_MAIL"),$template_att);
         $msg->contentType = "text/plain";
     }
-    //pas de solution
-    else
-        goto activate;
 
     //envoie le message
     if(!MailModule::sendMessage($msg))
