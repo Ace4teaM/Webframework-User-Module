@@ -151,7 +151,7 @@ switch($format){
         echo xarg_encode_array($att);
         break;
     case "html":
-        echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
+        echo $app->makeFormView($att,$fields,NULL,$_REQUEST,NULL);
         break;
     default:
         RESULT(cResult::Failed,Application::UnsuportedFeature);
