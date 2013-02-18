@@ -7,7 +7,7 @@ require_once("php/class/bases/cApplication.php");
 class Application extends cApplication
 {
     //surcharge makeXMLView avec les paramétres du template principale
-    public function makeXMLView($filename,$attributes,$template_file="view/template.html")
+    public function makeXMLView($filename,$attributes,$template_file=NULL)
     {
         //status de la base de données
         $attributes["bdd_status"] = "Indisponible, vérifiez la configuration de l'application et l'installation de votre SGBD";
