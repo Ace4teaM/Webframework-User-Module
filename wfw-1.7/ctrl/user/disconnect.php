@@ -20,6 +20,46 @@
     ---------------------------------------------------------------------------------------------------------------------------------------
 */
 
-include("user.php");
+/*
+ * Déconnecte l'utilisateur en cours
+ * Rôle : Utilisateur
+ * UC   : user_disconnect
+ */
+
+//résultat de la requete
+RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
+$result = cResult::getLast();
+
+//entree
+$fields = array(
+    "cid"=>"cInputName"
+);
+
+if(!empty($_REQUEST))
+{
+
+    // exemples JS
+    if(!cInputFields::checkArray($fields,NULL,$_COOKIE))
+        goto failed;
+    
+    //supprime le compte utilisateur
+    if(!UserModule::disconnect($_COOKIE["cid"]))
+        goto failed;
+    
+    //retourne le resultat de cette fonction
+    $result = cResult::getLast();
+    
+    //supprime le cookie
+    setcookie("cid",NULL,time()-1);
+}
+
+goto success;
+failed:
+// redefinit le resultat avec l'erreur en cours
+$result = cResult::getLast();
+
+success:
+
+;;
 
 ?>

@@ -21,46 +21,22 @@
 */
 
 /*
- * Crée un compte utilisateur
- * Rôle : Administrateur
- * UC   : user_create_account
+ * Active un compte utilisateur
+ * Rôle : Visiteur
+ * UC   : user_activate_account
  */
 
 require_once("inc/globals.php");
 global $app;
 
-
 //résultat de la requete
-RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
+RESULT_OK();
 $result = cResult::getLast();
 
-$fields = array(
-    "uid"=>"cInputIdentifier",
-    "pwd"=>"cInputPassword",
-    "mail"=>"cInputMail"
-);
-
-if(!empty($_REQUEST))
-{
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
-        goto failed;
-    
-    //crée le compte utilisateur
-    if(!UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],NULL,$_REQUEST["mail"]))
-            goto failed;
- 
-    //retourne le resultat de cette fonction
-    $result = cResult::getLast();
+//inclue le controleur
+if(isset($_GET["page"]) && cInputIdentifier::isValid($_GET["page"])){
+    include($app->getCfgValue("user_module","ctrl_path")."/".$_GET["page"].".php");
 }
-
-goto success;
-failed:
-// redefinit le resultat avec l'erreur en cours
-$result = cResult::getLast();
-
-
-success:
 
 // Traduit le nom du champ concerné
 if(isset($result->att["field_name"]) && $app->getDefaultFile($default))
@@ -83,7 +59,10 @@ switch($format){
         echo xarg_encode_array($att);
         break;
     case "html":
-        echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
+        if(isset($_GET["page"]))
+            echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
+        else
+            echo $app->makeXMLView("view/user/pages/index.html",$att);
         break;
     default:
         RESULT(cResult::Failed,Application::UnsuportedFeature);

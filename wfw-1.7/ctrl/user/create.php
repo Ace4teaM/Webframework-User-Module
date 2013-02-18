@@ -21,13 +21,11 @@
 */
 
 /*
- * Active un compte utilisateur
- * Rôle : Visiteur
- * UC   : user_activate_account
+ * Crée un compte utilisateur
+ * Rôle : Administrateur
+ * UC   : user_create_account
  */
 
-require_once("inc/globals.php");
-global $app;
 
 //résultat de la requete
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
@@ -36,19 +34,19 @@ $result = cResult::getLast();
 $fields = array(
     "uid"=>"cInputIdentifier",
     "pwd"=>"cInputPassword",
-    "mail"=>"cInputMail",
-    "token"=>"cInputName"
+    "mail"=>"cInputMail"
 );
 
-if(!empty($_REQUEST)){
+if(!empty($_REQUEST))
+{
     // exemples JS
     if(!cInputFields::checkArray($fields))
         goto failed;
     
     //crée le compte utilisateur
-    if(!UserModule::activateAccount($_REQUEST["uid"],$_REQUEST["pwd"],$_REQUEST["mail"],$_REQUEST["token"]))
-        goto failed;
-    
+    if(!UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],NULL,$_REQUEST["mail"]))
+            goto failed;
+ 
     //retourne le resultat de cette fonction
     $result = cResult::getLast();
 }
@@ -58,39 +56,8 @@ failed:
 // redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();
 
+
 success:
-
-// Traduit le nom du champ concerné
-if(isset($result->att["field_name"]) && $app->getDefaultFile($default))
-    $result->att["field_name"] = $default->getResultText("fields",$result->att["field_name"]);
-
-// Traduit le résultat
-$att = $app->translateResult($result);
-
-// Ajoute les arguments reçues en entrée au template
-$att = array_merge($att,$_REQUEST);
-
-/* Génére la sortie */
-$format = "html";
-if(cInputFields::checkArray(array("output"=>"cInputIdentifier")))
-    $format = $_REQUEST["output"] ;
-
-switch($format){
-    case "xarg":
-        header("content-type: text/xarg");
-        echo xarg_encode_array($att);
-        break;
-    case "html":
-        echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
-        break;
-    default:
-        RESULT(cResult::Failed,Application::UnsuportedFeature);
-        $app->processLastError();
-        break;
-}
-
-
-// ok
-exit($result->isOk() ? 0 : 1);
+;;
 
 ?>

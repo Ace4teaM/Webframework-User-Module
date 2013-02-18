@@ -20,6 +20,44 @@
     ---------------------------------------------------------------------------------------------------------------------------------------
 */
 
-include("user.php");
+/*
+ * Déconnect un utilisateur
+ * Rôle : Administrateur
+ * UC   : user_disconnect_account
+ */
+
+//résultat de la requete
+RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
+$result = cResult::getLast();
+
+//entree
+$fields = array(
+    "uid"=>"cInputIdentifier"
+);
+
+if(!empty($_REQUEST))
+{
+    // exemples JS
+    if(!cInputFields::checkArray($fields))
+        goto failed;
+    
+    $client_id = "none";
+
+    //supprime le compte utilisateur
+    if(!UserModule::disconnectUser($_REQUEST["uid"]))
+        goto failed;
+    
+    //retourne le resultat de cette fonction
+    $result = cResult::getLast();
+}
+
+goto success;
+failed:
+// redefinit le resultat avec l'erreur en cours
+$result = cResult::getLast();
+
+success:
+
+;;
 
 ?>

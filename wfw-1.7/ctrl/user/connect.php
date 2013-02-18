@@ -21,24 +21,57 @@
 */
 
 /*
- * Déconnecte tous les utilisateurs
- * Rôle : Administrateur
- * UC   : user_disconnect_all
+ * Connexion d'un utilisateur
+ * Rôle : Visiteur
+ * UC   : user_connect
  */
-
-require_once("inc/globals.php");
-global $app;
 
 //résultat de la requete
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-//supprime le compte utilisateur
-if(!UserModule::disconnectAll())
-    goto failed;
+//entree
+$fields = array(
+    "uid"=>"cInputIdentifier",
+    "pwd"=>"cInputPassword",
+    "life_time"=>"cInputInteger"
+);
 
-//retourne le resultat de cette fonction
-$result = cResult::getLast();
+if(!empty($_REQUEST)){
+
+    // exemples JS
+    if(!cInputFields::checkArray($fields))
+        goto failed;
+    
+    $client_ip  = $_SERVER["REMOTE_ADDR"];
+    $local_path = NULL;
+    $life_time  = intval($_REQUEST["life_time"]);
+
+    if(!UserModule::checkAuthentication($_REQUEST["uid"], $_REQUEST["pwd"]))
+        goto failed;
+    
+    //crée une connexion
+    if(!UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"]))
+        goto failed;
+    
+    //retourne le resultat de cette fonction
+    $result = cResult::getLast();
+    
+    //définit le cookie
+    setcookie("cid",$result->getAtt("CONNECTION_ID"));
+    
+    //initialise la tache de fermeture
+    $taskMgr=NULL;
+    $app->getTaskMgr($taskMgr);
+    if($taskMgr !== null && $life_time > 0){
+        $taskName = UserModule::disconnectTaskName($_REQUEST["uid"]);
+        $taskCmd  = UserModule::disconnectTaskCmd($_REQUEST["uid"]);
+        $expire   = new DateTime();
+        $expire->add(new DateInterval('P0Y0DT0H'.$life_time.'M'));
+        if(!$taskMgr->create($taskName,$expire,$taskCmd))
+             goto failed;
+    }
+}
 
 
 goto success;
@@ -48,30 +81,6 @@ $result = cResult::getLast();
 
 
 success:
-
-// Traduit le résultat
-$att = $app->translateResult($result);
-
-/* Génére la sortie */
-$format = "html";
-if(cInputFields::checkArray(array("output"=>"cInputIdentifier")))
-    $format = $_REQUEST["output"] ;
-
-switch($format){
-    case "xarg":
-        header("content-type: text/xarg");
-        echo xarg_encode_array($att);
-        break;
-    case "html":
-        echo $app->makeFormView($att,NULL,NULL,$_REQUEST);
-        break;
-    default:
-        RESULT(cResult::Failed,Application::UnsuportedFeature);
-        $app->processLastError();
-        break;
-}
-
-// ok
-exit($result->isOk() ? 0 : 1);
+;;
 
 ?>

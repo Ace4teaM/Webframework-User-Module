@@ -26,9 +26,6 @@
  * UC   : user_register_account
  */
 
-require_once("inc/globals.php");
-global $app;
-
 //résultat de la requete
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
@@ -130,36 +127,6 @@ $result = cResult::getLast();
 //Termine
 success:
 
-// Traduit le nom du champ concerné
-if(isset($result->att["field_name"]) && $app->getDefaultFile($default))
-    $result->att["field_name"] = $default->getResultText("fields",$result->att["field_name"]);
-
-// Traduit le résultat
-$att = $app->translateResult($result);
-
-// Ajoute les arguments reçues en entrée au template
-$att = array_merge($att,$_REQUEST);
-
-/* Génére la sortie */
-$format = "html";
-if(cInputFields::checkArray(array("output"=>"cInputIdentifier")))
-    $format = $_REQUEST["output"] ;
-
-switch($format){
-    case "xarg":
-        header("content-type: text/xarg");
-        echo xarg_encode_array($att);
-        break;
-    case "html":
-        echo $app->makeFormView($att,$fields,NULL,$_REQUEST,NULL);
-        break;
-    default:
-        RESULT(cResult::Failed,Application::UnsuportedFeature);
-        $app->processLastError();
-        break;
-}
-
-// ok
-exit($result->isOk() ? 0 : 1);
+;;
 
 ?>

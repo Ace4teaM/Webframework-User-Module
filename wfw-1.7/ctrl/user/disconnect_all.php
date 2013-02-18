@@ -21,77 +21,31 @@
 */
 
 /*
- * Déconnect un utilisateur
+ * Déconnecte tous les utilisateurs
  * Rôle : Administrateur
- * UC   : user_disconnect_account
+ * UC   : user_disconnect_all
  */
-
-require_once("inc/globals.php");
-global $app;
 
 //résultat de la requete
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-//entree
-$fields = array(
-    "uid"=>"cInputIdentifier"
-);
+//supprime le compte utilisateur
+if(!UserModule::disconnectAll())
+    goto failed;
 
-if(!empty($_REQUEST))
-{
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
-        goto failed;
-    
-    $client_id = "none";
+//retourne le resultat de cette fonction
+$result = cResult::getLast();
 
-    //supprime le compte utilisateur
-    if(!UserModule::disconnectUser($_REQUEST["uid"]))
-        goto failed;
-    
-    //retourne le resultat de cette fonction
-    $result = cResult::getLast();
-}
 
 goto success;
 failed:
 // redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();
 
+
 success:
 
-// Traduit le nom du champ concerné
-if(isset($result->att["field_name"]) && $app->getDefaultFile($default))
-    $result->att["field_name"] = $default->getResultText("fields",$result->att["field_name"]);
-
-// Traduit le résultat
-$att = $app->translateResult($result);
-
-// Ajoute les arguments reçues en entrée au template
-$att = array_merge($att,$_REQUEST);
-
-/* Génére la sortie */
-$format = "html";
-if(cInputFields::checkArray(array("output"=>"cInputIdentifier")))
-    $format = $_REQUEST["output"] ;
-
-switch($format){
-    case "xarg":
-        header("content-type: text/xarg");
-        echo xarg_encode_array($att);
-        break;
-    case "html":
-        echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
-        break;
-    default:
-        RESULT(cResult::Failed,Application::UnsuportedFeature);
-        $app->processLastError();
-        break;
-}
-
-
-// ok
-exit($result->isOk() ? 0 : 1);
+;;
 
 ?>
