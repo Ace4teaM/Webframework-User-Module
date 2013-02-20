@@ -75,7 +75,7 @@ if(!empty($_REQUEST))
     //attributs du template
     $template_att = $_REQUEST;
     $template_att["TOKEN"] = $result->getAtt("token");
-    $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","activate")."?token=".$result->getAtt("token")."&uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"];
+    $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","user_activate")."?token=".$result->getAtt("token")."&uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"];
 
     //depuis un template ?
     $template = $app->getCfgValue("user_module","activation_mail");

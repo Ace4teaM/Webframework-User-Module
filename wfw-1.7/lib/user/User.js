@@ -90,7 +90,7 @@ YUI.add('wfw-user', function (Y) {
                 checkReq = new wfw.Request.REQUEST(
                     {
                         name: "Maintient la connexion active",
-                        url: wfw.Navigator.getURI("check"),
+                        url: wfw.Navigator.getURI("user_check"),
                         args: {
                             cid: this.cid,
                             output: "xarg"
