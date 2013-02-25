@@ -60,8 +60,9 @@
             <DB_CONNECTION>Connexion au serveur de base de données a échouée</DB_CONNECTION>
             <DB_SQL_QUERY>Requête SQL mal formée</DB_SQL_QUERY>
             <SOCK_OPEN_URL>La connexion au serveur a échouée</SOCK_OPEN_URL>
-            <UNKNOWN_HOSTNAME>Nom de l'hôte inconnu</UNKNOWN_HOSTNAME>
-            <NO_DATABASE_CONFIGURED>Aucune base de donées n'est présente dans la configuration</NO_DATABASE_CONFIGURED>
+            <APP_UNKNOWN_HOSTNAME>Nom de l'hôte inconnu</APP_UNKNOWN_HOSTNAME>
+            <APP_NO_DATABASE_CONFIGURED>Aucune base de donées n'est présente dans la configuration</APP_NO_DATABASE_CONFIGURED>
+            <APP_UNKNOWN_FORM_TEMPLATE_FILE>Le template de formulaire est indéfinit</APP_UNKNOWN_FORM_TEMPLATE_FILE>
             <!-- WFW (ERR_SYSTEM) -->
             <SYS_TASK_CREATE>La tâche ne peut pas être créée</SYS_TASK_CREATE>
             <SYS_TASK_UPDATE>La tâche ne peut pas être mise à jour</SYS_TASK_UPDATE>
