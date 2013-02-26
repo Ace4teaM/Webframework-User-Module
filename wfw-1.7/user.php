@@ -60,9 +60,14 @@ switch($format){
         break;
     case "html":
         if(isset($_GET["page"]))
-            echo $app->makeFormView($att,$fields,NULL,$_REQUEST);
+            $content = $app->makeFormView($att, isset($fields)?$fields:NULL, isset($op_fields)?$op_fields:NULL, $_REQUEST);
         else
-            echo $app->makeXMLView("view/user/pages/index.html",$att);
+            $content = $app->makeXMLView("view/user/pages/index.html",$att);
+        
+        if($content === false)
+            $app->processLastError();
+        
+        echo $content;
         break;
     default:
         RESULT(cResult::Failed,Application::UnsuportedFeature);

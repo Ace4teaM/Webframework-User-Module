@@ -1,7 +1,28 @@
 <?php
 /*
-   Webframework User Module
-   PHP Data-Model Implementation
+    ---------------------------------------------------------------------------------------------------------------------------------------
+    (C)2012-2013 Thomas AUGUEY <contact@aceteam.org>
+    ---------------------------------------------------------------------------------------------------------------------------------------
+    This file is part of WebFrameWork.
+
+    WebFrameWork is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    WebFrameWork is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with WebFrameWork.  If not, see <http://www.gnu.org/licenses/>.
+    ---------------------------------------------------------------------------------------------------------------------------------------
+*/
+
+/**
+ *  Webframework Module
+ *  PHP Data-Model Implementation
 */
 
 
@@ -95,17 +116,17 @@ class UserAddressMgr
       
       //execute la requete
        $query = "SELECT * from user_address where $cond";
-       if($db->execute($query, $result)){
+       if($db->execute($query)){
             $inst = new UserAddress();
-          $inst->userAddressId = $db->fetchValue($result,"user_address_id");
-          $inst->zipCode = $db->fetchValue($result,"zip_code");
-          $inst->cityName = $db->fetchValue($result,"city_name");
-          $inst->streetName = $db->fetchValue($result,"street_name");
-          $inst->streetNumber = $db->fetchValue($result,"street_number");
-          $inst->countryName = $db->fetchValue($result,"country_name");
-          $inst->streetPrefix = $db->fetchValue($result,"street_prefix");
-          $inst->buildingNumber = $db->fetchValue($result,"building_number");
-          $inst->aptNumber = $db->fetchValue($result,"apt_number");          
+          $inst->userAddressId = $db->fetchValue("user_address_id");
+          $inst->zipCode = $db->fetchValue("zip_code");
+          $inst->cityName = $db->fetchValue("city_name");
+          $inst->streetName = $db->fetchValue("street_name");
+          $inst->streetNumber = $db->fetchValue("street_number");
+          $inst->countryName = $db->fetchValue("country_name");
+          $inst->streetPrefix = $db->fetchValue("street_prefix");
+          $inst->buildingNumber = $db->fetchValue("building_number");
+          $inst->aptNumber = $db->fetchValue("apt_number");          
 
           return true;
        }
@@ -129,17 +150,17 @@ class UserAddressMgr
            
       //execute la requete
        $query = "SELECT * from user_address where user_address_id=$id";
-       if($db->execute($query, $result)){
+       if($db->execute($query)){
             $inst = new UserAddress();
-          $inst->userAddressId = $db->fetchValue($result,"user_address_id");
-          $inst->zipCode = $db->fetchValue($result,"zip_code");
-          $inst->cityName = $db->fetchValue($result,"city_name");
-          $inst->streetName = $db->fetchValue($result,"street_name");
-          $inst->streetNumber = $db->fetchValue($result,"street_number");
-          $inst->countryName = $db->fetchValue($result,"country_name");
-          $inst->streetPrefix = $db->fetchValue($result,"street_prefix");
-          $inst->buildingNumber = $db->fetchValue($result,"building_number");
-          $inst->aptNumber = $db->fetchValue($result,"apt_number");          
+          $inst->userAddressId = $db->fetchValue("user_address_id");
+          $inst->zipCode = $db->fetchValue("zip_code");
+          $inst->cityName = $db->fetchValue("city_name");
+          $inst->streetName = $db->fetchValue("street_name");
+          $inst->streetNumber = $db->fetchValue("street_number");
+          $inst->countryName = $db->fetchValue("country_name");
+          $inst->streetPrefix = $db->fetchValue("street_prefix");
+          $inst->buildingNumber = $db->fetchValue("building_number");
+          $inst->aptNumber = $db->fetchValue("apt_number");          
 
           return true;
        }

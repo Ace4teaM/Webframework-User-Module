@@ -1,7 +1,28 @@
 <?php
 /*
-   Webframework User Module
-   PHP Data-Model Implementation
+    ---------------------------------------------------------------------------------------------------------------------------------------
+    (C)2012-2013 Thomas AUGUEY <contact@aceteam.org>
+    ---------------------------------------------------------------------------------------------------------------------------------------
+    This file is part of WebFrameWork.
+
+    WebFrameWork is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    WebFrameWork is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with WebFrameWork.  If not, see <http://www.gnu.org/licenses/>.
+    ---------------------------------------------------------------------------------------------------------------------------------------
+*/
+
+/**
+ *  Webframework Module
+ *  PHP Data-Model Implementation
 */
 
 
@@ -75,13 +96,13 @@ class UserConnectionMgr
       
       //execute la requete
        $query = "SELECT * from user_connection where $cond";
-       if($db->execute($query, $result)){
+       if($db->execute($query)){
             $inst = new UserConnection();
-          $inst->userConnectionId = $db->fetchValue($result,"user_connection_id");
-          $inst->clientIp = $db->fetchValue($result,"client_ip");
-          $inst->lastAccess = $db->fetchValue($result,"last_access");
-          $inst->lifeTime = $db->fetchValue($result,"life_time");
-          $inst->linkPath = $db->fetchValue($result,"link_path");          
+          $inst->userConnectionId = $db->fetchValue("user_connection_id");
+          $inst->clientIp = $db->fetchValue("client_ip");
+          $inst->lastAccess = $db->fetchValue("last_access");
+          $inst->lifeTime = $db->fetchValue("life_time");
+          $inst->linkPath = $db->fetchValue("link_path");          
 
           return true;
        }
@@ -105,13 +126,13 @@ class UserConnectionMgr
            
       //execute la requete
        $query = "SELECT * from user_connection where user_connection_id=$id";
-       if($db->execute($query, $result)){
+       if($db->execute($query)){
             $inst = new UserConnection();
-          $inst->userConnectionId = $db->fetchValue($result,"user_connection_id");
-          $inst->clientIp = $db->fetchValue($result,"client_ip");
-          $inst->lastAccess = $db->fetchValue($result,"last_access");
-          $inst->lifeTime = $db->fetchValue($result,"life_time");
-          $inst->linkPath = $db->fetchValue($result,"link_path");          
+          $inst->userConnectionId = $db->fetchValue("user_connection_id");
+          $inst->clientIp = $db->fetchValue("client_ip");
+          $inst->lastAccess = $db->fetchValue("last_access");
+          $inst->lifeTime = $db->fetchValue("life_time");
+          $inst->linkPath = $db->fetchValue("link_path");          
 
           return true;
        }
