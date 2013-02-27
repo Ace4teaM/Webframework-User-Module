@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1361905452" Name="user" Objects="57" Symbols="11" Target="PHP (WFW)" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1361905594" Name="user" Objects="57" Symbols="11" Target="PHP (WFW)" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,7 +12,7 @@
 <a:Code>USER</a:Code>
 <a:CreationDate>1355940053</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1361905452</a:ModificationDate>
+<a:ModificationDate>1361905594</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:History>ORG {94471171-BAD3-410B-8D7E-6A3235048243}
 DAT 1356018134
@@ -293,7 +293,7 @@ DLD {781772C0-BCEA-441F-AC0B-6358B52F7856}</a:History>
 
 [FolderOptions\Class Diagram Objects]
 GenerationCheckModel=Yes
-GenerationPath=C:\Users\developpement\Documents\GitHub\_Webframework-User-Module\wfw-1.7\lib\user\
+GenerationPath=C:\Users\developpement\Documents\GitHub\Webframework-User-Module\wfw-1.7\lib\user\
 GenerationOptions=
 GenerationTasks=WSDLJava|WSPackServer[LF]F[LF]WSDLJava|WSPackClient[LF]F[LF]
 GenerationTargets=WSDL[LF]F[LF]WSDLJava[LF]T

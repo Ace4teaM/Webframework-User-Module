@@ -91,12 +91,12 @@ class UserAccountMgr
       
       //execute la requete
        $query = "SELECT * from user_account where $cond";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserAccount();
-          $inst->userAccountId = $db->fetchValue("user_account_id");
-          $inst->clientId = $db->fetchValue("client_id");
-          $inst->userMail = $db->fetchValue("user_mail");
-          $inst->userPwd = $db->fetchValue("user_pwd");          
+          $inst->userAccountId = $result->fetchValue("user_account_id");
+          $inst->clientId = $result->fetchValue("client_id");
+          $inst->userMail = $result->fetchValue("user_mail");
+          $inst->userPwd = $result->fetchValue("user_pwd");          
 
           return true;
        }
@@ -120,12 +120,12 @@ class UserAccountMgr
            
       //execute la requete
        $query = "SELECT * from user_account where user_account_id=$id";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserAccount();
-          $inst->userAccountId = $db->fetchValue("user_account_id");
-          $inst->clientId = $db->fetchValue("client_id");
-          $inst->userMail = $db->fetchValue("user_mail");
-          $inst->userPwd = $db->fetchValue("user_pwd");          
+          $inst->userAccountId = $result->fetchValue("user_account_id");
+          $inst->clientId = $result->fetchValue("client_id");
+          $inst->userMail = $result->fetchValue("user_mail");
+          $inst->userPwd = $result->fetchValue("user_pwd");          
 
           return true;
        }

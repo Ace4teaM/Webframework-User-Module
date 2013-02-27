@@ -96,13 +96,13 @@ class UserIdentityMgr
       
       //execute la requete
        $query = "SELECT * from user_identity where $cond";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserIdentity();
-          $inst->userIdentityId = $db->fetchValue("user_identity_id");
-          $inst->firstName = $db->fetchValue("first_name");
-          $inst->lastName = $db->fetchValue("last_name");
-          $inst->birthDay = $db->fetchValue("birth_day");
-          $inst->sex = $db->fetchValue("sex");          
+          $inst->userIdentityId = $result->fetchValue("user_identity_id");
+          $inst->firstName = $result->fetchValue("first_name");
+          $inst->lastName = $result->fetchValue("last_name");
+          $inst->birthDay = $result->fetchValue("birth_day");
+          $inst->sex = $result->fetchValue("sex");          
 
           return true;
        }
@@ -126,13 +126,13 @@ class UserIdentityMgr
            
       //execute la requete
        $query = "SELECT * from user_identity where user_identity_id=$id";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserIdentity();
-          $inst->userIdentityId = $db->fetchValue("user_identity_id");
-          $inst->firstName = $db->fetchValue("first_name");
-          $inst->lastName = $db->fetchValue("last_name");
-          $inst->birthDay = $db->fetchValue("birth_day");
-          $inst->sex = $db->fetchValue("sex");          
+          $inst->userIdentityId = $result->fetchValue("user_identity_id");
+          $inst->firstName = $result->fetchValue("first_name");
+          $inst->lastName = $result->fetchValue("last_name");
+          $inst->birthDay = $result->fetchValue("birth_day");
+          $inst->sex = $result->fetchValue("sex");          
 
           return true;
        }

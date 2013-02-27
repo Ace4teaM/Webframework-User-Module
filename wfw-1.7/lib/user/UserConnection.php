@@ -96,13 +96,13 @@ class UserConnectionMgr
       
       //execute la requete
        $query = "SELECT * from user_connection where $cond";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserConnection();
-          $inst->userConnectionId = $db->fetchValue("user_connection_id");
-          $inst->clientIp = $db->fetchValue("client_ip");
-          $inst->lastAccess = $db->fetchValue("last_access");
-          $inst->lifeTime = $db->fetchValue("life_time");
-          $inst->linkPath = $db->fetchValue("link_path");          
+          $inst->userConnectionId = $result->fetchValue("user_connection_id");
+          $inst->clientIp = $result->fetchValue("client_ip");
+          $inst->lastAccess = $result->fetchValue("last_access");
+          $inst->lifeTime = $result->fetchValue("life_time");
+          $inst->linkPath = $result->fetchValue("link_path");          
 
           return true;
        }
@@ -126,13 +126,13 @@ class UserConnectionMgr
            
       //execute la requete
        $query = "SELECT * from user_connection where user_connection_id=$id";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserConnection();
-          $inst->userConnectionId = $db->fetchValue("user_connection_id");
-          $inst->clientIp = $db->fetchValue("client_ip");
-          $inst->lastAccess = $db->fetchValue("last_access");
-          $inst->lifeTime = $db->fetchValue("life_time");
-          $inst->linkPath = $db->fetchValue("link_path");          
+          $inst->userConnectionId = $result->fetchValue("user_connection_id");
+          $inst->clientIp = $result->fetchValue("client_ip");
+          $inst->lastAccess = $result->fetchValue("last_access");
+          $inst->lifeTime = $result->fetchValue("life_time");
+          $inst->linkPath = $result->fetchValue("link_path");          
 
           return true;
        }

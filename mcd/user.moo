@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1361905594" Name="user" Objects="57" Symbols="11" Target="PHP (WFW)" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{95319535-B633-4821-A608-3A33B99D1993}" Label="" LastModificationDate="1361950145" Name="user" Objects="55" Symbols="11" Target="PHP (WFW)" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -4563,6 +4563,7 @@ F	Femme</a:ListOfValues>
 <a:ObjectID>76356BAE-9F15-4A5E-8877-45D64FEF961A</a:ObjectID>
 <a:Name>user</a:Name>
 <a:Code>USER</a:Code>
+<a:ExtractionID>384</a:ExtractionID>
 <a:CreationDate>1356018134</a:CreationDate>
 <a:Creator>developpement</a:Creator>
 <a:ModificationDate>1360047685</a:ModificationDate>
@@ -4580,7 +4581,7 @@ F	Femme</a:ListOfValues>
 <a:Code>WSDLJava</a:Code>
 <a:CreationDate>1356018443</a:CreationDate>
 <a:Creator>developpement</a:Creator>
-<a:ModificationDate>1360047685</a:ModificationDate>
+<a:ModificationDate>1361950145</a:ModificationDate>
 <a:Modifier>developpement</a:Modifier>
 <a:TargetModelURL>file:///%_XEM%/WSDLJ2EE.xem</a:TargetModelURL>
 <a:TargetModelID>C8F5F7B2-CF9D-4E98-8301-959BB6E86C8A</a:TargetModelID>

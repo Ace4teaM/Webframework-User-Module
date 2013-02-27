@@ -81,10 +81,10 @@ class UserSessionMgr
       
       //execute la requete
        $query = "SELECT * from user_session where $cond";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserSession();
-          $inst->userSessionId = $db->fetchValue("user_session_id");
-          $inst->localPath = $db->fetchValue("local_path");          
+          $inst->userSessionId = $result->fetchValue("user_session_id");
+          $inst->localPath = $result->fetchValue("local_path");          
 
           return true;
        }
@@ -108,10 +108,10 @@ class UserSessionMgr
            
       //execute la requete
        $query = "SELECT * from user_session where user_session_id=$id";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserSession();
-          $inst->userSessionId = $db->fetchValue("user_session_id");
-          $inst->localPath = $db->fetchValue("local_path");          
+          $inst->userSessionId = $result->fetchValue("user_session_id");
+          $inst->localPath = $result->fetchValue("local_path");          
 
           return true;
        }

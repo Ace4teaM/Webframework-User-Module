@@ -91,12 +91,12 @@ class UserRegistrationMgr
       
       //execute la requete
        $query = "SELECT * from user_registration where $cond";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserRegistration();
-          $inst->userRegistrationId = $db->fetchValue("user_registration_id");
-          $inst->userToken = $db->fetchValue("user_token");
-          $inst->userMail = $db->fetchValue("user_mail");
-          $inst->userId = $db->fetchValue("user_id");          
+          $inst->userRegistrationId = $result->fetchValue("user_registration_id");
+          $inst->userToken = $result->fetchValue("user_token");
+          $inst->userMail = $result->fetchValue("user_mail");
+          $inst->userId = $result->fetchValue("user_id");          
 
           return true;
        }
@@ -120,12 +120,12 @@ class UserRegistrationMgr
            
       //execute la requete
        $query = "SELECT * from user_registration where user_registration_id=$id";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserRegistration();
-          $inst->userRegistrationId = $db->fetchValue("user_registration_id");
-          $inst->userToken = $db->fetchValue("user_token");
-          $inst->userMail = $db->fetchValue("user_mail");
-          $inst->userId = $db->fetchValue("user_id");          
+          $inst->userRegistrationId = $result->fetchValue("user_registration_id");
+          $inst->userToken = $result->fetchValue("user_token");
+          $inst->userMail = $result->fetchValue("user_mail");
+          $inst->userId = $result->fetchValue("user_id");          
 
           return true;
        }

@@ -116,17 +116,17 @@ class UserAddressMgr
       
       //execute la requete
        $query = "SELECT * from user_address where $cond";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserAddress();
-          $inst->userAddressId = $db->fetchValue("user_address_id");
-          $inst->zipCode = $db->fetchValue("zip_code");
-          $inst->cityName = $db->fetchValue("city_name");
-          $inst->streetName = $db->fetchValue("street_name");
-          $inst->streetNumber = $db->fetchValue("street_number");
-          $inst->countryName = $db->fetchValue("country_name");
-          $inst->streetPrefix = $db->fetchValue("street_prefix");
-          $inst->buildingNumber = $db->fetchValue("building_number");
-          $inst->aptNumber = $db->fetchValue("apt_number");          
+          $inst->userAddressId = $result->fetchValue("user_address_id");
+          $inst->zipCode = $result->fetchValue("zip_code");
+          $inst->cityName = $result->fetchValue("city_name");
+          $inst->streetName = $result->fetchValue("street_name");
+          $inst->streetNumber = $result->fetchValue("street_number");
+          $inst->countryName = $result->fetchValue("country_name");
+          $inst->streetPrefix = $result->fetchValue("street_prefix");
+          $inst->buildingNumber = $result->fetchValue("building_number");
+          $inst->aptNumber = $result->fetchValue("apt_number");          
 
           return true;
        }
@@ -150,17 +150,17 @@ class UserAddressMgr
            
       //execute la requete
        $query = "SELECT * from user_address where user_address_id=$id";
-       if($db->execute($query)){
+       if($db->execute($query,$result)){
             $inst = new UserAddress();
-          $inst->userAddressId = $db->fetchValue("user_address_id");
-          $inst->zipCode = $db->fetchValue("zip_code");
-          $inst->cityName = $db->fetchValue("city_name");
-          $inst->streetName = $db->fetchValue("street_name");
-          $inst->streetNumber = $db->fetchValue("street_number");
-          $inst->countryName = $db->fetchValue("country_name");
-          $inst->streetPrefix = $db->fetchValue("street_prefix");
-          $inst->buildingNumber = $db->fetchValue("building_number");
-          $inst->aptNumber = $db->fetchValue("apt_number");          
+          $inst->userAddressId = $result->fetchValue("user_address_id");
+          $inst->zipCode = $result->fetchValue("zip_code");
+          $inst->cityName = $result->fetchValue("city_name");
+          $inst->streetName = $result->fetchValue("street_name");
+          $inst->streetNumber = $result->fetchValue("street_number");
+          $inst->countryName = $result->fetchValue("country_name");
+          $inst->streetPrefix = $result->fetchValue("street_prefix");
+          $inst->buildingNumber = $result->fetchValue("building_number");
+          $inst->aptNumber = $result->fetchValue("apt_number");          
 
           return true;
        }

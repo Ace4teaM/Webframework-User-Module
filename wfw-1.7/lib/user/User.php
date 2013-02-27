@@ -25,7 +25,6 @@
  * Librairie PHP5
  */
 
-
 require_once("php/class/bases/iModule.php");
 require_once("php/xml_default.php");
 
@@ -162,13 +161,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_create_account", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_create_account", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -181,13 +180,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_delete_account", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_delete_account", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -205,13 +204,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_connect", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_connect", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -224,13 +223,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect_account", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect_account", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -243,13 +242,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -262,13 +261,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect_all", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect_all", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -285,13 +284,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_activate_account", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_activate_account", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -307,13 +306,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_register_account", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_register_account", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -329,13 +328,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_account_exists", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_account_exists", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -352,13 +351,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_make_identity", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_make_identity", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -374,13 +373,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_check_authentication", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_check_authentication", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
@@ -396,13 +395,13 @@ class UserModule implements iModule
         if(!$app->getDB($db))
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        if(!$db->call($app->getCfgValue("database","schema"), "user_check_connection", func_get_args()))
+        if(!$db->call($app->getCfgValue("database","schema"), "user_check_connection", func_get_args(), $result))
             return false;
         
-        $result = $db->fetchRow();
+        $row = $result->fetchRow();
 
         //return $result;
-        return RESULT($result["err_code"], $result["err_str"], stra_to_array($result["ext_fields"]));
+        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
     
     /** 
