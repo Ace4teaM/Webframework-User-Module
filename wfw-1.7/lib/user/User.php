@@ -75,6 +75,9 @@ function relativePath( $path, $compareTo ) {
     
 class UserModule implements iModule
 {
+    //erreurs
+    const Disconnected = "USER_DISCONNECTED";
+    
     /**
      * @brief Initialise le module
      * @param $local_path Chemin d'accès local vers ce dossier
@@ -383,7 +386,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Vérifie l'autentification d'un tilisateur
+     * Vérifie l'autentification d'un utilisateur
      * 
      * @param type $uid Nom d'utilisateur
      * @param type $pwd Mot de passe
@@ -428,6 +431,39 @@ class UserModule implements iModule
         //UNIX
         return '"'.$app->getRootPath().'/sh/disconnect_task.sh" "'.$uid.'" > NUL';
     }
+    
+    /** 
+     * @brief Obtient l'utilisateur en cours
+     * 
+     * @param type $uid Nom d'utilisateur
+     * @return Nom de la tâche système
+     */
+    public static function getCurrent(&$user){ 
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        //obtient l'identifiant de connexion
+        if(!isset($_COOKIE["cid"]))
+            return RESULT(cResult::Failed,UserModule::Disconnected);
+        $cid = $_COOKIE["cid"];
+        
+        //vérifie la validité de la connexion
+        if(!UserModule::checkConnection($cid,$_SERVER["REMOTE_ADDR"]))
+            return false;
+        
+        //obtient l'identifiant de l'utilisateur
+        $query = "select user_account_id from user_connection where user_connection_id = '$cid';";
+        if(!$db->execute($query, $result))
+            return false;
+        $uid = $result->fetchValue("user_account_id");
+        
+        //obtient l'utilisateur
+        return UserAccountMgr::getById($user, $uid);
+    }
+
 }
 
 ?>
