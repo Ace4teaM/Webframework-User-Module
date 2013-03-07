@@ -35,7 +35,8 @@ YUI.add('wfw-user', function (Y) {
         cid         : null, // connexion id
         pwd         : null, // mot-de-passe (si connexion automatique)
         expireTimeoutId : null, // id setTimeout fonction
-        
+        status      : null, //statut de connexion
+        //
         //-------------------------------------------------------------
         // public events
         //-------------------------------------------------------------
@@ -74,6 +75,13 @@ YUI.add('wfw-user', function (Y) {
         },
 
         /**
+         *   @brief Initialise le module
+        */
+        isConnected: function() {wfw.puts("status="+wfw.User.status);
+            return (wfw.User.status == "USER_CONNECTED") ? true : false;
+        },
+
+        /**
          *   @brief Vérifie et maintient l'état de la connexion
         */
         checkConnection: function() {
@@ -102,14 +110,18 @@ YUI.add('wfw-user', function (Y) {
                                 wfw.puts("wfw.User.checkConnection: onsuccess");
 
                                 wfw.User.onConnectionStatusChange(args.error);
+                    
+                                //enregistre l'etat
+                                wfw.User.status = args.error;
+                                wfw.puts("status="+wfw.User.status);
                                 //si l'utilisateur est connecté prépare l'événement d'expiration
                                 if(args.error == "USER_CONNECTED")
                                 {
                                     //calcule le delais pour la date d'expiration
                                     var expire = parseInt(args.expire);
                                     var expireDate = new Date(expire*1000);
-                                    var delay = (expire*1000)-new Date().getTime();
-                                    //wfw.puts("expire="+expireDate);
+                                    var delay = (expire*1000)-(new Date().getTime());
+//                                    wfw.puts("expire="+expireDate);
 
                                     //delais ok?
                                     if(!isNaN(expire) && delay>0)
@@ -121,6 +133,7 @@ YUI.add('wfw-user', function (Y) {
                                         }
                                         //cree le nouveau timer de l'evenement
                                         wfw.puts("wfw.User.checkConnection: Add expire callback to "+expireDate);
+//                                        wfw.puts("delay="+delay);
                                         wfw.User.expireTimeoutId = setTimeout(wfw.User.checkConnection,delay);
                                     }
                                     else
@@ -128,6 +141,10 @@ YUI.add('wfw-user', function (Y) {
                                 }
                             },
                             onfailed: function (obj, args) {
+                                //enregistre l'etat
+                                wfw.User.status = args.error;
+                                wfw.puts("status="+wfw.User.status);
+                                //
                                 wfw.puts("wfw.User.checkConnection: "+args.result+" = "+args.error);
                                 wfw.User.onConnectionStatusChange(args.error);
                                 wfw.User.cid = null; // pas la peine d'essayer de nouveau
