@@ -411,7 +411,7 @@ class UserModule implements iModule
      * Génére le nom pour la tâche de déconnection d'un utilisateur
      * 
      * @param type $uid Nom d'utilisateur
-     * @return Nom de la tâche système
+     * @return string Nom de la tâche système
      */
     public static function disconnectTaskName($uid){ 
         global $app;
@@ -422,7 +422,7 @@ class UserModule implements iModule
      * Génére la commande pour la tâche de déconnection d'un utilisateur
      * 
      * @param type $uid Nom d'utilisateur
-     * @return Commande de la tâche système
+     * @return string Commande de la tâche système
      */
     public static function disconnectTaskCmd($uid){
         global $app;
@@ -433,10 +433,10 @@ class UserModule implements iModule
     }
     
     /** 
-     * @brief Obtient l'utilisateur en cours
+     * @brief Obtient l'utilisateur connecté
      * 
-     * @param type $uid Nom d'utilisateur
-     * @return Nom de la tâche système
+     * @param UserAccount $user Reçoi l'instance du compte utilisateur connecté
+     * @return bool Résultat de procédure
      */
     public static function getCurrent(&$user){ 
         global $app;
