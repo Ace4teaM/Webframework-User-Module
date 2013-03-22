@@ -30,11 +30,12 @@
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-//entree
-$fields = array(
-    "uid"=>"cInputIdentifier",
-    "mail"=>"cInputMail"
-);
+//requis
+if(!$app->makeFiledList(
+        $fields,
+        array( 'user_account_id', 'user_mail' ),
+        cXMLDefault::FieldFormatClassName )
+   ) $app->processLastError();
 
 //module mail requis ?
 if(!class_exists("MailModule") && $app->getCfgValue("user_module","requires_mail_module")){
@@ -51,7 +52,7 @@ if(!empty($_REQUEST))
     $client_id = "none";
 
     //crée l'e compte utilisateur'inscription
-    if(!UserModule::registerAccount($_REQUEST["uid"],$_REQUEST["mail"]))
+    if(!UserModule::registerAccount($_REQUEST["user_account_id"],$_REQUEST["user_mail"]))
             goto failed;
 
     //retourne le resultat de cette fonction
@@ -69,13 +70,13 @@ if(!empty($_REQUEST))
     //initialise le message
     
     $msg = new MailMessage();
-    $msg->to       = $_REQUEST["mail"];
+    $msg->to       = $_REQUEST["user_mail"];
     $msg->subject  = "Activation";
     
     //attributs du template
     $template_att = $_REQUEST;
     $template_att["TOKEN"] = $result->getAtt("token");
-    $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","user_activate")."?token=".$result->getAtt("token")."&uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"];
+    $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","user_activate")."?token=".$result->getAtt("token")."&uid=".$_REQUEST["user_account_id"]."&mail=".$_REQUEST["user_mail"];
 
     //depuis un template ?
     $template = $app->getCfgValue("user_module","activation_mail");
@@ -109,7 +110,7 @@ activate:
     
 $pwd   = rand(1615,655641);
 //crée le compte utilisateur'inscription
-if(!UserModule::activateAccount($_REQUEST["uid"], $pwd, $_REQUEST["mail"], $result->getAtt("token")))
+if(!UserModule::activateAccount($_REQUEST["user_account_id"], $pwd, $_REQUEST["user_mail"], $result->getAtt("token")))
     goto failed;
 //ajoute un message d'avertissement
 $result->addAtt("pwd",$pwd);

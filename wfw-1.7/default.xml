@@ -118,15 +118,15 @@
         </messages>
         
         <fields>
-            <uid format="identifier">Nom d'utilisateur</uid>
-            <pwd format="password">Mot-de-passe</pwd>
-            <mail format="mail">Adresse eMail</mail>
-            <token format="name">Jeton</token>
-            <life_time format="integer">Temps d'inactivité avant déconnexion</life_time>
-            <cid format="name">Identifiant de connexion</cid>
-            <firstname format="name">Prénom</firstname>
-            <lastname format="name">Nom</lastname>
-            <birthday format="date">Date de naissance</birthday>
+            <user_account_id>Nom d'utilisateur</user_account_id>
+            <user_pwd>Mot-de-passe</user_pwd>
+            <user_mail>Adresse eMail</user_mail>
+            <token>Jeton</token>
+            <life_time>Temps d'inactivité avant déconnexion</life_time>
+            <cid>Identifiant de connexion</cid>
+            <firstname>Prénom</firstname>
+            <lastname>Nom</lastname>
+            <birthday>Date de naissance</birthday>
         </fields>
     </results>
 </site>
