@@ -26,27 +26,30 @@
  * UC   : user_activate_account
  */
 
-//résultat de la requete
+// Résultat de la requete
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-$fields = array(
-    "uid"=>"cInputIdentifier",
-    "pwd"=>"cInputPassword",
-    "mail"=>"cInputMail",
-    "token"=>"cInputName"
-);
+// Champs requis
+if(!$app->makeFiledList(
+        $fields,
+        array( 'user_account_id', 'user_pwd', 'user_mail', 'token' ),
+        cXMLDefault::FieldFormatClassName )
+   ) $app->processLastError();
 
-if(!empty($_REQUEST)){
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
+// Traite la requête
+if(!empty($_REQUEST))
+{
+    // vérifie la validitée des champs
+    $p = array();
+    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
         goto failed;
     
-    //crée le compte utilisateur
-    if(!UserModule::activateAccount($_REQUEST["uid"],$_REQUEST["pwd"],$_REQUEST["mail"],$_REQUEST["token"]))
+    // crée le compte utilisateur
+    if(!UserModule::activateAccount( $p->user_account_id, $p->user_pwd, $p->user_mail, $p->token ))
         goto failed;
     
-    //retourne le resultat de cette fonction
+    // retourne le resultat de cette fonction
     $result = cResult::getLast();
 }
 

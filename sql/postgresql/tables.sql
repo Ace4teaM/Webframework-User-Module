@@ -1,24 +1,24 @@
 /*==============================================================*/
-/* Nom de SGBD :  PostgreSQL 8                                  */
-/* Date de création :  05/02/2013 08:15:23                      */
+/* Nom de SGBD :  PostgreSQL 8 (WFW)                            */
+/* Date de création :  23/03/2013 15:43:14                      */
 /*==============================================================*/
 
 
-drop table USER_ACCOUNT  CASCADE;
+drop table if exists USER_ACCOUNT  CASCADE;
 
-drop table USER_ADDRESS  CASCADE;
+drop table if exists USER_ADDRESS  CASCADE;
 
-drop table USER_CONNECTION  CASCADE;
+drop table if exists USER_CONNECTION  CASCADE;
 
-drop table USER_IDENTITY  CASCADE;
+drop table if exists USER_IDENTITY  CASCADE;
 
-drop table USER_REGISTRATION  CASCADE;
+drop table if exists USER_REGISTRATION  CASCADE;
 
-drop table USER_SESSION  CASCADE;
+drop table if exists USER_SESSION  CASCADE;
 
-drop domain SEX;
+drop domain if exists SEX CASCADE;
 
-drop domain STREET_PREFIX;
+drop domain if exists STREET_PREFIX CASCADE;
 
 /*==============================================================*/
 /* Domaine : SEX                                                */

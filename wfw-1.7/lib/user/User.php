@@ -347,7 +347,7 @@ class UserModule implements iModule
      * @param type $attributes
      * @param type $template_file
      */
-    public static function makeIdentity($uid, $first_name, $last_name, $birth_day, $sex){ 
+    public static function makeIdentity($uid, $first_name, $last_name, DateTime $birth_day, $sex){ 
         global $app;
         $db=null;
         
@@ -356,9 +356,9 @@ class UserModule implements iModule
 
         if(!$db->call($app->getCfgValue("database","schema"), "user_make_identity", func_get_args(), $result))
             return false;
-        
-        $row = $result->fetchRow();
 
+        $row = $result->fetchRow();
+ 
         //return $result;
         return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
     }
@@ -446,9 +446,9 @@ class UserModule implements iModule
             return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
         //obtient l'identifiant de connexion
-        if(!isset($_COOKIE["cid"]))
+        if(!isset($_COOKIE["user_connection_id"]))
             return RESULT(cResult::Failed,UserModule::Disconnected);
-        $cid = $_COOKIE["cid"];
+        $cid = $_COOKIE["user_connection_id"];
         
         //vérifie la validité de la connexion
         if(!UserModule::checkConnection($cid,$_SERVER["REMOTE_ADDR"]))

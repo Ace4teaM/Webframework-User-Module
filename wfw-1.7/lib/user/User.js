@@ -69,9 +69,9 @@ YUI.add('wfw-user', function (Y) {
         */
         init: function() {
             wfw.puts("User: init");
-            this.uid = Y.Cookie.get("uid");
-            this.cid = Y.Cookie.get("cid");
-            this.pwd = Y.Cookie.get("pwd");
+            this.uid = Y.Cookie.get("user_account_id");
+            this.cid = Y.Cookie.get("user_connection_id");
+            this.pwd = Y.Cookie.get("user_pwd");
         },
 
         /**
@@ -85,9 +85,9 @@ YUI.add('wfw-user', function (Y) {
          *   @brief Vérifie et maintient l'état de la connexion
         */
         checkConnection: function() {
-            this.uid = Y.Cookie.get("uid");
-            this.cid = Y.Cookie.get("cid");
-            this.pwd = Y.Cookie.get("pwd");
+            this.uid = Y.Cookie.get("user_account_id");
+            this.cid = Y.Cookie.get("user_connection_id");
+            this.pwd = Y.Cookie.get("user_pwd");
 
             var checkReq = null; // 
             
@@ -100,7 +100,7 @@ YUI.add('wfw-user', function (Y) {
                         name: "Maintient la connexion active",
                         url: wfw.Navigator.getURI("user_check"),
                         args: {
-                            cid: this.cid,
+                            user_connection_id: this.cid,
                             output: "xarg"
                         },
                         callback : wfw.XArg.onCheckRequestResult_XARG,
@@ -143,12 +143,11 @@ YUI.add('wfw-user', function (Y) {
                             onfailed: function (obj, args) {
                                 //enregistre l'etat
                                 wfw.User.status = args.error;
-                                wfw.puts("status="+wfw.User.status);
-                                //
-                                wfw.puts("wfw.User.checkConnection: "+args.result+" = "+args.error);
+                                wfw.puts("wfw.User.checkConnection: "+wfw.Result.fromXArg(args).toString());
+                                //wfw.puts("wfw.User.checkConnection: "+args.result+" = "+args.error);
                                 wfw.User.onConnectionStatusChange(args.error);
                                 wfw.User.cid = null; // pas la peine d'essayer de nouveau
-                                Y.Cookie.remove("cid"); // supprime le cookie obselete
+                                Y.Cookie.remove("user_connection_id"); // supprime le cookie obselete
                             },
                             continue_if_failed: false,
                             no_msg: true,
@@ -172,8 +171,8 @@ YUI.add('wfw-user', function (Y) {
          *   @param string  connection_id  Token de connection
         */
         regSession: function(user_name, connection_id) {
-            this.uid = Y.Cookie.set("uid",user_name);
-            this.cid = Y.Cookie.set("cid",connection_id);
+            this.uid = Y.Cookie.set("user_account_id",user_name);
+            this.cid = Y.Cookie.set("user_connection_id",connection_id);
             wfw.puts("uid="+this.uid);
             wfw.puts("cid="+this.cid);
         }

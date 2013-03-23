@@ -53,6 +53,7 @@
             <MISSING_FIELD>Champ manquant</MISSING_FIELD>
             <EMPTY_TEXT>Champ vide</EMPTY_TEXT>
             <INVALID_CHAR>Champ contenant des caractères interdits</INVALID_CHAR>
+            <TOO_SMALL_STRING>Chaine de caractères trop petite</TOO_SMALL_STRING>
             <INVALID_FORMAT>Champ mal formé</INVALID_FORMAT>
             <INVALID_RANGE>Rang de valeur invalide</INVALID_RANGE>
             <OVERSIZED>Trop de caractères</OVERSIZED>
@@ -73,6 +74,7 @@
             <USER_REGISTRED>Inscription réussite</USER_REGISTRED>
             <USER_CONNECTED>Utilisateur connecté</USER_CONNECTED>
             <USER_DISCONNECTED>Utilisateur déconnecté</USER_DISCONNECTED>
+            <IDENTITY_UPDATED>Identité mise à jour</IDENTITY_UPDATED>
             <!-- USER (ERR_FAILED) -->
             <USER_EXISTS>L’Utilisateur existe déjà</USER_EXISTS>
             <USER_NOT_EXISTS>L'utilisateur n'existe pas</USER_NOT_EXISTS>
@@ -98,6 +100,7 @@
             <WFW_MSG_POPULATE_FORM>
                 Merci de compléter le formulaire
             </WFW_MSG_POPULATE_FORM>
+            <WFW_MSG_TOO_SMALL_PASSWORD>Un mot-de-passe doit contenir au minimum $MIN_CHAR_COUNT caractères</WFW_MSG_TOO_SMALL_PASSWORD>
             
             <!-- USER -->
             <USER_MSG_ACTIVATE_BY_MAIL>
@@ -119,14 +122,16 @@
         
         <fields>
             <user_account_id>Nom d'utilisateur</user_account_id>
+            <user_connection_id>Identifiant de connexion</user_connection_id>
             <user_pwd>Mot-de-passe</user_pwd>
             <user_mail>Adresse eMail</user_mail>
             <token>Jeton</token>
-            <life_time>Temps d'inactivité avant déconnexion</life_time>
+            <life_time>Temps d'inactivité avant déconnexion (min)</life_time>
             <cid>Identifiant de connexion</cid>
-            <firstname>Prénom</firstname>
-            <lastname>Nom</lastname>
-            <birthday>Date de naissance</birthday>
+            <first_name>Prénom</first_name>
+            <last_name>Nom</last_name>
+            <birth_day>Date de naissance</birth_day>
+            <sex>Sexe</sex>
         </fields>
     </results>
 </site>

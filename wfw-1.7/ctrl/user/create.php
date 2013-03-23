@@ -31,21 +31,23 @@
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-$fields = array(
-    "uid"=>"cInputIdentifier",
-    "pwd"=>"cInputPassword",
-    "mail"=>"cInputMail"
-);
+//requis
+if(!$app->makeFiledList(
+        $fields,
+        array( 'user_account_id', 'user_pwd', 'user_mail' ),
+        cXMLDefault::FieldFormatClassName )
+   ) $app->processLastError();
 
 if(!empty($_REQUEST))
 {
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
+    // vérifie la validitée des champs
+    $p = array();
+    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
         goto failed;
     
     //crée le compte utilisateur
-    if(!UserModule::createAccount($_REQUEST["uid"],$_REQUEST["pwd"],NULL,$_REQUEST["mail"]))
-            goto failed;
+    if(!UserModule::createAccount($p->user_account_id,$p->user_pwd,NULL,$p->user_mail))
+        goto failed;
  
     //retourne le resultat de cette fonction
     $result = cResult::getLast();

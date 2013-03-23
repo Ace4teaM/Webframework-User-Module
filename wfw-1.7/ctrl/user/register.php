@@ -45,14 +45,15 @@ if(!class_exists("MailModule") && $app->getCfgValue("user_module","requires_mail
 
 if(!empty($_REQUEST))
 {
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
+    // vérifie la validité des champs
+    $p = array();
+    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
         goto failed;
     
     $client_id = "none";
 
     //crée l'e compte utilisateur'inscription
-    if(!UserModule::registerAccount($_REQUEST["user_account_id"],$_REQUEST["user_mail"]))
+    if(!UserModule::registerAccount($p->user_account_id, $p->user_mail))
             goto failed;
 
     //retourne le resultat de cette fonction
@@ -70,13 +71,13 @@ if(!empty($_REQUEST))
     //initialise le message
     
     $msg = new MailMessage();
-    $msg->to       = $_REQUEST["user_mail"];
+    $msg->to       = $p->user_mail;
     $msg->subject  = "Activation";
     
     //attributs du template
     $template_att = $_REQUEST;
     $template_att["TOKEN"] = $result->getAtt("token");
-    $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","user_activate")."?token=".$result->getAtt("token")."&uid=".$_REQUEST["user_account_id"]."&mail=".$_REQUEST["user_mail"];
+    $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","user_activate")."&token=".$result->getAtt("token")."&user_account_id=$p->user_account_id&user_mail=$p->user_mail";
 
     //depuis un template ?
     $template = $app->getCfgValue("user_module","activation_mail");
@@ -95,12 +96,6 @@ if(!empty($_REQUEST))
         goto failed;
     //ajoute un message d'avertissement
     $result->addAtt("message","USER_MSG_ACTIVATE_BY_MAIL");
-    //header("Location: get_activatation.php?uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"]);
-    //exit;
-
-    //redirige vers la page d'activation
-    //header("Location: activate.php?uid=".$_REQUEST["uid"]."&mail=".$_REQUEST["mail"]);    
-    //exit;
 }
 
 //-------------------------------------------------------------------------------------------------------

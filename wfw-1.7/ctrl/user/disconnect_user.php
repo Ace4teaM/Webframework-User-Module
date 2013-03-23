@@ -30,21 +30,24 @@
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-//entree
-$fields = array(
-    "uid"=>"cInputIdentifier"
-);
+//requis
+if(!$app->makeFiledList(
+        $fields,
+        array( 'user_account_id' ),
+        cXMLDefault::FieldFormatClassName )
+   ) $app->processLastError();
 
 if(!empty($_REQUEST))
 {
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
+    // vérifie la validitée des champs
+    $p = array();
+    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
         goto failed;
     
     $client_id = "none";
 
     //supprime le compte utilisateur
-    if(!UserModule::disconnectUser($_REQUEST["uid"]))
+    if(!UserModule::disconnectUser($p->user_account_id))
         goto failed;
     
     //retourne le resultat de cette fonction

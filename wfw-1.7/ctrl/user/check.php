@@ -30,17 +30,21 @@
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-//entree
-$fields = array(
-    "cid"=>"cInputName"
-);
+//requis
+if(!$app->makeFiledList(
+        $fields,
+        array( 'user_connection_id' ),
+        cXMLDefault::FieldFormatClassName )
+   ) $app->processLastError();
 
-if(!empty($_REQUEST)){
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
+if(!empty($_REQUEST))
+{
+    // vérifie la validitée des champs
+    $p = array();
+    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
         goto failed;
     
-    if(!UserModule::checkConnection($_REQUEST["cid"],$_SERVER["REMOTE_ADDR"]))
+    if(!UserModule::checkConnection($p->user_connection_id,$_SERVER["REMOTE_ADDR"]))
         goto failed;
     
     //retourne le resultat de cette fonction

@@ -30,44 +30,44 @@
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-//entree
-$fields = array(
-    "uid"=>"cInputIdentifier",
-    "pwd"=>"cInputPassword",
-    "life_time"=>"cInputInteger"
-);
+//requis
+if(!$app->makeFiledList(
+        $fields,
+        array( 'user_account_id', 'user_pwd', 'life_time' ),
+        cXMLDefault::FieldFormatClassName )
+   ) $app->processLastError();
 
-if(!empty($_REQUEST)){
-
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
+if(!empty($_REQUEST))
+{
+    // vérifie la validitée des champs
+    $p = array();
+    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
         goto failed;
     
     $client_ip  = $_SERVER["REMOTE_ADDR"];
     $local_path = NULL;
-    $life_time  = intval($_REQUEST["life_time"]);
 
-    if(!UserModule::checkAuthentication($_REQUEST["uid"], $_REQUEST["pwd"]))
+    if(!UserModule::checkAuthentication($p->user_account_id, $p->user_pwd))
         goto failed;
     
     //crée une connexion
-    if(!UserModule::connectUser($_REQUEST["uid"], $client_ip, $local_path, $_REQUEST["life_time"]))
+    if(!UserModule::connectUser($p->user_account_id, $client_ip, $local_path, $p->life_time))
         goto failed;
     
     //retourne le resultat de cette fonction
     $result = cResult::getLast();
     
     //définit le cookie
-    setcookie("cid",$result->getAtt("CONNECTION_ID"));
+    setcookie("user_connection_id",$result->getAtt("CONNECTION_ID"));
     
     //initialise la tache de fermeture
     $taskMgr=NULL;
     $app->getTaskMgr($taskMgr);
-    if($taskMgr !== null && $life_time > 0){
-        $taskName = UserModule::disconnectTaskName($_REQUEST["uid"]);
-        $taskCmd  = UserModule::disconnectTaskCmd($_REQUEST["uid"]);
+    if($taskMgr !== null && $p->life_time > 0){
+        $taskName = UserModule::disconnectTaskName($p->user_account_id);
+        $taskCmd  = UserModule::disconnectTaskCmd($p->user_account_id);
         $expire   = new DateTime();
-        $expire->add(new DateInterval('P0Y0DT0H'.$life_time.'M'));
+        $expire->add(new DateInterval('P0Y0DT0H'.$p->life_time.'M'));
         if(!$taskMgr->create($taskName,$expire,$taskCmd))
              goto failed;
     }

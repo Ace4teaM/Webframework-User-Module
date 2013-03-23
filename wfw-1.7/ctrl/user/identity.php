@@ -30,26 +30,26 @@
 RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
 $result = cResult::getLast();
 
-$fields = array(
-    "user_id"=>"cInputInteger",
-    "last_name"=>"cInputName",
-    "first_name"=>"cInputName",
-    "birth_day"=>"",
-    "sex"=>""
-);
+//requis
+if(!$app->makeFiledList(
+        $fields,
+        array( 'user_account_id', 'last_name', 'first_name', 'birth_day', 'sex' ),
+        cXMLDefault::FieldFormatClassName )
+   ) $app->processLastError();
 
 if(!empty($_REQUEST))
 {
-    // exemples JS
-    if(!cInputFields::checkArray($fields))
+    // vérifie la validitée des champs
+    $p = array();
+    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
         goto failed;
 
     //verifie les informations de connexion
     //... $_REQUEST["user_id"]
  
     //obtient le compte utilisateur
-    if(!UserModule::makeIdentity($_REQUEST["user_id"], $_REQUEST["first_name"], $_REQUEST["last_name"], $_REQUEST["birth_day"], $_REQUEST["sex"]))
-            goto failed;
+    if(!UserModule::makeIdentity($p->user_account_id, $p->first_name, $p->last_name, $p->birth_day, $p->sex))
+        goto failed;
 
     //retourne le resultat de cette fonction
     $result = cResult::getLast();
@@ -82,7 +82,6 @@ goto success;
 failed:
 // redefinit le resultat avec l'erreur en cours
 $result = cResult::getLast();
-
 
 success:
 ;;
