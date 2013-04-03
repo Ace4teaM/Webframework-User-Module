@@ -26,51 +26,32 @@
  * UC   : user_check_connection
  */
 
-//résultat de la requete
-RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
-$result = cResult::getLast();
+class Ctrl extends cApplicationCtrl{
+    public $fields    = array('user_connection_id');
+    public $op_fields = null;
 
-//requis
-if(!$app->makeFiledList(
-        $fields,
-        array( 'user_connection_id' ),
-        cXMLDefault::FieldFormatClassName )
-   ) $app->processLastError();
+    function main(iApplication $app, $app_path, $p) {
 
-if(!empty($_REQUEST))
-{
-    // vérifie la validitée des champs
-    $p = array();
-    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
-        goto failed;
-    
-    if(!UserModule::checkConnection($p->user_connection_id,$_SERVER["REMOTE_ADDR"]))
-        goto failed;
-    
-    //retourne le resultat de cette fonction
-    $result = cResult::getLast();
+        if(!UserModule::checkConnection($p->user_connection_id,$_SERVER["REMOTE_ADDR"]))
+            return false;
+        $result = cResult::getLast();
 
-    //actualise la tache de fermeture
-    $taskMgr=NULL;
-    $app->getTaskMgr($taskMgr);
-    if($taskMgr!==NULL){
-        $expire  = new DateTime();
-        $expire->setTimestamp(intval($result->getAtt("EXPIRE")));
-        $current = new DateTime();
-        if($expire->getTimestamp() > $current->getTimestamp()){
-            $taskName = UserModule::disconnectTaskName($result->getAtt("UID"));
-            $taskCmd  = UserModule::disconnectTaskCmd($result->getAtt("UID"));
-            if(!$taskMgr->create($taskName,$expire,$taskCmd))
-                 goto failed;
+        //actualise la tache de fermeture
+        $taskMgr=NULL;
+        $app->getTaskMgr($taskMgr);
+        if($taskMgr!==NULL){
+            $expire  = new DateTime();
+            $expire->setTimestamp(intval($result->getAtt("EXPIRE")));
+            $current = new DateTime();
+            if($expire->getTimestamp() > $current->getTimestamp()){
+                $taskName = UserModule::disconnectTaskName($result->getAtt("UID"));
+                $taskCmd  = UserModule::disconnectTaskCmd($result->getAtt("UID"));
+                if(!$taskMgr->create($taskName,$expire,$taskCmd))
+                     return false;
+            }
         }
+
+        return RESULT_INST($result); //UserModule::checkConnection
     }
-}
-
-goto success;
-failed:
-// redefinit le resultat avec l'erreur en cours
-$result = cResult::getLast();
-
-success:
-;;
+};
 ?>

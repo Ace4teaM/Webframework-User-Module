@@ -26,41 +26,20 @@
  * UC   : user_disconnect_account
  */
 
-//résultat de la requete
-RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
-$result = cResult::getLast();
+class Ctrl extends cApplicationCtrl{
+    public $fields    = array('user_account_id');
+    public $op_fields = null;
 
-//requis
-if(!$app->makeFiledList(
-        $fields,
-        array( 'user_account_id' ),
-        cXMLDefault::FieldFormatClassName )
-   ) $app->processLastError();
+    function main(iApplication $app, $app_path, $p) {
 
-if(!empty($_REQUEST))
-{
-    // vérifie la validitée des champs
-    $p = array();
-    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
-        goto failed;
-    
-    $client_id = "none";
+        $client_id = "none";
 
-    //supprime le compte utilisateur
-    if(!UserModule::disconnectUser($p->user_account_id))
-        goto failed;
-    
-    //retourne le resultat de cette fonction
-    $result = cResult::getLast();
-}
+        //supprime le compte utilisateur
+        if(!UserModule::disconnectUser($p->user_account_id))
+            return false;
 
-goto success;
-failed:
-// redefinit le resultat avec l'erreur en cours
-$result = cResult::getLast();
-
-success:
-
-;;
+        return true;//UserModule::disconnectUser()
+    }
+};
 
 ?>

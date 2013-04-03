@@ -26,40 +26,18 @@
  * UC   : user_create_account
  */
 
+class Ctrl extends cApplicationCtrl{
+    public $fields    = array('user_account_id', 'user_pwd', 'user_mail');
+    public $op_fields = null;
 
-//résultat de la requete
-RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
-$result = cResult::getLast();
+    function main(iApplication $app, $app_path, $p) {
 
-//requis
-if(!$app->makeFiledList(
-        $fields,
-        array( 'user_account_id', 'user_pwd', 'user_mail' ),
-        cXMLDefault::FieldFormatClassName )
-   ) $app->processLastError();
+        //crée le compte utilisateur
+        if(!UserModule::createAccount($p->user_account_id,$p->user_pwd,NULL,$p->user_mail))
+            return false;
 
-if(!empty($_REQUEST))
-{
-    // vérifie la validitée des champs
-    $p = array();
-    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
-        goto failed;
-    
-    //crée le compte utilisateur
-    if(!UserModule::createAccount($p->user_account_id,$p->user_pwd,NULL,$p->user_mail))
-        goto failed;
- 
-    //retourne le resultat de cette fonction
-    $result = cResult::getLast();
-}
-
-goto success;
-failed:
-// redefinit le resultat avec l'erreur en cours
-$result = cResult::getLast();
-
-
-success:
-;;
-
+        //retourne le resultat de cette fonction
+        return true; // UserModule::createAccount
+    }
+};
 ?>

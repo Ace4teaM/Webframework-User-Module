@@ -7,21 +7,22 @@
     
     <index>
         <page id="index" name="Accueil">index.php</page>
+        <page id="datamodel" role="visitor" name="Obtient le model de données">ctrl.php?app=wfw&amp;ctrl=datamodel</page>
         <!-- admin -->
-        <page id="user_create" role="administrator" name="Créer un utilisateur">user.php?page=create</page>
-        <page id="user_delete" role="administrator" name="Supprimer un utilisateur">user.php?page=delete</page>
-        <page id="user_disconnect_user" role="administrator" name="Déconnecter un utilisateur">user.php?page=disconnect_user</page>
-        <page id="user_disconnect_all" role="administrator" name="Déconnecter tous les utilisateurs">user.php?page=disconnect_all</page>
+        <page id="user_create" role="administrator" name="Créer un utilisateur">ctrl.php?app=user_module&amp;ctrl=create</page>
+        <page id="user_delete" role="administrator" name="Supprimer un utilisateur">ctrl.php?app=user_module&amp;ctrl=delete</page>
+        <page id="user_disconnect_user" role="administrator" name="Déconnecter un utilisateur">ctrl.php?app=user_module&amp;ctrl=disconnect_user</page>
+        <page id="user_disconnect_all" role="administrator" name="Déconnecter tous les utilisateurs">ctrl.php?app=user_module&amp;ctrl=disconnect_all</page>
         <!-- visiteur -->
-        <page id="user_register" role="visitor" name="Inscription">user.php?page=register</page>
-        <page id="user_activate" role="visitor" name="Activer une inscription">user.php?page=activate</page>
-        <page id="user_connect" role="visitor" name="Connexion (auto)">user.php?page=connect</page>
-        <page id="user_connect_to" role="visitor" name="Connexion (session existante)">user.php?page=connect_to</page>
-        <page id="user_lost_pwd" role="visitor" name="Récuperation de mot-de-passe">user.php?page=lost_pwd</page>
+        <page id="user_register" role="visitor" name="Inscription">ctrl.php?app=user_module&amp;ctrl=register</page>
+        <page id="user_activate" role="visitor" name="Activer une inscription">ctrl.php?app=user_module&amp;ctrl=activate</page>
+        <page id="user_connect" role="visitor" name="Connexion (auto)">ctrl.php?app=user_module&amp;ctrl=connect</page>
+        <page id="user_connect_to" role="visitor" name="Connexion (session existante)">ctrl.php?app=user_module&amp;ctrl=connect_to</page>
+        <page id="user_lost_pwd" role="visitor" name="Récuperation de mot-de-passe">ctrl.php?app=user_module&amp;ctrl=lost_pwd</page>
         <!-- utilisateur -->
-        <page id="user_disconnect" role="user" name="Déconnexion">user.php?page=disconnect</page>
-        <page id="user_check" role="user" name="Maintenir ma connexion">user.php?page=check</page>
-        <page id="user_identity" role="user" name="Renseigner mon identité">user.php?page=identity</page>
+        <page id="user_disconnect" role="user" name="Déconnexion">ctrl.php?app=user_module&amp;ctrl=disconnect</page>
+        <page id="user_check" role="user" name="Maintenir ma connexion">ctrl.php?app=user_module&amp;ctrl=check</page>
+        <page id="user_identity" role="user" name="Renseigner mon identité">ctrl.php?app=user_module&amp;ctrl=identity</page>
     </index>
 
     <tree>
@@ -91,9 +92,9 @@
 
         <messages>
             <!-- WFW -->
-            <INPUT_MSG_INVALID_FIELD>
+            <MISSING_FIELD>
                 Merci de renseigner le champ: $TXT_FIELD_NAME ($FIELD_NAME).
-            </INPUT_MSG_INVALID_FIELD>
+            </MISSING_FIELD>
             <SOCK_SERVER_CONNECTION>
                 Cause retourné par le socket #$ERRNO : $ERRSTR
             </SOCK_SERVER_CONNECTION>

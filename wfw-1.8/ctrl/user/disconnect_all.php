@@ -26,26 +26,18 @@
  * UC   : user_disconnect_all
  */
 
-//résultat de la requete
-RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
-$result = cResult::getLast();
+class Ctrl extends cApplicationCtrl{
+    public $fields    = null;
+    public $op_fields = null;
 
-//supprime le compte utilisateur
-if(!UserModule::disconnectAll())
-    goto failed;
+    function main(iApplication $app, $app_path, $p) {
 
-//retourne le resultat de cette fonction
-$result = cResult::getLast();
+        //supprime le compte utilisateur
+        if(!UserModule::disconnectAll())
+            return false;
 
-
-goto success;
-failed:
-// redefinit le resultat avec l'erreur en cours
-$result = cResult::getLast();
-
-
-success:
-
-;;
+        return true;//UserModule::disconnectAll()
+    }
+};
 
 ?>

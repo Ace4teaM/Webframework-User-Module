@@ -26,103 +26,82 @@
  * UC   : user_register_account
  */
 
-//résultat de la requete
-RESULT(cResult::Ok,cApplication::Information,array("message"=>"WFW_MSG_POPULATE_FORM"));
-$result = cResult::getLast();
+class Ctrl extends cApplicationCtrl{
+    public $fields    = array('user_account_id', 'user_mail');
+    public $op_fields = null;
 
-//requis
-if(!$app->makeFiledList(
-        $fields,
-        array( 'user_account_id', 'user_mail' ),
-        cXMLDefault::FieldFormatClassName )
-   ) $app->processLastError();
+    //Active le compte en cas d'impossibilité d'envoyer un mail
+    function activate(iApplication $app, $app_path, $p) {
+        $result = cResult::getLast();
 
-//module mail requis ?
-if(!class_exists("MailModule") && $app->getCfgValue("user_module","requires_mail_module")){
-    RESULT(cResult::Failed,Application::ModuleClassNotFound,array("module_name"=>"mail"));
-    $app->processLastError();
-}
-
-if(!empty($_REQUEST))
-{
-    // vérifie la validité des champs
-    $p = array();
-    if(!cInputFields::checkArray($fields,NULL,$_REQUEST,$p))
-        goto failed;
-    
-    $client_id = "none";
-
-    //crée l'e compte utilisateur'inscription
-    if(!UserModule::registerAccount($p->user_account_id, $p->user_mail))
-            goto failed;
-
-    //retourne le resultat de cette fonction
-    $result = cResult::getLast();
-    
-    //pas de module Mail ?
-    if(!class_exists("MailModule"))
-        goto activate;
-    
-    //utile a la generation du message
-    if(!$app->getDefaultFile($default))
-        goto activate;
-    
-    //--------------------------------------------
-    //initialise le message
-    
-    $msg = new MailMessage();
-    $msg->to       = $p->user_mail;
-    $msg->subject  = "Activation";
-    
-    //attributs du template
-    $template_att = $_REQUEST;
-    $template_att["TOKEN"] = $result->getAtt("token");
-    $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","user_activate")."&token=".$result->getAtt("token")."&user_account_id=$p->user_account_id&user_mail=$p->user_mail";
-
-    //depuis un template ?
-    $template = $app->getCfgValue("user_module","activation_mail");
-    if(!empty($template) && file_exists($template)){
-        $msg->msg      = cHTMLTemplate::transformFile($template,$template_att);
-        $msg->contentType = mime_content_type($template);
+        $pwd   = rand(1615,655641);
+        
+        //crée le compte utilisateur'inscription
+        if(!UserModule::activateAccount($p->user_account_id, $pwd, $p->user_mail, $result->getAtt("token")))
+            return false;
+        
+        //ajoute un message d'avertissement
+        $result->addAtt("pwd",$pwd);
+        $result->addAtt("message","USER_MSG_AUTO_ACTIVATE");
+        
+        return RESULT_INST($result);
     }
-    //depuis le message standard ?
-    else{
-        $msg->msg      = cHTMLTemplate::transform($default->getResultText("messages","USER_ACTIVATION_MAIL"),$template_att);
-        $msg->contentType = "text/plain";
+    
+    function main(iApplication $app, $app_path, $p) {
+
+        //module mail requis ?
+        if(!class_exists("MailModule") && $app->getCfgValue("user_module","requires_mail_module"))
+            return RESULT(cResult::Failed,Application::ModuleClassNotFound,array("module_name"=>"mail"));
+
+        $client_id = "none";
+
+        //crée l'inscription
+        if(!UserModule::registerAccount($p->user_account_id, $p->user_mail))
+            return false;
+
+        //retourne le resultat de cette fonction
+        $result = cResult::getLast();
+
+        //pas de module Mail ?
+        if(!class_exists("MailModule"))
+            return $this->activate($app, $app_path, $p);
+
+        //utile a la generation du message
+        if(!$app->getDefaultFile($default))
+            return $this->activate($app, $app_path, $p);
+
+        //--------------------------------------------
+        //initialise le message
+
+        $msg = new MailMessage();
+        $msg->to       = $p->user_mail;
+        $msg->subject  = "Activation";
+
+        //attributs du template
+        $template_att = objectToArray($p);
+        $template_att["TOKEN"] = $result->getAtt("token");
+        $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","user_activate")."&token=".$result->getAtt("token")."&user_account_id=$p->user_account_id&user_mail=$p->user_mail";
+
+        //depuis un template ?
+        $template = $app->getCfgValue("user_module","activation_mail");
+        if(!empty($template) && file_exists($template)){
+            $msg->msg      = cHTMLTemplate::transformFile($template,$template_att);
+            $msg->contentType = mime_content_type($template);
+        }
+        //depuis le message standard ?
+        else{
+            $msg->msg      = cHTMLTemplate::transform($default->getResultText("messages","USER_ACTIVATION_MAIL"),$template_att);
+            $msg->contentType = "text/plain";
+        }
+
+        //envoie le message
+        if(!MailModule::sendMessage($msg))
+            return false;
+
+        //ajoute un message d'avertissement
+        $result->addAtt("message","USER_MSG_ACTIVATE_BY_MAIL");
+        return RESULT_INST($result);
     }
-
-    //envoie le message
-    if(!MailModule::sendMessage($msg))
-        goto failed;
-    //ajoute un message d'avertissement
-    $result->addAtt("message","USER_MSG_ACTIVATE_BY_MAIL");
-}
-
-//-------------------------------------------------------------------------------------------------------
-//Active le compte en cas d'impossibilité d'envoyer un mail
-goto success;
-activate:
-    
-$pwd   = rand(1615,655641);
-//crée le compte utilisateur'inscription
-if(!UserModule::activateAccount($_REQUEST["user_account_id"], $pwd, $_REQUEST["user_mail"], $result->getAtt("token")))
-    goto failed;
-//ajoute un message d'avertissement
-$result->addAtt("pwd",$pwd);
-$result->addAtt("message","USER_MSG_AUTO_ACTIVATE");
-
-//-------------------------------------------------------------------------------------------------------
-//En cas d'echec de la procedure
-goto success;
-failed:
-    
-// utilise le dernier resultat
-$result = cResult::getLast();
-
-//-------------------------------------------------------------------------------------------------------
-//Termine
-success:
-
-;;
+};
 
 ?>
