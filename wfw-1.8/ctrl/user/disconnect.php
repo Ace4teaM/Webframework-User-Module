@@ -29,7 +29,12 @@
 class Ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;
+    public $att       = null;
 
+    function Ctrl() {
+        $this->att = $_COOKIE;
+    }
+    
     function main(iApplication $app, $app_path, $p) {
 
         //supprime le compte utilisateur
