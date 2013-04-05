@@ -386,12 +386,23 @@ class UserModule implements iModule
     }
     
     /** 
-     * Vérifie l'autentification d'un utilisateur
+     * Vérifie et maintient une connexion utilisateur
      * 
-     * @param type $uid Nom d'utilisateur
-     * @param type $pwd Mot de passe
+     * @param type $cid Identifiant de connexion
+     * @param type $ip Adresse IP du client, utilisez $_SERVER["REMOTE_ADDR"]
+     * @return bool Résultat de procédure
+     * 
+     * # Résultat
+     * Si la fonction réussie le code USER_CONNECTED est retourné
+     * ## Codes d'erreur:
+     *  - USER_CONNECTED             L'utilisateur est connecté
+     *  - USER_CONNECTION_NOT_EXISTS La connexion n'existe pas
+     *  - USER_CONNECTION_IP_REFUSED L'adresse IP différe
+     * ## Paramètres de retour (si succès):
+     *  - EXPIRE                     Date de la prochaine expiration
+     *  - UID                        Identifiant du compte utilisateur
      */
-    public static function checkConnection($cid){ 
+    public static function checkConnection($cid,$ip){ 
         global $app;
         $db=null;
         
