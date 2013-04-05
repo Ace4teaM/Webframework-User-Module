@@ -186,31 +186,3 @@ YUI.add('wfw-user', function (Y) {
 }, '1.0', {
     requires:['base', 'cookie', 'wfw','wfw-request','wfw-xml','wfw-uri','wfw-navigator','wfw-style','wfw-xarg']
 });
-
-
-
-
-
-
-
-
-
-
-/*
-(C)2012 ID-Informatik. WebFrameWork(R) All rights reserved.
----------------------------------------------------------------------------------------------------------------------------------------
-Warning this script is protected by copyright, if you want to use this code you must ask permission:
-Attention ce script est protege part des droits d'auteur, si vous souhaitez utiliser ce code vous devez en demander la permission:
-ID-Informatik
-MR AUGUEY THOMAS
-contact@id-informatik.com
----------------------------------------------------------------------------------------------------------------------------------------
-
-Module Utilisateur
-
-Dependences: base.js, dom.js, wfw.js, wfw-extends.js
-
-Revisions:
-    [01-02-2012] Implentation
-    [29-02-2012] Update
-*/
