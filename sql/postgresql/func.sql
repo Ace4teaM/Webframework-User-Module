@@ -733,6 +733,13 @@ $$ LANGUAGE plpgsql;
   Parametres:
     p_user_connection_id  : Identifiant de connexion
     p_client_ip           : Adresse IP du client
+  Résultats:
+    USER_CONNECTED             L'utilisateur est connecté
+    USER_CONNECTION_NOT_EXISTS La connexion n'existe pas
+    USER_CONNECTION_IP_REFUSED L'adresse IP différe
+  Paramètres de retour:
+    EXPIRE                     Date de la prochaine expiration
+    UID                        Identifiant du compte utilisateur
 */
 CREATE OR REPLACE FUNCTION user_check_connection(
        p_user_connection_id    user_connection.user_connection_id%type,
@@ -770,7 +777,7 @@ CREATE OR REPLACE FUNCTION user_check_connection(
     /* Actualise la date d’accees */
     update user_connection set last_access = now() where user_connection_id = p_user_connection_id;
 
-    /* Date d'expiration */
+    /* Calcule la date d'expiration */
     /*SELECT TIMESTAMP WITH TIME ZONE 'epoch' + (EXTRACT(EPOCH FROM now()) + 3600) * INTERVAL '1 second';*/
     SELECT ROUND(EXTRACT(EPOCH FROM last_access) + life_time * 60) into v_expire from user_connection where user_connection_id = p_user_connection_id;
     /*select last_access+life_time into v_expire from user_connection where user_connection_id = p_user_connection_id;*/
