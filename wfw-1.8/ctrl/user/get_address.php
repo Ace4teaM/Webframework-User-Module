@@ -30,8 +30,6 @@ class Ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;
 
-    private $identity = array();
-    
     function Ctrl() {
         parent::__construct();
         $this->att = array_merge($this->att,$_COOKIE);
@@ -51,9 +49,6 @@ class Ctrl extends cApplicationCtrl{
 
         if(!$db->execute($query,$result))
             return false;
-        
-        if(!$result->rowCount())
-            return RESULT_OK(); //RESULT(cResult::Failed,iDatabaseQuery::EmptyResult);
         
         $this->identity = $result->fetchRow();
         
