@@ -27,13 +27,16 @@
  */
 
 class Ctrl extends cApplicationCtrl{
-    public $fields    = array('user_account_id', 'user_pwd', 'life_time');
-    public $op_fields = null;
+    public $fields    = array('user_account_id', 'user_pwd');
+    public $op_fields = array('life_time');
 
     function main(iApplication $app, $app_path, $p) {
 
         $client_ip  = $_SERVER["REMOTE_ADDR"];
         $local_path = NULL;
+        
+        if(!$p->life_time)
+            $p->life_time = $app->getCfgValue("user_module","default_connection_life_time");
 
         if(!UserModule::checkAuthentication($p->user_account_id, $p->user_pwd))
             return false;
