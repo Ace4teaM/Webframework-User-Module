@@ -30,6 +30,8 @@ class Ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;
 
+    private $address = array();
+    
     function Ctrl() {
         parent::__construct();
         $this->att = array_merge($this->att,$_COOKIE);
@@ -41,16 +43,20 @@ class Ctrl extends cApplicationCtrl{
             return false;
         
         $query = "
-            select i.* from user_identity i
-                inner join user_account a on a.user_identity_id = i.user_identity_id
-                inner join user_connection c on c.user_account_id = a.user_account_id
-                where c.user_connection_id = '$p->user_connection_id';
+            select l.* from user_address l
+                    inner join user_identity i on i.user_address_id = l.user_address_id
+                    inner join user_account a on a.user_identity_id = i.user_identity_id
+                    inner join user_connection c on c.user_account_id = a.user_account_id
+                    where c.user_connection_id = '$p->user_connection_id';
         ";
 
         if(!$db->execute($query,$result))
             return false;
         
-        $this->identity = $result->fetchRow();
+        if(!$result->rowCount())
+            return RESULT_OK(); //RESULT(cResult::Failed,iDatabaseQuery::EmptyResult);
+        
+        $this->address = $result->fetchRow();
         
         return RESULT_OK();
     }
@@ -64,11 +70,11 @@ class Ctrl extends cApplicationCtrl{
             case "xml":
                 $doc = new XMLDocument("1.0", "utf-8");
                 $doc->appendChild( $doc->createElement('data') );
-                $doc->appendAssocArray($doc->documentElement,$this->identity);
+                $doc->appendAssocArray($doc->documentElement,$this->address);
                 $doc->appendAssocArray($doc->documentElement,$result->toArray());
                 return '<?xml version="1.0" encoding="UTF-8" ?>'.$doc->saveXML( $doc->documentElement );
             case "xarg":
-                return xarg_encode_array($this->identity) . xarg_encode_array($result->toArray());
+                return xarg_encode_array($this->address) . xarg_encode_array($result->toArray());
         }
         return parent::output($app, $format, $att, $result);
     }
