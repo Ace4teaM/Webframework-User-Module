@@ -32,7 +32,8 @@ class Ctrl extends cApplicationCtrl{
     public $att       = null;
 
     function Ctrl() {
-        $this->att = $_COOKIE;
+        parent::__construct();
+        $this->att = array_merge($this->att,$_COOKIE);
     }
     
     function main(iApplication $app, $app_path, $p) {
