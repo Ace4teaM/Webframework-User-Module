@@ -27,13 +27,18 @@
  */
 
 class Ctrl extends cApplicationCtrl{
-    public $fields    = array('user_account_id', 'last_name', 'first_name', 'birth_day', 'sex');
+    public $fields    = array('user_connection_id', 'last_name', 'first_name', 'birth_day', 'sex');
     public $op_fields = null;
 
+    function Ctrl() {
+        parent::__construct();
+        $this->att = array_merge($this->att,$_COOKIE);
+    }
+    
     function main(iApplication $app, $app_path, $p) {
 
         //obtient le compte utilisateur
-        if(!UserModule::makeIdentity($p->user_account_id, $p->first_name, $p->last_name, $p->birth_day, $p->sex))
+        if(!UserModule::makeIdentity($p->user_connection_id, $p->first_name, $p->last_name, $p->birth_day, $p->sex))
             return false;
 
         return true;//UserModule::makeIdentity

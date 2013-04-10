@@ -347,7 +347,7 @@ class UserModule implements iModule
      * @param type $attributes
      * @param type $template_file
      */
-    public static function makeIdentity($uid, $first_name, $last_name, DateTime $birth_day, $sex){ 
+    public static function makeIdentity($user_connection_id, $first_name, $last_name, DateTime $birth_day, $sex){ 
         global $app;
         $db=null;
         
