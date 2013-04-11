@@ -721,17 +721,16 @@ CREATE OR REPLACE FUNCTION user_make_identity(
         update user_account
           set user_identity_id=v_user_identity_id
           where user_account_id = v_user_account_id;
-          select 'ERR_OK', 'IDENTITY_INSERTED' into v_result;
     else
         /* actualise l'identite existante */
         update user_identity
           set first_name=p_first_name, last_name=p_last_name, birth_day=p_birth_day, sex=p_sex
           where user_identity_id = v_user_identity_id;
-        select 'ERR_OK', 'IDENTITY_UPDATED' into v_result;
     end if;
   
     /* return */
-     return v_result;
+    select 'ERR_OK', 'USER_IDENTITY_UPDATED' into v_result;
+    return v_result;
   end;
 $$ LANGUAGE plpgsql;
 
