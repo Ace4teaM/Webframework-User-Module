@@ -674,11 +674,8 @@ $$ LANGUAGE plpgsql;
   /*
     Définit l'identité d'un utilisateur
     Parametres:
-      p_user_connection    : Identifiant de connexion
-      p_first_name         : ...
-      p_last_name          : ...
-      p_birth_day          : ...
-      p_sex                : ...
+      p_user_account_id    : Identifiant de l'utilisateur
+      ...
     Remarque:
       Si aucune entrée de la table USER_IDENTITY existe, elle est créée
     Succès:
@@ -687,7 +684,7 @@ $$ LANGUAGE plpgsql;
       [SQL Exceptions]
   */
 CREATE OR REPLACE FUNCTION user_make_identity(
-       p_user_connection_id user_connection.user_connection_id%type,
+       p_user_account_id    user_account.user_account_id%type,
        p_first_name         user_identity.first_name%type,
        p_last_name          user_identity.last_name%type,
        p_birth_day          user_identity.birth_day%type,
@@ -696,20 +693,19 @@ CREATE OR REPLACE FUNCTION user_make_identity(
     returns RESULT
   as $$
   declare
-    v_user_account_id    user_account.user_account_id%type;
     v_user_identity_id   user_identity.user_identity_id%type;
     v_result RESULT;
   begin
 
-    /* selectionne le compte utilisateur lié */
+    /* selectionne le compte utilisateur lié
     select user_account_id into v_user_account_id from user_connection where user_connection_id = p_user_connection_id;
     if v_user_account_id is NULL then
         select 'ERR_OK', 'USER_CONNECTION_NOT_EXISTS' into v_result;
         return v_result;
-    end if;
+    end if; */
 
     /* ajoute/actualise l'identite */
-    select user_identity_id into v_user_identity_id from user_account where user_account_id = v_user_account_id;
+    select user_identity_id into v_user_identity_id from user_account where user_account_id = p_user_account_id;
     if v_user_identity_id is NULL then
         /* obtient un nouvel ID */
         select coalesce(max(user_identity_id)+1,1) into v_user_identity_id from user_identity;
@@ -719,7 +715,7 @@ CREATE OR REPLACE FUNCTION user_make_identity(
         /* actualise le lien avec le compte */
         update user_account
           set user_identity_id=v_user_identity_id
-          where user_account_id = v_user_account_id;
+          where user_account_id = p_user_account_id;
     else
         /* actualise l'identite existante */
         update user_identity

@@ -37,8 +37,13 @@ class Ctrl extends cApplicationCtrl{
     
     function main(iApplication $app, $app_path, $p) {
         
+        if(!UserModule::checkConnection($p->user_connection_id,$_SERVER["REMOTE_ADDR"]))
+            return false;
+        
+        $user_account_id = cResult::getLast()->getAtt("UID");
+        
         //obtient le compte utilisateur
-        if(!UserModule::makeIdentity($p->user_connection_id, $p->first_name, $p->last_name, $p->birth_day, $p->sex))
+        if(!UserModule::makeIdentity($user_account_id, $p->first_name, $p->last_name, $p->birth_day, $p->sex))
             return false;
 
         return true;//UserModule::makeIdentity
