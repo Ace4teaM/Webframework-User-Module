@@ -36,7 +36,7 @@ class Ctrl extends cApplicationCtrl{
     }
     
     function main(iApplication $app, $app_path, $p) {
-
+        
         //obtient le compte utilisateur
         if(!UserModule::makeIdentity($p->user_connection_id, $p->first_name, $p->last_name, $p->birth_day, $p->sex))
             return false;

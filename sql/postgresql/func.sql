@@ -680,10 +680,9 @@ $$ LANGUAGE plpgsql;
       p_birth_day          : ...
       p_sex                : ...
     Remarque:
-      Si aucune entrée de la table USER_IDENTITY n'existe, elle est créé
+      Si aucune entrée de la table USER_IDENTITY existe, elle est créée
     Succès:
-      IDENTITY_INSERTED : Une nouvelle identité à été créée
-      IDENTITY_UPDATED  : L'identité existante à été modifié
+      USER_IDENTITY_UPDATED  : Identité mise à jour
     Echec:
       [SQL Exceptions]
   */
@@ -730,6 +729,75 @@ CREATE OR REPLACE FUNCTION user_make_identity(
   
     /* return */
     select 'ERR_OK', 'USER_IDENTITY_UPDATED' into v_result;
+    return v_result;
+  end;
+$$ LANGUAGE plpgsql;
+
+
+  /*
+    Définit l'adresse d'un utilisateur
+    Parametres:
+      p_user_account_id    : Identifiant de l'utilisateur
+      ...
+    Remarque:
+      Si aucune entrée de la table USER_ADDRESS existe, elle est créée
+    Succès:
+      USER_ADDRESS_UPDATED  : L'identité existante à été modifié
+    Echec:
+      USER_IDENTITY_NOT_FOUND : Aucune identité n'est définit pour cet utilisateur
+  */
+
+CREATE OR REPLACE FUNCTION user_make_address(
+       p_user_account_id user_account.user_account_id%type,
+       p_zip_code user_address.zip_code%type,
+       p_city_name user_address.city_name%type,
+       p_street_name user_address.street_name%type,
+       p_street_number user_address.street_number%type,
+       p_country_name user_address.country_name%type,
+       p_street_prefix user_address.street_prefix%type,
+       p_building_number user_address.building_number%type,
+       p_apt_number user_address.apt_number%type
+       )
+    returns RESULT
+  as $$
+  declare
+    v_user_address_id    user_address.user_address_id%type;
+    v_user_identity_id   user_identity.user_identity_id%type;
+    v_result RESULT;
+  begin
+
+    /* selectionne l'adresse existante */
+    select d.user_address_id,i.user_identity_id into v_user_address_id, v_user_identity_id from user_address d
+        right outer join user_identity i on i.user_address_id = d.user_address_id
+        inner join user_account a on a.user_identity_id = i.user_identity_id
+        where a.user_account_id = p_user_account_id;
+
+    /* pas d'identite ? */
+    if v_user_identity_id is null then
+        select 'ERR_FAILED', 'USER_IDENTITY_NOT_FOUND' into v_result;
+        return v_result;
+    end if;
+
+    /* pas d'adresse ? */
+    if v_user_address_id is NULL then
+        /* obtient un nouvel ID */
+        select coalesce(max(user_address_id)+1,1) into v_user_address_id from user_address;
+        /* insert une nouvelle identite */
+        insert into user_address (user_address_id, zip_code, city_name, street_name, street_number, country_name, street_prefix, building_number, apt_number)
+          values(v_user_address_id,p_zip_code, upper(p_city_name), initcap(p_street_name), p_street_number, upper(p_country_name), lower(p_street_prefix), p_building_number, p_apt_number);
+        /* actualise le lien avec l'identite */
+        update user_identity
+          set user_address_id=v_user_address_id
+          where user_identity_id = v_user_identity_id;
+    else
+        /* actualise l'adresse existante */
+        update user_address
+          set zip_code=p_zip_code, city_name=upper(p_city_name), street_name=initcap(p_street_name), street_number=p_street_number, country_name=upper(p_country_name), street_prefix=lower(p_street_prefix), building_number=p_building_number, apt_number=p_apt_number
+          where user_address_id = v_user_address_id;
+    end if;
+  
+    /* return */
+    select 'ERR_OK', 'USER_ADDRESS_UPDATED' into v_result;
     return v_result;
   end;
 $$ LANGUAGE plpgsql;

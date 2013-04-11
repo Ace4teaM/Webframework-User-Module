@@ -1,7 +1,7 @@
 <?php
 /*
     ---------------------------------------------------------------------------------------------------------------------------------------
-    (C)2012-2013 Thomas AUGUEY <contact@aceteam.org>
+    (C)2013 Thomas AUGUEY <contact@aceteam.org>
     ---------------------------------------------------------------------------------------------------------------------------------------
     This file is part of WebFrameWork.
 
@@ -21,14 +21,14 @@
 */
 
 /*
- * Renseigne l'identité d'un utilisateur
+ * Renseigne l'adresse d'identité
  * Rôle : Utilisateur
- * UC   : user_identity
+ * UC   : user_address
  */
 
 class Ctrl extends cApplicationCtrl{
-    public $fields    = array('user_connection_id', 'last_name', 'first_name', 'birth_day', 'sex');
-    public $op_fields = null;
+    public $fields    = array('user_connection_id', 'zip_code', 'city_name', 'street_name', 'street_number', 'country_name');
+    public $op_fields = array('street_prefix', 'building_number', 'apt_number');
 
     function Ctrl() {
         parent::__construct();
@@ -37,11 +37,16 @@ class Ctrl extends cApplicationCtrl{
     
     function main(iApplication $app, $app_path, $p) {
 
+        if(!UserModule::checkConnection($p->user_connection_id,$_SERVER["REMOTE_ADDR"]))
+            return false;
+        
+        $user_account_id = cResult::getLast()->getAtt("UID");
+        
         //obtient le compte utilisateur
-        if(!UserModule::makeIdentity($p->user_connection_id, $p->first_name, $p->last_name, $p->birth_day, $p->sex))
+        if(!UserModule::makeAddress($user_account_id, $p->zip_code, $p->city_name, $p->street_name, $p->street_number, $p->street_number, $p->country_name, $p->street_prefix, $p->building_number, $p->apt_number))
             return false;
 
-        return true;//UserModule::makeIdentity
+        return true;//UserModule::makeAddress
     }
 };
 

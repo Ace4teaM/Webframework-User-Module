@@ -23,6 +23,7 @@
         <page id="user_disconnect" role="user" name="Déconnexion">ctrl.php?app=user_module&amp;ctrl=disconnect</page>
         <page id="user_check" role="user" name="Maintenir ma connexion">ctrl.php?app=user_module&amp;ctrl=check</page>
         <page id="user_identity" role="user" name="Renseigner mon identité">ctrl.php?app=user_module&amp;ctrl=identity</page>
+        <page id="user_address" role="user" name="Renseigner mon adresse">ctrl.php?app=user_module&amp;ctrl=address</page>
         <page id="user_get_identity" role="user" name="Obtenir mon identité">ctrl.php?app=user_module&amp;ctrl=get_identity</page>
         <page id="user_get_address" role="user" name="Obtenir mon adresse">ctrl.php?app=user_module&amp;ctrl=get_address</page>
     </index>

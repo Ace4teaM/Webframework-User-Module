@@ -364,6 +364,18 @@ class UserModule implements iModule
     }
     
     /** 
+     * Fabrique une adresse
+     * 
+     * @param mixed       $src Element source, un des types suivants: UserAccount, UserConnection, UserIdentity
+     * @param UserAddress $adr Adresse à initialiser 
+     * 
+     */
+    public static function makeAddress($user_account_id, $zip_code, $city_name, $street_name, $street_number, $street_number, $country_name, $street_prefix, $building_number, $apt_number){
+        global $app;
+        return $app->callStoredProc("user_make_address", $user_account_id, $zip_code, $city_name, $street_name, $street_number, $country_name, $street_prefix, $building_number, $apt_number);
+    }
+    
+    /** 
      * Vérifie l'autentification d'un tilisateur
      * 
      * @param type $uid Nom d'utilisateur
