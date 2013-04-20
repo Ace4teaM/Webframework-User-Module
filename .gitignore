@@ -2,3 +2,4 @@
 ~*
 /wfw-1.7/tmp/*
 !/.gitignore
+!.htaccess
