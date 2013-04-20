@@ -43,35 +43,9 @@
     </tree>
     
     <results lang="fr">
-        <codes>
-            <ERR_OK>Succès</ERR_OK>
-            <ERR_FAILED>Echec</ERR_FAILED>
-            <ERR_SYSTEM>Erreur système</ERR_SYSTEM>
-        </codes>
+        <codes></codes>
 
         <errors>
-            <!-- WFW (ERR_OK) -->
-            <INFORMATION>Information</INFORMATION>
-            <!-- WFW (ERR_FAILED) -->
-            <NO_INPUT_FIELD>Aucun champ reçu</NO_INPUT_FIELD>
-            <MISSING_FIELD>Champ manquant</MISSING_FIELD>
-            <EMPTY_TEXT>Champ vide</EMPTY_TEXT>
-            <INVALID_CHAR>Champ contenant des caractères interdits</INVALID_CHAR>
-            <TOO_SMALL_STRING>Chaine de caractères trop petite</TOO_SMALL_STRING>
-            <INVALID_FORMAT>Champ mal formé</INVALID_FORMAT>
-            <INVALID_RANGE>Rang de valeur invalide</INVALID_RANGE>
-            <OVERSIZED>Trop de caractères</OVERSIZED>
-            <UNDERSIZED>Pas assez de caractères</UNDERSIZED>
-            <DB_CONNECTION>Connexion au serveur de base de données a échouée</DB_CONNECTION>
-            <DB_SQL_QUERY>Requête SQL mal formée</DB_SQL_QUERY>
-            <SOCK_OPEN_URL>La connexion au serveur a échouée</SOCK_OPEN_URL>
-            <APP_UNKNOWN_HOSTNAME>Nom de l'hôte inconnu</APP_UNKNOWN_HOSTNAME>
-            <APP_NO_DATABASE_CONFIGURED>Aucune base de donées n'est présente dans la configuration</APP_NO_DATABASE_CONFIGURED>
-            <APP_UNKNOWN_FORM_TEMPLATE_FILE>Le template de formulaire est indéfinit</APP_UNKNOWN_FORM_TEMPLATE_FILE>
-            <!-- WFW (ERR_SYSTEM) -->
-            <SYS_TASK_CREATE>La tâche ne peut pas être créée</SYS_TASK_CREATE>
-            <SYS_TASK_UPDATE>La tâche ne peut pas être mise à jour</SYS_TASK_UPDATE>
-            
             <!-- USER (ERR_OK) -->
             <USER_CREATED>Utilisateur créé</USER_CREATED>
             <USER_DELETED>Utilisateur supprimé</USER_DELETED>
@@ -94,18 +68,6 @@
         </errors>
 
         <messages>
-            <!-- WFW -->
-            <MISSING_FIELD>
-                Merci de renseigner le champ: $TXT_FIELD_NAME ($FIELD_NAME).
-            </MISSING_FIELD>
-            <SOCK_SERVER_CONNECTION>
-                Cause retourné par le socket #$ERRNO : $ERRSTR
-            </SOCK_SERVER_CONNECTION>
-            <WFW_MSG_POPULATE_FORM>
-                Merci de compléter le formulaire
-            </WFW_MSG_POPULATE_FORM>
-            <WFW_MSG_TOO_SMALL_PASSWORD>Un mot-de-passe doit contenir au minimum $MIN_CHAR_COUNT caractères</WFW_MSG_TOO_SMALL_PASSWORD>
-            
             <!-- USER -->
             <USER_MSG_ACTIVATE_BY_MAIL>
                 Merci de consulter vos courriers électroniques pour activer votre compte utilisateur.
