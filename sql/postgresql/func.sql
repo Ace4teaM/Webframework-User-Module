@@ -404,18 +404,18 @@ CREATE OR REPLACE FUNCTION user_connect_to_session(
   end;
 $$ LANGUAGE plpgsql;
 
-  /*
-    Crée une connexion utilisateur
-    Parametres:
-      p_user_id    : Identifiant de l'utilisateur
-      p_client_ip  : IP du client (IPv4)
-      p_data_path  : Chemin d'accès aux données utilisateurs
-      p_life_time  : temps de vie de la connexion (en secondes)
-    Remarque:
-      Si la connexion existe deja pour cette IP, elle est actualisée.
-    Retourne:
-      [VARCHAR2] Identifiant de la user_session active.
-  */
+/*
+  Crée une connexion utilisateur
+  Parametres:
+    p_user_id    : Identifiant de l'utilisateur
+    p_client_ip  : IP du client (IPv4)
+    p_data_path  : Chemin d'accès aux données utilisateurs
+    p_life_time  : temps de vie de la connexion (en secondes)
+  Remarque:
+    Si la connexion existe deja pour cette IP, elle est actualisée.
+  Retourne:
+    [VARCHAR2] Identifiant de la user_session active.
+*/
 CREATE OR REPLACE FUNCTION user_connect(
        p_user_id    user_account.user_account_id%type,
        p_client_ip  user_connection.client_ip%type,
