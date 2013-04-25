@@ -77,7 +77,8 @@ YUI.add('wfw-user', function (Y) {
         /**
          *   @brief Initialise le module
         */
-        isConnected: function() {wfw.puts("status="+wfw.User.status);
+        isConnected: function() {
+            wfw.puts("status="+wfw.User.status);
             return (wfw.User.status == "USER_CONNECTED") ? true : false;
         },
 
