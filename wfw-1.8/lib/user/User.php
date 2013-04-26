@@ -364,10 +364,10 @@ class UserModule implements iModule
     }
     
     /** 
-     * Fabrique une adresse
+     * Obtient l'identité lie à un compte utilisateur
      * 
-     * @param mixed       $src Element source, un des types suivants: UserAccount, UserConnection, UserIdentity
-     * @param UserAddress $adr Adresse à initialiser 
+     * @param mixed       $user_account Identifiant/Instance du compte (UserAccount)
+     * @param UserAddress $identity     Pointeur recevant l'identité (UserIdentity)
      * 
      */
     public static function getIdentity($user_account,&$identity){
@@ -391,6 +391,39 @@ class UserModule implements iModule
         
         $identity = new UserIdentity();
         UserIdentityMgr::bindResult($identity,$result);
+
+        return RESULT_OK();
+    }
+    
+    /** 
+     * Obtient l'adresse lie à un compte utilisateur
+     * 
+     * @param mixed       $user_account Identifiant/Instance du compte (UserAccount)
+     * @param UserAddress $address      Pointeur recevant l'adresse (UserAddress)
+     * 
+     */
+    public static function getAddress($user_account,&$address){
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        //obtient l'id
+        $user_account_id = ($user_account instanceof UserAccount) ? $user_account->getId() : $user_account;
+        
+        //initialise la requete SQL
+        $query = "
+            select d.* from user_address d
+                    inner join user_identity i on i.user_address_id = d.user_address_id
+                    inner join user_account a on a.user_identity_id = i.user_identity_id
+                    where a.user_account_id = '$user_account_id';
+        ";
+        if(!$db->execute($query,$result))
+            return false;
+        
+        $address = new UserAddress();
+        UserAddressMgr::bindResult($address,$result);
 
         return RESULT_OK();
     }
