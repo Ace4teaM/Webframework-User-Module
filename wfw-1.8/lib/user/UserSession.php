@@ -27,7 +27,7 @@
 
 
 /**
-* @author       developpement
+* @author       AceTeaM
 */
 class UserSession
 {
@@ -51,6 +51,23 @@ class UserSession
 */
 class UserSessionMgr
 {
+    /**
+     * @brief Convert existing instance to XML element
+     * @param $inst Entity instance (UserSession)
+     * @param $doc Parent document
+     * @return New element node
+     */
+    public static function toXML(&$inst,$doc) {
+        $node = $doc->createElement("UserSession");
+        
+        $node->appendChild($doc->createTextElement("user_session_id",$inst->userSessionId));
+        $node->appendChild($doc->createTextElement("local_path",$inst->localPath));       
+
+          
+        return $node;
+    }
+    
+    
     /*
       @brief Get entry list
       @param $list Array to receive new instances
@@ -58,13 +75,41 @@ class UserSessionMgr
       @param $db iDataBase derived instance
     */
     public static function getAll(&$list,$cond,$db=null){
+       $list = array();
+      
        //obtient la base de donnees courrante
        global $app;
        if(!$db && !$app->getDB($db))
          return false;
       
       //execute la requete
-       //...
+       $query = "SELECT * from user_session where $cond";
+       if(!$db->execute($query,$result))
+          return false;
+       
+      //extrait les instances
+       $i=0;
+       while($result->seek($i)){
+        $inst = new UserSession();
+        UserSessionMgr::bindResult($inst,$result);
+        array_push($list,$inst);
+        $i++;
+       }
+       
+       return true;
+    }
+    
+    /*
+      @brief Get single entry
+      @param $inst UserSession instance pointer to initialize
+      @param $cond SQL Select condition
+      @param $db iDataBase derived instance
+    */
+    public static function bindResult(&$inst,$result){
+          $inst->userSessionId = $result->fetchValue("user_session_id");
+          $inst->localPath = $result->fetchValue("local_path");          
+
+       return true;
     }
     
     /*
@@ -83,10 +128,7 @@ class UserSessionMgr
        $query = "SELECT * from user_session where $cond";
        if($db->execute($query,$result)){
             $inst = new UserSession();
-          $inst->userSessionId = $result->fetchValue("user_session_id");
-          $inst->localPath = $result->fetchValue("local_path");          
-
-          return true;
+          return UserSessionMgr::bindResult($inst,$result);
        }
        return false;
     }

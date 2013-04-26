@@ -27,7 +27,7 @@
 
 
 /**
-* @author       developpement
+* @author       AceTeaM
 */
 class UserAccount
 {
@@ -61,6 +61,25 @@ class UserAccount
 */
 class UserAccountMgr
 {
+    /**
+     * @brief Convert existing instance to XML element
+     * @param $inst Entity instance (UserAccount)
+     * @param $doc Parent document
+     * @return New element node
+     */
+    public static function toXML(&$inst,$doc) {
+        $node = $doc->createElement("UserAccount");
+        
+        $node->appendChild($doc->createTextElement("user_account_id",$inst->userAccountId));
+        $node->appendChild($doc->createTextElement("client_id",$inst->clientId));
+        $node->appendChild($doc->createTextElement("user_mail",$inst->userMail));
+        $node->appendChild($doc->createTextElement("user_pwd",$inst->userPwd));       
+
+          
+        return $node;
+    }
+    
+    
     /*
       @brief Get entry list
       @param $list Array to receive new instances
@@ -68,13 +87,43 @@ class UserAccountMgr
       @param $db iDataBase derived instance
     */
     public static function getAll(&$list,$cond,$db=null){
+       $list = array();
+      
        //obtient la base de donnees courrante
        global $app;
        if(!$db && !$app->getDB($db))
          return false;
       
       //execute la requete
-       //...
+       $query = "SELECT * from user_account where $cond";
+       if(!$db->execute($query,$result))
+          return false;
+       
+      //extrait les instances
+       $i=0;
+       while($result->seek($i)){
+        $inst = new UserAccount();
+        UserAccountMgr::bindResult($inst,$result);
+        array_push($list,$inst);
+        $i++;
+       }
+       
+       return true;
+    }
+    
+    /*
+      @brief Get single entry
+      @param $inst UserAccount instance pointer to initialize
+      @param $cond SQL Select condition
+      @param $db iDataBase derived instance
+    */
+    public static function bindResult(&$inst,$result){
+          $inst->userAccountId = $result->fetchValue("user_account_id");
+          $inst->clientId = $result->fetchValue("client_id");
+          $inst->userMail = $result->fetchValue("user_mail");
+          $inst->userPwd = $result->fetchValue("user_pwd");          
+
+       return true;
     }
     
     /*
@@ -93,12 +142,7 @@ class UserAccountMgr
        $query = "SELECT * from user_account where $cond";
        if($db->execute($query,$result)){
             $inst = new UserAccount();
-          $inst->userAccountId = $result->fetchValue("user_account_id");
-          $inst->clientId = $result->fetchValue("client_id");
-          $inst->userMail = $result->fetchValue("user_mail");
-          $inst->userPwd = $result->fetchValue("user_pwd");          
-
-          return true;
+          return UserAccountMgr::bindResult($inst,$result);
        }
        return false;
     }

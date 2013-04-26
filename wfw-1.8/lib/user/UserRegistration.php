@@ -27,7 +27,7 @@
 
 
 /**
-* @author       developpement
+* @author       AceTeaM
 */
 class UserRegistration
 {
@@ -61,6 +61,25 @@ class UserRegistration
 */
 class UserRegistrationMgr
 {
+    /**
+     * @brief Convert existing instance to XML element
+     * @param $inst Entity instance (UserRegistration)
+     * @param $doc Parent document
+     * @return New element node
+     */
+    public static function toXML(&$inst,$doc) {
+        $node = $doc->createElement("UserRegistration");
+        
+        $node->appendChild($doc->createTextElement("user_registration_id",$inst->userRegistrationId));
+        $node->appendChild($doc->createTextElement("user_token",$inst->userToken));
+        $node->appendChild($doc->createTextElement("user_mail",$inst->userMail));
+        $node->appendChild($doc->createTextElement("user_id",$inst->userId));       
+
+          
+        return $node;
+    }
+    
+    
     /*
       @brief Get entry list
       @param $list Array to receive new instances
@@ -68,13 +87,43 @@ class UserRegistrationMgr
       @param $db iDataBase derived instance
     */
     public static function getAll(&$list,$cond,$db=null){
+       $list = array();
+      
        //obtient la base de donnees courrante
        global $app;
        if(!$db && !$app->getDB($db))
          return false;
       
       //execute la requete
-       //...
+       $query = "SELECT * from user_registration where $cond";
+       if(!$db->execute($query,$result))
+          return false;
+       
+      //extrait les instances
+       $i=0;
+       while($result->seek($i)){
+        $inst = new UserRegistration();
+        UserRegistrationMgr::bindResult($inst,$result);
+        array_push($list,$inst);
+        $i++;
+       }
+       
+       return true;
+    }
+    
+    /*
+      @brief Get single entry
+      @param $inst UserRegistration instance pointer to initialize
+      @param $cond SQL Select condition
+      @param $db iDataBase derived instance
+    */
+    public static function bindResult(&$inst,$result){
+          $inst->userRegistrationId = $result->fetchValue("user_registration_id");
+          $inst->userToken = $result->fetchValue("user_token");
+          $inst->userMail = $result->fetchValue("user_mail");
+          $inst->userId = $result->fetchValue("user_id");          
+
+       return true;
     }
     
     /*
@@ -93,12 +142,7 @@ class UserRegistrationMgr
        $query = "SELECT * from user_registration where $cond";
        if($db->execute($query,$result)){
             $inst = new UserRegistration();
-          $inst->userRegistrationId = $result->fetchValue("user_registration_id");
-          $inst->userToken = $result->fetchValue("user_token");
-          $inst->userMail = $result->fetchValue("user_mail");
-          $inst->userId = $result->fetchValue("user_id");          
-
-          return true;
+          return UserRegistrationMgr::bindResult($inst,$result);
        }
        return false;
     }

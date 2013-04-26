@@ -27,7 +27,7 @@
 
 
 /**
-* @author       developpement
+* @author       AceTeaM
 */
 class UserConnection
 {
@@ -66,6 +66,26 @@ class UserConnection
 */
 class UserConnectionMgr
 {
+    /**
+     * @brief Convert existing instance to XML element
+     * @param $inst Entity instance (UserConnection)
+     * @param $doc Parent document
+     * @return New element node
+     */
+    public static function toXML(&$inst,$doc) {
+        $node = $doc->createElement("UserConnection");
+        
+        $node->appendChild($doc->createTextElement("user_connection_id",$inst->userConnectionId));
+        $node->appendChild($doc->createTextElement("client_ip",$inst->clientIp));
+        $node->appendChild($doc->createTextElement("last_access",$inst->lastAccess));
+        $node->appendChild($doc->createTextElement("life_time",$inst->lifeTime));
+        $node->appendChild($doc->createTextElement("link_path",$inst->linkPath));       
+
+          
+        return $node;
+    }
+    
+    
     /*
       @brief Get entry list
       @param $list Array to receive new instances
@@ -73,13 +93,44 @@ class UserConnectionMgr
       @param $db iDataBase derived instance
     */
     public static function getAll(&$list,$cond,$db=null){
+       $list = array();
+      
        //obtient la base de donnees courrante
        global $app;
        if(!$db && !$app->getDB($db))
          return false;
       
       //execute la requete
-       //...
+       $query = "SELECT * from user_connection where $cond";
+       if(!$db->execute($query,$result))
+          return false;
+       
+      //extrait les instances
+       $i=0;
+       while($result->seek($i)){
+        $inst = new UserConnection();
+        UserConnectionMgr::bindResult($inst,$result);
+        array_push($list,$inst);
+        $i++;
+       }
+       
+       return true;
+    }
+    
+    /*
+      @brief Get single entry
+      @param $inst UserConnection instance pointer to initialize
+      @param $cond SQL Select condition
+      @param $db iDataBase derived instance
+    */
+    public static function bindResult(&$inst,$result){
+          $inst->userConnectionId = $result->fetchValue("user_connection_id");
+          $inst->clientIp = $result->fetchValue("client_ip");
+          $inst->lastAccess = $result->fetchValue("last_access");
+          $inst->lifeTime = $result->fetchValue("life_time");
+          $inst->linkPath = $result->fetchValue("link_path");          
+
+       return true;
     }
     
     /*
@@ -98,13 +149,7 @@ class UserConnectionMgr
        $query = "SELECT * from user_connection where $cond";
        if($db->execute($query,$result)){
             $inst = new UserConnection();
-          $inst->userConnectionId = $result->fetchValue("user_connection_id");
-          $inst->clientIp = $result->fetchValue("client_ip");
-          $inst->lastAccess = $result->fetchValue("last_access");
-          $inst->lifeTime = $result->fetchValue("life_time");
-          $inst->linkPath = $result->fetchValue("link_path");          
-
-          return true;
+          return UserConnectionMgr::bindResult($inst,$result);
        }
        return false;
     }

@@ -370,6 +370,38 @@ class UserModule implements iModule
      * @param UserAddress $adr Adresse à initialiser 
      * 
      */
+    public static function getIdentity($user_account,&$identity){
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        //obtient l'id
+        $user_account_id = ($user_account instanceof UserAccount) ? $user_account->getId() : $user_account;
+        
+        //initialise la requete SQL
+        $query = "
+                select i.* from user_identity i
+                    inner join user_account a on a.user_identity_id = i.user_identity_id
+                    where a.user_account_id = '$user_account_id';
+        ";
+        if(!$db->execute($query,$result))
+            return false;
+        
+        $identity = new UserIdentity();
+        UserIdentityMgr::bindResult($identity,$result);
+
+        return RESULT_OK();
+    }
+    
+    /** 
+     * Fabrique une adresse
+     * 
+     * @param mixed       $src Element source, un des types suivants: UserAccount, UserConnection, UserIdentity
+     * @param UserAddress $adr Adresse à initialiser 
+     * 
+     */
     public static function makeAddress($user_account_id, $zip_code, $city_name, $street_name, $street_number, $street_number, $country_name, $street_prefix, $building_number, $apt_number){
         global $app;
         return $app->callStoredProc("user_make_address", $user_account_id, $zip_code, $city_name, $street_name, $street_number, $country_name, $street_prefix, $building_number, $apt_number);

@@ -4,10 +4,10 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{6FB9F148-AD47-4AAF-B43F-CD8A5C444AD7}" Loaded="No" Name="user" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="user.mcd"/>
-		<Model Expanded="Yes" ID="{8D93700A-2D93-4DAE-B2F9-94542D8970E7}" Loaded="No" Name="user" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="user.mld"/>
-		<Model Expanded="Yes" ID="{94471171-BAD3-410B-8D7E-6A3235048243}" Loaded="No" Name="user" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="user.mpd"/>
-		<Model ID="{95319535-B633-4821-A608-3A33B99D1993}" Name="user" Selected="Yes" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="user.moo"/>
+		<Model Expanded="Yes" ID="{6FB9F148-AD47-4AAF-B43F-CD8A5C444AD7}" Name="user" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="user.mcd"/>
+		<Model Expanded="Yes" ID="{8D93700A-2D93-4DAE-B2F9-94542D8970E7}" Name="user" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="user.mld"/>
+		<Model Expanded="Yes" ID="{94471171-BAD3-410B-8D7E-6A3235048243}" Name="user" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="user.mpd"/>
+		<Model ID="{95319535-B633-4821-A608-3A33B99D1993}" Name="user" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="user.moo"/>
 		<Model Expanded="Yes" ID="{FAC0B1E7-4D06-4C7F-8B93-FEA20086B4AD}" Loaded="No" Name="Cas d&#39;utilisations" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="uml.moo"/>
 		<Model Expanded="Yes" ID="{377D173D-DD4D-46A5-B22A-42B8A973D3B5}" Loaded="No" Name="base" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="../../Webframework/documents/base.mcd"/>
 		<Model Expanded="Yes" ID="{7865443D-B47A-4D8A-92AF-3C89C454802B}" Loaded="No" Name="base" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="../../Webframework/documents/base.mld"/>

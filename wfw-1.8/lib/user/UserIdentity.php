@@ -27,7 +27,7 @@
 
 
 /**
-* @author       developpement
+* @author       AceTeaM
 */
 class UserIdentity
 {
@@ -66,6 +66,26 @@ class UserIdentity
 */
 class UserIdentityMgr
 {
+    /**
+     * @brief Convert existing instance to XML element
+     * @param $inst Entity instance (UserIdentity)
+     * @param $doc Parent document
+     * @return New element node
+     */
+    public static function toXML(&$inst,$doc) {
+        $node = $doc->createElement("UserIdentity");
+        
+        $node->appendChild($doc->createTextElement("user_identity_id",$inst->userIdentityId));
+        $node->appendChild($doc->createTextElement("first_name",$inst->firstName));
+        $node->appendChild($doc->createTextElement("last_name",$inst->lastName));
+        $node->appendChild($doc->createTextElement("birth_day",$inst->birthDay));
+        $node->appendChild($doc->createTextElement("sex",$inst->sex));       
+
+          
+        return $node;
+    }
+    
+    
     /*
       @brief Get entry list
       @param $list Array to receive new instances
@@ -73,13 +93,44 @@ class UserIdentityMgr
       @param $db iDataBase derived instance
     */
     public static function getAll(&$list,$cond,$db=null){
+       $list = array();
+      
        //obtient la base de donnees courrante
        global $app;
        if(!$db && !$app->getDB($db))
          return false;
       
       //execute la requete
-       //...
+       $query = "SELECT * from user_identity where $cond";
+       if(!$db->execute($query,$result))
+          return false;
+       
+      //extrait les instances
+       $i=0;
+       while($result->seek($i)){
+        $inst = new UserIdentity();
+        UserIdentityMgr::bindResult($inst,$result);
+        array_push($list,$inst);
+        $i++;
+       }
+       
+       return true;
+    }
+    
+    /*
+      @brief Get single entry
+      @param $inst UserIdentity instance pointer to initialize
+      @param $cond SQL Select condition
+      @param $db iDataBase derived instance
+    */
+    public static function bindResult(&$inst,$result){
+          $inst->userIdentityId = $result->fetchValue("user_identity_id");
+          $inst->firstName = $result->fetchValue("first_name");
+          $inst->lastName = $result->fetchValue("last_name");
+          $inst->birthDay = $result->fetchValue("birth_day");
+          $inst->sex = $result->fetchValue("sex");          
+
+       return true;
     }
     
     /*
@@ -98,13 +149,7 @@ class UserIdentityMgr
        $query = "SELECT * from user_identity where $cond";
        if($db->execute($query,$result)){
             $inst = new UserIdentity();
-          $inst->userIdentityId = $result->fetchValue("user_identity_id");
-          $inst->firstName = $result->fetchValue("first_name");
-          $inst->lastName = $result->fetchValue("last_name");
-          $inst->birthDay = $result->fetchValue("birth_day");
-          $inst->sex = $result->fetchValue("sex");          
-
-          return true;
+          return UserIdentityMgr::bindResult($inst,$result);
        }
        return false;
     }

@@ -27,7 +27,7 @@
 
 
 /**
-* @author       developpement
+* @author       AceTeaM
 */
 class UserAddress
 {
@@ -86,6 +86,30 @@ class UserAddress
 */
 class UserAddressMgr
 {
+    /**
+     * @brief Convert existing instance to XML element
+     * @param $inst Entity instance (UserAddress)
+     * @param $doc Parent document
+     * @return New element node
+     */
+    public static function toXML(&$inst,$doc) {
+        $node = $doc->createElement("UserAddress");
+        
+        $node->appendChild($doc->createTextElement("user_address_id",$inst->userAddressId));
+        $node->appendChild($doc->createTextElement("zip_code",$inst->zipCode));
+        $node->appendChild($doc->createTextElement("city_name",$inst->cityName));
+        $node->appendChild($doc->createTextElement("street_name",$inst->streetName));
+        $node->appendChild($doc->createTextElement("street_number",$inst->streetNumber));
+        $node->appendChild($doc->createTextElement("country_name",$inst->countryName));
+        $node->appendChild($doc->createTextElement("street_prefix",$inst->streetPrefix));
+        $node->appendChild($doc->createTextElement("building_number",$inst->buildingNumber));
+        $node->appendChild($doc->createTextElement("apt_number",$inst->aptNumber));       
+
+          
+        return $node;
+    }
+    
+    
     /*
       @brief Get entry list
       @param $list Array to receive new instances
@@ -93,13 +117,48 @@ class UserAddressMgr
       @param $db iDataBase derived instance
     */
     public static function getAll(&$list,$cond,$db=null){
+       $list = array();
+      
        //obtient la base de donnees courrante
        global $app;
        if(!$db && !$app->getDB($db))
          return false;
       
       //execute la requete
-       //...
+       $query = "SELECT * from user_address where $cond";
+       if(!$db->execute($query,$result))
+          return false;
+       
+      //extrait les instances
+       $i=0;
+       while($result->seek($i)){
+        $inst = new UserAddress();
+        UserAddressMgr::bindResult($inst,$result);
+        array_push($list,$inst);
+        $i++;
+       }
+       
+       return true;
+    }
+    
+    /*
+      @brief Get single entry
+      @param $inst UserAddress instance pointer to initialize
+      @param $cond SQL Select condition
+      @param $db iDataBase derived instance
+    */
+    public static function bindResult(&$inst,$result){
+          $inst->userAddressId = $result->fetchValue("user_address_id");
+          $inst->zipCode = $result->fetchValue("zip_code");
+          $inst->cityName = $result->fetchValue("city_name");
+          $inst->streetName = $result->fetchValue("street_name");
+          $inst->streetNumber = $result->fetchValue("street_number");
+          $inst->countryName = $result->fetchValue("country_name");
+          $inst->streetPrefix = $result->fetchValue("street_prefix");
+          $inst->buildingNumber = $result->fetchValue("building_number");
+          $inst->aptNumber = $result->fetchValue("apt_number");          
+
+       return true;
     }
     
     /*
@@ -118,17 +177,7 @@ class UserAddressMgr
        $query = "SELECT * from user_address where $cond";
        if($db->execute($query,$result)){
             $inst = new UserAddress();
-          $inst->userAddressId = $result->fetchValue("user_address_id");
-          $inst->zipCode = $result->fetchValue("zip_code");
-          $inst->cityName = $result->fetchValue("city_name");
-          $inst->streetName = $result->fetchValue("street_name");
-          $inst->streetNumber = $result->fetchValue("street_number");
-          $inst->countryName = $result->fetchValue("country_name");
-          $inst->streetPrefix = $result->fetchValue("street_prefix");
-          $inst->buildingNumber = $result->fetchValue("building_number");
-          $inst->aptNumber = $result->fetchValue("apt_number");          
-
-          return true;
+          return UserAddressMgr::bindResult($inst,$result);
        }
        return false;
     }
