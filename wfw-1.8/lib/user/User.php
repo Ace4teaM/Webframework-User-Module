@@ -25,8 +25,8 @@
  * Librairie PHP5
  */
 
-require_once("php/class/bases/iModule.php");
-require_once("php/xml_default.php");
+require_once("class/bases/iModule.php");
+require_once("xml_default.php");
 
 function relativePath( $path, $compareTo ) {
     // clean arguments by removing trailing and prefixing slashes
