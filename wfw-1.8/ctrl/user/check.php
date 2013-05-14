@@ -23,10 +23,10 @@
 /*
  * Maintient la connexion d'un utilisateur
  * Rôle : Utilisateur
- * UC   : user_check_connection
+ * UC   : check
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_check_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;
 

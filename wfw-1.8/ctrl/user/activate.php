@@ -23,10 +23,10 @@
 /*
  * Active un compte utilisateur
  * Rôle : Visiteur
- * UC   : user_activate_account
+ * UC   : activate_account
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_activate_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd', 'user_mail', 'token');
     public $op_fields = null;
 

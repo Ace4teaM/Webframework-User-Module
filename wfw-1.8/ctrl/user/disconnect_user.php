@@ -23,10 +23,10 @@
 /*
  * Déconnect un utilisateur
  * Rôle : Administrateur
- * UC   : user_disconnect_account
+ * UC   : disconnect_user
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_disconnect_user_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id');
     public $op_fields = null;
 

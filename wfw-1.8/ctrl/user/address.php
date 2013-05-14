@@ -26,7 +26,7 @@
  * UC   : user_address
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_address_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id', 'zip_code', 'city_name', 'street_name', 'street_number', 'country_name');
     public $op_fields = array('street_prefix', 'building_number', 'apt_number');
 

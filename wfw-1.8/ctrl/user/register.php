@@ -23,10 +23,10 @@
 /**
  * Formulaire d'inscription
  * Rôle : Visiteur
- * UC   : user_register_account
+ * UC   : register_account
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_register_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_mail');
     public $op_fields = null;
 

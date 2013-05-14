@@ -23,10 +23,10 @@
 /*
  * Renseigne l'identité d'un utilisateur
  * Rôle : Utilisateur
- * UC   : user_identity
+ * UC   : identity
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_identity_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id', 'last_name', 'first_name', 'birth_day', 'sex');
     public $op_fields = null;
 

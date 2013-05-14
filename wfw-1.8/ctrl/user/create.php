@@ -23,10 +23,10 @@
 /*
  * Crée un compte utilisateur
  * Rôle : Administrateur
- * UC   : user_create_account
+ * UC   : create_account
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_create_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd', 'user_mail');
     public $op_fields = null;
 

@@ -23,10 +23,10 @@
 /*
  * Renseigne l'identité d'un utilisateur
  * Rôle : Utilisateur
- * UC   : user_identity
+ * UC   : get_identity
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_get_identity_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;
 

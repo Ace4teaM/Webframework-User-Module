@@ -23,10 +23,10 @@
 /*
  * Supprime un compte
  * Rôle : Administrateur
- * UC   : user_delete_account
+ * UC   : delete_account
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_delete_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id');
     public $op_fields = null;
 

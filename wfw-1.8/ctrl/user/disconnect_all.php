@@ -23,10 +23,10 @@
 /*
  * Déconnecte tous les utilisateurs
  * Rôle : Administrateur
- * UC   : user_disconnect_all
+ * UC   : disconnect_all
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_disconnect_all_ctrl extends cApplicationCtrl{
     public $fields    = null;
     public $op_fields = null;
 

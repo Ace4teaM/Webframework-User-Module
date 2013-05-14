@@ -23,10 +23,10 @@
 /*
  * Connexion d'un utilisateur
  * Rôle : Visiteur
- * UC   : user_connect
+ * UC   : connect
  */
 
-class Ctrl extends cApplicationCtrl{
+class user_module_connect_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd');
     public $op_fields = array('life_time');
 
