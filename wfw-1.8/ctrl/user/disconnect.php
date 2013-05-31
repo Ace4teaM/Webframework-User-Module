@@ -31,7 +31,7 @@ class user_module_disconnect_ctrl extends cApplicationCtrl{
     public $op_fields = null;
     public $att       = null;
 
-    function Ctrl() {
+    function __construct() {
         parent::__construct();
         $this->att = array_merge($this->att,$_COOKIE);
     }

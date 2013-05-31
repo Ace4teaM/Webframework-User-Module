@@ -30,7 +30,7 @@ class user_module_address_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id', 'zip_code', 'city_name', 'street_name', 'street_number', 'country_name');
     public $op_fields = array('street_prefix', 'building_number', 'apt_number');
 
-    function Ctrl() {
+    function __construct() {
         parent::__construct();
         $this->att = array_merge($this->att,$_COOKIE);
     }

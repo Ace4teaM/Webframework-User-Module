@@ -32,7 +32,7 @@ class user_module_get_address_ctrl extends cApplicationCtrl{
 
     private $address = array();
     
-    function Ctrl() {
+    function __construct() {
         parent::__construct();
         $this->att = array_merge($this->att,$_COOKIE);
     }

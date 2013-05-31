@@ -30,7 +30,7 @@ class user_module_identity_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id', 'last_name', 'first_name', 'birth_day', 'sex');
     public $op_fields = null;
 
-    function Ctrl() {
+    function __construct() {
         parent::__construct();
         $this->att = array_merge($this->att,$_COOKIE);
     }
