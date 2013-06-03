@@ -52,7 +52,7 @@
             <USER_REGISTRED>Inscription réussite</USER_REGISTRED>
             <USER_CONNECTED>Utilisateur connecté</USER_CONNECTED>
             <USER_DISCONNECTED>Utilisateur déconnecté</USER_DISCONNECTED>
-            <IDENTITY_UPDATED>Identité mise à jour</IDENTITY_UPDATED>
+            <USER_IDENTITY_UPDATED>Identité mise à jour</USER_IDENTITY_UPDATED>
             <!-- USER (ERR_FAILED) -->
             <USER_EXISTS>L’Utilisateur existe déjà</USER_EXISTS>
             <USER_NOT_EXISTS>L'utilisateur n'existe pas</USER_NOT_EXISTS>
