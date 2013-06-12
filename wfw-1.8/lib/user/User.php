@@ -159,18 +159,7 @@ class UserModule implements iModule
      */
     public static function createAccount($uid, $pwd, $client_id, $mail){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_create_account", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_create_account", $uid, $pwd, $client_id, $mail);
     }
     
     /** 
@@ -178,19 +167,7 @@ class UserModule implements iModule
      */
     public static function deleteAccount($uid){ 
         global $app;
-        
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_delete_account", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_delete_account", $uid);
     }
     
     /** 
@@ -203,18 +180,7 @@ class UserModule implements iModule
      */
     public static function connectUser($uid, $client_ip, $local_path, $life_time){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_connect", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_connect", $uid, $client_ip, $local_path, $life_time);
     }
     
     /** 
@@ -222,18 +188,7 @@ class UserModule implements iModule
      */
     public static function disconnectUser($uid){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect_account", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_disconnect_account", $uid);
     }
     
     /** 
@@ -241,18 +196,7 @@ class UserModule implements iModule
      */
     public static function disconnect($cid){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_disconnect", $cid);
     }
     
     /** 
@@ -260,18 +204,7 @@ class UserModule implements iModule
      */
     public static function disconnectAll(){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_disconnect_all", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_disconnect_all");
     }
     
     /** 
@@ -283,18 +216,7 @@ class UserModule implements iModule
      */
     public static function activateAccount($uid, $pwd, $mail, $token){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_activate_account", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_activate_account", $uid, $pwd, $mail, $token);
     }
     
     /** 
@@ -305,18 +227,7 @@ class UserModule implements iModule
      */
     public static function registerAccount($uid, $mail){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_register_account", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_register_account", $uid, $mail);
     }
     
     /** 
@@ -327,18 +238,7 @@ class UserModule implements iModule
      */
     public static function accountExists($uid, $mail){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_account_exists", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_account_exists", $uid, $mail);
     }
     
     /** 
@@ -350,18 +250,7 @@ class UserModule implements iModule
      */
     public static function makeIdentity($user_connection_id, $first_name, $last_name, DateTime $birth_day, $sex){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_make_identity", func_get_args(), $result))
-            return false;
-
-        $row = $result->fetchRow();
- 
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_make_identity", $user_connection_id, $first_name, $last_name, $birth_day, $sex);
     }
     
     /** 
@@ -449,18 +338,7 @@ class UserModule implements iModule
      */
     public static function checkAuthentication($uid, $pwd){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_check_authentication", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_check_authentication", $uid, $pwd);
     }
     
     /** 
@@ -482,18 +360,7 @@ class UserModule implements iModule
      */
     public static function checkConnection($cid,$ip){ 
         global $app;
-        $db=null;
-        
-        if(!$app->getDB($db))
-            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
-
-        if(!$db->call($app->getCfgValue("database","schema"), "user_check_connection", func_get_args(), $result))
-            return false;
-        
-        $row = $result->fetchRow();
-
-        //return $result;
-        return RESULT($row["err_code"], $row["err_str"], stra_to_array($row["ext_fields"]));
+        return $app->callStoredProc("user_check_connection", $cid,$ip);
     }
     
     /** 
