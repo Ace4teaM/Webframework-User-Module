@@ -178,6 +178,7 @@ class UserModule implements iModule
      */
     public static function deleteAccount($uid){ 
         global $app;
+        
         $db=null;
         
         if(!$app->getDB($db))
@@ -552,6 +553,35 @@ class UserModule implements iModule
         return UserAccountMgr::getById($user, $uid);
     }
 
+    /** 
+     * Obtient un compte utilisateur lié à une adresse mail
+     * 
+     * @param string      $user_mail    Adresse mail
+     * @param UserAccount $user_account Pointeur recevant l'instance du compte (UserAccount)
+     * 
+     * @return bool Résultat de procédure
+     */
+    public static function getByMail($user_mail,&$user_account){
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        //initialise la requete SQL
+        $query = "
+            select * from user_account
+                    where user_mail = '$user_mail';
+        ";
+        if(!$db->execute($query,$result))
+            return false;
+        
+        $user_account = new UserAccount();
+        UserAccountMgr::bindResult($user_account,$result);
+
+        return RESULT_OK();
+    }
+    
 }
 
 ?>
