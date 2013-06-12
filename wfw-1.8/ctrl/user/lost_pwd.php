@@ -1,7 +1,7 @@
 <?php
 /*
     ---------------------------------------------------------------------------------------------------------------------------------------
-    (C)2012-2013 Thomas AUGUEY <contact@aceteam.org>
+    (C)2013 Thomas AUGUEY <contact@aceteam.org>
     ---------------------------------------------------------------------------------------------------------------------------------------
     This file is part of WebFrameWork.
 
@@ -21,50 +21,27 @@
 */
 
 /**
- * Formulaire d'inscription
+ * Récupérer un mot-de-passe
+ * L'Utilisateur souhaite récupérer un mot de passe et nom d’utilisateur oublié
  * Rôle : Visiteur
- * UC   : register_account
+ * UC   : lost_pwd
  */
 
-class user_module_register_ctrl extends cApplicationCtrl{
-    public $fields    = array('user_account_id', 'user_mail');
-    public $op_fields = null;
+class user_module_lost_pwd_ctrl extends cApplicationCtrl{
+    public $fields      = array('user_mail');
+    public $op_fields   = null;
+    public $out_fields  = array('user_account_id','message');
 
-    //Active le compte en cas d'impossibilité d'envoyer un mail
-    function activate(iApplication $app, $app_path, $p) {
-        $result = cResult::getLast();
-
-        $pwd   = rand(1615,655641);
-        
-        //crée le compte utilisateur'inscription
-        if(!UserModule::activateAccount($p->user_account_id, $pwd, $p->user_mail, $result->getAtt("token")))
-            return false;
-        
-        //ajoute un message d'avertissement
-        $result->addAtt("pwd",$pwd);
-        $result->addAtt("message","USER_MSG_AUTO_ACTIVATE");
-        
-        return RESULT_INST($result);
-    }
-    
+    /* Point d'entrée */
     function main(iApplication $app, $app_path, $p) {
 
-        //module mail requis ?
-        if(!class_exists("MailModule") && $app->getCfgValue("user_module","requires_mail_module"))
+        // module mail requis ?
+        if(!class_exists("MailModule"))
             return RESULT(cResult::Failed,Application::ModuleClassNotFound,array("module_name"=>"mail"));
 
-        $client_id = "none";
-
-        //crée l'inscription
-        if(!UserModule::registerAccount($p->user_account_id, $p->user_mail))
+        // recupere les informations sur l'utilisateur
+        if(!UserModule::getByMail($p->user_mail,$user_account))
             return false;
-
-        //retourne le resultat de cette fonction
-        $result = cResult::getLast();
-
-        //pas de module Mail ?
-        if(!class_exists("MailModule"))
-            return $this->activate($app, $app_path, $p);
 
         //utile a la generation du message
         if(!$app->getDefaultFile($default))
@@ -79,18 +56,18 @@ class user_module_register_ctrl extends cApplicationCtrl{
 
         //attributs du template
         $template_att = objectToArray($p);
-        $template_att["TOKEN"] = $result->getAtt("token");
-        $template_att["ACTIVATION_LINK"] = $app->getBaseURI()."/".$default->getIndexValue("page","user_activate")."&token=".$result->getAtt("token")."&user_account_id=$p->user_account_id&user_mail=$p->user_mail";
+        $template_att["USER_PWD"]        = $user_account->userPwd;
+        $template_att["USER_ACCOUNT_ID"] = $user_account->userAccountId;
 
         //depuis un template ?
-        $template = $app->getCfgValue("user_module","activation_mail");
+        $template = $app->getCfgValue("user_module","pwd_recovery_mail");
         if(!empty($template) && file_exists($template)){
             $msg->msg      = cHTMLTemplate::transformFile($template,$template_att);
             $msg->contentType = mime_content_type($template);
         }
-        //depuis le message standard ?
+        //depuis le message texte ?
         else{
-            $msg->msg      = cHTMLTemplate::transform($default->getResultText("messages","USER_ACTIVATION_MAIL"),$template_att);
+            $msg->msg      = cHTMLTemplate::transform($default->getResultText("messages","USER_PWD_LOST_MAIL"),$template_att);
             $msg->contentType = "text/plain";
         }
 
@@ -98,9 +75,8 @@ class user_module_register_ctrl extends cApplicationCtrl{
         if(!MailModule::sendMessage($msg))
             return false;
 
-        //ajoute un message d'avertissement
-        $result->addAtt("message","USER_MSG_ACTIVATE_BY_MAIL");
-        return RESULT_INST($result);
+        // ok + message d'information
+        return RESULT(cResult::Ok, cResult::Success, array("message"=>"USER_PWD_LOST_MAIL_SENT"));
     }
 };
 

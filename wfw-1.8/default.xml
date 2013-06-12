@@ -84,6 +84,16 @@
                 Votre adresse eMail     : $MAIL
                 Votre code d'activation : $TOKEN
             </USER_ACTIVATION_MAIL>
+            <USER_PWD_LOST_MAIL>
+                Vous avez demandez la récupération de vos informations de compte utilisateur.
+                Voici vos informations:
+                Votre nom d'utilisateur : $USER_ACCOUNT_ID
+                Votre mot-de-passe      : $USER_PWD
+                Pour des raisons de sécurités, il est fortement recommandé de réinitialiser votre mot-de-passe lors de votre prochaine connexion.
+            </USER_PWD_LOST_MAIL>
+            <USER_PWD_LOST_MAIL_SENT>
+                Merci de consulter vos courriers électroniques, un mail avec votre identifiant et votre mot-de-passe vous a été envoyé.
+            </USER_PWD_LOST_MAIL_SENT>
         </messages>
         
         <fields>
