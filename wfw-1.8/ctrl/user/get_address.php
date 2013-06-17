@@ -21,7 +21,9 @@
 */
 
 /*
- * Renseigne l'identité d'un utilisateur
+ * Obtient l'adresse d'un utilisateur
+ * Affiche l'adresse (rue, ville, pays, ...) lié à un compte utilisateur
+ * 
  * Rôle : Utilisateur
  * UC   : get_address
  */
@@ -39,6 +41,15 @@ class user_module_get_address_ctrl extends cApplicationCtrl{
     
     function main(iApplication $app, $app_path, $p) {
         
+        //--------------------------------------------
+        //1. Valide les informations de connexion utilisateur
+        if(!UserModule::checkConnection($p->user_connection_id,$_SERVER["REMOTE_ADDR"]))
+            return false;
+        
+        $user_account_id = cResult::getLast()->getAtt("UID");
+        
+        //--------------------------------------------
+        //2. Obtient l'adresse liée à ce compte
         if(!$app->getDB($db))
             return false;
         
@@ -54,7 +65,7 @@ class user_module_get_address_ctrl extends cApplicationCtrl{
             return false;
         
         if(!$result->rowCount())
-            return RESULT_OK(); //RESULT(cResult::Failed,iDatabaseQuery::EmptyResult);
+            return RESULT_OK(); //ok, retourne un contenu vide
         
         $this->address = $result->fetchRow();
         
