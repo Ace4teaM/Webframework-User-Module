@@ -21,7 +21,9 @@
 */
 
 /*
- * Renseigne l'identité d'un utilisateur
+ * Obtient l'identité d'un utilisateur
+ * Affiche l'identité (nom, prénom, sexe, ...) lié à un compte utilisateur
+ * 
  * Rôle : Utilisateur
  * UC   : get_identity
  */
@@ -39,6 +41,15 @@ class user_module_get_identity_ctrl extends cApplicationCtrl{
     
     function main(iApplication $app, $app_path, $p) {
         
+        //--------------------------------------------
+        //1. Valide les informations de connexion utilisateur
+        if(!UserModule::checkConnection($p->user_connection_id,$_SERVER["REMOTE_ADDR"]))
+            return false;
+        
+        $user_account_id = cResult::getLast()->getAtt("UID");
+        
+        //--------------------------------------------
+        //2. Obtient l'identité liée à ce compte
         if(!$app->getDB($db))
             return false;
         
@@ -46,14 +57,14 @@ class user_module_get_identity_ctrl extends cApplicationCtrl{
             select i.* from user_identity i
                 inner join user_account a on a.user_identity_id = i.user_identity_id
                 inner join user_connection c on c.user_account_id = a.user_account_id
-                where c.user_connection_id = '$p->user_connection_id';
+                where c.user_connection_id = '$user_account_id';
         ";
 
         if(!$db->execute($query,$result))
             return false;
         
         if(!$result->rowCount())
-            return RESULT_OK(); //RESULT(cResult::Failed,iDatabaseQuery::EmptyResult);
+            return RESULT_OK(); //ok, retourne un contenu vide
         
         $this->identity = $result->fetchRow();
         
