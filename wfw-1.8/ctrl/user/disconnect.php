@@ -38,7 +38,7 @@ class user_module_disconnect_ctrl extends cApplicationCtrl{
     
     function main(iApplication $app, $app_path, $p) {
 
-        //supprime le compte utilisateur
+        // supprime la connexion utilisateur
         if(!UserModule::disconnect($p->user_connection_id))
             return false;
 

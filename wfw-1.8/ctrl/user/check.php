@@ -22,6 +22,8 @@
 
 /*
  * Maintient la connexion d'un utilisateur
+ * Actualiser une connexion permet de maintenir l’expiration d’une session utilisateur et d’obtenir des informations sur la connexion en cours.
+ * 
  * Rôle : Utilisateur
  * UC   : check
  */
@@ -32,11 +34,12 @@ class user_module_check_ctrl extends cApplicationCtrl{
 
     function main(iApplication $app, $app_path, $p) {
 
+        // 1. Valide les informations de connexion utilisateur 
         if(!UserModule::checkConnection($p->user_connection_id,$_SERVER["REMOTE_ADDR"]))
             return false;
         $result = cResult::getLast();
 
-        //actualise la tache de fermeture
+        // 2. Actualise la tâche de fermeture automatique
         $taskMgr=NULL;
         $app->getTaskMgr($taskMgr);
         if($taskMgr!==NULL){

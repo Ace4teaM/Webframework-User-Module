@@ -22,7 +22,8 @@
 
 /**
  * Récupérer un mot-de-passe
- * L'Utilisateur souhaite récupérer un mot de passe et nom d’utilisateur oublié
+ * L'Utilisateur souhaite récupérer son mot-de-passe et son nom d’utilisateur oublié
+ * 
  * Rôle : Visiteur
  * UC   : lost_pwd
  */
@@ -34,6 +35,9 @@ class user_module_lost_pwd_ctrl extends cApplicationCtrl{
 
     /* Point d'entrée */
     function main(iApplication $app, $app_path, $p) {
+        
+        //--------------------------------------------
+        // 1. Vérifie si le compte utilisateur lié à l’adresse mail existe
 
         // module mail requis ?
         if(!class_exists("MailModule"))
@@ -43,12 +47,12 @@ class user_module_lost_pwd_ctrl extends cApplicationCtrl{
         if(!UserModule::getByMail($p->user_mail,$user_account))
             return false;
 
-        //utile a la generation du message
+        //--------------------------------------------
+        // 2. Envoie un mail contenant : le nom d'utilisateur (USER_ACCOUNT_ID) et le mot-de-passe (USER_PWD)
+
+        //utile pour générer le message mail
         if(!$app->getDefaultFile($default))
             return $this->activate($app, $app_path, $p);
-
-        //--------------------------------------------
-        //initialise le message
 
         $msg = new MailMessage();
         $msg->to       = $p->user_mail;
@@ -75,7 +79,8 @@ class user_module_lost_pwd_ctrl extends cApplicationCtrl{
         if(!MailModule::sendMessage($msg))
             return false;
 
-        // ok + message d'information
+        //--------------------------------------------
+        // 3. Retourne un message de confirmation à l’utilisateur 
         return RESULT(cResult::Ok, cResult::Success, array("message"=>"USER_PWD_LOST_MAIL_SENT"));
     }
 };

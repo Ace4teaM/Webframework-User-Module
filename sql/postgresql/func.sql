@@ -800,7 +800,7 @@ $$ LANGUAGE plpgsql;
 
 
 /*
-  Maintient une connexion utilisateur
+  Maintient et valide une connexion utilisateur
   Parametres:
     p_user_connection_id  : Identifiant de connexion
     p_client_ip           : Adresse IP du client
