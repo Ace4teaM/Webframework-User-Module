@@ -413,6 +413,7 @@ $$ LANGUAGE plpgsql;
     p_life_time  : temps de vie de la connexion (en secondes)
   Remarque:
     Si la connexion existe deja pour cette IP, elle est actualisée.
+    La session est créée automatiquement
   Retourne:
     [VARCHAR2] Identifiant de la user_session active.
 */
@@ -597,6 +598,8 @@ $$ LANGUAGE plpgsql;
       p_connection_id    : Identifiant de connexion
     Remarques:
       Si la session est de type automatique et non utilisée, elle sera detruite.
+    Paramètres de retour:
+        USER_ACCOUNT_ID : Identifiant de l'utilisateur déconnecté
   */
 CREATE OR REPLACE FUNCTION user_disconnect(
        p_connection_id    user_connection.user_connection_id%type
@@ -605,7 +608,11 @@ CREATE OR REPLACE FUNCTION user_disconnect(
 AS $$
 DECLARE
     v_result RESULT;
+    v_user_account_id user_account.user_account_id%type;
   BEGIN
+     --obtient l'identifiant de la connexion
+     select user_account_id from user_connection into v_user_account_id where user_connection_id = p_connection_id;
+
     -- supprime la connexion
     delete from user_connection where user_connection_id = p_connection_id;
 
@@ -613,7 +620,7 @@ DECLARE
     -- delete from user_session where user_session_id like(get_global('CLIENT_SESSION_PREFIX')||p_user_id);
 
     -- ok
-    select 'ERR_OK', 'USER_DISCONNECTED' into v_result;
+    select 'ERR_OK', 'USER_DISCONNECTED', 'USER_ACCOUNT_ID:'||v_user_account_id into v_result;
     return v_result;
   END;
 $$ LANGUAGE plpgsql;
