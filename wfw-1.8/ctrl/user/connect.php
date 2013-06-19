@@ -33,7 +33,7 @@ class user_module_connect_ctrl extends cApplicationCtrl{
     function main(iApplication $app, $app_path, $p) {
 
         $client_ip  = $_SERVER["REMOTE_ADDR"];
-        $local_path = NULL;
+        $session_path = NULL;
         
         if(!$p->life_time)
             $p->life_time = $app->getCfgValue("user_module","default_connection_life_time");
@@ -41,8 +41,8 @@ class user_module_connect_ctrl extends cApplicationCtrl{
         if(!UserModule::checkAuthentication($p->user_account_id, $p->user_pwd))
             return false;
 
-        //crée une connexion
-        if(!UserModule::connectUser($p->user_account_id, $client_ip, $local_path, $p->life_time))
+        //crée une connexion avec session automatique
+        if(!UserModule::connectUser($p->user_account_id, $client_ip, $session_path, $p->life_time))
             return false;
 
         //retourne le resultat de cette fonction
