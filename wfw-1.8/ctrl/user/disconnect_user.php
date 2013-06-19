@@ -31,24 +31,19 @@ class user_module_disconnect_user_ctrl extends cApplicationCtrl{
     public $op_fields = null;
 
     function main(iApplication $app, $app_path, $p) {
-
-        // résultat retourné
-        $result = new cResult();
-
         // 1,2,3. Supprime la connexion (et la session) utilisateur
         if(!UserModule::disconnectUser($p->user_account_id))
             return false;
         $result = cResult::getLast();
         
         //4. Supprime la tache de fermeture automatique
-        /** todo: A FAIRE
         $taskMgr=NULL;
         $app->getTaskMgr($taskMgr);
-        if($taskMgr !== null && $p->life_time > 0){
+        if($taskMgr !== null){
             $taskName = UserModule::disconnectTaskName($p->user_account_id);
-            if(!$taskMgr->remove($taskName))
+            if(!$taskMgr->delete($taskName))
                  return false;
-        } */
+        }
 
         return RESULT_INST($result);//UserModule::disconnectUser()
     }
