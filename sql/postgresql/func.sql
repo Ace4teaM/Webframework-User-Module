@@ -433,7 +433,7 @@ CREATE OR REPLACE FUNCTION user_connect(
     
   begin
     ------------------------------------------------------------
-    --  Ajoute la session
+    --  Ajoute/Actualise la session
     --  Si la session existe elle est remplacée
     ------------------------------------------------------------
     select count(*) into v_n from user_session where user_session_id = v_SessionID;
@@ -450,7 +450,7 @@ CREATE OR REPLACE FUNCTION user_connect(
     
 
     ------------------------------------------------------------
-    --  Ajoute la connexion
+    --  Ajoute/Actualise la connexion
     --  Si la connexion existe elle est remplacée
     ------------------------------------------------------------
     select count(*) into v_n from user_connection where client_ip = p_client_ip AND user_account_id = p_user_id;

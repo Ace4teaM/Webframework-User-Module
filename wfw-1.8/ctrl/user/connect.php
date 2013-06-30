@@ -32,26 +32,30 @@ class user_module_connect_ctrl extends cApplicationCtrl{
 
     function main(iApplication $app, $app_path, $p) {
 
+        // initialise les arguments
         $client_ip  = $_SERVER["REMOTE_ADDR"];
         $session_path = NULL;
         
         if(!$p->life_time)
             $p->life_time = $app->getCfgValue("user_module","default_connection_life_time");
 
+        // 1. Vérifie si le compte utilisateur existe
         if(!UserModule::checkAuthentication($p->user_account_id, $p->user_pwd))
             return false;
+        
+        // 2. Vérifie si le compte utilisateur est inactif
+        // ...
 
-        //crée une connexion avec session automatique
+        // 3,4,5,6 Crée une connexion avec session automatique
         if(!UserModule::connectUser($p->user_account_id, $client_ip, $session_path, $p->life_time))
             return false;
-
-        //retourne le resultat de cette fonction
+        // retourne le resultat de cette fonction
         $result = cResult::getLast();
 
-        //définit le cookie
+        // 9. Définit l’identificateur de connexion dans le cookie de navigateur 
         setcookie("user_connection_id",$result->getAtt("CONNECTION_ID"));
 
-        //initialise la tache de fermeture
+        // 8. Crée la tâche de fermeture automatique de connexion 
         $taskMgr=NULL;
         $app->getTaskMgr($taskMgr);
         if($taskMgr !== null && $p->life_time > 0){
