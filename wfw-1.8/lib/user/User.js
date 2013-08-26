@@ -68,7 +68,7 @@ YUI.add('wfw-user', function (Y) {
          *   @brief Initialise le module
         */
         init: function() {
-            wfw.puts("User: init");
+            wfw.puts("User.init: OK");
             this.uid = Y.Cookie.get("user_account_id");
             this.cid = Y.Cookie.get("user_connection_id");
             this.pwd = Y.Cookie.get("user_pwd");
