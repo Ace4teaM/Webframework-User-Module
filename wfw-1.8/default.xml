@@ -19,6 +19,7 @@
         <page id="user_connect" role="visitor" name="Connexion (auto)">ctrl.php?app=user_module&amp;ctrl=connect</page>
         <page id="user_connect_to" role="visitor" name="Connexion (session existante)">ctrl.php?app=user_module&amp;ctrl=connect_to</page>
         <page id="user_lost_pwd" role="visitor" name="Récuperation de mot-de-passe">ctrl.php?app=user_module&amp;ctrl=lost_pwd</page>
+        <page id="user_send_token" role="visitor" name="Récuperation du jeton d'activation">ctrl.php?app=user_module&amp;ctrl=send_token</page>
         <!-- utilisateur -->
         <page id="user_disconnect" role="user" name="Déconnexion">ctrl.php?app=user_module&amp;ctrl=disconnect</page>
         <page id="user_check" role="user" name="Maintenir ma connexion">ctrl.php?app=user_module&amp;ctrl=check</page>
@@ -82,7 +83,7 @@
                 Voici vos informations d'activation:
                 Votre nom d'utilisateur : $UID
                 Votre adresse eMail     : $MAIL
-                Votre code d'activation : $TOKEN
+                Votre jeton d'activation: $TOKEN
             </USER_ACTIVATION_MAIL>
             <USER_PWD_LOST_MAIL>
                 Vous avez demandez la récupération de vos informations de compte utilisateur.
@@ -94,6 +95,16 @@
             <USER_PWD_LOST_MAIL_SENT>
                 Merci de consulter vos courriers électroniques, un mail avec votre identifiant et votre mot-de-passe vous a été envoyé.
             </USER_PWD_LOST_MAIL_SENT>
+            <USER_MSG_TOKEN_BY_MAIL>
+                Merci de consulter vos courriers électroniques, un jeton d’activation avec vos identifiants vous a été envoyé.
+            </USER_MSG_TOKEN_BY_MAIL>
+            <USER_TOKEN_MAIL>
+                Vous avez demandez le jeton d'activation de votre compte utilisateur.
+                Voici vos informations d'identification:
+                Votre nom d'utilisateur : $USER_ID
+                Votre adresse eMail     : $USER_MAIL
+                Votre jeton d'activation: $USER_TOKEN
+            </USER_TOKEN_MAIL>
         </messages>
         
         <fields>

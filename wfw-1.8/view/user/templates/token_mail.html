@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:template="http://www.webframework.fr/last/xmlns/template" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+<title>-{subject}</title>
+<base href="-{__base_uri__}" target="_blank" /><!-- important pour la resolution des path-->
+</head>
+<!-- Document -->
+<body>
+    <h1>Cher utilisateur</h1>
+    <p>Vous avez demandez à recevoir votre jeton d'activation. Pour terminer votre inscription, merci de renseigner vos informations d'identification en cliquant sur le lien suivant:</p>
+    <p><strong>Cliquez sur le lien suivant</strong>:<br/><a href="$ACTIVATION_LINK">$ACTIVATION_LINK</a></p>
+    <p><strong>Vos informations d'identification</strong>:
+        <dl>
+            <dt>Votre nom d'utilisateur</dt>
+            <dd><code>$USER_ID</code></dd>
+            <dt>Votre adresse email</dt>
+            <dd><code>$USER_MAIL</code></dd>
+            <dt>Jeton d'activation</dt>
+            <dd><code>$USER_TOKEN</code></dd>
+        </dl>
+    </p>
+</body>
+</html>

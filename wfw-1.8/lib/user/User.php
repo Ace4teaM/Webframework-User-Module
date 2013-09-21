@@ -230,6 +230,34 @@ class UserModule implements iModule
         return $app->callStoredProc("user_register_account", $uid, $mail);
     }
     
+
+    /*
+      @brief Get single entry by mail
+      @param $inst UserRegistration instance pointer to initialize
+      @param $id Primary unique identifier of entry to retreive
+      @param $db iDataBase derived instance
+    */
+    public static function getRegisterByMail(&$inst,$user_mail,$db=null){
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        //initialise la requete SQL
+        $query = "
+            select * from user_registration
+                    where user_mail = '$user_mail';
+        ";
+        if(!$db->execute($query,$result))
+            return false;
+        
+        $inst = new UserRegistration();
+        UserRegistrationMgr::bindResult($inst,$result);
+
+        return RESULT_OK();
+    }
+    
     /** 
      * Vérifie si un utilisateur existe utilisateur
      * 
