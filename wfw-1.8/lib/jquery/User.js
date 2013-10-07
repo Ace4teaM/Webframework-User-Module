@@ -73,6 +73,13 @@
         /**
          *   @brief Initialise le module
         */
+        setConnectionStatusChange: function(callback) {
+            onConnectionStatusChange = callback;
+        },
+
+        /**
+         *   @brief Initialise le module
+        */
         isConnected: function() {
             console.log("status="+status);
             return (status == "USER_CONNECTED") ? true : false;
@@ -93,7 +100,7 @@
             if (cid != null) {
                 console.log("$.user.checkConnection: Checking connection");
 
-                $(windows).request("xarg","user_check",{user_connection_id: cid},
+                $(window).request("xarg","user_check",{user_connection_id: cid},
                     {
                         onsuccess: function (obj, args) {
                             console.log("$.user.checkConnection: onsuccess");
@@ -169,4 +176,4 @@
      * Initialise
      -----------------------------------------------------------------------------------------------------------------------*/
     $.user.init();
-});
+})(jQuery);
