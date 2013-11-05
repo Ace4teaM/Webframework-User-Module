@@ -52,8 +52,9 @@ class user_module_connect_ctrl extends cApplicationCtrl{
         // retourne le resultat de cette fonction
         $result = cResult::getLast();
 
-        // 9. Définit l’identificateur de connexion dans le cookie de navigateur 
-        setcookie("user_connection_id",$result->getAtt("CONNECTION_ID"));
+        // 9. Définit l’identificateur de connexion dans le cookie de navigateur
+        // Note: Ecrit le cookie dans l'ensemble du domaine '/'. Permet aux autres applications d'accèder à ce cookie
+        setcookie("user_connection_id",$result->getAtt("CONNECTION_ID"),0,'/');
 
         // 8. Crée la tâche de fermeture automatique de connexion 
         $taskMgr=NULL;
