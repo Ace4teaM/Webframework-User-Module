@@ -24,7 +24,7 @@
  * Librairie Javascript
  *
  * WFW Dependences: base.js
- * YUI Dependences: base, wfw, wfw-request, wfw-uri, wfw-navigator, wfw-style, wfw-xarg, wfw-document
+ * YUI Dependences: base, wfw, wfw-request, wfw-uri, wfw-navigator, wfw-style, wfw-xarg, wfw-document, cookie
 */
 
 YUI.add('wfw-user', function (Y) {
@@ -68,10 +68,11 @@ YUI.add('wfw-user', function (Y) {
          *   @brief Initialise le module
         */
         init: function() {
-            wfw.puts("User.init: OK");
+            wfw.puts("User.init...");
             this.uid = Y.Cookie.get("user_account_id");
             this.cid = Y.Cookie.get("user_connection_id");
             this.pwd = Y.Cookie.get("user_pwd");
+            this.checkConnection();
         },
 
         /**
@@ -80,6 +81,13 @@ YUI.add('wfw-user', function (Y) {
         isConnected: function() {
             wfw.puts("status="+wfw.User.status);
             return (wfw.User.status == "USER_CONNECTED") ? true : false;
+        },
+
+        /**
+         *   @brief Retourne l'identifiant de l'utilisateur en cours
+        */
+        getUserAccountId: function() {
+            return this.uid;
         },
 
         /**
@@ -107,14 +115,15 @@ YUI.add('wfw-user', function (Y) {
                         callback : wfw.XArg.onCheckRequestResult_XARG,
                         user : {
                             onsuccess: function (obj, args) {
-                                //wfw.puts(args.error);
+                                //enregistre l'etat
+                                wfw.User.status = args.error;
                                 wfw.puts("wfw.User.checkConnection: onsuccess");
+                                console.dir(args);
 
                                 wfw.User.onConnectionStatusChange(args.error);
                     
                                 //enregistre l'etat
                                 wfw.User.status = args.error;
-                                wfw.puts("status="+wfw.User.status);
                                 //si l'utilisateur est connecté prépare l'événement d'expiration
                                 if(args.error == "USER_CONNECTED")
                                 {
@@ -144,6 +153,7 @@ YUI.add('wfw-user', function (Y) {
                             onfailed: function (obj, args) {
                                 //enregistre l'etat
                                 wfw.User.status = args.error;
+                                console.dir(args);
                                 wfw.puts("wfw.User.checkConnection: "+wfw.Result.fromXArg(args).toString());
                                 //wfw.puts("wfw.User.checkConnection: "+args.result+" = "+args.error);
                                 wfw.User.onConnectionStatusChange(args.error);
@@ -182,7 +192,7 @@ YUI.add('wfw-user', function (Y) {
     /*-----------------------------------------------------------------------------------------------------------------------
      * Initialise
      -----------------------------------------------------------------------------------------------------------------------*/
-    wfw.User.init();
+    //wfw.User.init();
     
 }, '1.0', {
     requires:['base', 'cookie', 'wfw','wfw-request','wfw-xml','wfw-uri','wfw-navigator','wfw-style','wfw-xarg']
