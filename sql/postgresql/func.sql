@@ -829,6 +829,7 @@ CREATE OR REPLACE FUNCTION user_check_connection(
     v_result RESULT;
     v_client_ip user_connection.client_ip%type := NULL;
     v_expire INT; /* timestamp de la date d'expiration */
+    v_user_account_id user_account.user_account_id%type := NULL;
   begin
 
     /* Vérifie l’existence de la connexion */
@@ -861,7 +862,8 @@ CREATE OR REPLACE FUNCTION user_check_connection(
     /*select last_access+life_time into v_expire from user_connection where user_connection_id = p_user_connection_id;*/
 
     /* return */
-    select 'ERR_OK', 'USER_CONNECTED', 'EXPIRE:'||v_expire||';'||'UID:'||(select user_account_id from user_connection where user_connection_id = p_user_connection_id)||';' into v_result;
+    select user_account_id into v_user_account_id from user_connection where user_connection_id = p_user_connection_id;
+    select 'ERR_OK', 'USER_CONNECTED', 'EXPIRE:'||v_expire||';'||'UID:'||v_user_account_id||';'||'USER_ACCOUNT_ID:'||v_user_account_id||';' into v_result;
     return v_result;
   end;
 $$ LANGUAGE plpgsql;
