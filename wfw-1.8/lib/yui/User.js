@@ -79,7 +79,7 @@ YUI.add('wfw-user', function (Y) {
          *   @brief Initialise le module
         */
         isConnected: function() {
-            wfw.puts("status="+wfw.User.status);
+            wfw.puts("wfw.User.status="+wfw.User.status);
             return (wfw.User.status == "USER_CONNECTED") ? true : false;
         },
 
@@ -87,6 +87,7 @@ YUI.add('wfw-user', function (Y) {
          *   @brief Retourne l'identifiant de l'utilisateur en cours
         */
         getUserAccountId: function() {
+            wfw.puts("wfw.User.uid="+wfw.User.uid);
             return this.uid;
         },
 
@@ -115,15 +116,18 @@ YUI.add('wfw-user', function (Y) {
                         callback : wfw.XArg.onCheckRequestResult_XARG,
                         user : {
                             onsuccess: function (obj, args) {
-                                //enregistre l'etat
-                                wfw.User.status = args.error;
+                                //debug
                                 wfw.puts("wfw.User.checkConnection: onsuccess");
                                 console.dir(args);
 
-                                wfw.User.onConnectionStatusChange(args.error);
-                    
                                 //enregistre l'etat
                                 wfw.User.status = args.error;
+                                //enregistre l'user id
+                                Y.Cookie.set("user_account_id",args.user_account_id);
+                                wfw.User.uid = args.user_account_id;
+                                    
+                                wfw.User.onConnectionStatusChange(args.error);
+                    
                                 //si l'utilisateur est connecté prépare l'événement d'expiration
                                 if(args.error == "USER_CONNECTED")
                                 {
