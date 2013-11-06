@@ -9,6 +9,8 @@
         <page id="index" name="Accueil">index.php</page>
         <page id="datamodel" role="visitor" name="Obtient le model de données">ctrl.php?app=wfw&amp;ctrl=datamodel</page>
         <!-- admin -->
+        <page id="user_list" role="administrator" name="Renseigner l'identité d'un utilisateur">ctrl.php?app=user_module&amp;ctrl=list&amp;output=xml</page>
+        <page id="user_set_identity" role="administrator" name="Renseigner l'identité d'un utilisateur">ctrl.php?app=user_module&amp;ctrl=set_identity</page>
         <page id="user_create" role="administrator" name="Créer un utilisateur">ctrl.php?app=user_module&amp;ctrl=create</page>
         <page id="user_delete" role="administrator" name="Supprimer un utilisateur">ctrl.php?app=user_module&amp;ctrl=delete</page>
         <page id="user_disconnect_user" role="administrator" name="Déconnecter un utilisateur">ctrl.php?app=user_module&amp;ctrl=disconnect_user</page>
