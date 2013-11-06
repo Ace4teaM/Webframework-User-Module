@@ -30,6 +30,10 @@ class user_module_create_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd', 'user_mail');
     public $op_fields = null;
 
+    function acceptedRole(){
+        return cApplication::AdminRole;
+    }
+
     function main(iApplication $app, $app_path, $p) {
 
         //crée le compte utilisateur

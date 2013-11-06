@@ -30,6 +30,10 @@ class user_module_delete_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id');
     public $op_fields = null;
 
+    function acceptedRole(){
+        return cApplication::AdminRole;
+    }
+
     function main(iApplication $app, $app_path, $p) {
 
         $client_id = "none";
