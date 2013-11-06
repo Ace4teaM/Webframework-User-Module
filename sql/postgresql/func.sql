@@ -124,17 +124,15 @@ BEGIN
      if v_result.err_code <> 'ERR_OK' then
         return v_result;
      end if;
-     --supprime l'user_account
-     delete from user_account where user_account_id = p_user_id;
+     --supprime les identités
+     --delete from user_connection where user_account_id = p_user_id;
      --supprime les connexions
      delete from user_connection where user_account_id = p_user_id;
+     --supprime l'user_account
+     delete from user_account where user_account_id = p_user_id;
      --termine
      select 'ERR_OK', 'USER_DELETED' into v_result;
      return v_result;
-EXCEPTION
-  when others then
-       select 'ERR_SYSTEM', 'NOT_SPECIFIED' into v_result;
-       return v_result;
 END;
 $$ LANGUAGE plpgsql;
 
