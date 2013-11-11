@@ -21,15 +21,14 @@
 */
 
 /*
- * Renseigne l'identité d'un utilisateur
- * Crée ou modifie l'identité (nom, prénom, sex, ...) lié à un compte utilisateur
+ * Renseigne le mot-de-passe d'un utilisateur
  * 
  * Rôle : Administrateur
- * UC   : set_identity
+ * UC   : set_password
  */
 
-class user_module_set_identity_ctrl extends cApplicationCtrl{
-    public $fields    = array('user_account_id', 'last_name', 'first_name', 'birth_day', 'sex');
+class user_module_set_password_ctrl extends cApplicationCtrl{
+    public $fields    = array('user_account_id', 'user_pwd');
     public $op_fields = null;
 
     function acceptedRole(){
@@ -42,11 +41,22 @@ class user_module_set_identity_ctrl extends cApplicationCtrl{
     }
     
     function main(iApplication $app, $app_path, $p) {
-        //1. Actualise les données de l'identité
-        if(!UserModule::makeIdentity($p->user_account_id, $p->first_name, $p->last_name, $p->birth_day, $p->sex))
-            return false;
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
 
-        return true;//UserModule::makeIdentity
+        //initialise la requete SQL
+        $query = "
+            update user_account
+                    set user_pwd = '$p->user_pwd'
+                    where user_account_id = '$p->user_account_id';
+        ";
+        if(!$db->execute($query,$result))
+            return false;
+        
+        return RESULT_OK();
     }
 };
 
