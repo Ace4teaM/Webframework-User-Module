@@ -64,10 +64,10 @@
          *   @brief Initialise le module
         */
         init: function() {
-            console.log("User.init: OK");
             uid = $.cookie("user_account_id");
             cid = $.cookie("user_connection_id");
             pwd = $.cookie("user_pwd");
+            console.log("$.user.init: user_account_id="+uid+" user_connexion_id="+cid);
         },
 
         /**
