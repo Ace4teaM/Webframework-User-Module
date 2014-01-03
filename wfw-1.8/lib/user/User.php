@@ -314,6 +314,39 @@ class UserModule implements iModule
     }
     
     /** 
+     * Obtient Le nom d'un utilisateur
+     * 
+     * @param mixed       $user_account Identifiant/Instance du compte (UserAccount)
+     * @return User name
+     */
+    public static function getUserName($user_account){
+        global $app;
+        $db=null;
+        
+        if(!$app->getDB($db))
+            return RESULT(cResult::Failed, Application::DatabaseConnectionNotFound);
+
+        //obtient l'id
+        $user_account_id = ($user_account instanceof UserAccount) ? $user_account->getId() : $user_account;
+        
+        //initialise la requete SQL
+        $query = "
+                select initcap(i.first_name) as name from user_identity i
+                    inner join user_account a on a.user_identity_id = i.user_identity_id
+                    where a.user_account_id = '$user_account_id';
+        ";
+        if(!$db->execute($query,$result))
+            return false;
+        
+        $name = $result->fetchValue("name");
+        if(empty($name))
+            $name = $user_account_id;
+        
+        RESULT_OK();
+        return $name;
+    }
+    
+    /** 
      * Obtient l'adresse lie à un compte utilisateur
      * 
      * @param mixed       $user_account Identifiant/Instance du compte (UserAccount)
