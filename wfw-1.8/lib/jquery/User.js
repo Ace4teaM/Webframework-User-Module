@@ -76,6 +76,13 @@
         setConnectionStatusChange: function(callback) {
             onConnectionStatusChange = callback;
         },
+        
+        /**
+         *   @brief Retourne l'identifiant de connexion
+        */
+        getConnectionId: function() {
+            return cid;
+        },
 
         /**
          *   @brief Initialise le module
