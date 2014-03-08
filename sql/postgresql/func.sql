@@ -222,12 +222,12 @@ BEGIN
   end if;
 
   /* Génère le code d’activation */
-  select user_random_token() into v_token;
+  select random_token(8) into v_token;
 
   /* insert l'entree */
   insert into user_registration (user_registration_id,user_token,user_id,user_mail)
         values(
-            (select coalesce(max(user_registration_id),0)+1 from user_registration), /* id auto-increment */
+            nextval('user_registration_seq'),
             v_token, /* token généré */
             p_user_id,
             lower(p_user_mail)
@@ -314,31 +314,6 @@ EXCEPTION
        --debugmsg(v_result.err_code||':'||v_result.err_str);
        return v_result;
 */
-END;
-$$
-LANGUAGE plpgsql;
-
-/*
-  Génère un token aléatoire (utilisé par la fonction user_create_account)
-  Retourne:
-     [TEXT] Token généré
-
-*/
-
-CREATE OR REPLACE FUNCTION user_random_token()
-RETURNS text AS 
-$$
-DECLARE
-  chars text[] := '{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z}';
-  result text := '';
-  i integer := 0;
-  token_length integer := 8;
-  chars_length integer := 62; /*array_length(chars, 1); PG-8.4! */
-BEGIN
-  for i in 1..token_length loop
-    result := result || chars[round(random()*(chars_length-1))];
-  end loop;
-  return result;
 END;
 $$
 LANGUAGE plpgsql;
@@ -455,10 +430,8 @@ CREATE OR REPLACE FUNCTION user_connect(
     if v_n = 0 then
       RAISE NOTICE 'insert la connection %;%',p_client_ip,p_user_id;
       -- Crée l'identifiant de connexion (YYYYMMDDHHMISSTTTTTTTT)
-      select to_char(current_timestamp, 'YYYYMMDDHHMISS')||user_random_token() into v_connection_id;
-      --v_ConnectionID user_connection.user_connection_id%TYPE := user_random_token()||user_random_token());
-      --select coalesce(max(user_connection_id),0)+1 into v_connection_id from user_connection;
-      -- Crée la connexion
+      select to_char(current_timestamp, 'YYYYMMDDHHMISS')||random_token(8) into v_connection_id;
+      -- Crée la connexions
       insert into user_connection (user_connection_id,client_ip,user_account_id,user_session_id,life_time)
         values(v_connection_id,p_client_ip,p_user_id,v_SessionID,p_life_time);
     else
@@ -713,7 +686,7 @@ CREATE OR REPLACE FUNCTION user_make_identity(
     select user_identity_id into v_user_identity_id from user_account where user_account_id = p_user_account_id;
     if v_user_identity_id is NULL then
         /* obtient un nouvel ID */
-        select coalesce(max(user_identity_id)+1,1) into v_user_identity_id from user_identity;
+        select nextval('user_identity_seq') into v_user_identity_id;
         /* insert une nouvelle identite */
         insert into user_identity (user_identity_id,first_name,last_name,birth_day,sex)
           values(v_user_identity_id,p_first_name,p_last_name,p_birth_day,p_sex);
@@ -782,7 +755,7 @@ CREATE OR REPLACE FUNCTION user_make_address(
     /* pas d'adresse ? */
     if v_user_address_id is NULL then
         /* obtient un nouvel ID */
-        select coalesce(max(user_address_id)+1,1) into v_user_address_id from user_address;
+        select nextval('user_address_seq') into v_user_address_id;
         /* insert une nouvelle identite */
         insert into user_address (user_address_id, zip_code, city_name, street_name, street_number, country_name, street_prefix, building_number, apt_number)
           values(v_user_address_id,p_zip_code, upper(p_city_name), initcap(p_street_name), p_street_number, upper(p_country_name), lower(p_street_prefix), p_building_number, p_apt_number);
