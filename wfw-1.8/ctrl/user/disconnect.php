@@ -44,7 +44,7 @@ class user_module_disconnect_ctrl extends cApplicationCtrl{
         $user_account_id = cResult::getLast()->getAtt("user_account_id");
 
         // supprime le cookie
-        setcookie("user_connection_id",NULL,time()-1,'/');
+        setcookie("user_connection_id",NULL,time()-1/*,'/'*/);
         
         //2. Supprime la tache de fermeture automatique
         $taskMgr=NULL;

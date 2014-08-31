@@ -28,7 +28,7 @@
 
 class user_module_connect_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd');
-    public $op_fields = array('life_time');
+    public $op_fields = array('life_time','no_cookie');
 
     function main(iApplication $app, $app_path, $p) {
 
@@ -54,7 +54,12 @@ class user_module_connect_ctrl extends cApplicationCtrl{
 
         // 9. Définit l’identificateur de connexion dans le cookie de navigateur
         // Note: Ecrit le cookie dans l'ensemble du domaine '/'. Permet aux autres applications d'accèder à ce cookie
-        setcookie("user_connection_id",$result->getAtt("CONNECTION_ID"),0,'/');
+        //if($app->getCfgValue("user_module","set_cookie_enabled") == true)
+        //if($p->no_cookie == null)
+        {
+            //setcookie("user_connection_id",$result->getAtt("CONNECTION_ID"),0,'/');
+            setcookie("user_connection_id",$result->getAtt("CONNECTION_ID"),0);
+        }
 
         // 8. Crée la tâche de fermeture automatique de connexion 
         $taskMgr=NULL;
