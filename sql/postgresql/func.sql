@@ -227,7 +227,7 @@ BEGIN
   /* insert l'entree */
   insert into user_registration (user_registration_id,user_token,user_id,user_mail)
         values(
-            nextval('user_registration_seq'),
+            nextval(pg_get_serial_sequence('user_registration', 'user_registration_id')),
             v_token, /* token généré */
             p_user_id,
             lower(p_user_mail)
@@ -686,7 +686,7 @@ CREATE OR REPLACE FUNCTION user_make_identity(
     select user_identity_id into v_user_identity_id from user_account where user_account_id = p_user_account_id;
     if v_user_identity_id is NULL then
         /* obtient un nouvel ID */
-        select nextval('user_identity_seq') into v_user_identity_id;
+        select nextval(pg_get_serial_sequence('user_identity', 'user_identity_id')) into v_user_identity_id;
         /* insert une nouvelle identite */
         insert into user_identity (user_identity_id,first_name,last_name,birth_day,sex)
           values(v_user_identity_id,p_first_name,p_last_name,p_birth_day,p_sex);
@@ -755,7 +755,7 @@ CREATE OR REPLACE FUNCTION user_make_address(
     /* pas d'adresse ? */
     if v_user_address_id is NULL then
         /* obtient un nouvel ID */
-        select nextval('user_address_seq') into v_user_address_id;
+        select nextval(pg_get_serial_sequence('user_address', 'user_address_id')) into v_user_address_id;
         /* insert une nouvelle identite */
         insert into user_address (user_address_id, zip_code, city_name, street_name, street_number, country_name, street_prefix, building_number, apt_number)
           values(v_user_address_id,p_zip_code, upper(p_city_name), initcap(p_street_name), p_street_number, upper(p_country_name), lower(p_street_prefix), p_building_number, p_apt_number);
