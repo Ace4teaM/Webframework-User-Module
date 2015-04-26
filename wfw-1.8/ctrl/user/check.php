@@ -21,13 +21,20 @@
 */
 
 /*
- * Maintient la connexion d'un utilisateur
- * Actualiser une connexion permet de maintenir l’expiration d’une session utilisateur et d’obtenir des informations sur la connexion en cours.
- * 
- * Rôle : Utilisateur
- * UC   : check
+  Maintient la connexion d'un utilisateur
+  
+  Role   : Tous
+  UC     : Check
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
+    
+  Remarques:
+    Actualiser une connexion permet de maintenir l’expiration d’une session utilisateur et d’obtenir des informations sur la connexion en cours
+    
  */
-
 class user_module_check_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;

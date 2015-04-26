@@ -1,7 +1,7 @@
 <?php
 /*
     ---------------------------------------------------------------------------------------------------------------------------------------
-    (C)2012-2013 Thomas AUGUEY <contact@aceteam.org>
+    (C)2012-2013,2015 Thomas AUGUEY <contact@aceteam.org>
     ---------------------------------------------------------------------------------------------------------------------------------------
     This file is part of WebFrameWork.
 
@@ -20,12 +20,21 @@
     ---------------------------------------------------------------------------------------------------------------------------------------
 */
 
-/*
- * Connexion d'un utilisateur
- * Rôle : Visiteur
- * UC   : connect
- */
 
+/*
+  Connexion d'un utilisateur
+  
+  Role   : Tous
+  UC     : Connect
+  Module : user
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
+    user_pwd        : Mot-de-passe de l'utilisateur
+
+  Champs complémentaires:
+    life_time : Temps de vie de la session en minutes
+ */
 class user_module_connect_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd');
     public $op_fields = array('life_time','no_cookie');

@@ -21,11 +21,18 @@
 */
 
 /*
- * Crée un compte utilisateur
- * Rôle : Administrateur
- * UC   : create_account
+  Crée un compte utilisateur
+  
+  Role   : Admin
+  UC     : Create
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
+    user_pwd        : Mot-de-passe
+    user_mail       : Adresse éléctronique
  */
-
 class user_module_create_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd', 'user_mail');
     public $op_fields = null;

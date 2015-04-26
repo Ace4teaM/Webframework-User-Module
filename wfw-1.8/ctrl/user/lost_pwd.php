@@ -20,14 +20,17 @@
     ---------------------------------------------------------------------------------------------------------------------------------------
 */
 
-/**
- * Récupérer un mot-de-passe
- * L'Utilisateur souhaite récupérer son mot-de-passe et son nom d’utilisateur oublié
- * 
- * Rôle : Visiteur
- * UC   : lost_pwd
+/*
+  Récupérer un mot-de-passe
+  
+  Role   : Tous
+  UC     : Lost_Pwd
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_mail       : Adresse éléctronique du compte
  */
-
 class user_module_lost_pwd_ctrl extends cApplicationCtrl{
     public $fields      = array('user_mail');
     public $op_fields   = null;

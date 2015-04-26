@@ -21,11 +21,20 @@
 */
 
 /*
- * Active un compte utilisateur
- * Rôle : Visiteur
- * UC   : activate_account
+  Envoi une clé de controle pour l'activation d'un compte utilisateur
+  
+  Role   : Tous
+  UC     : Send_Token
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_mail : Mail du compte utilisateur
+    
+  Remarques:
+    Le message est envoyé par mail.
+    La clé de configuration 'send_token_mail' définit le tempalte utilisé pour créer le mail. Si non définit un  message générique au format "text/plain" est envoyé.
  */
-
 class user_module_send_token_ctrl extends cApplicationCtrl{
     public $fields    = array('user_mail');
     public $op_fields = null;

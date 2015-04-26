@@ -21,11 +21,19 @@
 */
 
 /*
- * Active un compte utilisateur
- * Rôle : Visiteur
- * UC   : activate_account
+  Active un compte utilisateur
+  
+  Role   : Tous
+  UC     : Activate
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur (renseigné à l'inscription)
+    user_pwd        : Mot-de-passe
+    user_mail       : Adresse éléctronique (renseigné à l'inscription)
+    token           : Clé d'activation
  */
-
 class user_module_activate_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd', 'user_mail', 'token');
     public $op_fields = null;

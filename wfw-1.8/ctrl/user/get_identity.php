@@ -19,15 +19,18 @@
     along with WebFrameWork.  If not, see <http://www.gnu.org/licenses/>.
     ---------------------------------------------------------------------------------------------------------------------------------------
 */
-
+ 
 /*
- * Obtient l'identité d'un utilisateur
- * Affiche l'identité (nom, prénom, sexe, ...) lié à un compte utilisateur
- * 
- * Rôle : Utilisateur
- * UC   : get_identity
+  Obtient l'identité d'un utilisateur
+  
+  Role : Admin
+  UC   : Get_Identity
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
  */
-
 class user_module_get_identity_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;

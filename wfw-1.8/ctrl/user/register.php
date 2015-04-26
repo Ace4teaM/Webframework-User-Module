@@ -20,12 +20,21 @@
     ---------------------------------------------------------------------------------------------------------------------------------------
 */
 
-/**
- * Formulaire d'inscription
- * Rôle : Visiteur
- * UC   : register_account
+/*
+  Inscrit un nouveau compte utilisateur
+  
+  Role   : Tous
+  UC     : Register
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant du compte utilisateur
+    user_mail       : Adresse éléctronique du compte
+    
+  Remarques:
+    Une fois enregistré le compte doit être activé avec le controleur 'activate'
  */
-
 class user_module_register_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_mail');
     public $op_fields = null;

@@ -21,11 +21,16 @@
 */
 
 /*
- * Déconnect un utilisateur
- * Rôle : Administrateur
- * UC   : disconnect_user
+  Déconnect un utilisateur
+  
+  Role : Tous
+  UC   : Disconnect_User
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
  */
-
 class user_module_disconnect_user_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id');
     public $op_fields = null;

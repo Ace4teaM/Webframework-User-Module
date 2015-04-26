@@ -21,11 +21,16 @@
 */
 
 /*
- * Supprime un compte
- * Rôle : Administrateur
- * UC   : delete_account
+  ReSupprime un compte utilisateur
+  
+  Role   : Admin
+  UC     : Delete
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
  */
-
 class user_module_delete_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id');
     public $op_fields = null;

@@ -21,13 +21,20 @@
 */
 
 /*
- * Renseigne l'identité d'un utilisateur
- * Crée ou modifie l'identité (nom, prénom, sex, ...) lié à un compte utilisateur
- * 
- * Rôle : Administrateur
- * UC   : set_identity
+  Renseigne l'identité d'un utilisateur
+  
+  Role : Admin
+  UC   : Set_Identity
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
+    last_name       : Nom
+    first_name      : Prénom
+    birth_day       : Date de naissance
+    sex             : Genre
  */
-
 class user_module_set_identity_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'last_name', 'first_name', 'birth_day', 'sex');
     public $op_fields = null;

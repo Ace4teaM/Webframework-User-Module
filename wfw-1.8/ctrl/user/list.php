@@ -21,11 +21,13 @@
 */
 
 /*
- * Liste les comptes utilisateur
- * Rôle : Administrateur
- * UC   : adm_users
+  Liste les comptes utilisateur
+  
+  Role : Admin
+  UC   : List
+  Module : user
+  Output : "text/xml"
  */
-
 class user_module_list_ctrl extends cApplicationCtrl
 {
     public $fields    = null;

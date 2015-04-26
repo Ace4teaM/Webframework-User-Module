@@ -20,12 +20,17 @@
     ---------------------------------------------------------------------------------------------------------------------------------------
 */
 
-/*
- * Déconnecte l'utilisateur en cours
- * Rôle : Utilisateur
- * UC   : disconnect
- */
 
+/*
+  Déconnecte l'utilisateur en cours
+  
+  Role   : Tous
+  UC     : Disconnect
+  Module : user
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
+ */
 class user_module_disconnect_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;

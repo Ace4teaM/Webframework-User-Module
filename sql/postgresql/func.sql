@@ -6,9 +6,11 @@
   PostgreSQL v8.3 (version minimum requise)
 */
 
-/*
+/**
   Vérifie l'autentification d'un compte utilisateur
-  Le nom 'p_user_id' et le mot-de-passe 'p_user_pwd' est valide la fonction réussie.
+
+  Remarque:	
+	  Le nom 'p_user_id' et le mot-de-passe 'p_user_pwd' est valide la fonction réussie.
 */
 
 CREATE OR REPLACE FUNCTION user_check_authentication(
@@ -37,9 +39,11 @@ END;
 $$
 LANGUAGE plpgsql;
 
-/*
+/**
   Vérifie si le compte utilisateur existe
-  Si un compte utilisteur avec le nom 'p_user_id' existe la fonction réussie.
+  
+  Remarque:	
+	  Si un compte utilisteur avec le nom 'p_user_id' existe la fonction réussie.
 */
 
 CREATE OR REPLACE FUNCTION user_account_exists(
@@ -67,9 +71,11 @@ END;
 $$
 LANGUAGE plpgsql;
 
-/*
+/**
   Vérifie si un compte utilisateur n'existe pas
-  Si un compte utilisteur avec le nom 'p_user_id' ou le mail 'p_user_mail' existe la fonction échoue.
+  
+  Remarque:	
+	  Si un compte utilisteur avec le nom 'p_user_id' ou le mail 'p_user_mail' existe la fonction échoue.
 */
 
 CREATE OR REPLACE FUNCTION user_is_free_account(
@@ -106,8 +112,9 @@ $$
 LANGUAGE plpgsql;
 
 
-/*
+/**
   Supprime un utilisateur
+
   Remarques:
     Les sessions automatiques sont automatiquements supprimées (on_disconnect_user)
 */
@@ -137,8 +144,9 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-/*
+/**
   Crée un utilisateur
+
   Retourne:
      [RESULT] Un des résultats suivant:
         'ERR_OK     : USER_CREATED'   -> L'Utilisateur à été créé avec succès
@@ -186,8 +194,9 @@ END;
 $$
 LANGUAGE plpgsql;
 
-/*
+/**
   Inscrit un utilisateur
+
   Retourne:
      [RESULT] Un des résultats suivant:
         'ERR_OK     : USER_CREATED'   -> L'Utilisateur à été créé avec succès
@@ -195,7 +204,6 @@ LANGUAGE plpgsql;
         'ERR_SYSTEM : NOT_SPECIFIED'  -> Une erreur système est survenue
 
 */
-
 CREATE OR REPLACE FUNCTION user_register_account(
        p_user_id user_account.user_account_id%type,
        p_user_mail user_account.user_mail%type
@@ -252,10 +260,9 @@ END;
 $$
 LANGUAGE plpgsql;
 
-/*
+/**
   Active un compte utilisateur
 */
-
 CREATE OR REPLACE FUNCTION user_activate_account(
        p_user_id user_account.user_account_id%type,
        p_user_pwd user_account.user_pwd%type,
@@ -318,8 +325,13 @@ END;
 $$
 LANGUAGE plpgsql;
 
-/*
+/**
   Crée une user_session
+
+  Paramètres:
+	p_session_id : Identifiant de la session
+	p_local_path : Chemin d'accès local aux données (serveur web uniquement)
+
   Retourne:
      [BOOL] TRUE si la user_session à été créée.
 */
@@ -339,16 +351,18 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-  /*
-    Initialise une connexion utilisateur
-    Parametres:
-      p_user_id    : Identifiant de l'utilisateur
-      p_client_ip  : IP du client (IPv4)
-      p_session_id : Identifiant de Session
-      p_life_time  : Temps de vie de la connexion (en secondes)
-    Remarque:
-      Si une connexion existe deja pour cette IP, elle est remplacée
-  */
+/**
+	Initialise une connexion utilisateur
+
+	Parametres:
+		p_user_id    : Identifiant de l'utilisateur
+		p_client_ip  : IP du client (IPv4)
+		p_session_id : Identifiant de Session
+		p_life_time  : Temps de vie de la connexion (en secondes)
+
+	Remarque:
+		Si une connexion existe deja pour cette IP, elle est remplacée
+*/
 CREATE OR REPLACE FUNCTION user_connect_to_session(
        p_user_id user_account.user_account_id%type,
        p_client_ip user_connection.client_ip%type,
@@ -377,16 +391,19 @@ CREATE OR REPLACE FUNCTION user_connect_to_session(
   end;
 $$ LANGUAGE plpgsql;
 
-/*
+/**
   Crée une connexion utilisateur
+
   Parametres:
     p_user_id    : Identifiant de l'utilisateur
     p_client_ip  : IP du client (IPv4)
     p_data_path  : Chemin d'accès aux données utilisateurs
     p_life_time  : temps de vie de la connexion (en secondes)
+
   Remarque:
     Si la connexion existe deja pour cette IP, elle est actualisée.
     La session est créée automatiquement
+
   Retourne:
     [VARCHAR2] Identifiant de la user_session active.
 */
@@ -451,11 +468,12 @@ CREATE OR REPLACE FUNCTION user_connect(
 $$ LANGUAGE plpgsql;
 
 
-  /*
-    Termine toutes les connexions
-    Parametres:
-      p_b_session : Si true, termine toutes les sessions
-  */
+/**
+	Termine toutes les connexions
+
+	Parametres:
+		p_b_session : Si true, termine toutes les sessions
+*/
 CREATE OR REPLACE FUNCTION user_disconnect_all()
 RETURNS RESULT
 AS $$
@@ -474,11 +492,12 @@ END;
 $$ LANGUAGE plpgsql;
   
   
-  /*
-    Termine toutes les connexions créées avec une user_session client
-    Remarques:
-      Les sessions sont supprimées.
-  */
+/**
+	Termine toutes les connexions créées avec une user_session client
+
+	Remarques:
+		Les sessions sont supprimées.
+*/
 CREATE OR REPLACE FUNCTION user_disconnect_all_client(
        p_b_session in boolean/* default true*/
        )
@@ -501,12 +520,13 @@ END;
 $$ LANGUAGE plpgsql;
 
 
-  /*
-    Ferme une user_session
-    Parametres:
-      p_session_id : identificateur de la user_session a terminer
-      p_b_session  : Force la fermeture des connexions si la user_session est encore utilisée
-  */
+/**
+	Ferme une user_session
+
+	Parametres:
+		p_session_id : identificateur de la user_session a terminer
+		p_b_session  : Force la fermeture des connexions si la user_session est encore utilisée
+*/
 CREATE OR REPLACE FUNCTION user_delete_session(
        p_session_id user_session.user_session_id%type,
        p_force in boolean/* default true*/
@@ -526,13 +546,15 @@ AS $$
 $$ LANGUAGE plpgsql;
   
   
-  /*
-    Termine la connexion d'un utilisateur
-    Parametres:
-      p_user_id    : Identifiant de l'utilisateur
-    Remarques:
-      Si la session est de type automatique et non utilisée, elle sera detruite.
-  */
+/**
+	Termine la connexion d'un utilisateur
+
+	Parametres:
+		p_user_id    : Identifiant de l'utilisateur
+
+	Remarques:
+		Si la session est de type automatique et non utilisée, elle sera detruite.
+*/
 CREATE OR REPLACE FUNCTION user_disconnect_account(
        p_user_id    user_account.user_account_id%type
        )
@@ -563,15 +585,18 @@ DECLARE
   END;
 $$ LANGUAGE plpgsql;
   
-  /*
-    Termine une connexion
-    Parametres:
-      p_connection_id    : Identifiant de connexion
-    Remarques:
-      Si la session est de type automatique et non utilisée, elle sera detruite.
-    Paramètres de retour:
-        USER_ACCOUNT_ID : Identifiant de l'utilisateur déconnecté
-  */
+/*
+	Termine une connexion
+
+	Parametres:
+		p_connection_id    : Identifiant de connexion
+
+	Remarques:
+		Si la session est de type automatique et non utilisée, elle sera detruite.
+
+	Paramètres de retour:
+		USER_ACCOUNT_ID : Identifiant de l'utilisateur déconnecté
+*/
 CREATE OR REPLACE FUNCTION user_disconnect(
        p_connection_id    user_connection.user_connection_id%type
        )
@@ -597,7 +622,7 @@ DECLARE
 $$ LANGUAGE plpgsql;
   
 
-/*
+/**
   Lors de la suppression d'une connexion
        * ferme les sessions automatiques non utilisées
 */  
@@ -619,7 +644,7 @@ begin
 end;
 $$ LANGUAGE plpgsql;
 
-/*
+/**
   Delencheur: tg_disconnect_user
 */
 drop trigger if exists tg_disconnect_user on user_connection;
@@ -629,7 +654,7 @@ create trigger tg_disconnect_user
        execute procedure on_disconnect_user();
 
 
-/*
+/**
   Supprime les sessions inutilisées
 */
 CREATE OR REPLACE FUNCTION user_close_unused_session(
@@ -649,18 +674,21 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-  /*
-    Définit l'identité d'un utilisateur
-    Parametres:
-      p_user_account_id    : Identifiant de l'utilisateur
-      ...
-    Remarque:
-      Si aucune entrée de la table USER_IDENTITY existe, elle est créée
-    Succès:
-      USER_IDENTITY_UPDATED  : Identité mise à jour
-    Echec:
-      [SQL Exceptions]
-  */
+/**
+	Définit l'identité d'un utilisateur
+
+	Parametres:
+		p_user_account_id    : Identifiant de l'utilisateur
+		...
+
+	Remarque:
+		Si aucune entrée de la table USER_IDENTITY existe, elle est créée
+
+	Succès:
+		USER_IDENTITY_UPDATED  : Identité mise à jour
+	Echec:
+		[SQL Exceptions]
+*/
 CREATE OR REPLACE FUNCTION user_make_identity(
        p_user_account_id    user_account.user_account_id%type,
        p_first_name         user_identity.first_name%type,
@@ -708,19 +736,21 @@ CREATE OR REPLACE FUNCTION user_make_identity(
 $$ LANGUAGE plpgsql;
 
 
-  /*
-    Définit l'adresse d'un utilisateur
-    Parametres:
-      p_user_account_id    : Identifiant de l'utilisateur
-      ...
-    Remarque:
-      Si aucune entrée de la table USER_ADDRESS existe, elle est créée
-    Succès:
-      USER_ADDRESS_UPDATED  : L'identité existante à été modifié
-    Echec:
-      USER_IDENTITY_NOT_FOUND : Aucune identité n'est définit pour cet utilisateur
-  */
+/**
+	Définit l'adresse d'un utilisateur
 
+	Parametres:
+		p_user_account_id    : Identifiant de l'utilisateur
+		...
+
+	Remarque:
+		Si aucune entrée de la table USER_ADDRESS existe, elle est créée
+
+	Succès:
+		USER_ADDRESS_UPDATED  : L'identité existante à été modifié
+	Echec:
+		USER_IDENTITY_NOT_FOUND : Aucune identité n'est définit pour cet utilisateur
+*/
 CREATE OR REPLACE FUNCTION user_make_address(
        p_user_account_id user_account.user_account_id%type,
        p_zip_code user_address.zip_code%type,
@@ -777,15 +807,18 @@ CREATE OR REPLACE FUNCTION user_make_address(
 $$ LANGUAGE plpgsql;
 
 
-/*
+/**
   Maintient et valide une connexion utilisateur
+
   Parametres:
     p_user_connection_id  : Identifiant de connexion
     p_client_ip           : Adresse IP du client
+
   Résultats:
     USER_CONNECTED             L'utilisateur est connecté
     USER_CONNECTION_NOT_EXISTS La connexion n'existe pas
     USER_CONNECTION_IP_REFUSED L'adresse IP différe
+
   Paramètres de retour:
     EXPIRE                     Date de la prochaine expiration
     UID                        Identifiant du compte utilisateur

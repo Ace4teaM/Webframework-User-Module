@@ -73,10 +73,23 @@ function relativePath( $path, $compareTo ) {
     return implode( '/', $relative );
 }
     
+/**
+ * @brief Module utilisateur 
+ */
 class UserModule implements iModule
 {
+    //--------------------------------------------------------
+    // Constantes des erreurs
+    // @class UserModule
+    //--------------------------------------------------------
+    
     //erreurs
     const Disconnected = "USER_DISCONNECTED";
+    
+    //--------------------------------------------------------
+    // Méthodes
+    // @class UserModule
+    //--------------------------------------------------------
     
     /**
      * @brief Initialise le module
@@ -151,7 +164,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Cree un nouvel utilisateur
+     * @brief Cree un nouvel utilisateur
      * 
      * @param type $name
      * @param type $attributes
@@ -163,7 +176,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Supprime un utilisateur existant
+     * @brief Supprime un utilisateur existant
      */
     public static function deleteAccount($uid){ 
         global $app;
@@ -171,7 +184,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Connect un utilisateur
+     * @brief Connect un utilisateur
      * 
      * @param type $uid         Nom d'utilisateur
      * @param type $client_ip   IP du client. Si NULL, $_SERVER["..."] est utilisé
@@ -184,7 +197,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Deconnect un utilisateur
+     * @brief Déconnecte un utilisateur
      */
     public static function disconnectUser($uid){ 
         global $app;
@@ -192,7 +205,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Deconnect une connexion
+     * @brief Déconnecte une connexion
      */
     public static function disconnect($cid){ 
         global $app;
@@ -200,7 +213,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Deconnect un utilisateur
+     * @brief Déconnecte un utilisateur
      */
     public static function disconnectAll(){ 
         global $app;
@@ -208,7 +221,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Cree un nouvel utilisateur
+     * @brief Crée un nouvel utilisateur
      * 
      * @param type $name
      * @param type $attributes
@@ -220,7 +233,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Inscrit un nouvel utilisateur
+     * @brief Inscrit un nouvel utilisateur
      * 
      * @param type $uid Identifiant
      * @param type $mail Adresse Mail
@@ -231,7 +244,7 @@ class UserModule implements iModule
     }
     
 
-    /*
+    /**
       @brief Get single entry by mail
       @param $inst UserRegistration instance pointer to initialize
       @param $id Primary unique identifier of entry to retreive
@@ -259,7 +272,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Vérifie si un utilisateur existe utilisateur
+     * @brief Vérifie si un utilisateur existe utilisateur
      * 
      * @param type $uid Identifiant
      * @param type $mail Adresse Mail
@@ -270,7 +283,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Cree un nouvel utilisateur
+     * @brief Cree un nouvel utilisateur
      * 
      * @param type $name
      * @param type $attributes
@@ -282,7 +295,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Obtient l'identité lie à un compte utilisateur
+     * @brief Obtient l'identité lie à un compte utilisateur
      * 
      * @param mixed       $user_account Identifiant/Instance du compte (UserAccount)
      * @param UserAddress $identity     Pointeur recevant l'identité (UserIdentity)
@@ -314,7 +327,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Obtient Le nom d'un utilisateur
+     * @brief Obtient Le nom d'un utilisateur
      * 
      * @param mixed       $user_account Identifiant/Instance du compte (UserAccount)
      * @return User name
@@ -347,7 +360,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Obtient l'adresse lie à un compte utilisateur
+     * @brief Obtient l'adresse lie à un compte utilisateur
      * 
      * @param mixed       $user_account Identifiant/Instance du compte (UserAccount)
      * @param UserAddress $address      Pointeur recevant l'adresse (UserAddress)
@@ -380,7 +393,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Fabrique une adresse
+     * @brief Fabrique une adresse
      * 
      * @param mixed       $src Element source, un des types suivants: UserAccount, UserConnection, UserIdentity
      * @param UserAddress $adr Adresse à initialiser 
@@ -392,7 +405,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Vérifie l'autentification d'un tilisateur
+     * @brief Vérifie l'autentification d'un tilisateur
      * 
      * @param type $uid Nom d'utilisateur
      * @param type $pwd Mot de passe
@@ -403,7 +416,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Vérifie et maintient une connexion utilisateur
+     * @brief Vérifie et maintient une connexion utilisateur
      * 
      * @param type $cid Identifiant de connexion
      * @param type $ip Adresse IP du client, utilisez $_SERVER["REMOTE_ADDR"]
@@ -425,7 +438,7 @@ class UserModule implements iModule
     }
     
     /** 
-     * Génére le nom pour la tâche de déconnection d'un utilisateur
+     * @brief Génére le nom pour la tâche de déconnection d'un utilisateur
      * 
      * @param type $uid Nom d'utilisateur
      * @return string Nom de la tâche système
@@ -436,7 +449,7 @@ class UserModule implements iModule
     }
 
     /** 
-     * Génére la commande pour la tâche de déconnection d'un utilisateur
+     * @brief Génére la commande pour la tâche de déconnection d'un utilisateur
      * 
      * @param type $uid Nom d'utilisateur
      * @return string Commande de la tâche système
@@ -482,7 +495,7 @@ class UserModule implements iModule
     }
 
     /** 
-     * Obtient un compte utilisateur lié à une adresse mail
+     * @brief Obtient un compte utilisateur lié à une adresse mail
      * 
      * @param string      $user_mail    Adresse mail
      * @param UserAccount $user_account Pointeur recevant l'instance du compte (UserAccount)

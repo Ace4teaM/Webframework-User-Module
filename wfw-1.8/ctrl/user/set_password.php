@@ -21,12 +21,17 @@
 */
 
 /*
- * Renseigne le mot-de-passe d'un utilisateur
- * 
- * Rôle : Administrateur
- * UC   : set_password
+  Renseigne le mot-de-passe d'un utilisateur
+  
+  Role   : Admin
+  UC     : Set_Password
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
+    user_pwd        : Nouveau Mot-de-passe
  */
-
 class user_module_set_password_ctrl extends cApplicationCtrl{
     public $fields    = array('user_account_id', 'user_pwd');
     public $op_fields = null;

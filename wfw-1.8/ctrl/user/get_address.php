@@ -21,13 +21,16 @@
 */
 
 /*
- * Obtient l'adresse d'un utilisateur
- * Affiche l'adresse (rue, ville, pays, ...) lié à un compte utilisateur
- * 
- * Rôle : Utilisateur
- * UC   : get_address
+  Obtient l'adresse d'un utilisateur
+  
+  Role : Tous
+  UC   : Get_Address
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
  */
-
 class user_module_get_address_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id');
     public $op_fields = null;

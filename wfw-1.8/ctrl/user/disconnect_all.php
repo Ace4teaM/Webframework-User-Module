@@ -21,11 +21,13 @@
 */
 
 /*
- * Déconnecte tous les utilisateurs
- * Rôle : Administrateur
- * UC   : disconnect_all
+  Déconnect un utilisateur
+  
+  Role : Tous
+  UC   : Disconnect_All
+  Module : user
+  Output : "text/xml"
  */
-
 class user_module_disconnect_all_ctrl extends cApplicationCtrl{
     public $fields    = null;
     public $op_fields = null;

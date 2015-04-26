@@ -21,11 +21,21 @@
 */
 
 /*
- * Renseigne l'adresse d'identité
- * Rôle : Utilisateur
- * UC   : user_address
+  Renseigne l'adresse d'identité
+  
+  Role   : Tous
+  UC     : Address
+  Module : user
+  Output : "text/xml"
+ 
+  Champs:
+    user_account_id : Identifiant de l'utilisateur
+    zip_code        : Code postal
+    city_name       : Ville
+    street_name     : Rue
+    street_number   : Numéro
+    country_name    : Pays
  */
-
 class user_module_address_ctrl extends cApplicationCtrl{
     public $fields    = array('user_connection_id', 'zip_code', 'city_name', 'street_name', 'street_number', 'country_name');
     public $op_fields = array('street_prefix', 'building_number', 'apt_number');
